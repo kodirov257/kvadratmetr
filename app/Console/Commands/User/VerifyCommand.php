@@ -21,24 +21,24 @@ class VerifyCommand extends Command
         $this->service = $service;
     }
 
-    public function handle(): bool
+    public function handle(): int
     {
         $email = $this->argument('email');
 
         /** @var User $user */
         if (!$user = User::where('email', $email)->first()) {
             $this->error('Undefined user with email ' . $email);
-            return false;
+            return 0;
         }
 
         try {
             $this->service->verify($user->id);
         } catch (\DomainException $e) {
             $this->error($e->getMessage());
-            return false;
+            return 0;
         }
 
         $this->info('User is successfully verified');
-        return true;
+        return 1;
     }
 }

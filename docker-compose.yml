@@ -1,80 +1,108 @@
-version: '2'
+version: '3.7'
 services:
-    nginx:
-        build:
-            context: ./
-            dockerfile: docker/nginx.docker
-        volumes:
-            - ./:/var/www
-            - ./docker/nginx/ssl:/etc/nginx/ssl
-        ports:
-            - "8080:443"
-        links:
-            - php-fpm
-    php-fpm:
-        build:
-            context: ./
-            dockerfile: docker/php-fpm.docker
-        volumes:
-            - ./:/var/www
-        links:
-            - mysql
-            - redis
-            - elasticsearch
-        environment:
-            - "DB_PORT=3306"
-            - "DB_HOST=mysql"
-            - "REDIS_PORT=6379"
-            - "REDIS_HOST=redis"
-            - "ELASTICSEARCH_HOSTS=elasticsearch:9200"
-    php-cli:
-        build:
-            context: ./
-            dockerfile: docker/php-cli.docker
-        volumes:
-            - ./:/var/www
-        links:
-            - mysql
-            - redis
-            - elasticsearch
-        environment:
-            - "DB_PORT=3306"
-            - "DB_HOST=mysql"
-            - "REDIS_PORT=6379"
-            - "REDIS_HOST=redis"
-            - "ELASTICSEARCH_HOSTS=elasticsearch:9200"
-        tty: true
-    mysql:
-        image: mysql:5.7
-        volumes:
-            - ./storage/docker/mysql:/var/lib/mysql
-        environment:
-            - "MYSQL_ROOT_PASSWORD=secret"
-            - "MYSQL_USER=app"
-            - "MYSQL_PASSWORD=secret"
-            - "MYSQL_DATABASE=app"
-        ports:
-            - "33061:3306"
-    redis:
-        image: redis:3.0
-        ports:
-            - "63791:6379"
-    node:
-        image: node:8.6-alpine
-        volumes:
-            - ./:/var/www
-        working_dir: /var/www
-        tty: true
-    elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
-        environment:
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-        volumes:
-            - ./storage/docker/elasticsearch:/usr/share/elasticsearch/data
-        ports:
-            - "9201:9200"
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: kvadratmetr-nginx
+    restart: unless-stopped
+    ports:
+      - 5500:80
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/var/www/html
+      # Mount config for development
+      - ./docker/nginx:/etc/nginx/conf.d:cached
+    links:
+      - php-fpm
+    depends_on:
+      - php-fpm
+      - db
+      - elasticsearch
+    networks:
+      - kvadratmetr
+
+  php-fpm:
+    build: docker/php-fpm
+    restart: unless-stopped
+    container_name: kvadratmetr-php
+    ports:
+      - 9000:9000
+    volumes:
+      - ./:/var/www/html:cached
+    links:
+      - db
+      - redis
+      - elasticsearch
+    depends_on:
+      - db
+      - elasticsearch
+    networks:
+      - kvadratmetr
+
+  db:
+    build: docker/psql
+    ports:
+      - 11:5432
+    container_name: kvadratmetr-db
+    restart: unless-stopped
+    volumes:
+      - ./docker/psql/db-cache:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=kvadratmetr
+      - POSTGRES_USER=dev_kvadratmetr
+      - POSTGRES_PASSWORD=kvadratmetr
+    networks:
+      - kvadratmetr
+
+  node:
+    image: node:14.1.0-alpine3.11
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html/
+    tty: true
+    working_dir: /var/www/html/
+    networks:
+      - kvadratmetr
+
+  redis:
+    image: redis
+    restart: unless-stopped
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    container_name: kvadratmetr-redis
+    volumes:
+      - ./:/var/www/html:cached
+    networks:
+      - kvadratmetr
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    container_name: kvadratmetr_elasticsearch
+    restart: unless-stopped
+    environment:
+      - node.name=kvadratmetr-es
+      - cluster.name=kvadratmetr-es-docker-cluster
+      - cluster.initial_master_nodes=kvadratmetr-es
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - kvadratmetr
+
+networks:
+  kvadratmetr:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.125.0/28

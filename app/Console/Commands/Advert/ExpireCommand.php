@@ -19,16 +19,16 @@ class ExpireCommand extends Command
         $this->service = $service;
     }
 
-    public function handle(): bool
+    public function handle(): int
     {
-        $success = true;
+        $success = 1;
 
         foreach (Advert::active()->where('expired_at', '<', Carbon::now())->cursor() as $advert) {
             try {
                 $this->service->expire($advert);
             } catch (\DomainException $e) {
                 $this->error($e->getMessage());
-                $success = false;
+                $success = 0;
             }
         }
 
