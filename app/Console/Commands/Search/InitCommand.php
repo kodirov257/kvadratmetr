@@ -39,47 +39,45 @@ class InitCommand extends Command
             'index' => 'adverts',
             'body' => [
                 'mappings' => [
-                    'advert' => [
-                        '_source' => [
-                            'enabled' => true,
+                    '_source' => [
+                        'enabled' => true,
+                    ],
+                    'properties' => [
+                        'id' => [
+                            'type' => 'integer',
                         ],
-                        'properties' => [
-                            'id' => [
-                                'type' => 'integer',
-                            ],
-                            'published_at' => [
-                                'type' => 'date',
-                            ],
-                            'title' => [
-                                'type' => 'text',
-                            ],
-                            'content' => [
-                                'type' => 'text',
-                            ],
-                            'price' => [
-                                'type' => 'integer',
-                            ],
-                            'status' => [
-                                'type' => 'keyword',
-                            ],
-                            'categories' => [
-                                'type' => 'integer',
-                            ],
-                            'regions' => [
-                                'type' => 'integer',
-                            ],
-                            'values' => [
-                                'type' => 'nested',
-                                'properties' => [
-                                    'attribute' => [
-                                        'type' => 'integer'
-                                    ],
-                                    'value_string' => [
-                                        'type' => 'keyword',
-                                    ],
-                                    'value_int' => [
-                                        'type' => 'integer',
-                                    ],
+                        'published_at' => [
+                            'type' => 'date',
+                        ],
+                        'title' => [
+                            'type' => 'text',
+                        ],
+                        'content' => [
+                            'type' => 'text',
+                        ],
+                        'price' => [
+                            'type' => 'integer',
+                        ],
+                        'status' => [
+                            'type' => 'keyword',
+                        ],
+                        'categories' => [
+                            'type' => 'integer',
+                        ],
+                        'regions' => [
+                            'type' => 'integer',
+                        ],
+                        'values' => [
+                            'type' => 'nested',
+                            'properties' => [
+                                'attribute' => [
+                                    'type' => 'integer'
+                                ],
+                                'value_string' => [
+                                    'type' => 'keyword',
+                                ],
+                                'value_int' => [
+                                    'type' => 'integer',
                                 ],
                             ],
                         ],
@@ -108,8 +106,8 @@ class InitCommand extends Command
                             ],
                             'trigrams' => [
                                 'type' => 'ngram',
-                                'min_gram' => 4,
-                                'max_gram' => 6,
+                                'min_gram' => 3,
+                                'max_gram' => 5,
                             ],
                         ],
                         'analyzer' => [
@@ -127,6 +125,9 @@ class InitCommand extends Command
                                 ],
                             ],
                         ],
+                    ],
+                    'index' => [
+                        'max_ngram_diff' => 2,
                     ],
                 ],
             ],
