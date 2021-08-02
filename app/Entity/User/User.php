@@ -13,7 +13,6 @@ use Laravel\Passport\HasApiTokens;
 /**
  * @property int $id
  * @property string $name
- * @property string $last_name
  * @property string $email
  * @property string $phone
  * @property bool $phone_verified
@@ -25,7 +24,8 @@ use Laravel\Passport\HasApiTokens;
  * @property string $role
  * @property string $status
  *
- * @property Network[] networks
+ * @property Network[] $networks
+ * @property Profile $profile
  *
  * @method Builder byNetwork(string $network, string $identity)
  */
@@ -33,15 +33,15 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
-    public const STATUS_WAIT = 'wait';
-    public const STATUS_ACTIVE = 'active';
+    public const STATUS_WAIT = 0;
+    public const STATUS_ACTIVE = 9;
 
     public const ROLE_USER = 'user';
     public const ROLE_MODERATOR = 'moderator';
     public const ROLE_ADMIN = 'admin';
 
     protected $fillable = [
-        'name', 'last_name', 'email', 'phone', 'password', 'verify_token', 'status', 'role',
+        'name', 'email', 'phone', 'password', 'verify_token', 'status', 'role',
     ];
 
     protected $hidden = [
@@ -230,17 +230,7 @@ class User extends Authenticatable
 
     public function hasFilledProfile(): bool
     {
-        return !empty($this->name) && !empty($this->last_name) && $this->isPhoneVerified();
-    }
-
-    public function favorites()
-    {
-        return $this->belongsToMany(Advert::class, 'advert_favorites', 'user_id', 'advert_id');
-    }
-
-    public function networks()
-    {
-        return $this->hasMany(Network::class, 'user_id', 'id');
+        return !empty($this->name) && $this->isPhoneVerified();
     }
 
     public function scopeByNetwork(Builder $query, string $network, string $identity): Builder
@@ -254,4 +244,25 @@ class User extends Authenticatable
     {
         return self::where('email', $identifier)->where('status', self::STATUS_ACTIVE)->first();
     }
+
+
+    ########################################### Relations
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Advert::class, 'advert_favorites', 'user_id', 'advert_id');
+    }
+
+    public function networks()
+    {
+        return $this->hasMany(Network::class, 'user_id', 'id');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+
+    ###########################################
 }

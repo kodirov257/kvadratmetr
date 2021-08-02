@@ -150,7 +150,7 @@ class Advert extends Model
         ]);
     }
 
-    public function getValue($id)
+    public function getValue($id): ?string
     {
         foreach ($this->values as $value) {
             if ($value->attribute_id === $id) {
@@ -179,6 +179,49 @@ class Advert extends Model
     {
         return $this->status === self::STATUS_CLOSED;
     }
+
+
+    ########################################### Scopes
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function scopeForUser(Builder $query, User $user)
+    {
+        return $query->where('user_id', $user->id);
+    }
+
+    public function scopeForCategory(Builder $query, Category $category)
+    {
+        return $query->whereIn('category_id', array_merge(
+            [$category->id],
+            $category->descendants()->pluck('id')->toArray()
+        ));
+    }
+
+    public function scopeForRegion(Builder $query, Region $region)
+    {
+        $ids = [$region->id];
+        $childrenIds = $ids;
+        while ($childrenIds = Region::where(['parent_id' => $childrenIds])->pluck('id')->toArray()) {
+            $ids = array_merge($ids, $childrenIds);
+        }
+        return $query->whereIn('region_id', $ids);
+    }
+
+    public function scopeFavoredByUser(Builder $query, User $user)
+    {
+        return $query->whereHas('favorites', function(Builder $query) use ($user) {
+            $query->where('user_id', $user->id);
+        });
+    }
+
+    ###########################################
+
+
+    ########################################### Relations
 
     public function user()
     {
@@ -215,38 +258,5 @@ class Advert extends Model
         return $this->hasMany(Dialog::class, 'advert_id', 'id');
     }
 
-    public function scopeActive(Builder $query)
-    {
-        return $query->where('status', self::STATUS_ACTIVE);
-    }
-
-    public function scopeForUser(Builder $query, User $user)
-    {
-        return $query->where('user_id', $user->id);
-    }
-
-    public function scopeForCategory(Builder $query, Category $category)
-    {
-        return $query->whereIn('category_id', array_merge(
-            [$category->id],
-            $category->descendants()->pluck('id')->toArray()
-        ));
-    }
-
-    public function scopeForRegion(Builder $query, Region $region)
-    {
-        $ids = [$region->id];
-        $childrenIds = $ids;
-        while ($childrenIds = Region::where(['parent_id' => $childrenIds])->pluck('id')->toArray()) {
-            $ids = array_merge($ids, $childrenIds);
-        }
-        return $query->whereIn('region_id', $ids);
-    }
-
-    public function scopeFavoredByUser(Builder $query, User $user)
-    {
-        return $query->whereHas('favorites', function(Builder $query) use ($user) {
-            $query->where('user_id', $user->id);
-        });
-    }
+    ###########################################
 }
