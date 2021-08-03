@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Entity\User\User;
 use App\Services\Sms\SmsSender;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -14,14 +14,18 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class LoginController extends Controller
 {
-    use ThrottlesLogins;
+    use AuthenticatesUsers;
+
+    protected $redirectTo = '/';
 
     private $sms;
+    protected $username;
 
     public function __construct(SmsSender $sms)
     {
         $this->middleware('guest')->except('logout');
         $this->sms = $sms;
+        $this->username = $this->findUsername();
     }
 
     public function showLoginForm()
@@ -29,25 +33,29 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
-        if ($this->hasTooManyLoginAttempts($request)) {
+        $this->validateLogin($request);
+
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
             $this->sendLockoutResponse($request);
         }
 
         $authenticate = Auth::attempt(
-            $request->only(['email', 'password']),
+            $request->only([$this->username(), 'password']),
             $request->filled('remember')
         );
 
         if ($authenticate) {
-            $request->session()->regenerate();
-            $this->clearLoginAttempts($request);
+//            $request->session()->regenerate();
+//            $this->clearLoginAttempts($request);
             $user = Auth::user();
             if ($user->isWait()) {
                 Auth::logout();
-                return back()->with('error', 'You need to confirm your account. Please check your email.');
+                session(['url.intended' => back()->with('error', 'You need to confirm your account. Please check your email.')]);
+                $this->redirectTo = back()->with('error', 'You need to confirm your account. Please check your email.');
             }
             if ($user->isPhoneAuthEnabled()) {
                 Auth::logout();
@@ -58,9 +66,20 @@ class LoginController extends Controller
                     'remember' => $request->filled('remember'),
                 ]);
                 $this->sms->send($user->phone, 'Login code: ' . $token);
-                return redirect()->route('login.phone');
+                session(['url.intended' => route('login.phone')]);
+                $this->redirectTo = route('login.phone');
+//                return redirect()->route('login.phone');
             }
-            return redirect()->intended(route('cabinet.home'));
+            if ($user->isAdmin()) {
+                session(['url.intended' => route('admin.home')]);
+                $this->redirectTo = route('admin.home');
+            } else {
+                session(['url.intended' => route('cabinet.home')]);
+                $this->redirectTo = route('cabinet.home');
+            }
+
+            return $this->sendLoginResponse($request);
+//            return redirect()->intended(route('cabinet.home'));
         }
 
         $this->incrementLoginAttempts($request);
@@ -110,8 +129,28 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    protected function username()
+    public function findUsername(): string
     {
-        return 'email';
+        $login = request()->input('login');
+        $fieldType = $this->isEmail($login) ? 'email' : ($this->isPhone($login) ? 'phone' : 'name');
+
+        request()->merge([$fieldType => $login]);
+
+        return $fieldType;
+    }
+
+    private function isEmail($login): bool
+    {
+        return filter_var($login, FILTER_VALIDATE_EMAIL);
+    }
+
+    private function isPhone($login): bool
+    {
+        return preg_match('/^\+?998[0-9]{9}$/', $login);
+    }
+
+    protected function username(): string
+    {
+        return $this->username;
     }
 }
