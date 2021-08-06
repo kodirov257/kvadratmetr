@@ -6,8 +6,12 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Entity\Adverts\Category::class, function (Faker $faker) {
     return [
-        'name' => $faker->unique()->name,
+        'name_uz' => $faker->unique()->name,
+        'name_ru' => $faker->unique()->name,
+        'name_en' => $faker->unique()->name,
         'slug' => $faker->unique()->slug(2),
         'parent_id' => null,
+        'created_by' => 1,
+        'updated_by' => 1,
     ];
 });

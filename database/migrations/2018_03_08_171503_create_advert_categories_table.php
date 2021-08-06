@@ -16,9 +16,22 @@ class CreateAdvertCategoriesTable extends Migration
     {
         Schema::create('advert_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->index();
+            $table->string('name_uz')->index();
+            $table->string('name_ru')->index();
+            $table->string('name_en')->index();
             $table->string('slug');
-            NestedSet::columns($table);
+            $table->integer('left');
+            $table->integer('right');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
+            $table->timestamps();
+        });
+
+        Schema::table('advert_categories', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('advert_categories')->onDelete('restrict');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict');
         });
     }
 

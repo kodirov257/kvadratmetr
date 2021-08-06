@@ -15,12 +15,14 @@ class CreateRegionsTable extends Migration
     {
         Schema::create('regions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->index();
+            $table->string('name_uz')->index();
+            $table->string('name_ru')->index();
+            $table->string('name_en')->index();
             $table->string('slug');
             $table->unsignedInteger('parent_id')->nullable();
             $table->timestamps();
             $table->unique(['parent_id', 'slug']);
-            $table->unique(['parent_id', 'name']);
+//            $table->unique(['parent_id', 'name']);
         });
 
         Schema::table('regions', function (Blueprint $table) {

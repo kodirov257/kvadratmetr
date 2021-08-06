@@ -17,6 +17,9 @@ class CreateAdvertAttributesTable extends Migration
             $table->boolean('required');
             $table->json('variants');
             $table->integer('sort');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
+            $table->timestamps();
         });
     }
 
