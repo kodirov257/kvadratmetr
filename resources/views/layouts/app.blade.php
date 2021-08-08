@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Adverts</title>
+    <title>Projects</title>
     @yield('meta')
 
     <!-- Styles -->
@@ -19,7 +19,7 @@
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Adverts
+                    Projects
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -78,7 +78,7 @@
         </nav>
 
         @section('search')
-            @include('layouts.partials.search', ['category' => null, 'route' => route('adverts.index')])
+            @include('layouts.partials.search', ['category' => null, 'route' => route('projects.index')])
         @show
     </header>
 
@@ -94,7 +94,7 @@
     <footer>
         <div class="container">
             <div class="border-top pt-3">
-                <p>&copy; {{ date('Y') }} - Adverts</p>
+                <p>&copy; {{ date('Y') }} - Projects</p>
             </div>
         </div>
     </footer>

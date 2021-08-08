@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\Region;
+use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class RegionController extends Controller
 
     public function index()
     {
-        $regions = Region::where('parent_id', null)->orderBy('name')->get();
+        $regions = Region::where('parent_id', null)->orderBy('name_' . LanguageHelper::getCurrentLanguagePrefix())->get();
 
         return view('admin.regions.index', compact('regions'));
     }
@@ -50,7 +51,7 @@ class RegionController extends Controller
 
     public function show(Region $region)
     {
-        $regions = Region::where('parent_id', $region->id)->orderBy('name')->get();
+        $regions = Region::where('parent_id', $region->id)->orderBy('name_' . LanguageHelper::getCurrentLanguagePrefix())->get();
 
         return view('admin.regions.show', compact('region', 'regions'));
     }

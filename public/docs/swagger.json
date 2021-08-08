@@ -17,10 +17,10 @@
         "application/json"
     ],
     "paths": {
-        "/adverts": {
+        "/projects": {
             "get": {
                 "tags": [
-                    "Adverts"
+                    "Projects"
                 ],
                 "responses": {
                     "200": {
@@ -28,7 +28,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/AdvertList"
+                                "$ref": "#/definitions/ProjectList"
                             }
                         }
                     }
@@ -41,16 +41,16 @@
                 ]
             }
         },
-        "/adverts/{advertId}": {
+        "/projects/{projectId}": {
             "get": {
                 "tags": [
-                    "Adverts"
+                    "Projects"
                 ],
                 "parameters": [
                     {
-                        "name": "advertId",
+                        "name": "projectId",
                         "in": "path",
-                        "description": "ID of advert",
+                        "description": "ID of project",
                         "required": true,
                         "type": "integer"
                     }
@@ -59,7 +59,7 @@
                     "200": {
                         "description": "Success response",
                         "schema": {
-                            "$ref": "#/definitions/AdvertDetail"
+                            "$ref": "#/definitions/ProjectDetail"
                         }
                     }
                 },
@@ -71,14 +71,14 @@
                 ]
             }
         },
-        "/adverts/{advertId}/favorite": {
+        "/projects/{projectId}/favorite": {
             "post": {
                 "tags": [
-                    "Adverts"
+                    "Projects"
                 ],
                 "parameters": [
                     {
-                        "name": "advertId",
+                        "name": "projectId",
                         "in": "path",
                         "required": true,
                         "type": "integer"
@@ -98,11 +98,11 @@
             },
             "delete": {
                 "tags": [
-                    "Adverts"
+                    "Projects"
                 ],
                 "parameters": [
                     {
-                        "name": "advertId",
+                        "name": "projectId",
                         "in": "path",
                         "required": true,
                         "type": "integer"
@@ -174,7 +174,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/AdvertList"
+                                "$ref": "#/definitions/ProjectList"
                             }
                         }
                     }
@@ -187,14 +187,14 @@
                 ]
             }
         },
-        "/user/favorites/{advertId}": {
+        "/user/favorites/{projectId}": {
             "delete": {
                 "tags": [
                     "Favorites"
                 ],
                 "parameters": [
                     {
-                        "name": "advertId",
+                        "name": "projectId",
                         "in": "path",
                         "required": true,
                         "type": "integer"
@@ -308,7 +308,7 @@
             },
             "type": "object"
         },
-        "AdvertDetail": {
+        "ProjectDetail": {
             "properties": {
                 "id": {
                     "type": "integer"
@@ -372,7 +372,7 @@
                 "values": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AdvertValue"
+                        "$ref": "#/definitions/ProjectValue"
                     }
                 },
                 "photos": {
@@ -384,7 +384,7 @@
             },
             "type": "object"
         },
-        "AdvertValue": {
+        "ProjectValue": {
             "properties": {
                 "name": {
                     "type": "string"
@@ -395,7 +395,7 @@
             },
             "type": "object"
         },
-        "AdvertList": {
+        "ProjectList": {
             "properties": {
                 "id": {
                     "type": "integer"

@@ -16,19 +16,19 @@
         </thead>
         <tbody>
 
-        @foreach ($adverts as $advert)
+        @foreach ($projects as $project)
             <tr>
-                <td>{{ $advert->id }}</td>
-                <td>{{ $advert->updated_at }}</td>
-                <td><a href="{{ route('adverts.show', $advert) }}" target="_blank">{{ $advert->title }}</a></td>
+                <td>{{ $project->id }}</td>
+                <td>{{ $project->updated_at }}</td>
+                <td><a href="{{ route('projects.show', $project) }}" target="_blank">{{ $project->title }}</a></td>
                 <td>
-                    @if ($advert->region)
-                        {{ $advert->region->name }}
+                    @if ($project->region)
+                        {{ $project->region->name }}
                     @endif
                 </td>
-                <td>{{ $advert->category->name }}</td>
+                <td>{{ $project->category->name }}</td>
                 <td>
-                    <form method="POST" action="{{ route('cabinet.favorites.remove', $advert) }}" class="mr-1">
+                    <form method="POST" action="{{ route('cabinet.favorites.remove', $project) }}" class="mr-1">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger"><span class="fa fa-remove"></span> Remove</button>
@@ -40,5 +40,5 @@
         </tbody>
     </table>
 
-    {{ $adverts->links() }}
+    {{ $projects->links() }}
 @endsection

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Entity\Adverts\Advert\Advert;
+use App\Entity\Projects\Project\Project;
 use App\Entity\Banner\Banner;
 use App\Entity\Ticket\Ticket;
 use App\Entity\User\User;
@@ -55,11 +55,11 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
 
-        Gate::define('manage-adverts', function (User $user) {
+        Gate::define('manage-projects', function (User $user) {
             return $user->isAdmin() || $user->isModerator();
         });
 
-        Gate::define('manage-adverts-categories', function (User $user) {
+        Gate::define('manage-projects-categories', function (User $user) {
             return $user->isAdmin() || $user->isModerator();
         });
 
@@ -67,12 +67,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin() || $user->isModerator();
         });
 
-        Gate::define('show-advert', function (User $user, Advert $advert) {
-            return $user->isAdmin() || $user->isModerator() || $advert->user_id === $user->id;
+        Gate::define('show-project', function (User $user, Project $project) {
+            return $user->isAdmin() || $user->isModerator() || $project->user_id === $user->id;
         });
 
-        Gate::define('manage-own-advert', function (User $user, Advert $advert) {
-            return $advert->user_id === $user->id;
+        Gate::define('manage-own-project', function (User $user, Project $project) {
+            return $project->user_id === $user->id;
         });
 
         Gate::define('manage-own-banner', function (User $user, Banner $banner) {

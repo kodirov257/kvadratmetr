@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use App\Entity\Adverts\Advert\Advert;
+use App\Entity\Projects\Project\Project;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Adverts\AdvertDetailResource;
-use App\UseCases\Adverts\FavoriteService;
+use App\Http\Resources\Projects\ProjectDetailResource;
+use App\UseCases\Projects\FavoriteService;
 use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
@@ -27,7 +27,7 @@ class FavoriteController extends Controller
      *         description="Success response",
      *         @SWG\Schema(
      *             type="array",
-     *             @SWG\Items(ref="#/definitions/AdvertList")
+     *             @SWG\Items(ref="#/definitions/ProjectList")
      *         ),
      *     ),
      *     security={{"Bearer": {}, "OAuth2": {}}}
@@ -35,16 +35,16 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $adverts = Advert::favoredByUser(Auth::user())->orderByDesc('id')->paginate(20);
+        $projects = Project::favoredByUser(Auth::user())->orderByDesc('id')->paginate(20);
 
-        return AdvertDetailResource::collection($adverts);
+        return ProjectDetailResource::collection($projects);
     }
 
     /**
      * @SWG\Delete(
-     *     path="/user/favorites/{advertId}",
+     *     path="/user/favorites/{projectId}",
      *     tags={"Favorites"},
-     *     @SWG\Parameter(name="advertId", in="path", required=true, type="integer"),
+     *     @SWG\Parameter(name="projectId", in="path", required=true, type="integer"),
      *     @SWG\Response(
      *         response=204,
      *         description="Success response",
@@ -52,10 +52,10 @@ class FavoriteController extends Controller
      *     security={{"Bearer": {}, "OAuth2": {}}}
      * )
      */
-    public function remove(Advert $advert)
+    public function remove(Project $project)
     {
         try {
-            $this->service->remove(Auth::id(), $advert->id);
+            $this->service->remove(Auth::id(), $project->id);
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }

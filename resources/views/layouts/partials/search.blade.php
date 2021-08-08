@@ -18,29 +18,29 @@
 
                     @if ($category)
                         <div class="row">
-                            @foreach ($category->allAttributes() as $attribute)
-                                @if ($attribute->isSelect() || $attribute->isNumber())
+                            @foreach ($category->allCharacteristics() as $characteristic)
+                                @if ($characteristic->isSelect() || $characteristic->isNumber())
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label">{{ $attribute->name }}</label>
+                                            <label class="col-form-label">{{ $characteristic->name }}</label>
 
-                                            @if ($attribute->isSelect())
-                                                <select class="form-control" name="attrs[{{ $attribute->id }}][equals]">
+                                            @if ($characteristic->isSelect())
+                                                <select class="form-control" name="attrs[{{ $characteristic->id }}][equals]">
                                                     <option value=""></option>
-                                                    @foreach ($attribute->variants as $variant)
-                                                        <option value="{{ $variant }}"{{ $variant === request()->input('attrs.' . $attribute->id . '.equals') ? ' selected' : '' }}>
+                                                    @foreach ($characteristic->variants as $variant)
+                                                        <option value="{{ $variant }}"{{ $variant === request()->input('attrs.' . $characteristic->id . '.equals') ? ' selected' : '' }}>
                                                             {{ $variant }}
                                                         </option>
                                                     @endforeach
                                                 </select>
 
-                                            @elseif ($attribute->isNumber())
+                                            @elseif ($characteristic->isNumber())
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input type="number" class="form-control" name="attrs[{{ $attribute->id }}][from]" value="{{ request()->input('attrs.' . $attribute->id . '.from') }}" placeholder="From">
+                                                        <input type="number" class="form-control" name="attrs[{{ $characteristic->id }}][from]" value="{{ request()->input('attrs.' . $characteristic->id . '.from') }}" placeholder="From">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="number" class="form-control" name="attrs[{{ $attribute->id }}][to]" value="{{ request()->input('attrs.' . $attribute->id . '.to') }}" placeholder="To">
+                                                        <input type="number" class="form-control" name="attrs[{{ $characteristic->id }}][to]" value="{{ request()->input('attrs.' . $characteristic->id . '.to') }}" placeholder="To">
                                                     </div>
                                                 </div>
                                             @endif
@@ -53,7 +53,7 @@
                 </form>
             </div>
             <div class="col-md-3" style="text-align: right">
-                <p><a href="{{ route('cabinet.adverts.create') }}" class="btn btn-success"><span class="fa fa-plus"></span> Add New Advertisement</a></p>
+                <p><a href="{{ route('cabinet.projects.create') }}" class="btn btn-success"><span class="fa fa-plus"></span> Add New Project</a></p>
             </div>
         </div>
     </div>

@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands\Search;
 
-use App\Entity\Adverts\Advert\Advert;
+use App\Entity\Projects\Project\Project;
 use App\Entity\Banner\Banner;
-use App\Services\Search\AdvertIndexer;
+use App\Services\Search\ProjectIndexer;
 use App\Services\Search\BannerIndexer;
 use Illuminate\Console\Command;
 
@@ -12,22 +12,22 @@ class ReindexCommand extends Command
 {
     protected $signature = 'search:reindex';
 
-    private $adverts;
+    private $projects;
     private $banners;
 
-    public function __construct(AdvertIndexer $adverts, BannerIndexer $banners)
+    public function __construct(ProjectIndexer $projects, BannerIndexer $banners)
     {
         parent::__construct();
-        $this->adverts = $adverts;
+        $this->projects = $projects;
         $this->banners = $banners;
     }
     
     public function handle(): bool
     {
-        $this->adverts->clear();
+        $this->projects->clear();
 
-        foreach (Advert::active()->orderBy('id')->cursor() as $advert) {
-            $this->adverts->index($advert);
+        foreach (Project::active()->orderBy('id')->cursor() as $project) {
+            $this->projects->index($project);
         }
 
         $this->banners->clear();

@@ -20,23 +20,23 @@ class InitCommand extends Command
     
     public function handle(): bool
     {
-        $this->initAdverts();
+        $this->initProjects();
         $this->initBanners();
 
         return true;
     }
 
-    private function initAdverts(): void
+    private function initProjects(): void
     {
         try {
             $this->client->indices()->delete([
-                'index' => 'adverts'
+                'index' => 'projects'
             ]);
         } catch (Missing404Exception $e) {
         }
 
         $this->client->indices()->create([
-            'index' => 'adverts',
+            'index' => 'projects',
             'body' => [
                 'mappings' => [
                     '_source' => [
@@ -70,7 +70,7 @@ class InitCommand extends Command
                         'values' => [
                             'type' => 'nested',
                             'properties' => [
-                                'attribute' => [
+                                'characteristic' => [
                                     'type' => 'integer'
                                 ],
                                 'value_string' => [

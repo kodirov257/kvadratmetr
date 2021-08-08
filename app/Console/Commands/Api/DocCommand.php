@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Entity\Adverts\Advert\Advert;
-use App\UseCases\Adverts\AdvertService;
+use App\Entity\Projects\Project\Project;
+use App\UseCases\Projects\ProjectService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

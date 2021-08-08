@@ -1,16 +1,16 @@
 <?php
 
-use App\Entity\Adverts\Category;
+use App\Entity\Projects\Category;
 use App\Entity\Page;
 use App\Entity\Region;
-use App\Http\Router\AdvertsPath;
+use App\Http\Router\ProjectsPath;
 use App\Http\Router\PagePath;
 
-if (! function_exists('adverts_path')) {
+if (! function_exists('projects_path')) {
 
-    function adverts_path(?Region $region, ?Category $category)
+    function projects_path(?Region $region, ?Category $category)
     {
-        return app()->make(AdvertsPath::class)
+        return app()->make(ProjectsPath::class)
             ->withRegion($region)
             ->withCategory($category);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Cabinet\Banners;
 
-use App\Entity\Adverts\Category;
+use App\Entity\Projects\Category;
 use App\Entity\Banner\Banner;
 use App\Entity\Region;
 use App\Http\Controllers\Controller;

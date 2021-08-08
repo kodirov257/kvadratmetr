@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Cabinet;
 
-use App\Entity\Adverts\Advert\Advert;
+use App\Entity\Projects\Project\Project;
 use App\Http\Controllers\Controller;
-use App\UseCases\Adverts\FavoriteService;
+use App\UseCases\Projects\FavoriteService;
 use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
@@ -19,15 +19,15 @@ class FavoriteController extends Controller
 
     public function index()
     {
-        $adverts = Advert::favoredByUser(Auth::user())->orderByDesc('id')->paginate(20);
+        $projects = Project::favoredByUser(Auth::user())->orderByDesc('id')->paginate(20);
 
-        return view('cabinet.favorites.index', compact('adverts'));
+        return view('cabinet.favorites.index', compact('projects'));
     }
 
-    public function remove(Advert $advert)
+    public function remove(Project $project)
     {
         try {
-            $this->service->remove(Auth::id(), $advert->id);
+            $this->service->remove(Auth::id(), $project->id);
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }

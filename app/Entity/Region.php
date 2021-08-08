@@ -35,7 +35,7 @@ class Region extends Model
     }
 
 
-    ########################################### Mutators
+    ########################################### Scopes
 
     public function scopeRoots(Builder $query)
     {

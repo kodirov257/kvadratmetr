@@ -2,7 +2,7 @@
 
 namespace App\Entity\User;
 
-use App\Entity\Adverts\Advert\Advert;
+use App\Entity\Projects\Project\Project;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
@@ -193,7 +193,7 @@ class User extends Authenticatable
     public function addToFavorites($id): void
     {
         if ($this->hasInFavorites($id)) {
-            throw new \DomainException('This advert is already added to favorites.');
+            throw new \DomainException('This project is already added to favorites.');
         }
         $this->favorites()->attach($id);
     }
@@ -250,7 +250,7 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany(Advert::class, 'advert_favorites', 'user_id', 'advert_id');
+        return $this->belongsToMany(Project::class, 'project_favorites', 'user_id', 'project_id');
     }
 
     public function networks()

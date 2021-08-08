@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Entity\Adverts\Advert\Advert;
+use App\Entity\Projects\Project\Project;
 use App\Entity\Region;
 use App\Entity\User\User;
 use Illuminate\Database\Eloquent\Model;

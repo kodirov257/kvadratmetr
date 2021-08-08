@@ -2,9 +2,10 @@
 
 namespace App\Entity\Banner;
 
-use App\Entity\Adverts\Category;
+use App\Entity\Projects\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
+use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property int $category_id
  * @property int $region_id
- * @property string $name
+ * @property string $name_uz
+ * @property string $name_ru
+ * @property string $name_en
  * @property int $views
  * @property int $limit
  * @property int $clicks
@@ -25,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property Carbon $published_at
  *
+ * @property string $name
  * @property Region|null $region
  * @property Category $category
  *
@@ -87,7 +91,7 @@ class Banner extends Model
     public function sendToModeration(): void
     {
         if (!$this->isDraft()) {
-            throw new \DomainException('Advert is not draft.');
+            throw new \DomainException('Project is not draft.');
         }
         $this->update([
             'status' => self::STATUS_MODERATION,
@@ -97,7 +101,7 @@ class Banner extends Model
     public function cancelModeration(): void
     {
         if (!$this->isOnModeration()) {
-            throw new \DomainException('Advert is not sent to moderation.');
+            throw new \DomainException('Project is not sent to moderation.');
         }
         $this->update([
             'status' => self::STATUS_DRAFT,
@@ -107,7 +111,7 @@ class Banner extends Model
     public function moderate(): void
     {
         if (!$this->isOnModeration()) {
-            throw new \DomainException('Advert is not sent to moderation.');
+            throw new \DomainException('Project is not sent to moderation.');
         }
         $this->update([
             'status' => self::STATUS_MODERATED,
@@ -125,7 +129,7 @@ class Banner extends Model
     public function order(int $cost): void
     {
         if (!$this->isModerated()) {
-            throw new \DomainException('Advert is not moderated.');
+            throw new \DomainException('Project is not moderated.');
         }
         $this->update([
             'cost' => $cost,
@@ -136,7 +140,7 @@ class Banner extends Model
     public function pay(Carbon $date): void
     {
         if (!$this->isOrdered()) {
-            throw new \DomainException('Advert is not ordered.');
+            throw new \DomainException('Project is not ordered.');
         }
         $this->update([
             'published_at' => $date,
@@ -194,6 +198,34 @@ class Banner extends Model
         return $this->status === self::STATUS_CLOSED;
     }
 
+
+    ########################################### Mutators
+
+    public function getNameAttribute(): string
+    {
+        return htmlspecialchars_decode(LanguageHelper::getName($this));
+    }
+
+    ###########################################
+
+
+    ########################################### Scopes
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function scopeForUser(Builder $query, User $user)
+    {
+        return $query->where('user_id', $user->id);
+    }
+
+    ###########################################
+
+
+    ########################################### Relations
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -209,15 +241,8 @@ class Banner extends Model
         return $this->belongsTo(Region::class, 'region_id', 'id');
     }
 
-    public function scopeActive(Builder $query)
-    {
-        return $query->where('status', self::STATUS_ACTIVE);
-    }
+    ###########################################
 
-    public function scopeForUser(Builder $query, User $user)
-    {
-        return $query->where('user_id', $user->id);
-    }
 
     private function assertIsActive(): void
     {

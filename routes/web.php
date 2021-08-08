@@ -30,16 +30,16 @@ Route::get('/banner/get', 'BannerController@get')->name('banner.get');
 Route::get('/banner/{banner}/click', 'BannerController@click')->name('banner.click');
 
 Route::group([
-    'prefix' => 'adverts',
-    'as' => 'adverts.',
-    'namespace' => 'Adverts',
+    'prefix' => 'projects',
+    'as' => 'projects.',
+    'namespace' => 'Projects',
 ], function () {
-    Route::get('/show/{advert}', 'AdvertController@show')->name('show');
-    Route::post('/show/{advert}/phone', 'AdvertController@phone')->name('phone');
-    Route::post('/show/{advert}/favorites', 'FavoriteController@add')->name('favorites');
-    Route::delete('/show/{advert}/favorites', 'FavoriteController@remove');
+    Route::get('/show/{project}', 'ProjectController@show')->name('show');
+    Route::post('/show/{project}/phone', 'ProjectController@phone')->name('phone');
+    Route::post('/show/{project}/favorites', 'FavoriteController@add')->name('favorites');
+    Route::delete('/show/{project}/favorites', 'FavoriteController@remove');
 
-    Route::get('/{adverts_path?}', 'AdvertController@index')->name('index')->where('adverts_path', '.+');
+    Route::get('/{projects_path?}', 'ProjectController@index')->name('index')->where('projects_path', '.+');
 });
 
 Route::group(
@@ -64,32 +64,32 @@ Route::group(
         });
 
         Route::get('favorites', 'FavoriteController@index')->name('favorites.index');
-        Route::delete('favorites/{advert}', 'FavoriteController@remove')->name('favorites.remove');
+        Route::delete('favorites/{project}', 'FavoriteController@remove')->name('favorites.remove');
 
         Route::resource('tickets', 'TicketController')->only(['index', 'show', 'create', 'store', 'destroy']);
         Route::post('tickets/{ticket}/message', 'TicketController@message')->name('tickets.message');
 
         Route::group([
-            'prefix' => 'adverts',
-            'as' => 'adverts.',
-            'namespace' => 'Adverts',
-            'middleware' => [App\Http\Middleware\FilledProfile::class],
+            'prefix' => 'projects',
+            'as' => 'projects.',
+            'namespace' => 'Projects',
+//            'middleware' => [App\Http\Middleware\FilledProfile::class],
         ], function () {
-            Route::get('/', 'AdvertController@index')->name('index');
+            Route::get('/', 'ProjectController@index')->name('index');
             Route::get('/create', 'CreateController@category')->name('create');
             Route::get('/create/region/{category}/{region?}', 'CreateController@region')->name('create.region');
-            Route::get('/create/advert/{category}/{region?}', 'CreateController@advert')->name('create.advert');
-            Route::post('/create/advert/{category}/{region?}', 'CreateController@store')->name('create.advert.store');
+            Route::get('/create/project/{category}/{region?}', 'CreateController@project')->name('create.project');
+            Route::post('/create/project/{category}/{region?}', 'CreateController@store')->name('create.project.store');
 
-            Route::get('/{advert}/edit', 'ManageController@editForm')->name('edit');
-            Route::put('/{advert}/edit', 'ManageController@edit');
-            Route::get('/{advert}/photos', 'ManageController@photosForm')->name('photos');
-            Route::post('/{advert}/photos', 'ManageController@photos');
-            Route::get('/{advert}/attributes', 'ManageController@attributesForm')->name('attributes');
-            Route::post('/{advert}/attributes', 'ManageController@attributes');
-            Route::post('/{advert}/send', 'ManageController@send')->name('send');
-            Route::post('/{advert}/close', 'ManageController@close')->name('close');
-            Route::delete('/{advert}/destroy', 'ManageController@destroy')->name('destroy');
+            Route::get('/{project}/edit', 'ManageController@editForm')->name('edit');
+            Route::put('/{project}/edit', 'ManageController@edit');
+            Route::get('/{project}/photos', 'ManageController@photosForm')->name('photos');
+            Route::post('/{project}/photos', 'ManageController@photos');
+            Route::get('/{project}/characteristics', 'ManageController@characteristicsForm')->name('characteristics');
+            Route::post('/{project}/characteristics', 'ManageController@characteristics');
+            Route::post('/{project}/send', 'ManageController@send')->name('send');
+            Route::post('/{project}/close', 'ManageController@close')->name('close');
+            Route::delete('/{project}/destroy', 'ManageController@destroy')->name('destroy');
         });
 
         Route::group([
@@ -142,7 +142,7 @@ Route::group(
             Route::post('/last', 'PageController@last')->name('last');
         });
 
-        Route::group(['prefix' => 'adverts', 'as' => 'adverts.', 'namespace' => 'Adverts'], function () {
+        Route::group(['prefix' => 'projects', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
 
             Route::resource('categories', 'CategoryController');
 
@@ -151,21 +151,21 @@ Route::group(
                 Route::post('/up', 'CategoryController@up')->name('up');
                 Route::post('/down', 'CategoryController@down')->name('down');
                 Route::post('/last', 'CategoryController@last')->name('last');
-                Route::resource('attributes', 'AttributeController')->except('index');
+                Route::resource('characteristics', 'CharacteristicController')->except('index');
             });
 
-            Route::group(['prefix' => 'adverts', 'as' => 'adverts.'], function () {
-                Route::get('/', 'AdvertController@index')->name('index');
-                Route::get('/{advert}/edit', 'AdvertController@editForm')->name('edit');
-                Route::put('/{advert}/edit', 'AdvertController@edit');
-                Route::get('/{advert}/photos', 'AdvertController@photosForm')->name('photos');
-                Route::post('/{advert}/photos', 'AdvertController@photos');
-                Route::get('/{advert}/attributes', 'AdvertController@attributesForm')->name('attributes');
-                Route::post('/{advert}/attributes', 'AdvertController@attributes');
-                Route::post('/{advert}/moderate', 'AdvertController@moderate')->name('moderate');
-                Route::get('/{advert}/reject', 'AdvertController@rejectForm')->name('reject');
-                Route::post('/{advert}/reject', 'AdvertController@reject');
-                Route::delete('/{advert}/destroy', 'AdvertController@destroy')->name('destroy');
+            Route::group(['prefix' => 'projects', 'as' => 'projects.'], function () {
+                Route::get('/', 'ProjectController@index')->name('index');
+                Route::get('/{project}/edit', 'ProjectController@editForm')->name('edit');
+                Route::put('/{project}/edit', 'ProjectController@edit');
+                Route::get('/{project}/photos', 'ProjectController@photosForm')->name('photos');
+                Route::post('/{project}/photos', 'ProjectController@photos');
+                Route::get('/{project}/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
+                Route::post('/{project}/characteristics', 'ProjectController@characteristics');
+                Route::post('/{project}/moderate', 'ProjectController@moderate')->name('moderate');
+                Route::get('/{project}/reject', 'ProjectController@rejectForm')->name('reject');
+                Route::post('/{project}/reject', 'ProjectController@reject');
+                Route::delete('/{project}/destroy', 'ProjectController@destroy')->name('destroy');
             });
         });
 

@@ -19,9 +19,9 @@ Route::group(['as' => 'api.', 'namespace' => 'Api'],
         Route::post('/register', 'Auth\RegisterController@register');
 
         Route::middleware('auth:api')->group(function () {
-            Route::resource('adverts', 'Adverts\AdvertController')->only('index', 'show');
-            Route::post('/adverts/{advert}/favorite', 'Adverts\FavoriteController@add');
-            Route::delete('/adverts/{advert}/favorite', 'Adverts\FavoriteController@remove');
+            Route::resource('projects', 'Projects\ProjectController')->only('index', 'show');
+            Route::post('/projects/{project}/favorite', 'Projects\FavoriteController@add');
+            Route::delete('/projects/{project}/favorite', 'Projects\FavoriteController@remove');
 
             Route::group(
                 [
@@ -33,15 +33,15 @@ Route::group(['as' => 'api.', 'namespace' => 'Api'],
                     Route::get('/', 'ProfileController@show');
                     Route::put('/', 'ProfileController@update');
                     Route::get('/favorites', 'FavoriteController@index');
-                    Route::delete('/favorites/{advert}', 'FavoriteController@remove');
+                    Route::delete('/favorites/{project}', 'FavoriteController@remove');
 
-                    Route::resource('adverts', 'AdvertController')->only('index', 'show', 'update', 'destroy');
-                    Route::post('/adverts/create/{category}/{region?}', 'AdvertController@store');
+                    Route::resource('projects', 'ProjectController')->only('index', 'show', 'update', 'destroy');
+                    Route::post('/projects/create/{category}/{region?}', 'ProjectController@store');
 
-                    Route::put('/adverts/{advert}/photos', 'AdvertController@photos');
-                    Route::put('/adverts/{advert}/attributes', 'AdvertController@attributes');
-                    Route::post('/adverts/{advert}/send', 'AdvertController@send');
-                    Route::post('/adverts/{advert}/close', 'AdvertController@close');
+                    Route::put('/projects/{project}/photos', 'ProjectController@photos');
+                    Route::put('/projects/{project}/characteristics', 'ProjectController@characteristics');
+                    Route::post('/projects/{project}/send', 'ProjectController@send');
+                    Route::post('/projects/{project}/close', 'ProjectController@close');
                 }
             );
         });

@@ -14,10 +14,12 @@ class CreateBannersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('advert_categories');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedInteger('region_id')->nullable();
             $table->foreign('region_id')->references('id')->on('regions');
-            $table->string('name');
+            $table->string('name_uz');
+            $table->string('name_ru');
+            $table->string('name_en');
             $table->integer('views')->nullable();
             $table->integer('limit');
             $table->integer('clicks')->nullable();
