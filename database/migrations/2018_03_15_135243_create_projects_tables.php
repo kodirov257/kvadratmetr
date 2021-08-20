@@ -9,45 +9,44 @@ class CreateProjectsTables extends Migration
     public function up()
     {
         Schema::create('project_projects', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->id();
+            $table->unsignedBigInteger('developer_id');
+            $table->string('name_uz');
+            $table->string('name_ru');
+            $table->string('name_en');
+            $table->text('about_uz');
+            $table->text('about_ru');
+            $table->text('about_en');
             $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->unsignedInteger('region_id')->nullable();
-            $table->foreign('region_id')->references('id')->on('regions');
-            $table->string('title');
-            $table->integer('price');
-            $table->text('address');
-            $table->text('content');
-            $table->string('status', 16);
+//            $table->unsignedInteger('region_id')->nullable();
+            $table->unsignedInteger('price')->default(0);
+            $table->unsignedInteger('impressions')->default(0); 
+            $table->unsignedInteger('clicks')->default(0);
+            $table->unsignedInteger('leads')->default(0);
+            $table->string('address_uz');
+            $table->string('address_ru');
+            $table->string('address_en');
+            $table->string('landmark_uz');
+            $table->string('landmark_ru');
+            $table->string('landmark_en');
+            $table->string('lng');
+            $table->string('ltd');
+            $table->smallInteger('status');
             $table->text('reject_reason')->nullable();
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->timestamp('expires_at')->nullable();
         });
 
-        Schema::create('project_project_values', function (Blueprint $table) {
-            $table->unsignedInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('project_projects')->onDelete('CASCADE');
-            $table->unsignedInteger('characteristic_id');
-            $table->foreign('characteristic_id')->references('id')->on('project_characteristics')->onDelete('CASCADE');
-            $table->string('value');
-            $table->primary(['project_id', 'characteristic_id']);
-        });
-
-        Schema::create('project_project_photos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('project_projects')->onDelete('CASCADE');
-            $table->string('file');
+        Schema::table('project_projects', function (Blueprint $table) {
+            $table->foreign('developer_id')->references('id')->on('project_developers')->onDelete('restrict');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
+//            $table->foreign('region_id')->references('id')->on('regions')->onDelete('restrict');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('project_project_photos');
-        Schema::dropIfExists('project_project_values');
         Schema::dropIfExists('project_projects');
     }
 }

@@ -29,6 +29,7 @@ class CharacteristicController extends Controller
             'type' => ['required', 'string', 'max:255', Rule::in(array_keys(Characteristic::typesList()))],
             'required' => 'nullable|string|max:255',
             'variants' => 'nullable|string',
+            'is_range' => 'boolean',
             'sort' => 'required|integer',
         ]);
 
@@ -37,6 +38,7 @@ class CharacteristicController extends Controller
             'type' => $request['type'],
             'required' => (bool)$request['required'],
             'variants' => array_map('trim', preg_split('#[\r\n]+#', $request['variants'])),
+            'is_range' => $request['is_range'],
             'sort' => $request['sort'],
         ]);
 

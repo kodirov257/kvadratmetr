@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $default
  * @property boolean $required
  * @property array $variants
+ * @property boolean $is_range
  * @property integer $sort
  * @property int $created_by
  * @property int $updated_by
@@ -38,7 +39,7 @@ class Characteristic extends BaseModel
 
     public $timestamps = false;
 
-    protected $fillable = ['name_uz', 'name_ru', 'name_en', 'type', 'required', 'default', 'variants', 'sort'];
+    protected $fillable = ['name_uz', 'name_ru', 'name_en', 'type', 'required', 'default', 'variants', 'is_range', 'sort'];
 
     protected $casts = [
         'variants' => 'array',
@@ -76,6 +77,11 @@ class Characteristic extends BaseModel
     public function isSelect(): bool
     {
         return \count($this->variants) > 0;
+    }
+
+    public function isRange(): bool
+    {
+        return $this->is_range;
     }
 
 

@@ -2,48 +2,77 @@
 
 namespace App\Entity\Projects\Project;
 
+use App\Entity\Projects\Developer;
 use App\Entity\Projects\Project\Dialog\Dialog;
 use App\Entity\Projects\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
+use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $developer_id
+ * @property string $name_uz
+ * @property string $name_ru
+ * @property string $name_en
+ * @property string $about_uz
+ * @property string $about_ru
+ * @property string $about_en
  * @property int $category_id
  * @property int $region_id
- * @property string $title
- * @property string $content
  * @property int $price
- * @property string $address
- * @property string $status
+ * @property int $impressions
+ * @property int $clicks
+ * @property int $leads
+ * @property string $address_uz
+ * @property string $address_ru
+ * @property string $address_en
+ * @property string $landmark_uz
+ * @property string $landmark_ru
+ * @property string $landmark_en
+ * @property string $lng
+ * @property string $ltd
+ * @property int $status
  * @property string $reject_reason
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $published_at
  * @property Carbon $expires_at
  *
- * @property User $user
+ * @property Developer $developer
  * @property Region $region
  * @property Category $category
  * @property Value[] $values
  * @property Photo[] $photos
+ *
+ * @property string $name
+ * @property string $about
+ * @property string $address
+ * @property string $landmark
  * @method Builder active()
  * @method Builder forUser(User $user)
+ * @mixin Eloquent
  */
 class Project extends Model
 {
-    public const STATUS_DRAFT = 'draft';
-    public const STATUS_MODERATION = 'moderation';
-    public const STATUS_ACTIVE = 'active';
-    public const STATUS_CLOSED = 'closed';
+    public const STATUS_DRAFT = 1;
+    public const STATUS_MODERATION = 2;
+    public const STATUS_ACTIVE = 5;
+    public const STATUS_CLOSED = 6;
 
     protected $table = 'project_projects';
 
     protected $guarded = ['id'];
+
+    protected $fillable = [
+        'developer_id', 'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'address_uz', 'price',
+        'category_id', 'region_id', 'impressions', 'clicks', 'leads', 'address_ru', 'address_en', 'landmark_uz',
+        'landmark_ru', 'landmark_en', 'lng', 'ltd', 'status', 'reject_reason', 'published_at', 'expires_at',
+    ];
 
     protected $casts = [
         'published_at' => 'datetime',
@@ -181,6 +210,31 @@ class Project extends Model
     }
 
 
+    ########################################### Mutators
+
+    public function getNameAttribute(): string
+    {
+        return htmlspecialchars_decode(LanguageHelper::getName($this));
+    }
+
+    public function getAboutAttribute(): string
+    {
+        return htmlspecialchars_decode(LanguageHelper::getAbout($this));
+    }
+
+    public function getAddressAttribute(): string
+    {
+        return htmlspecialchars_decode(LanguageHelper::getAddress($this));
+    }
+
+    public function getLandmarkAttribute(): string
+    {
+        return htmlspecialchars_decode(LanguageHelper::getLandmark($this));
+    }
+
+    ###########################################
+
+
     ########################################### Scopes
 
     public function scopeActive(Builder $query)
@@ -223,9 +277,9 @@ class Project extends Model
 
     ########################################### Relations
 
-    public function user()
+    public function developer()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Developer::class, 'developer_id', 'id');
     }
 
     public function category()

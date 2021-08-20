@@ -11,7 +11,7 @@ class CreateProjectFavoritesTable extends Migration
         Schema::create('project_favorites', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
-            $table->unsignedInteger('project_id');
+            $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('project_projects')->onDelete('CASCADE');
             $table->primary(['user_id', 'project_id']);
         });
