@@ -9,7 +9,7 @@ class CreateProjectProjectValuesTable extends Migration
     public function up()
     {
         Schema::create('project_project_values', function (Blueprint $table) {
-            $table->id('project_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedInteger('characteristic_id');
             $table->string('value')->nullable();
             $table->string('value_from')->nullable();

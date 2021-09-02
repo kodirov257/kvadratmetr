@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <form action="{{ $password_email_url }}" method="post">
+    <form action="{{ route('password.email') }}" method="post">
         {{ csrf_field() }}
 
         {{-- Email field --}}

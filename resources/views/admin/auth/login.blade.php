@@ -36,18 +36,18 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">{{ trans('adminlte.login_message') }}</p>
-                <form action="{{ $login_url }}" method="post">
+                <form action="{{ route('signin') }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-group mb-3">
-                        <input name="email_or_phone" class="form-control {{ $errors->has('email_or_phone') ? 'is-invalid' : '' }}" value="{{ old('email_or_phone') }}" placeholder="{{ trans('auth.email_phone_or_username') }}" autofocus>
+                        <input name="login" class="form-control {{ $errors->has('login') ? 'is-invalid' : '' }}" value="{{ old('login') }}" placeholder="{{ trans('auth.email_phone_or_username') }}" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
-                        @if ($errors->has('email_or_phone'))
+                        @if ($errors->has('login'))
                             <div class="invalid-feedback">
-                                {{ $errors->first('email_or_phone') }}
+                                {{ $errors->first('login') }}
                             </div>
                         @endif
                     </div>
