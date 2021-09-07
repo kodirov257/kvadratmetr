@@ -150,6 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\AdminLteServiceProvider::class,
 
         /*
          * Application Service Providers...

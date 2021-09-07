@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.page')
 
 @section('content')
     @include ('admin._nav', ['page' => ''])
