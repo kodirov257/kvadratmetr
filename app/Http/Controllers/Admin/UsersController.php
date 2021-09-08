@@ -57,15 +57,14 @@ class UsersController extends Controller
 
     public function create()
     {
-        return view('admin.users.create');
+        $roles = User::rolesList();
+
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(CreateRequest $request)
     {
-        $user = User::new(
-            $request['name'],
-            $request['email']
-        );
+        $user = User::new( $request->name, $request->email, $request->phone, $request->role);
 
         return redirect()->route('admin.users.show', $user);
     }
@@ -78,13 +77,14 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roles = User::rolesList();
+        $statuses = User::statusesList();
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'statuses'));
     }
 
     public function update(UpdateRequest $request, User $user)
     {
-        $user->update($request->only(['name', 'email']));
+        $user->update($request->only(['name', 'email', 'phone', 'status']));
 
         if ($request['role'] !== $user->role) {
             $user->changeRole($request['role']);

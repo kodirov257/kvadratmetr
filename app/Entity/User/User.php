@@ -63,6 +63,14 @@ class User extends Authenticatable
         ];
     }
 
+    public static function statusesList(): array
+    {
+        return [
+            self::STATUS_WAIT => trans('adminlte.user.waiting'),
+            self::STATUS_ACTIVE => trans('adminlte.user.active'),
+        ];
+    }
+
     public static function register(string $name, string $email, string $password): self
     {
         return static::create([
@@ -92,13 +100,14 @@ class User extends Authenticatable
         return $user;
     }
 
-    public static function new($name, $email): self
+    public static function new($name, $email = null, $phone = null, $role = User::ROLE_USER): self
     {
         return static::create([
             'name' => $name,
             'email' => $email,
+            'phone' => $phone,
             'password' => bcrypt(Str::random()),
-            'role' => self::ROLE_USER,
+            'role' => $role,
             'status' => self::STATUS_ACTIVE,
         ]);
     }

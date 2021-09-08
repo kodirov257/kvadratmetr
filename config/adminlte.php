@@ -228,16 +228,16 @@ return [
     */
 
     'menu' => [
-
-        // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
             'text' => 'search',
+            'search' => true,
+            'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'users',
+            'url'  => 'ru/admin/users',
+            'icon' => 'fas fa-fw fa-user',
+            'can' => 'manage-users',
         ],
         [
             'text'        => 'pages',

@@ -14,32 +14,32 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as Crumbs;
 
 Breadcrumbs::for('home', function (Crumbs $crumbs) {
-    $crumbs->push('Home', route('home'));
+    $crumbs->push(trans('adminlte.home'), route('home'));
 });
 
 Breadcrumbs::for('login', function (Crumbs $crumbs) {
     $crumbs->parent('home');
-    $crumbs->push('Login', route('login'));
+    $crumbs->push(trans('adminlte.sign_in'), route('login'));
 });
 
 Breadcrumbs::for('login.phone', function (Crumbs $crumbs) {
     $crumbs->parent('home');
-    $crumbs->push('Login', route('login.phone'));
+    $crumbs->push(trans('adminlte.sign_in'), route('login.phone'));
 });
 
 Breadcrumbs::for('register', function (Crumbs $crumbs) {
     $crumbs->parent('home');
-    $crumbs->push('Register', route('register'));
+    $crumbs->push(trans('adminlte.register'), route('register'));
 });
 
 Breadcrumbs::for('password.request', function (Crumbs $crumbs) {
     $crumbs->parent('login');
-    $crumbs->push('Reset Password', route('password.request'));
+    $crumbs->push(trans('adminlte.reset_password'), route('password.request'));
 });
 
 Breadcrumbs::for('password.reset', function (Crumbs $crumbs) {
     $crumbs->parent('password.request');
-    $crumbs->push('Change', route('password.reset'));
+    $crumbs->push(trans('adminlte.change_password'), route('password.reset'));
 });
 
 Breadcrumbs::for('page', function (Crumbs $crumbs, PagePath $path) {
@@ -58,7 +58,7 @@ Breadcrumbs::for('projects.inner_region', function (Crumbs $crumbs, ProjectsPath
         $crumbs->parent('projects.inner_region', $path->withRegion($parent));
     } else {
         $crumbs->parent('home');
-        $crumbs->push('Projects', route('projects.index'));
+        $crumbs->push(trans('adminlte.projects'), route('projects.index'));
     }
     if ($path->region) {
         $crumbs->push($path->region->name, route('projects.index', $path));
@@ -112,7 +112,7 @@ Breadcrumbs::for('cabinet.profile.phone', function (Crumbs $crumbs) {
 
 Breadcrumbs::for('cabinet.projects.index', function (Crumbs $crumbs) {
     $crumbs->parent('cabinet.home');
-    $crumbs->push('Projects', route('cabinet.projects.index'));
+    $crumbs->push(trans('adminlte.projects'), route('cabinet.projects.index'));
 });
 
 Breadcrumbs::for('cabinet.projects.create', function (Crumbs $crumbs) {
@@ -194,15 +194,15 @@ Breadcrumbs::for('cabinet.tickets.show', function (Crumbs $crumbs, Ticket $ticke
 // Admin
 
 Breadcrumbs::for('admin.home', function (Crumbs $crumbs) {
-    $crumbs->parent('home');
-    $crumbs->push('Admin', route('admin.home'));
+//    $crumbs->parent('home');
+    $crumbs->push(trans('adminlte.home'), route('admin.home'));
 });
 
 // Users
 
 Breadcrumbs::for('admin.users.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push('Users', route('admin.users.index'));
+    $crumbs->push(trans('adminlte.users'), route('admin.users.index'));
 });
 
 Breadcrumbs::for('admin.users.create', function (Crumbs $crumbs) {
