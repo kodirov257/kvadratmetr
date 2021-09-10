@@ -1,21 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.admin.page')
 
 @section('content')
-    @include('admin.users._nav')
-
     <p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Add User</a></p>
 
     <div class="card mb-3">
-        <div class="card-header">Filter</div>
+{{--        <div class="card-header">Filter</div>--}}
         <div class="card-body">
             <form action="?" method="GET">
                 <div class="row">
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label for="id" class="col-form-label">ID</label>
-                            <input id="id" class="form-control" name="id" value="{{ request('id') }}">
-                        </div>
-                    </div>
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label for="name" class="col-form-label">Name</label>
@@ -29,6 +21,12 @@
                         </div>
                     </div>
                     <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="phone" class="col-form-label">Phone</label>
+                            <input id="phone" class="form-control" name="phone" value="{{ request('phone') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
                         <div class="form-group">
                             <label for="status" class="col-form-label">Status</label>
                             <select id="status" class="form-control" name="status">
@@ -67,6 +65,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Phone</th>
             <th>Status</th>
             <th>Role</th>
         </tr>
@@ -78,6 +77,11 @@
                 <td>{{ $user->id }}</td>
                 <td><a href="{{ route('admin.users.show', $user) }}">{{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
+                <td>
+                    @if($user->phone)
+                        +{{ $user->phone }}
+                    @endif
+                </td>
                 <td>
                     @if ($user->isWait())
                         <span class="badge badge-secondary">Waiting</span>
