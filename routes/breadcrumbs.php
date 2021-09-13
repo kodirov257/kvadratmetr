@@ -220,6 +220,12 @@ Breadcrumbs::for('admin.users.edit', function (Crumbs $crumbs, User $user) {
     $crumbs->push('Edit', route('admin.users.edit', $user));
 });
 
+// Categories
+
+Breadcrumbs::for('admin.category.index', function ($trail) {
+    $trail->push('Category', route('admin.category.index'));
+});
+
 // Pages
 
 Breadcrumbs::for('admin.pages.index', function (Crumbs $crumbs) {
