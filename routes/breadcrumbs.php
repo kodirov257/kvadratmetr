@@ -2,7 +2,7 @@
 
 use App\Entity\Projects\Project\Project;
 use App\Entity\Projects\Characteristic;
-use App\Entity\Projects\Category;
+//use App\Entity\Projects\Category;
 use App\Entity\Banner\Banner;
 use App\Entity\Page;
 use App\Entity\Region;
@@ -12,6 +12,7 @@ use App\Http\Router\ProjectsPath;
 use App\Http\Router\PagePath;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as Crumbs;
+use App\Entity\Category;
 
 Breadcrumbs::for('home', function (Crumbs $crumbs) {
     $crumbs->push(trans('adminlte.home'), route('home'));
@@ -225,7 +226,13 @@ Breadcrumbs::for('admin.users.edit', function (Crumbs $crumbs, User $user) {
 Breadcrumbs::for('admin.category.index', function ($trail) {
     $trail->push('Category', route('admin.category.index'));
 });
+Breadcrumbs::for('admin.category.create', function ($trail) {
+    $trail->push('Create Category', route('admin.category.create'));
+});
+Breadcrumbs::for('admin.category.show', function (Crumbs $crumbs, Category $category) {
 
+    $crumbs->push($category->name, route('admin.category.show', $category));
+});
 // Pages
 
 Breadcrumbs::for('admin.pages.index', function (Crumbs $crumbs) {

@@ -1,7 +1,7 @@
 @extends('layouts.admin.page')
 
 @section('content')
-    <form action="{{route('admin.category.create')}}"  enctype="multipart/form-data"method="POST">
+    <form method="POST" action="{{route('admin.category.store')}}"  enctype="multipart/form-data">
         @csrf
 
         @include('admin.category._form', ['category' => null])

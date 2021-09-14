@@ -1,85 +1,48 @@
 @extends('layouts.admin.page')
 
 @section('content')
-    <p><a href="{{ route('admin.category.create') }}" class="btn btn-success">Add User</a></p>
-
-    <div class="card mb-3">
-        {{--        <div class="card-header">Filter</div>--}}
-        <div class="card-body">
-            <form action="?" method="GET">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label for="name" class="col-form-label">Name</label>
-                            <input id="name" class="form-control" name="name" value="{{ request('category_name') }}">
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <div class="form-group">
-                            <label for="status" class="col-form-label">Status</label>
-                            <select id="status" class="form-control" name="status">
-                                <option value=""></option>
-                                @foreach ($categories as $value => $label)
-                                    <option value="{{ $value }}"{{ $value === request('status') ? ' selected' : '' }}>{{ $label }}</option>
-                                @endforeach;
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <label class="col-form-label">&nbsp;</label><br />
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    <p><a href="{{ route('admin.category.create') }}" class="btn btn-success">{{ trans('adminlte.category.add') }}</a></p>
 
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Category Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Status</th>
-            <th>Role</th>
+            <th>{{ trans('adminlte.name') }}</th>
+            <th>Slug</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
 
-        @foreach ($users as $user)
+        @foreach ($categories as $category)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td><a href="{{ route('admin.users.show', $user) }}">{{ $user->name }}</a></td>
-                <td>{{ $user->email }}</td>
                 <td>
-                    @if($user->phone)
-                        +{{ $user->phone }}
-                    @endif
+                    @for ($i = 0; $i < $category->depth; $i++) &mdash; @endfor
+                    <a href="{{ route('admin.category.show', $category) }}">{{ $category->name }}</a>
                 </td>
+                <td>{{ $category->slug }}</td>
                 <td>
-                    @if ($user->isWait())
-                        <span class="badge badge-secondary">Waiting</span>
-                    @endif
-                    @if ($user->isActive())
-                        <span class="badge badge-primary">Active</span>
-                    @endif
-                </td>
-                <td>
-                    @if ($user->isAdmin())
-                        <span class="badge badge-danger">Admin</span>
-                    @else
-                        <span class="badge badge-secondary">User</span>
-                    @endif
+                    <div class="d-flex flex-row">
+                        <form method="POST" action="{{ route('admin.category.first', $category) }}" class="mr-1">
+                            @csrf
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
+                        </form>
+                        <form method="POST" action="{{ route('admin.category.up', $category) }}" class="mr-1">
+                            @csrf
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>
+                        </form>
+                        <form method="POST" action="{{ route('admin.category.down', $category) }}" class="mr-1">
+                            @csrf
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>
+                        </form>
+                        <form method="POST" action="{{ route('admin.category.last', $category) }}" class="mr-1">
+                            @csrf
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
 
         </tbody>
     </table>
-
-    {{ $users->links() }}
-
 @endsection

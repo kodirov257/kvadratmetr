@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Entity\Projects;
+namespace App\Entity;
 
 use App\Entity\BaseModel;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
 /**

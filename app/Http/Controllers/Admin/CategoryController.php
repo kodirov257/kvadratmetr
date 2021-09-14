@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\User\User;
-use App\Http\Requests\Admin\Users\CreateRequest;
-use App\Http\Requests\Admin\Users\UpdateRequest;
+use App\Http\Requests\Admin\Categories\CreateRequest;
+use App\Http\Requests\Admin\Categories\UpdateRequest;
 use App\Http\Controllers\Controller;
 use App\UseCases\Auth\RegisterService;
 use Illuminate\Http\Request;
@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     private $register;
+
 
     public function __construct(RegisterService $register)
     {
@@ -27,22 +28,25 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $parents = Category::defaultOrder()->withDepth()->get();
 
 
-
-        return view('admin.category.create');
+        return view('admin.category.create', compact('parents'));
     }
 
     public function store(CreateRequest $request)
     {
-//        $user = User::new( $request->name, $request->email, $request->phone, $request->role);
+//        dd($request->all());
 
-        return redirect()->route('admin.category.show');
+        $category = Category::create($request->all());
+        session()->flash('message', 'запись обновлён ');
+        return redirect()->route('admin.category.show', $category);
     }
 
-    public function show(User $user)
+    public function show(Category $category)
     {
-        return view('admin.users.show', compact('user'));
+
+        return view('admin.category.show', compact('category'));
     }
 
     public function edit(Category $category)
