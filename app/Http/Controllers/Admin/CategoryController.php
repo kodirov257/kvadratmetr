@@ -23,7 +23,9 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        return view('admin.category.index');
+        $categories = Category::defaultOrder()->withDepth()->get();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     public function create()
@@ -51,27 +53,45 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
+        $parents = Category::defaultOrder()->withDepth()->get();
 
-
-        return view('admin.category.edit');
+        return view('admin.category.edit' , compact('category', 'parents'));
     }
 
-    public function update(UpdateRequest $request, User $user)
+    public function update(\App\Http\Requests\Admin\Shop\Categories\UpdateRequest $request, Category $category)
     {
-        $user->update($request->only(['name', 'email', 'phone', 'status']));
+        $category = $this->service->update($category->id, $request);
+        session()->flash('message', 'запись обновлён ');
+        return redirect()->route('admin.categories.show', $category);
+    }
+    public function up(Category $category)
+    {
+        $category->up();
 
-        if ($request['role'] !== $user->role) {
-            $user->changeRole($request['role']);
+        return redirect()->route('admin.categories.index');
+    }
+
+    public function down(Category $category)
+    {
+        $category->down();
+
+        return redirect()->route('admin.categories.index');
+    }
+
+    public function last(Category $category)
+    {
+        if ($last = $category->siblings()->defaultOrder('desc')->first()) {
+            $category->insertAfterNode($last);
         }
 
-        return redirect()->route('admin.users.show', $user);
+        return redirect()->route('admin.categories.index');
     }
 
-    public function destroy(User $user)
+    public function destroy(Category $category)
     {
-        $user->delete();
-
-        return redirect()->route('admin.users.index');
+        $this->service->remove($category->id);
+        session()->flash('message', 'запись обновлён ');
+        return redirect()->route('admin.categories.index');
     }
 
 }
