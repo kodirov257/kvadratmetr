@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin.page')
 
 @section('content')
-    @include('admin.projects.projects._nav')
+    <p><a href="{{ route('admin.projects.create') }}" class="btn btn-success">Добавить проект</a></p>
 
     <div class="card mb-3">
-        <div class="card-header">Filter</div>
+{{--        <div class="card-header">Filter</div>--}}
         <div class="card-body">
             <form action="?" method="GET">
                 <div class="row">

@@ -56,7 +56,13 @@ class ProjectController extends Controller
 
         $roles = User::rolesList();
 
-        return view('admin.projects.projects.index', compact('projects', 'statuses', 'roles'));
+        return view('admin.projects.index', compact('projects', 'statuses', 'roles'));
+    }
+
+    public function create(Request $request)
+    {
+        $categories
+        return view('admin.projects.create');
     }
 
     public function editForm(Project $project)
@@ -120,7 +126,7 @@ class ProjectController extends Controller
 
     public function rejectForm(Project $project)
     {
-        return view('admin.projects.projects.reject', compact('project'));
+        return view('admin.projects.reject', compact('project'));
     }
 
     public function reject(RejectRequest $request, Project $project)

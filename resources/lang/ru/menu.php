@@ -18,4 +18,5 @@ return [
     'information'                   => 'Информация',
 
     'users' => 'Пользователи',
+    'projects' => 'Проекты',
 ];

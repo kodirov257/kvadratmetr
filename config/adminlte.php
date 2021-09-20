@@ -240,8 +240,8 @@ return [
             'can' => 'manage-users',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'projects',
+            'url'         => 'ru/admin/projects',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',

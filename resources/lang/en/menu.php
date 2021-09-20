@@ -18,4 +18,5 @@ return [
     'information'                   => 'Information',
 
     'users' => 'Users',
+    'projects' => 'Projects',
 ];

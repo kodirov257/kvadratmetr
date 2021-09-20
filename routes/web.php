@@ -85,6 +85,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('/last', 'PageController@last')->name('last');
             });
 
+            Route::resource('projects', 'Projects\ProjectController');
             Route::group(['prefix' => 'projects', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
 
                 Route::resource('categories', 'CategoryController');
@@ -97,19 +98,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                     Route::resource('characteristics', 'CharacteristicController')->except('index');
                 });
 
-                Route::group(['prefix' => 'projects', 'as' => 'projects.'], function () {
-                    Route::get('/', 'ProjectController@index')->name('index');
-                    Route::get('/{project}/edit', 'ProjectController@editForm')->name('edit');
-                    Route::put('/{project}/edit', 'ProjectController@edit');
-                    Route::get('/{project}/photos', 'ProjectController@photosForm')->name('photos');
-                    Route::post('/{project}/photos', 'ProjectController@photos');
-                    Route::get('/{project}/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
-                    Route::post('/{project}/characteristics', 'ProjectController@characteristics');
-                    Route::post('/{project}/moderate', 'ProjectController@moderate')->name('moderate');
-                    Route::get('/{project}/reject', 'ProjectController@rejectForm')->name('reject');
-                    Route::post('/{project}/reject', 'ProjectController@reject');
-                    Route::delete('/{project}/destroy', 'ProjectController@destroy')->name('destroy');
-                });
+//                Route::get('/', 'ProjectController@index')->name('index');
+                Route::get('/{project}/edit', 'ProjectController@editForm')->name('edit');
+                Route::put('/{project}/edit', 'ProjectController@edit');
+                Route::get('/{project}/photos', 'ProjectController@photosForm')->name('photos');
+                Route::post('/{project}/photos', 'ProjectController@photos');
+                Route::get('/{project}/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
+                Route::post('/{project}/characteristics', 'ProjectController@characteristics');
+                Route::post('/{project}/moderate', 'ProjectController@moderate')->name('moderate');
+                Route::get('/{project}/reject', 'ProjectController@rejectForm')->name('reject');
+                Route::post('/{project}/reject', 'ProjectController@reject');
+                Route::delete('/{project}/destroy', 'ProjectController@destroy')->name('destroy');
             });
 
             Route::group(['prefix' => 'banners', 'as' => 'banners.'], function () {

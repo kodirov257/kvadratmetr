@@ -326,19 +326,24 @@ Breadcrumbs::for('admin.regions.edit', function (Crumbs $crumbs, Region $region)
 
 // Projects
 
-Breadcrumbs::for('admin.projects.projects.index', function (Crumbs $crumbs) {
+Breadcrumbs::for('admin.projects.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push('Categories', route('admin.projects.projects.index'));
+    $crumbs->push('Categories', route('admin.projects.index'));
 });
 
-Breadcrumbs::for('admin.projects.projects.edit', function (Crumbs $crumbs, Project $project) {
+Breadcrumbs::for('admin.projects.create', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push($project->title, route('admin.projects.projects.edit', $project));
+    $crumbs->push('Create', route('admin.projects.create'));
 });
 
-Breadcrumbs::for('admin.projects.projects.reject', function (Crumbs $crumbs, Project $project) {
+Breadcrumbs::for('admin.projects.edit', function (Crumbs $crumbs, Project $project) {
     $crumbs->parent('admin.home');
-    $crumbs->push($project->title, route('admin.projects.projects.reject', $project));
+    $crumbs->push($project->title, route('admin.projects.edit', $project));
+});
+
+Breadcrumbs::for('admin.projects.reject', function (Crumbs $crumbs, Project $project) {
+    $crumbs->parent('admin.home');
+    $crumbs->push($project->title, route('admin.projects.reject', $project));
 });
 
 // Project Categories
