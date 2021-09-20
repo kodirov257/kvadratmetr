@@ -19,4 +19,6 @@ return [
 
     'users' => 'Пользователи',
     'projects' => 'Проекты',
+    'content' => 'Контент',
+    'characteristics' => 'Характеристики',
 ];

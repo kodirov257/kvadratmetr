@@ -4,7 +4,7 @@ namespace App\Entity\Projects\Project;
 
 use App\Entity\Projects\Developer;
 use App\Entity\Projects\Project\Dialog\Dialog;
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $about_uz
  * @property string $about_ru
  * @property string $about_en
+ * @property string $slug
  * @property int $category_id
  * @property int $region_id
  * @property int $price
@@ -69,9 +70,10 @@ class Project extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'developer_id', 'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'address_uz', 'price',
-        'category_id', 'region_id', 'impressions', 'clicks', 'leads', 'address_ru', 'address_en', 'landmark_uz',
-        'landmark_ru', 'landmark_en', 'lng', 'ltd', 'status', 'reject_reason', 'published_at', 'expires_at',
+        'developer_id', 'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'slug', 'address_uz',
+        'price', 'category_id', 'region_id', 'impressions', 'clicks', 'leads', 'address_ru', 'address_en',
+        'landmark_uz', 'landmark_ru', 'landmark_en', 'lng', 'ltd', 'status', 'reject_reason', 'published_at',
+        'expires_at',
     ];
 
     protected $casts = [

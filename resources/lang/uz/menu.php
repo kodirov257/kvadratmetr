@@ -19,4 +19,6 @@ return [
 
     'users' => 'Foydalanuvchilar',
     'projects' => 'Loyihalar',
+    'content' => 'Kontent',
+    'characteristics' => 'Xususiyatlar',
 ];

@@ -10,15 +10,13 @@ class CreateProjectCharacteristicsTable extends Migration
     {
         Schema::create('project_characteristics', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
             $table->string('name_uz');
             $table->string('name_ru');
             $table->string('name_en');
             $table->string('type');
             $table->boolean('required');
             $table->json('variants');
-            $table->boolean('is_range');
+            $table->boolean('is_range')->default(false);
             $table->integer('sort');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');

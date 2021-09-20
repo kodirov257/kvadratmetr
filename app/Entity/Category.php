@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Entity\BaseModel;
+use App\Entity\Projects\Characteristic;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
@@ -30,6 +32,7 @@ use Kalnoy\Nestedset\NodeTrait;
  * @property Characteristic[] $characteristics
  * @property User $createdBy
  * @property User $updatedBy
+ * @mixin Eloquent
  */
 class Category extends BaseModel
 {

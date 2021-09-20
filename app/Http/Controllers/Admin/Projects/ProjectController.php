@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Projects;
 
+use App\Entity\Projects\Developer;
 use App\Entity\Projects\Project\Project;
+use App\Entity\Region;
 use App\Entity\User\User;
+use App\Helpers\LanguageHelper;
+use App\Helpers\ProjectHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Projects\CharacteristicsRequest;
 use App\Http\Requests\Projects\EditRequest;
@@ -56,21 +60,30 @@ class ProjectController extends Controller
 
         $roles = User::rolesList();
 
-        return view('admin.projects.index', compact('projects', 'statuses', 'roles'));
+        return view('admin.projects.projects.index', compact('projects', 'statuses', 'roles'));
     }
 
     public function create(Request $request)
     {
-        $categories
-        return view('admin.projects.create');
+        $categories = ProjectHelper::getCategoryList();
+        $regions = ProjectHelper::getRegionsList();
+        $developers = Developer::orderByDesc('updated_at')->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+        $statuses = Project::statusesList();
+
+        return view('admin.projects.projects.create', compact('categories', 'regions', 'developers', 'statuses'));
     }
 
-    public function editForm(Project $project)
+    public function show(Project $project)
     {
-        return view('projects.edit.project', compact('project'));
+        return view('admin.projects.projects.show', compact('project'));
     }
 
-    public function edit(EditRequest $request, Project $project)
+    public function edit(Project $project)
+    {
+        return view('admin.projects.projects.edit', compact('project'));
+    }
+
+    public function update(EditRequest $request, Project $project)
     {
         try {
             $this->service->edit($project->id, $request);
@@ -83,7 +96,7 @@ class ProjectController extends Controller
 
     public function characteristicsForm(Project $project)
     {
-        return view('projects.edit.characteristics', compact('project'));
+        return view('admin.projects.characteristics.create', compact('project'));
     }
 
     public function characteristics(CharacteristicsRequest $request, Project $project)
@@ -99,7 +112,7 @@ class ProjectController extends Controller
 
     public function photosForm(Project $project)
     {
-        return view('projects.edit.photos', compact('project'));
+        return view('admin.projects.photos.photos', compact('project'));
     }
 
     public function photos(PhotosRequest $request, Project $project)
@@ -148,6 +161,6 @@ class ProjectController extends Controller
             return back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('admin.projects.projects.index');
+        return redirect()->route('admin.projects.index');
     }
 }

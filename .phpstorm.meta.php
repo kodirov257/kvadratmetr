@@ -11,7 +11,6 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -23,8 +22,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -203,7 +204,6 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -215,8 +215,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -395,7 +397,6 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -407,8 +408,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -587,7 +590,6 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -599,8 +601,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -779,7 +783,6 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -791,8 +794,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -971,7 +976,6 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -983,8 +987,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -1163,7 +1169,6 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -1175,8 +1180,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -1355,7 +1362,6 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -1367,8 +1373,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -1547,7 +1555,6 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -1559,8 +1566,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -1739,7 +1748,6 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -1751,8 +1759,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -1931,7 +1941,6 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
-            'App\Services\Banner\CostCalculator' => \App\Services\Banner\CostCalculator::class,
             'App\Services\Sms\SmsSender' => \App\Services\Sms\SmsUz::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'Diglactic\Breadcrumbs\Generator' => \Diglactic\Breadcrumbs\Generator::class,
@@ -1943,8 +1952,10 @@ namespace PHPSTORM_META {
             'Facade\Ignition\DumpRecorder\MultiDumpHandler' => \Facade\Ignition\DumpRecorder\MultiDumpHandler::class,
             'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
             'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
+            'Facade\Ignition\JobRecorder\JobRecorder' => \Facade\Ignition\JobRecorder\JobRecorder::class,
             'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
             'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+            'Facade\Ignition\Support\SentReports' => \Facade\Ignition\Support\SentReports::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,

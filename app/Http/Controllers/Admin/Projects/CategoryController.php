@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Projects;
 
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

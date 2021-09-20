@@ -63,6 +63,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin() || $user->isModerator();
         });
 
+        Gate::define('manage-projects-characteristics', function (User $user) {
+            return $user->isAdmin() || $user->isModerator();
+        });
+
         Gate::define('manage-banners', function (User $user) {
             return $user->isAdmin() || $user->isModerator();
         });

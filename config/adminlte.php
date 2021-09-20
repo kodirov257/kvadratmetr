@@ -240,11 +240,25 @@ return [
             'can' => 'manage-users',
         ],
         [
+            'text' => 'content',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text'        => 'projects',
+                    'url'         => 'ru/admin/projects',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'characteristics',
+                    'url'         => 'ru/admin/projects/characteristics',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+            ],
+        ],
+        [
             'text'        => 'projects',
             'url'         => 'ru/admin/projects',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
@@ -369,17 +383,18 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'name' => 'Select2',
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/select2/dist/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                    'asset' => true,
+                    'location' => 'vendor/select2/dist/css/select2.css',
                 ],
             ],
         ],

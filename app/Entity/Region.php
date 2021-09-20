@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Helpers\LanguageHelper;
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Region[] $children
  *
  * @method Builder roots()
+ * @mixin Eloquent
  */
 class Region extends Model
 {

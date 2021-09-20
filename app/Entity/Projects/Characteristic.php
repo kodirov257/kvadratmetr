@@ -6,11 +6,11 @@ use App\Entity\BaseModel;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $category_id
  * @property string $name_uz
  * @property string $name_ru
  * @property string $name_en
@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property User $createdBy
  * @property User $updatedBy
+ *
+ * @mixin Eloquent
  */
 class Characteristic extends BaseModel
 {
@@ -52,6 +54,11 @@ class Characteristic extends BaseModel
             self::TYPE_INTEGER => 'Integer',
             self::TYPE_FLOAT => 'Float',
         ];
+    }
+
+    public function typeName(): string
+    {
+        return self::typesList()[$this->type];
     }
 
     public function isString(): bool
@@ -82,6 +89,16 @@ class Characteristic extends BaseModel
     public function isRange(): bool
     {
         return $this->is_range;
+    }
+
+    public function isIdEqualTo(int $characteristicId): bool
+    {
+        return $this->id === $characteristicId;
+    }
+
+    public function setSort($sort): void
+    {
+        $this->sort = $sort;
     }
 
 

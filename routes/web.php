@@ -85,7 +85,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('/last', 'PageController@last')->name('last');
             });
 
-            Route::resource('projects', 'Projects\ProjectController');
             Route::group(['prefix' => 'projects', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
 
                 Route::resource('categories', 'CategoryController');
@@ -95,12 +94,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                     Route::post('/up', 'CategoryController@up')->name('up');
                     Route::post('/down', 'CategoryController@down')->name('down');
                     Route::post('/last', 'CategoryController@last')->name('last');
-                    Route::resource('characteristics', 'CharacteristicController')->except('index');
+                });
+
+                Route::resource('characteristics', 'CharacteristicController');
+
+                Route::group(['prefix' => 'characteristics/{characteristic}', 'as' => 'characteristics.'], function () {
+                    Route::post('/first', 'CharacteristicController@first')->name('first');
+                    Route::post('/up', 'CharacteristicController@up')->name('up');
+                    Route::post('/down', 'CharacteristicController@down')->name('down');
+                    Route::post('/last', 'CharacteristicController@last')->name('last');
                 });
 
 //                Route::get('/', 'ProjectController@index')->name('index');
-                Route::get('/{project}/edit', 'ProjectController@editForm')->name('edit');
-                Route::put('/{project}/edit', 'ProjectController@edit');
+                Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
+                Route::put('/{project}/update', 'ProjectController@update')->name('update');
                 Route::get('/{project}/photos', 'ProjectController@photosForm')->name('photos');
                 Route::post('/{project}/photos', 'ProjectController@photos');
                 Route::get('/{project}/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
@@ -109,7 +116,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::get('/{project}/reject', 'ProjectController@rejectForm')->name('reject');
                 Route::post('/{project}/reject', 'ProjectController@reject');
                 Route::delete('/{project}/destroy', 'ProjectController@destroy')->name('destroy');
+
+                Route::group(['prefix' => 'values', 'as' => 'values.'], function () {
+                    Route::get('create', 'ValueController@create')->name('add');
+                    Route::post('', 'ValueController@store')->name('store');
+                    Route::get('characteristic/{characteristic}', 'ValueController@show')->name('show');
+                    Route::get('characteristic/{characteristic}/edit', 'ValueController@edit')->name('edit');
+                    Route::put('characteristic/{characteristic}', 'ValueController@update')->name('update');
+                    Route::delete('characteristic/{characteristic}', 'ValueController@destroy')->name('destroy');
+                    Route::post('characteristic/{characteristic}/first', 'ValueController@first')->name('first');
+                    Route::post('characteristic/{characteristic}/up', 'ValueController@up')->name('up');
+                    Route::post('characteristic/{characteristic}/down', 'ValueController@down')->name('down');
+                    Route::post('characteristic/{characteristic}/last', 'ValueController@last')->name('last');
+                });
             });
+            Route::resource('projects', 'Projects\ProjectController');
 
             Route::group(['prefix' => 'banners', 'as' => 'banners.'], function () {
                 Route::get('/', 'BannerController@index')->name('index');
