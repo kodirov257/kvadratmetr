@@ -15,7 +15,7 @@
                 @csrf
                 <button class="btn btn-success" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.send_to_moderation')</button>
             </form>
-        @elseif($project->isActive() && Gate::allows('manage-shop-products', $project))
+        @elseif($project->isActive() && Gate::allows('manage-projects', $project))
             <form method="POST" action="{{ route('admin.projects.close', $project) }}" class="mr-1">
                 @csrf
                 <button class="btn btn-danger" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.close')</button>
@@ -32,11 +32,8 @@
                 <button class="btn btn-success">@lang('adminlte.activate')</button>
             </form>
         @endif
-        <a href="{{ route('admin.projects.main-photo', $project) }}" class="btn btn-dark mr-1">{{ trans('adminlte.product.add_main_photo') }}</a>
         <a href="{{ route('admin.projects.photos', $project) }}" class="btn btn-secondary mr-1">{{ trans('adminlte.product.add_photos') }}</a>
         <a href="{{ route('admin.projects.values.add', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.value.add') }}</a>
-        <a href="{{ route('admin.projects.reviews.index', $project) }}" class="btn btn-info mr-1">{{ trans('adminlte.product.comments') }}</a>
-        <a href="{{ route('admin.projects.posts.create', $project) }}" class="btn btn-info mr-1">{{ trans('adminlte.product.reviews') }}</a>
         <form method="POST" action="{{ route('admin.projects.destroy', $project) }}" class="mr-1">
             @csrf
             @method('DELETE')
@@ -58,25 +55,16 @@
                         <tr><th>{{ trans('adminlte.name') }} Uz</th><td>{{ $project->name_uz }}</td></tr>
                         <tr><th>{{ trans('adminlte.name') }} Ru</th><td>{{ $project->name_ru }}</td></tr>
                         <tr><th>{{ trans('adminlte.name') }} En</th><td>{{ $project->name_en }}</td></tr>
-                        <tr><th>{{ trans('adminlte.description') }} Uz</th><td>{!! htmlspecialchars_decode($project->description_uz) !!}</td></tr>
-                        <tr><th>{{ trans('adminlte.description') }} Ru</th><td>{!! htmlspecialchars_decode($project->description_ru) !!}</td></tr>
-                        <tr><th>{{ trans('adminlte.description') }} En</th><td>{!! htmlspecialchars_decode($project->description_en) !!}</td></tr>
+                        <tr><th>{{ trans('adminlte.about') }} Uz</th><td>{!! htmlspecialchars_decode($project->about_uz) !!}</td></tr>
+                        <tr><th>{{ trans('adminlte.about') }} Ru</th><td>{!! htmlspecialchars_decode($project->about_ru) !!}</td></tr>
+                        <tr><th>{{ trans('adminlte.about') }} En</th><td>{!! htmlspecialchars_decode($project->about_en) !!}</td></tr>
                         <tr><th>Slug</th><td>{{ $project->slug }}</td></tr>
+                        <tr>
+                            <th>{{ trans('adminlte.product.category') }}</th>
+                            <td><a href="{{ route('admin.categories.show', $project->category) }}">{{ $project->category->name }}</a></td>
+                        </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-gray card-outline">
-                <div class="card-header"><h3 class="card-title">{{ trans('adminlte.product.main_photo') }}</h3></div>
-                <div class="card-body">
-                    @if ($project->mainPhoto)
-                        <a href="{{ $project->mainPhoto->fileOriginal }}" target="_blank"><img src="{{ $project->mainPhoto->fileThumbnail }}"></a>
-                    @endif
                 </div>
             </div>
         </div>
@@ -89,16 +77,14 @@
                 <div class="card-body">
                     <table class="table {{--table-bordered--}} table-striped projects">
                         <tbody>
-                        <tr><th>{{ trans('adminlte.product.main_category') }}</th><td><a href="{{ route('admin.categories.show', $mainCategory) }}">{{ $mainCategory->name }}</a></td></tr>
-                        <tr><th>{{ trans('adminlte.brand.name') }}</th><td><a href="{{ route('admin.brands.show', $brand) }}">{{ $brand->name }}</a></td></tr>
-                        <tr>
-                            <th>{{ trans('menu.marks') }}</th>
-                            <td>
-                                @foreach($project->marks as $mark)
-                                    <a href="{{ route('admin.shop.marks.show', $mark) }}">{{ $mark->name }}</a><br>
-                                @endforeach
-                            </td>
-                        </tr>
+                        <tr><th>{{ trans('adminlte.address') }} Uz</th><td>{{ $project->address_uz }}</td></tr>
+                        <tr><th>{{ trans('adminlte.address') }} Ru</th><td>{{ $project->address_ru }}</td></tr>
+                        <tr><th>{{ trans('adminlte.address') }} En</th><td>{{ $project->address_en }}</td></tr>
+                        <tr><th>{{ trans('adminlte.landmark') }} Uz</th><td>{{ $project->landmark_uz }}</td></tr>
+                        <tr><th>{{ trans('adminlte.landmark') }} Ru</th><td>{{ $project->landmark_ru }}</td></tr>
+                        <tr><th>{{ trans('adminlte.landmark') }} En</th><td>{{ $project->landmark_en }}</td></tr>
+                        <tr><th>{{ trans('adminlte.longitude') }} En</th><td>{{ $project->lng }}</td></tr>
+                        <tr><th>{{ trans('adminlte.latitude') }} En</th><td>{{ $project->ltd }}</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -113,23 +99,14 @@
                 <div class="card-body">
                     <table class="table {{--table-bordered--}} table-striped projects">
                         <tbody>
-                        <tr><th>{{ trans('adminlte.price_uzs') }}</th><td>{{ $project->price_uzs }}</td></tr>
-                        <tr><th>{{ trans('adminlte.price_usd') }}</th><td>{{ $project->price_usd }}</td></tr>
-                        <tr><th>{{ trans('adminlte.product.discount') }}</th><td>{{ $project->discount }}</td></tr>
-                        <tr><th>{{ trans('adminlte.status') }}</th><td>{!! \App\Helpers\ProductHelper::getStatusLabel($project->status) !!}</td></tr>
-                        <tr><th>{{ trans('adminlte.product.weight') }}</th><td>{{ $project->weight }}</td></tr>
-                        <tr><th>{{ trans('adminlte.quantity') }}</th><td>{{ $project->quantity }}</td></tr>
-                        <tr><th>{{ trans('adminlte.product.guarantee') }}</th><td>{{ $project->guarantee ? 'Да' : 'Нет' }}</td></tr>
-                        <tr><th>{{ trans('adminlte.product.bestseller') }}</th><td>{{ $project->bestseller ? 'Да' : 'Нет' }}</td></tr>
-                        <tr><th>{{ trans('adminlte.new') }}</th><td>{{ $project->new ? 'Да' : 'Нет' }}</td></tr>
-                        <tr><th>{{ trans('adminlte.rating') }}</th><td>{{ $project->rating }}</td></tr>
-                        <tr><th>{{ trans('adminlte.number_of_reviews') }}</th><td>{{ $project->number_of_reviews }}</td></tr>
+                        <tr><th>{{ trans('adminlte.price') }}</th><td>{{ $project->price }}</td></tr>
+                        <tr><th>{{ trans('adminlte.status') }}</th><td>{!! \App\Helpers\ProjectHelper::getStatusLabel($project->status) !!}</td></tr>
                         <tr>
-                            <th>{{ trans('menu.discounts') }}</th>
+                            <th>{{ trans('adminlte.reject_reason') }}</th>
                             <td>
-                                @foreach($discounts as $discount)
-                                    <a href="{{ route('admin.discounts.show', $discount) }}">{{ $discount->name }}</a><br>
-                                @endforeach
+                                @if($project->status === \App\Entity\Projects\Project\Project::STATUS_DRAFT && $project->reject_reason)
+                                    {{ $project->reject_reason }}
+                                @endif
                             </td>
                         </tr>
                         </tbody>
@@ -188,56 +165,6 @@
         </div>
     </div>
 
-{{--    <div class="card" id="modifications">--}}
-{{--        <div class="card-header card-green with-border">{{ trans('adminlte.modification.name') }}</div>--}}
-{{--        <div class="card-body">--}}
-{{--            <p><a href="{{ route('admin.projects.modifications.create', $project) }}" class="btn btn-success">{{ trans('adminlte.modification.add') }}</a></p>--}}
-{{--            <table class="table table-bordered table-striped">--}}
-{{--                <thead>--}}
-{{--                <tr>--}}
-{{--                    <th>ID</th>--}}
-{{--                    <th>{{ trans('adminlte.name') }}</th>--}}
-{{--                    <th>{{ trans('adminlte.code') }}</th>--}}
-{{--                    <th>{{ trans('adminlte.price_uzs') }}</th>--}}
-{{--                    <th></th>--}}
-{{--                </tr>--}}
-{{--                </thead>--}}
-{{--                <tbody>--}}
-
-{{--                @foreach ($project->modifications as $modification)--}}
-{{--                    <tr>--}}
-{{--                        <td>{{ $modification->id }}</td>--}}
-{{--                        <td><a href="{{ route('admin.projects.modifications.show', ['product' => $project, 'modification' => $modification]) }}">{{ $modification->name }}</a></td>--}}
-{{--                        <td>{{ $modification->code }}</td>--}}
-{{--                        <td>{{ $modification->price_uzs }}</td>--}}
-{{--                        <td>--}}
-{{--                            <div class="d-flex flex-row">--}}
-{{--                                <form method="POST" action="{{ route('admin.projects.modifications.first', ['product' => $project, 'modification' => $modification]) }}" class="mr-1">--}}
-{{--                                    @csrf--}}
-{{--                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>--}}
-{{--                                </form>--}}
-{{--                                <form method="POST" action="{{ route('admin.projects.modifications.up', ['product' => $project, 'modification' => $modification]) }}" class="mr-1">--}}
-{{--                                    @csrf--}}
-{{--                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>--}}
-{{--                                </form>--}}
-{{--                                <form method="POST" action="{{ route('admin.projects.modifications.down', ['product' => $project, 'modification' => $modification]) }}" class="mr-1">--}}
-{{--                                    @csrf--}}
-{{--                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>--}}
-{{--                                </form>--}}
-{{--                                <form method="POST" action="{{ route('admin.projects.modifications.last', ['product' => $project, 'modification' => $modification]) }}" class="mr-1">--}}
-{{--                                    @csrf--}}
-{{--                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-{{--                @endforeach--}}
-
-{{--                </tbody>--}}
-{{--            </table>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
     <div class="card" id="values">
         <div class="card-header card-gray with-border">{{ trans('adminlte.value.name') }}</div>
         <div class="card-body">
@@ -257,7 +184,7 @@
                 @foreach ($project->values as $value)
                     @php($characteristic = $value->characteristic)
                     <tr>
-                        <td><a href="{{ route('admin.shop.characteristics.show', ['product' => $project, 'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td>
+                        <td><a href="{{ route('admin.projects.characteristics.show', ['product' => $project, 'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td>
                         <td>{{ $value->value }}</td>
                         <td>{{ $value->main ? trans('adminlte.yes') : trans('adminlte.no') }}</td>
                         <td>

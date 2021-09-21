@@ -18,6 +18,7 @@ class CreateProjectProjectPhotosTable extends Migration
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('project_projects')->onDelete('CASCADE');
             $table->string('file');
+            $table->integer('sort')->default(1000);
         });
     }
 

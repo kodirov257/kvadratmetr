@@ -11,19 +11,15 @@ class ImageHelper
 {
     const THUMBNAIL_NAME = 'thumbs';
 
-    const FOLDER_BRANDS = 'brands';
-    const FOLDER_MARKS = 'marks';
     const FOLDER_PAYMENTS = 'payments';
     const FOLDER_CATEGORIES = 'categories';
-    const FOLDER_PRODUCTS = 'products';
-    const FOLDER_MODIFICATIONS = 'modifications';
+    const FOLDER_PROJECTS = 'projects';
     const FOLDER_BANNERS = 'banners';
     const FOLDER_SLIDERS = 'sliders';
     const FOLDER_NEWS = 'news';
     const FOLDER_POSTS = 'posters';
     const FOLDER_VIDEOS = 'videos';
     const FOLDER_ADS = 'ads';
-    const FOLDER_DISCOUNTS = 'discounts';
     const FOLDER_PROFILES = 'profiles';
     const FOLDER_PASSPORT = 'passport';
     const FOLDER_PROJECT_PLAN = 'project_plans';

@@ -106,10 +106,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 });
 
 //                Route::get('/', 'ProjectController@index')->name('index');
-                Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
-                Route::put('/{project}/update', 'ProjectController@update')->name('update');
-                Route::get('/{project}/photos', 'ProjectController@photosForm')->name('photos');
-                Route::post('/{project}/photos', 'ProjectController@photos');
+//                Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
+//                Route::put('/{project}/update', 'ProjectController@update')->name('update');
+                Route::get('/{project}/photos', 'PhotoController@addForm')->name('photos');
+                Route::post('/{project}/photos', 'PhotoController@addPhoto')->name('add-photo');
+                Route::post('/{project}/photos', 'PhotoController@addPhotos')->name('add-photos');
+                Route::delete('photos/{photo}', 'PhotoController@removePhoto')->name('remove-photo');
+                Route::get('move-photo-up/{photo}', 'PhotoController@movePhotoUp')->name('move-photo-up');
+                Route::get('move-photo-down/{photo}', 'PhotoController@movePhotoDown')->name('move-photo-down');
                 Route::get('/{project}/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
                 Route::post('/{project}/characteristics', 'ProjectController@characteristics');
                 Route::post('/{project}/moderate', 'ProjectController@moderate')->name('moderate');
@@ -129,6 +133,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                     Route::post('characteristic/{characteristic}/down', 'ValueController@down')->name('down');
                     Route::post('characteristic/{characteristic}/last', 'ValueController@last')->name('last');
                 });
+
+                Route::post('send-to-moderation', 'ProjectController@sendToModeration')->name('on-moderation');
+                Route::post('moderate', 'ProjectController@moderate')->name('moderate');
+                Route::post('activate', 'ProjectController@activate')->name('activate');
+                Route::post('draft', 'ProjectController@draft')->name('draft');
+                Route::post('close', 'ProjectController@close')->name('close');
             });
             Route::resource('projects', 'Projects\ProjectController');
 

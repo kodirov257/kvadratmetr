@@ -126,6 +126,18 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', $project);
     }
 
+    public function sendToModeration(Project $project)
+    {
+        $this->service->sendToModeration($project->id);
+        try {
+            session()->flash('message', 'запись обновлён ');
+            return redirect()->route('admin.projects.show', $project);
+        } catch (\Exception $e) {
+            session()->flash('error', 'Произошла ошибка');
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
     public function moderate(Project $project)
     {
         try {
