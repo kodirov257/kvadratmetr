@@ -1,5 +1,26 @@
 @section($javaScriptSectionName)
     <script>
+        function getSelectForm(formName, variants, defaultValue) {
+            let form =
+                "<label for=value\" class=\"col-form-label\">{{ trans('adminlte.value.name') }}</label>\n" +
+                "<select id=\"value\" class=\"form-control{{ $errors->has('value') ? ' is-invalid' : '' }}\" name=\"value\">\n" +
+                "   <option value=\"\"></option>\n";
+
+            $.each(data.variants, function (key, value) {
+                form += "<option value=" + value;
+
+                if (value === defaultValue) {
+                    form += ' selected';
+                }
+
+                form += '>' + value + '</option>\n';
+            })
+
+            form += '</select>';
+
+            return form;
+        }
+
         $('#characteristic_id').select2();
         let main_forms = $('#main-forms');
         let submit_button = $('#submit-button');
@@ -38,7 +59,7 @@
                             })
 
                             form += '</select>';
-                        } else if (data.type === '{{ \App\Entity\Shop\Characteristic::TYPE_FLOAT }}') {
+                        } else if (data.type === '{{ \App\Entity\Projects\Characteristic::TYPE_FLOAT }}') {
                             form +=
                                 "<label for=value\" class=\"col-form-label\">{{ trans('adminlte.value.name') }}</label>\n" +
                                 "<input id=\"value\" type=\"number\" step=\"0.01\" class=\"form-control{{ $errors->has('value') ? ' is-invalid' : '' }}\"\n" +
@@ -47,7 +68,7 @@
                             if (data.required) {
                                 form += " required>";
                             }
-                        } else if (data.type === '{{ \App\Entity\Shop\Characteristic::TYPE_INTEGER }}') {
+                        } else if (data.type === '{{ \App\Entity\Projects\Characteristic::TYPE_INTEGER }}') {
                             form +=
                                 "<label for=value\" class=\"col-form-label\">{{ trans('adminlte.value.name') }}</label>\n" +
                                 "<input id=\"value\" type=\"number\" class=\"form-control{{ $errors->has('value') ? ' is-invalid' : '' }}\"\n" +

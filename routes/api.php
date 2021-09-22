@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('characteristics/{characteristic}', 'Api\Projects\CharacteristicController@show');
+
 Route::group(['as' => 'api.', 'namespace' => 'Api'],
     function () {
         Route::get('/', 'HomeController@home');
