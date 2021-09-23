@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\Projects\Developer;
 use App\Entity\Projects\Project\Project;
 use App\Entity\Projects\Characteristic;
 //use App\Entity\Projects\Category;
@@ -392,4 +393,26 @@ Breadcrumbs::for('admin.projects.characteristics.show', function (Crumbs $crumbs
 Breadcrumbs::for('admin.projects.characteristics.edit', function (Crumbs $crumbs, Characteristic $characteristic) {
     $crumbs->parent('admin.projects.characteristics.show', $characteristic);
     $crumbs->push(trans('adminlte.edit'), route('admin.projects.characteristics.edit', $characteristic));
+});
+
+// Developers
+
+Breadcrumbs::for('admin.projects.developers.index', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push('Developers', route('admin.projects.developers.index'));
+});
+
+Breadcrumbs::for('admin.users.developers.create', function (Crumbs $crumbs, User $user) {
+    $crumbs->parent('admin.projects.developers.index');
+    $crumbs->push(trans('adminlte.create'), route('admin.users.developers.create', $user));
+});
+
+Breadcrumbs::for('admin.users.developers.show', function (Crumbs $crumbs, User $user, Developer $developer) {
+    $crumbs->parent('admin.projects.developers.index');
+    $crumbs->push($developer->name, route('admin.users.developers.show', [$user, $developer]));
+});
+
+Breadcrumbs::for('admin.users.developers.edit', function (Crumbs $crumbs, User $user, Developer $developer) {
+    $crumbs->parent('admin.projects.developers.show', [$user, $developer]);
+    $crumbs->push($developer->name, route('admin.users.developers.edit', [$user, $developer]));
 });

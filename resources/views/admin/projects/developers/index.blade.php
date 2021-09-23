@@ -1,0 +1,107 @@
+@extends('layouts.admin.page')
+
+@section('content')
+    <p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Add User</a></p>
+
+    <div class="card mb-3">
+{{--        <div class="card-header">Filter</div>--}}
+        <div class="card-body">
+            <form action="?" method="GET">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="name" class="col-form-label">Name</label>
+                            <input id="name" class="form-control" name="name" value="{{ request('name') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="email" class="col-form-label">Email</label>
+                            <input id="email" class="form-control" name="email" value="{{ request('email') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="phone" class="col-form-label">Phone</label>
+                            <input id="phone" class="form-control" name="phone" value="{{ request('phone') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label for="status" class="col-form-label">Status</label>
+                            <select id="status" class="form-control" name="status">
+                                <option value=""></option>
+                                @foreach ($statuses as $value => $label)
+                                    <option value="{{ $value }}"{{ $value === request('status') ? ' selected' : '' }}>{{ $label }}</option>
+                                @endforeach;
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="role" class="col-form-label">Role</label>
+                            <select id="role" class="form-control" name="role">
+                                <option value=""></option>
+                                @foreach ($roles as $value => $label)
+                                    <option value="{{ $value }}"{{ $value === request('role') ? ' selected' : '' }}>{{ $label }}</option>
+                                @endforeach;
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="col-form-label">&nbsp;</label><br />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach ($developers as $developer)
+            <tr>
+                <td>{{ $developer->id }}</td>
+                <td><a href="{{ route('admin.users.show', $developer) }}">{{ $developer->name }}</a></td>
+                <td>{{ $developer->email }}</td>
+                <td>
+                    @if($developer->phone)
+                        +{{ $developer->phone }}
+                    @endif
+                </td>
+                <td>
+                    @if ($developer->isWait())
+                        <span class="badge badge-secondary">Waiting</span>
+                    @endif
+                    @if ($developer->isActive())
+                        <span class="badge badge-primary">Active</span>
+                    @endif
+                </td>
+                <td>
+                    @if ($developer->isAdmin())
+                        <span class="badge badge-danger">Admin</span>
+                    @else
+                        <span class="badge badge-secondary">User</span>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+
+        </tbody>
+    </table>
+
+    {{ $developers->links() }}
+@endsection

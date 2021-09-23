@@ -244,6 +244,11 @@ return [
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
+                    'text'        => 'developers',
+                    'url'         => 'ru/admin/developers',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
                     'text'        => 'projects',
                     'url'         => 'ru/admin/projects',
                     'icon'        => 'far fa-fw fa-file',
