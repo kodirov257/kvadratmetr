@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Projects;
 
 use App\Entity\Projects\Project\Project;
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\Region;
 use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;

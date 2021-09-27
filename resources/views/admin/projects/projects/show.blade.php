@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
+        <a href="{{ route('admin.developers.projects.edit', $project) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
         @if ($project->isOnModeration() && Gate::allows('alter-products-status'))
             <form method="POST" action="{{ route('admin.projects.moderate', $project) }}" class="mr-1">
                 @csrf
@@ -34,15 +34,12 @@
         @endif
         <a href="{{ route('admin.projects.photos', $project) }}" class="btn btn-secondary mr-1">{{ trans('adminlte.product.add_photos') }}</a>
         <a href="{{ route('admin.projects.values.add', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.value.add') }}</a>
-        <form method="POST" action="{{ route('admin.projects.destroy', $project) }}" class="mr-1">
+        <form method="POST" action="{{ route('admin.developers.projects.destroy', $project) }}" class="mr-1">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">{{ trans('adminlte.delete') }}</button>
         </form>
     </div>
-
-    @php($mainCategory = $project->mainCategory)
-    @php($brand = $project->brand)
 
     <div class="row">
         <div class="col-md-12">
@@ -73,7 +70,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-gray card-outline">
-                <div class="card-header"><h3 class="card-title">{{ trans('adminlte.relations') }}</h3></div>
+                <div class="card-header"><h3 class="card-title">{{ trans('adminlte.address') }}</h3></div>
                 <div class="card-body">
                     <table class="table {{--table-bordered--}} table-striped projects">
                         <tbody>
@@ -83,8 +80,8 @@
                         <tr><th>{{ trans('adminlte.landmark') }} Uz</th><td>{{ $project->landmark_uz }}</td></tr>
                         <tr><th>{{ trans('adminlte.landmark') }} Ru</th><td>{{ $project->landmark_ru }}</td></tr>
                         <tr><th>{{ trans('adminlte.landmark') }} En</th><td>{{ $project->landmark_en }}</td></tr>
-                        <tr><th>{{ trans('adminlte.longitude') }} En</th><td>{{ $project->lng }}</td></tr>
-                        <tr><th>{{ trans('adminlte.latitude') }} En</th><td>{{ $project->ltd }}</td></tr>
+                        <tr><th>{{ trans('adminlte.longitude') }}</th><td>{{ $project->lng }}</td></tr>
+                        <tr><th>{{ trans('adminlte.latitude') }}</th><td>{{ $project->ltd }}</td></tr>
                         </tbody>
                     </table>
                 </div>

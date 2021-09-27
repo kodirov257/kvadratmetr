@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\Region;
 use App\Helpers\LanguageHelper;
 

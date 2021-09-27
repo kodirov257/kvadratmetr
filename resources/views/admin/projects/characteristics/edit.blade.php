@@ -2,9 +2,9 @@
 
 @section('content')
     {!! Form::open(['url' => route('admin.projects.characteristics.update', $characteristic), 'method' => 'POST']) !!}
-    @csrf
-    @method('PUT')
+        @csrf
+        @method('PUT')
 
-    @include('admin.projects.characteristics._form')
+        @include('admin.projects.characteristics._form')
     {!! Form::close() !!}
 @endsection

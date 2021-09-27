@@ -44,7 +44,7 @@ class CreateController extends Controller
             $project = $this->service->create(
                 Auth::id(),
                 $category->id,
-                $region ? $region->id : null,
+//                $region ? $region->id : null,
                 $request
             );
         } catch (\DomainException $e) {

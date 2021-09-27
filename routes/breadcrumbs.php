@@ -3,7 +3,7 @@
 use App\Entity\Projects\Developer;
 use App\Entity\Projects\Project\Project;
 use App\Entity\Projects\Characteristic;
-//use App\Entity\Projects\Category;
+//use App\Entity\Category;
 use App\Entity\Banner\Banner;
 use App\Entity\Page;
 use App\Entity\Region;
@@ -221,19 +221,6 @@ Breadcrumbs::for('admin.users.edit', function (Crumbs $crumbs, User $user) {
     $crumbs->parent('admin.users.show', $user);
     $crumbs->push(trans('adminlte.edit'), route('admin.users.edit', $user));
 });
-
-// Categories
-
-Breadcrumbs::for('admin.category.index', function ($trail) {
-    $trail->push('Category', route('admin.category.index'));
-});
-Breadcrumbs::for('admin.category.create', function ($trail) {
-    $trail->push('Create Category', route('admin.category.create'));
-});
-Breadcrumbs::for('admin.category.show', function (Crumbs $crumbs, Category $category) {
-
-    $crumbs->push($category->name, route('admin.category.show', $category));
-});
 // Pages
 
 Breadcrumbs::for('admin.pages.index', function (Crumbs $crumbs) {
@@ -325,52 +312,80 @@ Breadcrumbs::for('admin.regions.edit', function (Crumbs $crumbs, Region $region)
     $crumbs->push(trans('adminlte.edit'), route('admin.regions.edit', $region));
 });
 
+// Developers
+
+Breadcrumbs::for('admin.developers.index', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push('Developers', route('admin.developers.index'));
+});
+
+Breadcrumbs::for('admin.users.developers.create', function (Crumbs $crumbs, User $user) {
+    $crumbs->parent('admin.developers.index');
+    $crumbs->push(trans('adminlte.create'), route('admin.users.developers.create', $user));
+});
+
+Breadcrumbs::for('admin.users.developers.show', function (Crumbs $crumbs, User $user, Developer $developer) {
+    $crumbs->parent('admin.developers.index');
+    $crumbs->push($developer->name, route('admin.users.developers.show', [$user, $developer]));
+});
+
+Breadcrumbs::for('admin.users.developers.edit', function (Crumbs $crumbs, User $user, Developer $developer) {
+    $crumbs->parent('admin.users.developers.show', $user, $developer);
+    $crumbs->push('Edit', route('admin.users.developers.edit', [$user, $developer]));
+});
+
 // Projects
+
+Breadcrumbs::for('admin.developers.show', function (Crumbs $crumbs, Developer $developer) {
+    $crumbs->parent('admin.developers.index');
+    $crumbs->push($developer->name, route('admin.users.developers.show', ['user' => $developer->owner, 'developer' => $developer]));
+});
 
 Breadcrumbs::for('admin.projects.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push('Categories', route('admin.projects.index'));
+    $crumbs->push('Projects', route('admin.projects.index'));
 });
 
-Breadcrumbs::for('admin.projects.create', function (Crumbs $crumbs) {
-    $crumbs->parent('admin.home');
-    $crumbs->push(trans('adminlte.create'), route('admin.projects.create'));
+Breadcrumbs::for('admin.developers.projects.create', function (Crumbs $crumbs, Developer $developer) {
+    $crumbs->parent('admin.developers.show', $developer);
+    $crumbs->push(trans('adminlte.create'), route('admin.developers.projects.create', $developer));
 });
 
-Breadcrumbs::for('admin.projects.edit', function (Crumbs $crumbs, Project $project) {
-    $crumbs->parent('admin.home');
-    $crumbs->push($project->title, route('admin.projects.edit', $project));
+Breadcrumbs::for('admin.developers.projects.show', function (Crumbs $crumbs, Developer $developer, Project $project) {
+    $crumbs->parent('admin.developers.show', $developer);
+    $crumbs->push($project->name, route('admin.developers.projects.show', [$developer, $project]));
 });
 
-Breadcrumbs::for('admin.projects.reject', function (Crumbs $crumbs, Project $project) {
-    $crumbs->parent('admin.home');
-    $crumbs->push($project->title, route('admin.projects.reject', $project));
+Breadcrumbs::for('admin.developers.projects.edit', function (Crumbs $crumbs, Developer $developer, Project $project) {
+    $crumbs->parent('admin.developers.projects.show', $developer, $project);
+    $crumbs->push(trans('adminlte.edit'), route('admin.developers.projects.edit', [$developer, $project]));
 });
 
-// Project Categories
-
-Breadcrumbs::for('admin.projects.categories.index', function (Crumbs $crumbs) {
-    $crumbs->parent('admin.home');
-    $crumbs->push(trans('adminlte.categories.name'), route('admin.projects.categories.index'));
+Breadcrumbs::for('admin.projects.reject', function (Crumbs $crumbs, Developer $developer, Project $project) {
+    $crumbs->parent('admin.developers.projects.show', $developer, $project);
+    $crumbs->push($project->name, route('admin.projects.reject', $project));
 });
 
-Breadcrumbs::for('admin.projects.categories.create', function (Crumbs $crumbs) {
-    $crumbs->parent('admin.projects.categories.index');
-    $crumbs->push(trans('adminlte.create'), route('admin.projects.categories.create'));
-});
+// Categories
 
-Breadcrumbs::for('admin.projects.categories.show', function (Crumbs $crumbs, Category $category) {
+Breadcrumbs::for('admin.categories.index', function ($trail) {
+    $trail->push(trans('adminlte.categories.name'), route('admin.categories.index'));
+});
+Breadcrumbs::for('admin.categories.create', function ($trail) {
+    $trail->push(trans('adminlte.create'), route('admin.categories.create'));
+});
+Breadcrumbs::for('admin.categories.show', function (Crumbs $crumbs, Category $category) {
     if ($parent = $category->parent) {
-        $crumbs->parent('admin.projects.categories.show', $parent);
+        $crumbs->parent('admin.categories.show', $parent);
     } else {
-        $crumbs->parent('admin.projects.categories.index');
+        $crumbs->parent('admin.categories.index');
     }
-    $crumbs->push($category->name, route('admin.projects.categories.show', $category));
+    $crumbs->push($category->name, route('admin.categories.show', $category));
 });
 
-Breadcrumbs::for('admin.projects.categories.edit', function (Crumbs $crumbs, Category $category) {
-    $crumbs->parent('admin.projects.categories.show', $category);
-    $crumbs->push(trans('adminlte.edit'), route('admin.projects.categories.edit', $category));
+Breadcrumbs::for('admin.categories.edit', function (Crumbs $crumbs, Category $category) {
+    $crumbs->parent('admin.categories.show', $category);
+    $crumbs->push(trans('adminlte.edit'), route('admin.categories.edit', $category));
 });
 
 // Project Characteristics
@@ -395,24 +410,24 @@ Breadcrumbs::for('admin.projects.characteristics.edit', function (Crumbs $crumbs
     $crumbs->push(trans('adminlte.edit'), route('admin.projects.characteristics.edit', $characteristic));
 });
 
-// Developers
+// Project Values
 
-Breadcrumbs::for('admin.projects.developers.index', function (Crumbs $crumbs) {
-    $crumbs->parent('admin.home');
-    $crumbs->push('Developers', route('admin.projects.developers.index'));
+Breadcrumbs::for('admin.projects.show', function (Crumbs $crumbs, Project $project) {
+    $crumbs->parent('admin.developers.show', $project->developer);
+    $crumbs->push($project->name, route('admin.developers.projects.show', ['developer' => $project->developer, 'project' => $project]));
 });
 
-Breadcrumbs::for('admin.users.developers.create', function (Crumbs $crumbs, User $user) {
-    $crumbs->parent('admin.projects.developers.index');
-    $crumbs->push(trans('adminlte.create'), route('admin.users.developers.create', $user));
+Breadcrumbs::for('admin.projects.values.add', function (Crumbs $crumbs, Project $project) {
+    $crumbs->parent('admin.projects.show', $project);
+    $crumbs->push(trans('adminlte.create'), route('admin.projects.values.add', $project));
 });
 
-Breadcrumbs::for('admin.users.developers.show', function (Crumbs $crumbs, User $user, Developer $developer) {
-    $crumbs->parent('admin.projects.developers.index');
-    $crumbs->push($developer->name, route('admin.users.developers.show', [$user, $developer]));
+Breadcrumbs::for('admin.projects.values.show', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
+    $crumbs->parent('admin.projects.show', $project);
+    $crumbs->push($characteristic->name, route('admin.projects.values.show', [$project, $characteristic]));
 });
 
-Breadcrumbs::for('admin.users.developers.edit', function (Crumbs $crumbs, User $user, Developer $developer) {
-    $crumbs->parent('admin.projects.developers.show', [$user, $developer]);
-    $crumbs->push($developer->name, route('admin.users.developers.edit', [$user, $developer]));
+Breadcrumbs::for('admin.projects.values.edit', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
+    $crumbs->parent('admin.projects.values.show', $project, $characteristic);
+    $crumbs->push(trans('adminlte.edit'), route('admin.projects.values.edit', [$project, $characteristic]));
 });

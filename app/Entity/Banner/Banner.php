@@ -2,7 +2,7 @@
 
 namespace App\Entity\Banner;
 
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;

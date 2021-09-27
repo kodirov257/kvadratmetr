@@ -20,12 +20,12 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            {!! Form::label('description_uz', 'Tavsifi', ['class' => 'col-form-label']); !!}
-                            {!! Form::textarea('description_uz', old('description_uz', $project ? $project->description_uz : null),
-                                ['class' => 'form-control' . $errors->has('description_uz') ? ' is-invalid' : '', 'id' => 'description_uz', 'rows' => 10]); !!}
-                            @if ($errors->has('description_uz'))
+                            {!! Form::label('about_uz', 'Tavsifi', ['class' => 'col-form-label']); !!}
+                            {!! Form::textarea('about_uz', old('about_uz', $project ? $project->about_uz : null),
+                                ['class' => 'form-control' . $errors->has('about_uz') ? ' is-invalid' : '', 'id' => 'about_uz', 'rows' => 10]); !!}
+                            @if ($errors->has('about_uz'))
                                 <span
-                                        class="invalid-feedback"><strong>{{ $errors->first('description_uz') }}</strong></span>
+                                        class="invalid-feedback"><strong>{{ $errors->first('about_uz') }}</strong></span>
                             @endif
                         </div>
                         <div class="form-group">
@@ -52,12 +52,12 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            {!! Form::label('description_ru', 'Описание', ['class' => 'col-form-label']); !!}
-                            {!! Form::textarea('description_ru', old('description_ru', $project ? $project->description_ru : null),
-                                ['class' => 'form-control' . $errors->has('description_ru') ? ' is-invalid' : '', 'id' => 'description_ru', 'rows' => 10]); !!}
-                            @if ($errors->has('description_ru'))
+                            {!! Form::label('about_ru', 'Описание', ['class' => 'col-form-label']); !!}
+                            {!! Form::textarea('about_ru', old('about_ru', $project ? $project->about_ru : null),
+                                ['class' => 'form-control' . $errors->has('about_ru') ? ' is-invalid' : '', 'id' => 'about_ru', 'rows' => 10]); !!}
+                            @if ($errors->has('about_ru'))
                                 <span
-                                        class="invalid-feedback"><strong>{{ $errors->first('description_ru') }}</strong></span>
+                                        class="invalid-feedback"><strong>{{ $errors->first('about_ru') }}</strong></span>
                             @endif
                         </div>
                         <div class="form-group">
@@ -84,11 +84,11 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            {!! Form::label('description_en', 'Description', ['class' => 'col-form-label']); !!}
-                            {!! Form::textarea('description_en', old('description_en', $project ? $project->description_en : null),
-                                ['class' => 'form-control' . $errors->has('description_en') ? ' is-invalid' : '', 'id' => 'description_en', 'rows' => 10]); !!}
-                            @if ($errors->has('description_en'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('description_en') }}</strong></span>
+                            {!! Form::label('about_en', 'about', ['class' => 'col-form-label']); !!}
+                            {!! Form::textarea('about_en', old('about_en', $project ? $project->about_en : null),
+                                ['class' => 'form-control' . $errors->has('about_en') ? ' is-invalid' : '', 'id' => 'about_en', 'rows' => 10]); !!}
+                            @if ($errors->has('about_en'))
+                                <span class="invalid-feedback"><strong>{{ $errors->first('about_en') }}</strong></span>
                             @endif
                         </div>
                         <div class="form-group">
@@ -204,9 +204,9 @@
 @section($javaScriptSectionName)
     <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace('description_uz');
-        CKEDITOR.replace('description_ru');
-        CKEDITOR.replace('description_en');
+        CKEDITOR.replace('about_uz');
+        CKEDITOR.replace('about_ru');
+        CKEDITOR.replace('about_en');
         $('#category_id').select2();
         $('#region_id').select2();
         $('#developer_id').select2();

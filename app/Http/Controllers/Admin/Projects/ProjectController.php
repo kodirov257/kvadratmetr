@@ -9,6 +9,7 @@ use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
 use App\Helpers\ProjectHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Projects\CreateRequest;
 use App\Http\Requests\Projects\CharacteristicsRequest;
 use App\Http\Requests\Projects\EditRequest;
 use App\Http\Requests\Projects\PhotosRequest;
@@ -63,14 +64,24 @@ class ProjectController extends Controller
         return view('admin.projects.projects.index', compact('projects', 'statuses', 'roles'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request, Developer $developer)
     {
         $categories = ProjectHelper::getCategoryList();
         $regions = ProjectHelper::getRegionsList();
-        $developers = Developer::orderByDesc('updated_at')->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
         $statuses = Project::statusesList();
 
-        return view('admin.projects.projects.create', compact('categories', 'regions', 'developers', 'statuses'));
+        return view('admin.projects.projects.create', compact('categories', 'regions', 'developer', 'statuses'));
+    }
+
+    public function store(CreateRequest $request, Developer $developer)
+    {
+        try {
+            $project = $this->service->create($developer->id, $request->category_id, $request);
+
+            return redirect()->route('admin.developers.projects.show', [$developer, $project]);
+        } catch (\DomainException $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function show(Project $project)
@@ -78,36 +89,29 @@ class ProjectController extends Controller
         return view('admin.projects.projects.show', compact('project'));
     }
 
-    public function edit(Project $project)
+    public function edit(Developer $developer, Project $project)
     {
-        return view('admin.projects.projects.edit', compact('project'));
+        $categories = ProjectHelper::getCategoryList();
+        $regions = ProjectHelper::getRegionsList();
+        $statuses = Project::statusesList();
+
+        return view('admin.projects.projects.edit', compact('project', 'categories', 'regions', 'developer', 'statuses'));
     }
 
-    public function update(EditRequest $request, Project $project)
+    public function update(EditRequest $request, Developer $developer, Project $project)
     {
         try {
             $this->service->edit($project->id, $request);
+
+            return redirect()->route('admin.developers.projects.show', [$developer, $project]);
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }
-
-        return redirect()->route('projects.show', $project);
     }
 
     public function characteristicsForm(Project $project)
     {
         return view('admin.projects.characteristics.create', compact('project'));
-    }
-
-    public function characteristics(CharacteristicsRequest $request, Project $project)
-    {
-        try {
-            $this->service->editCharacteristics($project->id, $request);
-        } catch (\DomainException $e) {
-            return back()->with('error', $e->getMessage());
-        }
-
-        return redirect()->route('projects.show', $project);
     }
 
     public function photosForm(Project $project)
@@ -123,7 +127,7 @@ class ProjectController extends Controller
             return back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('admin.developers.projects.show', ['developer' => $project->developer, 'project' => $project]);
     }
 
     public function sendToModeration(Project $project)
@@ -146,7 +150,7 @@ class ProjectController extends Controller
             return back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('admin.developers.projects.show', ['developer' => $project->developer, 'project' => $project]);
     }
 
     public function rejectForm(Project $project)
@@ -163,6 +167,28 @@ class ProjectController extends Controller
         }
 
         return redirect()->route('projects.show', $project);
+    }
+
+    public function activate(Project $project)
+    {
+        try {
+            $this->service->activate($project->id);
+
+            return redirect()->route('admin.developers.projects.show', $project);
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function close(Project $project)
+    {
+        try {
+            $this->service->close($project->id);
+
+            return redirect()->route('admin.developers.projects.show', $project);
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function destroy(Project $project)

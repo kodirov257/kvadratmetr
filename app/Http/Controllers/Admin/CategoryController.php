@@ -58,12 +58,23 @@ class CategoryController extends Controller
         return view('admin.category.edit' , compact('category', 'parents'));
     }
 
-    public function update(\App\Http\Requests\Admin\Shop\Categories\UpdateRequest $request, Category $category)
+    public function update(UpdateRequest $request, Category $category)
     {
         $category = $this->service->update($category->id, $request);
         session()->flash('message', 'запись обновлён ');
         return redirect()->route('admin.categories.show', $category);
     }
+
+    public function first(Category $category)
+    {
+        if ($first = $category->siblings()->defaultOrder()->first()) {
+            $category->insertBeforeNode($first);
+        }
+
+        return redirect()->route('admin.categories.index');
+    }
+
+
     public function up(Category $category)
     {
         $category->up();

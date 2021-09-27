@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-$factory->define(App\Entity\Projects\Category::class, function (Faker $faker) {
+$factory->define(App\Entity\Category::class, function (Faker $faker) {
     return [
         'name_uz' => $faker->unique()->name,
         'name_ru' => $faker->unique()->name,

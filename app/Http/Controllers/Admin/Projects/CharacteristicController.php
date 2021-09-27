@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin\Projects;
 use App\Entity\Projects\Characteristic;
 use App\Entity\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Characteristics\CreateRequest;
+use App\Http\Requests\Admin\Characteristics\UpdateRequest;
 use App\UseCases\Projects\CharacteristicService;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CharacteristicController extends Controller
 {
@@ -43,30 +45,28 @@ class CharacteristicController extends Controller
         return view('admin.projects.characteristics.create', compact('types'));
     }
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        $this->validate($request, [
-            'name_uz' => 'required|string|max:255',
-            'name_ru' => 'required|string|max:255',
-            'name_en' => 'required|string|max:255',
-            'type' => ['required', 'string', 'max:255', Rule::in(array_keys(Characteristic::typesList()))],
-            'required' => 'nullable|string|max:255',
-            'variants' => 'nullable|string',
-            'is_range' => 'boolean',
-        ]);
+        try {
+            if (($request->variants && $request->is_range) || ($request->type === Characteristic::TYPE_STRING && $request->is_range)) {
+                throw new Exception('Characteristic range cannot be string.');
+            }
 
-        $characteristic = Characteristic::create([
-            'name_uz' => $request['name_uz'],
-            'name_ru' => $request['name_ru'],
-            'name_en' => $request['name_en'],
-            'type' => $request['type'],
-            'required' => (bool)$request['required'],
-            'variants' => array_map('trim', preg_split('#[\r\n]+#', $request['variants'])),
-            'is_range' => $request['is_range'] ?? false,
-            'sort' => Characteristic::count() + 1,
-        ]);
+            $characteristic = Characteristic::create([
+                'name_uz' => $request->name_uz,
+                'name_ru' => $request->name_ru,
+                'name_en' => $request->name_en,
+                'type' => $request->type,
+                'required' => $request->required,
+                'variants' => array_map('trim', preg_split('#[\r\n]+#', $request->variants)),
+                'is_range' => $request->is_range ?? false,
+                'sort' => Characteristic::count() + 1,
+            ]);
 
-        return redirect()->route('admin.projects.characteristics.show', $characteristic);
+            return redirect()->route('admin.projects.characteristics.show', $characteristic);
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function show(Category $category, Characteristic $characteristic)
@@ -81,25 +81,27 @@ class CharacteristicController extends Controller
         return view('admin.projects.characteristics.edit', compact('category', 'characteristic', 'types'));
     }
 
-    public function update(Request $request, Characteristic $characteristic)
+    public function update(UpdateRequest $request, Characteristic $characteristic)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'type' => ['required', 'string', 'max:255', Rule::in(array_keys(Characteristic::typesList()))],
-            'required' => 'nullable|string|max:255',
-            'variants' => 'nullable|string',
-            'sort' => 'required|integer',
-        ]);
+        try {
+            if (($request->variants && $request->is_range) || ($request->type === Characteristic::TYPE_STRING && $request->is_range)) {
+                throw new Exception('Characteristic range cannot be string.');
+            }
 
-        $characteristic->update([
-            'name' => $request['name'],
-            'type' => $request['type'],
-            'required' => (bool)$request['required'],
-            'variants' => array_map('trim', preg_split('#[\r\n]+#', $request['variants'])),
-            'sort' => $request['sort'],
-        ]);
+            $characteristic->update([
+                'name_uz' => $request->name_uz,
+                'name_ru' => $request->name_ru,
+                'name_en' => $request->name_en,
+                'type' => $request->type,
+                'required' => $request->required,
+                'variants' => array_map('trim', preg_split('#[\r\n]+#', $request->variants)),
+                'is_range' => $request->is_range ?? false,
+            ]);
 
-        return redirect()->route('admin.projects.characteristics.show', $characteristic);
+            return redirect()->route('admin.projects.characteristics.show', $characteristic);
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function first(Characteristic $characteristic)
@@ -107,7 +109,7 @@ class CharacteristicController extends Controller
         try {
             $this->service->moveToFirst($characteristic->id);
             return redirect()->route('admin.projects.characteristics.index');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
     }
@@ -117,7 +119,7 @@ class CharacteristicController extends Controller
         try {
             $this->service->moveUp($characteristic->id);
             return redirect()->route('admin.projects.characteristics.index');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
     }
@@ -127,7 +129,7 @@ class CharacteristicController extends Controller
         try {
             $this->service->moveDown($characteristic->id);
             return redirect()->route('admin.projects.characteristics.index');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
     }
@@ -137,7 +139,7 @@ class CharacteristicController extends Controller
         try {
             $this->service->moveToLast($characteristic->id);
             return redirect()->route('admin.projects.characteristics.index');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
     }

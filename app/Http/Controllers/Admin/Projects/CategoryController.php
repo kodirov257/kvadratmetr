@@ -17,14 +17,14 @@ class CategoryController extends Controller
     {
         $categories = Category::defaultOrder()->withDepth()->get();
 
-        return view('admin.projects.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     public function create()
     {
         $parents = Category::defaultOrder()->withDepth()->get();
 
-        return view('admin.projects.categories.create', compact('parents'));
+        return view('admin.categories.create', compact('parents'));
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class CategoryController extends Controller
             'parent_id' => $request['parent'],
         ]);
 
-        return redirect()->route('admin.projects.categories.show', $category);
+        return redirect()->route('admin.categories.show', $category);
     }
 
     public function show(Category $category)
@@ -49,14 +49,14 @@ class CategoryController extends Controller
         $parentCharacteristics = $category->parentCharacteristics();
         $characteristics = $category->characteristics()->orderBy('sort')->get();
 
-        return view('admin.projects.categories.show', compact('category', 'characteristics', 'parentCharacteristics'));
+        return view('admin.categories.show', compact('category', 'characteristics', 'parentCharacteristics'));
     }
 
     public function edit(Category $category)
     {
         $parents = Category::defaultOrder()->withDepth()->get();
 
-        return view('admin.projects.categories.edit', compact('category', 'parents'));
+        return view('admin.categories.edit', compact('category', 'parents'));
     }
 
     public function update(Request $request, Category $category)
@@ -73,7 +73,7 @@ class CategoryController extends Controller
             'parent_id' => $request['parent'],
         ]);
 
-        return redirect()->route('admin.projects.categories.show', $category);
+        return redirect()->route('admin.categories.show', $category);
     }
 
     public function first(Category $category)
@@ -82,21 +82,21 @@ class CategoryController extends Controller
             $category->insertBeforeNode($first);
         }
 
-        return redirect()->route('admin.projects.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function up(Category $category)
     {
         $category->up();
 
-        return redirect()->route('admin.projects.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function down(Category $category)
     {
         $category->down();
 
-        return redirect()->route('admin.projects.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function last(Category $category)
@@ -105,13 +105,13 @@ class CategoryController extends Controller
             $category->insertAfterNode($last);
         }
 
-        return redirect()->route('admin.projects.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return redirect()->route('admin.projects.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 }

@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 class ProjectHelper
 {
-
     public static function getStatusLabel($status): string
     {
         switch ($status) {
@@ -25,6 +24,7 @@ class ProjectHelper
                 return '<span class="badge badge-danger">Default</span>';
         }
     }
+
     public static function getCategoryList(): array
     {
         /* @var $category Category */

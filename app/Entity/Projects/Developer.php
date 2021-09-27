@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $about_uz
  * @property string $about_ru
  * @property string $about_en
+ * @property string $slug
+ * @property int $status
  * @property string $main_number
  * @property string $call_center
  * @property string $website
@@ -53,15 +55,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Developer extends Model
 {
+    const STATUS_INACTIVE = 1;
+    const STATUS_ACTIVE = 5;
 
     protected $table = 'project_developers';
 
     protected $fillable = [
-        'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'main_number', 'call_center', 'website', 'email',
-        'facebook', 'instagram', 'tik_tok', 'telegram', 'youtube', 'twitter', 'address_uz', 'address_ru', 'address_en',
-        'landmark_uz', 'landmark_ru', 'landmark_en', 'lng', 'ltd', 'impressions', 'clicks', 'leads',
+        'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'slug', 'status', 'main_number',
+        'call_center', 'website', 'email', 'facebook', 'instagram', 'tik_tok', 'telegram', 'youtube', 'twitter',
+        'address_uz', 'address_ru', 'address_en', 'landmark_uz', 'landmark_ru', 'landmark_en', 'lng', 'ltd',
+        'impressions', 'clicks', 'leads',
     ];
 
+    public function getStatusLabel(): string
+    {
+        switch ($this->status) {
+            case self::STATUS_INACTIVE:
+                return '<span class="badge badge-danger">' . trans('adminlte.inactive') . '</span>';
+            case self::STATUS_ACTIVE:
+                return '<span class="badge badge-success">' . trans('adminlte.active') . '</span>';
+            default:
+                return '<span class="badge badge-info">Default</span>';
+        }
+    }
 
     ########################################### Mutators
 

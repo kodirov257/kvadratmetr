@@ -70,13 +70,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::get('/', 'HomeController@index')->name('home');
             Route::resource('users', 'UsersController');
 
-            Route::get('developers', 'Projects\DeveloperController@index')->name('projects.developers.index');
-            Route::group(['prefix' => 'users/{page}', 'as' => 'users.'], function () {
-                Route::resource('developers', 'Projects\DeveloperController')->except('index');
-            });
-
-            Route::resource('category', 'CategoryController');
-
             Route::post('/users/{user}/verify', 'UsersController@verify')->name('users.verify');
 
             Route::resource('regions', 'RegionController');
@@ -90,17 +83,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('/last', 'PageController@last')->name('last');
             });
 
+            Route::resource('categories', 'CategoryController');
+
+            Route::group(['prefix' => 'categories/{category}', 'as' => 'categories.'], function () {
+                Route::post('/first', 'CategoryController@first')->name('first');
+                Route::post('/up', 'CategoryController@up')->name('up');
+                Route::post('/down', 'CategoryController@down')->name('down');
+                Route::post('/last', 'CategoryController@last')->name('last');
+            });
+
             Route::group(['prefix' => 'projects', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
-
-                Route::resource('categories', 'CategoryController');
-
-                Route::group(['prefix' => 'categories/{category}', 'as' => 'categories.'], function () {
-                    Route::post('/first', 'CategoryController@first')->name('first');
-                    Route::post('/up', 'CategoryController@up')->name('up');
-                    Route::post('/down', 'CategoryController@down')->name('down');
-                    Route::post('/last', 'CategoryController@last')->name('last');
-                });
-
                 Route::resource('characteristics', 'CharacteristicController');
 
                 Route::group(['prefix' => 'characteristics/{characteristic}', 'as' => 'characteristics.'], function () {
@@ -109,43 +101,57 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                     Route::post('/down', 'CharacteristicController@down')->name('down');
                     Route::post('/last', 'CharacteristicController@last')->name('last');
                 });
+            });
+
+            Route::group(['prefix' => 'projects/{project}', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
+
+
 
 //                Route::get('/', 'ProjectController@index')->name('index');
-//                Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
-//                Route::put('/{project}/update', 'ProjectController@update')->name('update');
-                Route::get('/{project}/photos', 'PhotoController@addForm')->name('photos');
-                Route::post('/{project}/photos', 'PhotoController@addPhoto')->name('add-photo');
-                Route::post('/{project}/photos', 'PhotoController@addPhotos')->name('add-photos');
+//                Route::get('/edit', 'ProjectController@edit')->name('edit');
+//                Route::put('/update', 'ProjectController@update')->name('update');
+                Route::get('/photos', 'PhotoController@addForm')->name('photos');
+                Route::post('/photos', 'PhotoController@addPhoto')->name('add-photo');
+                Route::post('/photos', 'PhotoController@addPhotos')->name('add-photos');
                 Route::delete('photos/{photo}', 'PhotoController@removePhoto')->name('remove-photo');
-                Route::get('move-photo-up/{photo}', 'PhotoController@movePhotoUp')->name('move-photo-up');
-                Route::get('move-photo-down/{photo}', 'PhotoController@movePhotoDown')->name('move-photo-down');
-                Route::get('/{project}/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
-                Route::post('/{project}/characteristics', 'ProjectController@characteristics');
-                Route::post('/{project}/moderate', 'ProjectController@moderate')->name('moderate');
-                Route::get('/{project}/reject', 'ProjectController@rejectForm')->name('reject');
-                Route::post('/{project}/reject', 'ProjectController@reject');
-                Route::delete('/{project}/destroy', 'ProjectController@destroy')->name('destroy');
-
-                Route::group(['prefix' => 'values', 'as' => 'values.'], function () {
-                    Route::get('create', 'ValueController@create')->name('add');
-                    Route::post('', 'ValueController@store')->name('store');
-                    Route::get('characteristic/{characteristic}', 'ValueController@show')->name('show');
-                    Route::get('characteristic/{characteristic}/edit', 'ValueController@edit')->name('edit');
-                    Route::put('characteristic/{characteristic}', 'ValueController@update')->name('update');
-                    Route::delete('characteristic/{characteristic}', 'ValueController@destroy')->name('destroy');
-                    Route::post('characteristic/{characteristic}/first', 'ValueController@first')->name('first');
-                    Route::post('characteristic/{characteristic}/up', 'ValueController@up')->name('up');
-                    Route::post('characteristic/{characteristic}/down', 'ValueController@down')->name('down');
-                    Route::post('characteristic/{characteristic}/last', 'ValueController@last')->name('last');
-                });
-
+                Route::get('/move-photo-up/{photo}', 'PhotoController@movePhotoUp')->name('move-photo-up');
+                Route::get('/move-photo-down/{photo}', 'PhotoController@movePhotoDown')->name('move-photo-down');
+                Route::get('/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
+                Route::post('/characteristics', 'ProjectController@characteristics');
+                Route::post('/moderate', 'ProjectController@moderate')->name('moderate');
+                Route::get('/reject', 'ProjectController@rejectForm')->name('reject');
+                Route::post('/reject', 'ProjectController@reject');
                 Route::post('send-to-moderation', 'ProjectController@sendToModeration')->name('on-moderation');
                 Route::post('moderate', 'ProjectController@moderate')->name('moderate');
                 Route::post('activate', 'ProjectController@activate')->name('activate');
-                Route::post('draft', 'ProjectController@draft')->name('draft');
                 Route::post('close', 'ProjectController@close')->name('close');
+//                Route::delete('/destroy', 'ProjectController@destroy')->name('destroy');
+
+                Route::get('values/create', 'ValueController@create')->name('values.add');
+                Route::post('values', 'ValueController@store')->name('values.store');
+                Route::group(['prefix' => 'characteristic/{characteristic}', 'as' => 'values.'], function () {
+                    Route::get('', 'ValueController@show')->name('show');
+                    Route::get('edit', 'ValueController@edit')->name('edit');
+                    Route::put('', 'ValueController@update')->name('update');
+                    Route::delete('', 'ValueController@destroy')->name('destroy');
+                    Route::post('first', 'ValueController@first')->name('first');
+                    Route::post('up', 'ValueController@up')->name('up');
+                    Route::post('down', 'ValueController@down')->name('down');
+                    Route::post('last', 'ValueController@last')->name('last');
+                });
+
             });
-            Route::resource('projects', 'Projects\ProjectController');
+//            Route::resource('projects', 'Projects\ProjectController');
+
+            Route::get('projects', 'Projects\DeveloperController@index')->name('projects.index');
+            Route::group(['prefix' => 'developers/{developer}', 'as' => 'developers.'], function () {
+                Route::resource('projects', 'Projects\ProjectController')->except('index');
+            });
+
+            Route::get('developers', 'Projects\DeveloperController@index')->name('developers.index');
+            Route::group(['prefix' => 'users/{user}', 'as' => 'users.'], function () {
+                Route::resource('developers', 'Projects\DeveloperController')->except('index');
+            });
 
             Route::group(['prefix' => 'banners', 'as' => 'banners.'], function () {
                 Route::get('/', 'BannerController@index')->name('index');

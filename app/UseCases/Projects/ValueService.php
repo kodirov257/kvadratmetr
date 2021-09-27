@@ -36,7 +36,7 @@ class ValueService
         }
     }
 
-    public function updateValue(int $id, int $characteristicId, ValueRequest $request): Value
+    public function editValue(int $id, int $characteristicId, ValueRequest $request): Value
     {
         $project = Project::findOrFail($id);
         $characteristic = Characteristic::findOrFail($request->characteristic_id);

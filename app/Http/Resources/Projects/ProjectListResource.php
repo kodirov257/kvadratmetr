@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Projects;
 
 use App\Entity\Projects\Project\Photo;
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
 use Carbon\Carbon;

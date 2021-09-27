@@ -16,6 +16,8 @@
             @method('DELETE')
             <button class="btn btn-danger">Delete</button>
         </form>
+
+        <a href="{{ route('admin.users.developers.create', $user) }}" class="btn btn-warning mr-1">Create developer</a>
     </div>
 
     <div class="row">

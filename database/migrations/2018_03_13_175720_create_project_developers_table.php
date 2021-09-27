@@ -17,6 +17,8 @@ class CreateProjectDevelopersTable extends Migration
             $table->text('about_uz');
             $table->text('about_ru');
             $table->text('about_en');
+            $table->string('slug', 255);
+            $table->integer('status');
             $table->string('main_number', 20)->nullable();
             $table->string('call_center', 20)->nullable();
             $table->string('website', 50)->nullable();

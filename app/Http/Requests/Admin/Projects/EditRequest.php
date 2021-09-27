@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Projects;
+namespace App\Http\Requests\Admin\Projects;
 
-use App\Entity\Category;
-use App\Entity\Region;
+use App\Entity\Projects\Project\Project;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,8 +24,10 @@ use Illuminate\Validation\Rule;
  * @property string $landmark_en
  * @property string $lng
  * @property string $ltd
+ *
+ * @property Project $project
  */
-class CreateRequest extends FormRequest
+class EditRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -42,7 +43,7 @@ class CreateRequest extends FormRequest
             'about_uz' => 'required|string',
             'about_ru' => 'required|string',
             'about_en' => 'required|string',
-            'slug' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9-]+$/', 'unique:project_projects'],
+            'slug' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9-]+$/', Rule::unique('project_projects')->ignore($this->project->id)],
             'category_id' => 'required|numeric|min:1|exists:categories,id',
             'price' => 'required|numeric|min:0',
             'address_uz' => 'required|string|max:255',

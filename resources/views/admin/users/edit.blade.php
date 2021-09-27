@@ -35,7 +35,7 @@
 
                         <div class="form-group">
                             <label for="role" class="col-form-label">Role</label>
-                            <select id="role" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="role">
+                            <select id="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                 @foreach ($roles as $value => $label)
                                     <option value="{{ $value }}"{{ $value === old('role', $user->role) ? ' selected' : '' }}>{{ $label }}</option>
                                 @endforeach;

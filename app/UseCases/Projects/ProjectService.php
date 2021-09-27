@@ -2,8 +2,9 @@
 
 namespace App\UseCases\Projects;
 
+use App\Entity\Projects\Developer;
 use App\Entity\Projects\Project\Project;
-use App\Entity\Projects\Category;
+use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
 use App\Events\Project\ModerationPassed;
@@ -17,41 +18,42 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectService
 {
-    public function create($userId, $categoryId, $regionId, CreateRequest $request): Project
+    public function create($developerId, $categoryId, /*$regionId, */CreateRequest $request): Project
     {
-        /** @var User $user */
-        $user = User::findOrFail($userId);
+        /** @var User $developer */
+        $developer = Developer::findOrFail($developerId);
         /** @var Category $category */
         $category = Category::findOrFail($categoryId);
-        /** @var Region $region */
-        $region = $regionId ? Region::findOrFail($regionId) : null;
+//        /** @var Region $region */
+//        $region = $regionId ? Region::findOrFail($regionId) : null;
 
-        return DB::transaction(function () use ($request, $user, $category, $region) {
+        return DB::transaction(function () use ($request, $developer, $category/*, $region*/) {
 
             /** @var Project $project */
             $project = Project::make([
-                'title' => $request['title'],
-                'content' => $request['content'],
-                'price' => $request['price'],
-                'address' => $request['address'],
+                'name_uz' => $request->name_uz,
+                'name_ru' => $request->name_ru,
+                'name_en' => $request->name_en,
+                'about_uz' => $request->about_uz,
+                'about_ru' => $request->about_ru,
+                'about_en' => $request->about_en,
+                'slug' => $request->slug,
+                'address_uz' => $request->address_uz,
+                'address_ru' => $request->address_ru,
+                'address_en' => $request->address_en,
+                'landmark_uz' => $request->landmark_uz,
+                'landmark_ru' => $request->landmark_ru,
+                'landmark_en' => $request->landmark_en,
+                'lng' => $request->lng,
+                'ltd' => $request->ltd,
                 'status' => Project::STATUS_DRAFT,
             ]);
 
-            $project->user()->associate($user);
+            $project->developer()->associate($developer);
             $project->category()->associate($category);
-            $project->region()->associate($region);
+//            $project->region()->associate($region);
 
             $project->saveOrFail();
-
-            foreach ($category->allCharacteristics() as $characteristic) {
-                $value = $request['characteristics'][$characteristic->id] ?? null;
-                if (!empty($value)) {
-                    $project->values()->create([
-                        'characteristic_id' => $characteristic->id,
-                        'value' => $value,
-                    ]);
-                }
-            }
 
             return $project;
         });
@@ -99,6 +101,12 @@ class ProjectService
     {
         $project = $this->getProject($id);
         $project->reject($request['reason']);
+    }
+
+    public function activate(int $id): void
+    {
+        $project = $this->getProject($id);
+        $project->activate();
     }
 
     public function editCharacteristics($id, CharacteristicsRequest $request): void

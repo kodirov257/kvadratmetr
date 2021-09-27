@@ -79,7 +79,7 @@
             <tr>
                 <td>{{ $project->id }}</td>
                 <td>{{ $project->updated_at }}</td>
-                <td><a href="{{ route('projects.show', $project) }}" target="_blank">{{ $project->title }}</a></td>
+                <td><a href="{{ route('admin.developers.projects.show', ['developer' => $project->developer, 'project' => $project]) }}" target="_blank">{{ $project->title }}</a></td>
                 <td>{{ $project->user->id }} - {{ $project->user->name }}</td>
                 <td>
                     @if ($project->region)

@@ -255,7 +255,7 @@ return [
                 ],
                 [
                     'text'        => 'characteristics',
-                    'url'         => 'ru/admin/projects/characteristics',
+                    'url'         => 'ru/admin/characteristics',
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ],

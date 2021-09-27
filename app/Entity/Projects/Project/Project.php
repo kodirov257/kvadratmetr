@@ -116,6 +116,17 @@ class Project extends Model
         ]);
     }
 
+    public function activate(): void
+    {
+        if ($this->status === self::STATUS_ACTIVE) {
+            throw new \DomainException('Project is already activated.');
+        }
+
+        $this->update([
+            'status' => self::STATUS_ACTIVE,
+        ]);
+    }
+
     public function reject($reason): void
     {
         $this->update([
