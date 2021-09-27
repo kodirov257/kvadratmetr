@@ -134,16 +134,16 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label('region_id', trans('adminlte.region'), ['class' => 'col-form-label']); !!}
-                            {!! Form::select('region_id', $regions, old('region_id', $project ? $project->region_id : null),
-                                ['class'=>'form-control' . ($errors->has('region_id') ? ' is-invalid' : ''), 'placeholder' => '', 'required' => true]) !!}
-                            @if ($errors->has('region_id'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('region_id') }}</strong></span>
-                            @endif
-                        </div>
-                    </div>
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="form-group">--}}
+{{--                            {!! Form::label('region_id', trans('adminlte.region'), ['class' => 'col-form-label']); !!}--}}
+{{--                            {!! Form::select('region_id', $regions, old('region_id', $project ? $project->region_id : null),--}}
+{{--                                ['class'=>'form-control' . ($errors->has('region_id') ? ' is-invalid' : ''), 'placeholder' => '', 'required' => true]) !!}--}}
+{{--                            @if ($errors->has('region_id'))--}}
+{{--                                <span class="invalid-feedback"><strong>{{ $errors->first('region_id') }}</strong></span>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('lng', trans('adminlte.longitude'), ['class' => 'col-form-label']); !!}

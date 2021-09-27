@@ -3,6 +3,7 @@
 namespace App\Entity\Projects\Project;
 
 use App\Entity\Projects\Developer;
+use App\Entity\Projects\Facility;
 use App\Entity\Projects\Project\Dialog\Dialog;
 use App\Entity\Category;
 use App\Entity\Region;
@@ -48,6 +49,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property Region $region
  * @property Category $category
  * @property Value[] $values
+ * @property ProjectFacility[] $projectFacilities
+ * @property Facility[] $facilities
  * @property Photo[] $photos
  *
  * @property string $name
@@ -308,6 +311,16 @@ class Project extends Model
     public function values()
     {
         return $this->hasMany(Value::class, 'project_id', 'id');
+    }
+
+    public function projectFacilities()
+    {
+        return $this->hasMany(ProjectFacility::class, 'project_id', 'id');
+    }
+
+    public function projectFacilites()
+    {
+        return $this->belongsToMany(User::class, 'project_project_facilities', 'project_id', 'facility_id');
     }
 
     public function photos()

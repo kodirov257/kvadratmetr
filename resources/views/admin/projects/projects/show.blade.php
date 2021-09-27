@@ -182,7 +182,13 @@
                     @php($characteristic = $value->characteristic)
                     <tr>
                         <td><a href="{{ route('admin.projects.characteristics.show', ['product' => $project, 'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td>
-                        <td>{{ $value->value }}</td>
+                        <td>
+                            @if($characteristic->is_range)
+                                {{ $value->value_from }} - {{ $value->value_to }}
+                            @else
+                                {{ $value->value }}
+                            @endif
+                        </td>
                         <td>{{ $value->main ? trans('adminlte.yes') : trans('adminlte.no') }}</td>
                         <td>
                             <div class="d-flex flex-row">

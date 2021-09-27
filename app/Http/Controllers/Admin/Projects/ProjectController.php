@@ -92,10 +92,10 @@ class ProjectController extends Controller
     public function edit(Developer $developer, Project $project)
     {
         $categories = ProjectHelper::getCategoryList();
-        $regions = ProjectHelper::getRegionsList();
+//        $regions = ProjectHelper::getRegionsList();
         $statuses = Project::statusesList();
 
-        return view('admin.projects.projects.edit', compact('project', 'categories', 'regions', 'developer', 'statuses'));
+        return view('admin.projects.projects.edit', compact('project', 'categories', /*'regions', */'developer', 'statuses'));
     }
 
     public function update(EditRequest $request, Developer $developer, Project $project)

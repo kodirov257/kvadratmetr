@@ -93,6 +93,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             });
 
             Route::group(['prefix' => 'projects', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
+                Route::resource('facilities', 'FacilityController');
+                Route::post('facilities/{facility}/remove-icon', 'FacilityController@removeIcon')->name('remove-icon');
+
                 Route::resource('characteristics', 'CharacteristicController');
 
                 Route::group(['prefix' => 'characteristics/{characteristic}', 'as' => 'characteristics.'], function () {
@@ -143,7 +146,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             });
 //            Route::resource('projects', 'Projects\ProjectController');
 
-            Route::get('projects', 'Projects\DeveloperController@index')->name('projects.index');
+            Route::get('projects', 'Projects\ProjectController@index')->name('projects.index');
             Route::group(['prefix' => 'developers/{developer}', 'as' => 'developers.'], function () {
                 Route::resource('projects', 'Projects\ProjectController')->except('index');
             });
@@ -270,5 +273,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         }
     );
 
-    Route::get('/{page_path}', 'PageController@show')->name('page')->where('page_path', '.+');
+    Route::get('pages/{page_path}', 'PageController@show')->name('page')->where('page_path', '.+');
 });

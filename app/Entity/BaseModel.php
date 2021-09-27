@@ -18,6 +18,7 @@ class BaseModel extends Model
             static::creating(function ($model) use ($user) {
                 $model->created_by = $user->id;
                 $model->updated_by = $user->id;
+                $model->created_at = Carbon::now();
             });
 
             static::updating(function ($model) use ($user) {

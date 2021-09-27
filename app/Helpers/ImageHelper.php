@@ -23,6 +23,7 @@ class ImageHelper
     const FOLDER_PROFILES = 'profiles';
     const FOLDER_PASSPORT = 'passport';
     const FOLDER_PROJECT_PLAN = 'project_plans';
+    const FOLDER_FACILITIES = 'facilities';
 
     const TYPE_THUMBNAIL = 'thumbs';
     const TYPE_CUSTOM = 'custom';

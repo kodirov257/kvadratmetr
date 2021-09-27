@@ -19,7 +19,12 @@
                         <tbody>
                         <tr><th>{{ trans('adminlte.characteristic.name') }}</th><td><a href="{{ route('admin.projects.characteristics.show', [
                                     'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td></tr>
-                        <tr><th>{{ trans('adminlte.value.name') }}</th><td>{{ $value->value }}</td></tr>
+                        @if($value->characteristic->is_range)
+                            <tr><th>{{ trans('adminlte.value.from') }}</th><td>{{ $value->value_from }}</td></tr>
+                            <tr><th>{{ trans('adminlte.value.to') }}</th><td>{{ $value->value_to }}</td></tr>
+                        @else
+                            <tr><th>{{ trans('adminlte.value.name') }}</th><td>{{ $value->value }}</td></tr>
+                        @endif
                         <tr><th>{{ trans('adminlte.main') }}</th><td>{{ $value->main ? trans('adminlte.yes') : trans('adminlte.no') }}</td></tr>
                         <tr><th>{{ trans('adminlte.sort') }}</th><td>{{ $value->sort }}</td></tr>
                         </tbody>

@@ -16,7 +16,7 @@ class ValueController extends Controller
 
     public function __construct(ValueService $service)
     {
-        $this->middleware('can:manage-shop-characteristics');
+        $this->middleware('can:manage-projects-characteristics');
         $this->service = $service;
     }
 

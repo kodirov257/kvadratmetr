@@ -45,47 +45,47 @@
             <tr>
                 <td>{{ $developer->id }}</td>
                 <td>
-                    <a href="{{ route('admin.users.developers.show', ['user' => $developer->$owner_id, 'developer' => $developer]) }}">
+                    <a href="{{ route('admin.users.developers.show', ['user' => $developer->owner_id, 'developer' => $developer]) }}">
                         {{ $developer->name }}
                     </a>
                 </td>
                 <td>
                     @if($developer->main_number)
                         Main number: {{ $developer->main_number }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->call_center)
                         Call center: {{ $developer->call_center }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->website)
                         Website: {{ $developer->website }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->email)
                         Email: {{ $developer->email }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->facebook)
                         Facebook: {{ $developer->facebook }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->instagram)
                         Instagram: {{ $developer->instagram }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->tik_tok)
                         Tik-tok: {{ $developer->tik_tok }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->telegram)
                         Telegram: {{ $developer->telegram }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->youtube)
                         Youtube: {{ $developer->youtube }}
+                        <br>
                     @endif
-                    <br>
                     @if($developer->twitter)
                         Twitter: {{ $developer->twitter }}
                     @endif

@@ -1,8 +1,6 @@
 @extends('layouts.admin.page')
 
 @section('content')
-    <p><a href="{{ route('admin.projects.create') }}" class="btn btn-success">Добавить проект</a></p>
-
     <div class="card mb-3">
 {{--        <div class="card-header">Filter</div>--}}
         <div class="card-body">

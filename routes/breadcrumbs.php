@@ -1,9 +1,9 @@
 <?php
 
 use App\Entity\Projects\Developer;
+use App\Entity\Projects\Facility;
 use App\Entity\Projects\Project\Project;
 use App\Entity\Projects\Characteristic;
-//use App\Entity\Category;
 use App\Entity\Banner\Banner;
 use App\Entity\Page;
 use App\Entity\Region;
@@ -430,4 +430,26 @@ Breadcrumbs::for('admin.projects.values.show', function (Crumbs $crumbs, Project
 Breadcrumbs::for('admin.projects.values.edit', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
     $crumbs->parent('admin.projects.values.show', $project, $characteristic);
     $crumbs->push(trans('adminlte.edit'), route('admin.projects.values.edit', [$project, $characteristic]));
+});
+
+// Facilities
+
+Breadcrumbs::for('admin.projects.facilities.index', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push('Facilities', route('admin.projects.facilities.index'));
+});
+
+Breadcrumbs::for('admin.projects.facilities.create', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.projects.facilities.index');
+    $crumbs->push(trans('adminlte.create'), route('admin.projects.facilities.create'));
+});
+
+Breadcrumbs::for('admin.projects.facilities.show', function (Crumbs $crumbs, Facility $facility) {
+    $crumbs->parent('admin.projects.facilities.index');
+    $crumbs->push($facility->name, route('admin.projects.facilities.show', $facility));
+});
+
+Breadcrumbs::for('admin.projects.facilities.edit', function (Crumbs $crumbs, Facility $facility) {
+    $crumbs->parent('admin.projects.facilities.show', $facility);
+    $crumbs->push(trans('adminlte.edit'), route('admin.projects.facilities.edit', $facility));
 });

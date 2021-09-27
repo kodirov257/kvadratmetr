@@ -18,7 +18,10 @@ return [
     'information'                   => 'Информация',
 
     'users' => 'Пользователи',
+    'developers' => 'Разработчики',
     'projects' => 'Проекты',
     'content' => 'Контент',
     'characteristics' => 'Характеристики',
+    'values' => 'Значения',
+    'facilities' => 'Удобства',
 ];

@@ -18,7 +18,10 @@ return [
     'information'                   => 'Information',
 
     'users' => 'Foydalanuvchilar',
+    'developers' => 'Ishlab chiquvchilar',
     'projects' => 'Loyihalar',
     'content' => 'Kontent',
     'characteristics' => 'Xususiyatlar',
+    'values' => 'Qiymat',
+    'facilities' => 'Qiymat',
 ];

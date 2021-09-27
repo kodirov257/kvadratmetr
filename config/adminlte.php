@@ -255,7 +255,12 @@ return [
                 ],
                 [
                     'text'        => 'characteristics',
-                    'url'         => 'ru/admin/characteristics',
+                    'url'         => 'ru/admin/projects/characteristics',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'facilities',
+                    'url'         => 'ru/admin/projects/facilities',
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ],

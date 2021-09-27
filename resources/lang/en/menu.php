@@ -18,7 +18,10 @@ return [
     'information'                   => 'Information',
 
     'users' => 'Users',
+    'developers' => 'Developers',
     'projects' => 'Projects',
     'content' => 'Content',
     'characteristics' => 'Characteristics',
+    'values' => 'Values',
+    'facilities' => 'Facilities',
 ];
