@@ -152,6 +152,15 @@ class Project extends Model
         ]);
     }
 
+    public function addOrRemoveFacility($facilityId): void
+    {
+        if (!$this->projectFacilities()->where('facility_id', $facilityId)->exists()) {
+            $this->projectFacilities()->create(['facility_id' => $facilityId]);
+        } else {
+            $this->projectFacilities()->where('facility_id', $facilityId)->delete();
+        }
+    }
+
     public function writeClientMessage(int $fromId, string $message): void
     {
         $this->getOrCreateDialogWith($fromId)->writeMessageByClient($fromId, $message);
@@ -318,9 +327,9 @@ class Project extends Model
         return $this->hasMany(ProjectFacility::class, 'project_id', 'id');
     }
 
-    public function projectFacilites()
+    public function facilities()
     {
-        return $this->belongsToMany(User::class, 'project_project_facilities', 'project_id', 'facility_id');
+        return $this->belongsToMany(Facility::class, 'project_project_facilities', 'project_id', 'facility_id');
     }
 
     public function photos()

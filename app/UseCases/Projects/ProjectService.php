@@ -18,16 +18,16 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectService
 {
-    public function create($developerId, $categoryId, /*$regionId, */CreateRequest $request): Project
+    public function create($developerId, /*$categoryId, $regionId, */CreateRequest $request): Project
     {
         /** @var User $developer */
         $developer = Developer::findOrFail($developerId);
-        /** @var Category $category */
-        $category = Category::findOrFail($categoryId);
+//        /** @var Category $category */
+//        $category = Category::findOrFail($categoryId);
 //        /** @var Region $region */
 //        $region = $regionId ? Region::findOrFail($regionId) : null;
 
-        return DB::transaction(function () use ($request, $developer, $category/*, $region*/) {
+        return DB::transaction(function () use ($request, $developer/*, $category, $region*/) {
 
             /** @var Project $project */
             $project = Project::make([
@@ -50,7 +50,7 @@ class ProjectService
             ]);
 
             $project->developer()->associate($developer);
-            $project->category()->associate($category);
+//            $project->category()->associate($category);
 //            $project->region()->associate($region);
 
             $project->saveOrFail();

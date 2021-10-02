@@ -7,7 +7,7 @@
 @endif
 
 @section('content')
-    <p><a href="{{ route('admin.projects.characteristics.create') }}" class="btn btn-success">{{ trans('adminlte.characteristic.add') }}</a></p>
+    <p><a href="{{ route('admin.project.characteristics.create') }}" class="btn btn-success">{{ trans('adminlte.characteristic.add') }}</a></p>
 
     <div class="card mb-4">
         <div class="card-body">
@@ -42,26 +42,26 @@
 
         @foreach ($characteristics as $characteristic)
             <tr>
-                <td><a href="{{ route('admin.projects.characteristics.show', $characteristic) }}">{{ $characteristic->name }}</a></td>
+                <td><a href="{{ route('admin.project.characteristics.show', $characteristic) }}">{{ $characteristic->name }}</a></td>
                 <td>
                     {{ $characteristic->variants ? 'Select' : $characteristic->typeName() }}
                 </td>
                 <td>{{ $characteristic->required ? trans('adminlte.yes') : trans('adminlte.no') }}</td>
                 <td>
                     <div class="d-flex flex-row">
-                        <form method="POST" action="{{ route('admin.projects.characteristics.first', $characteristic) }}" class="mr-1">
+                        <form method="POST" action="{{ route('admin.project.characteristics.first', $characteristic) }}" class="mr-1">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
                         </form>
-                        <form method="POST" action="{{ route('admin.projects.characteristics.up', $characteristic) }}" class="mr-1">
+                        <form method="POST" action="{{ route('admin.project.characteristics.up', $characteristic) }}" class="mr-1">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>
                         </form>
-                        <form method="POST" action="{{ route('admin.projects.characteristics.down', $characteristic) }}" class="mr-1">
+                        <form method="POST" action="{{ route('admin.project.characteristics.down', $characteristic) }}" class="mr-1">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>
                         </form>
-                        <form method="POST" action="{{ route('admin.projects.characteristics.last', $characteristic) }}" class="mr-1">
+                        <form method="POST" action="{{ route('admin.project.characteristics.last', $characteristic) }}" class="mr-1">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>
                         </form>

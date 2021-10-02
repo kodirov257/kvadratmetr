@@ -12,6 +12,7 @@ class CreateProjectProjectFacilitiesTable extends Migration
         Schema::create('project_project_facilities', function (Blueprint $table) {
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('facility_id');
+            $table->integer('sort')->default(1000);
         });
 
         Schema::table('project_project_facilities', function (Blueprint $table) {

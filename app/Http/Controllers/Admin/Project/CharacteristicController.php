@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Projects;
+namespace App\Http\Controllers\Admin\Project;
 
 use App\Entity\Projects\Characteristic;
 use App\Entity\Category;
@@ -35,14 +35,14 @@ class CharacteristicController extends Controller
 
         $characteristics = $query->paginate(20);
 
-        return view('admin.projects.characteristics.index', compact('characteristics'));
+        return view('admin.project.characteristics.index', compact('characteristics'));
     }
 
     public function create()
     {
         $types = Characteristic::typesList();
 
-        return view('admin.projects.characteristics.create', compact('types'));
+        return view('admin.project.characteristics.create', compact('types'));
     }
 
     public function store(CreateRequest $request)
@@ -63,7 +63,7 @@ class CharacteristicController extends Controller
                 'sort' => Characteristic::count() + 1,
             ]);
 
-            return redirect()->route('admin.projects.characteristics.show', $characteristic);
+            return redirect()->route('admin.project.characteristics.show', $characteristic);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -71,14 +71,14 @@ class CharacteristicController extends Controller
 
     public function show(Category $category, Characteristic $characteristic)
     {
-        return view('admin.projects.characteristics.show', compact('category', 'characteristic'));
+        return view('admin.project.characteristics.show', compact('category', 'characteristic'));
     }
 
     public function edit(Category $category, Characteristic $characteristic)
     {
         $types = Characteristic::typesList();
 
-        return view('admin.projects.characteristics.edit', compact('category', 'characteristic', 'types'));
+        return view('admin.project.characteristics.edit', compact('category', 'characteristic', 'types'));
     }
 
     public function update(UpdateRequest $request, Characteristic $characteristic)
@@ -98,7 +98,7 @@ class CharacteristicController extends Controller
                 'is_range' => $request->is_range ?? false,
             ]);
 
-            return redirect()->route('admin.projects.characteristics.show', $characteristic);
+            return redirect()->route('admin.project.characteristics.show', $characteristic);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -108,7 +108,7 @@ class CharacteristicController extends Controller
     {
         try {
             $this->service->moveToFirst($characteristic->id);
-            return redirect()->route('admin.projects.characteristics.index');
+            return redirect()->route('admin.project.characteristics.index');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -118,7 +118,7 @@ class CharacteristicController extends Controller
     {
         try {
             $this->service->moveUp($characteristic->id);
-            return redirect()->route('admin.projects.characteristics.index');
+            return redirect()->route('admin.project.characteristics.index');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -128,7 +128,7 @@ class CharacteristicController extends Controller
     {
         try {
             $this->service->moveDown($characteristic->id);
-            return redirect()->route('admin.projects.characteristics.index');
+            return redirect()->route('admin.project.characteristics.index');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -138,7 +138,7 @@ class CharacteristicController extends Controller
     {
         try {
             $this->service->moveToLast($characteristic->id);
-            return redirect()->route('admin.projects.characteristics.index');
+            return redirect()->route('admin.project.characteristics.index');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -148,6 +148,6 @@ class CharacteristicController extends Controller
     {
         $characteristic->delete();
 
-        return redirect()->route('admin.projects.characteristics.index');
+        return redirect()->route('admin.project.characteristics.index');
     }
 }

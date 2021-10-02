@@ -124,16 +124,16 @@
         <div class="card card-gray card-outline">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="form-group">--}}
 {{--                            {!! Form::label('category_id', trans('adminlte.product.category'), ['class' => 'col-form-label']); !!}--}}
 {{--                            {!! Form::select('category_id', $categories, old('category_id', $project ? $project->category_id : null),--}}
 {{--                                ['class'=>'form-control' . ($errors->has('category_id') ? ' is-invalid' : ''), 'placeholder' => '', 'required' => true]) !!}--}}
 {{--                            @if ($errors->has('category_id'))--}}
 {{--                                <span class="invalid-feedback"><strong>{{ $errors->first('category_id') }}</strong></span>--}}
 {{--                            @endif--}}
-                        </div>
-                    </div>
+{{--                        </div>--}}
+{{--                    </div>--}}
 {{--                    <div class="col-md-12">--}}
 {{--                        <div class="form-group">--}}
 {{--                            {!! Form::label('region_id', trans('adminlte.region'), ['class' => 'col-form-label']); !!}--}}
@@ -146,19 +146,19 @@
 {{--                    </div>--}}
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('lng', trans('adminlte.longitude'), ['class' => 'col-form-label']); !!}
-                            {!! Form::text('lng', old('lng', $project ? $project->lng : null), ['class'=>'form-control' . ($errors->has('lng') ? ' is-invalid' : ''), 'required' => true]) !!}
-                            @if ($errors->has('lng'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('lng') }}</strong></span>
+                            {!! Form::label('ltd', trans('adminlte.latitude'), ['class' => 'col-form-label']); !!}
+                            {!! Form::text('ltd', old('ltd', $project ? $project->ltd : null), ['class'=>'form-control' . ($errors->has('ltd') ? ' is-invalid' : ''), 'required' => true]) !!}
+                            @if ($errors->has('ltd'))
+                                <span class="invalid-feedback"><strong>{{ $errors->first('ltd') }}</strong></span>
                             @endif
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('ltd', trans('adminlte.latitude'), ['class' => 'col-form-label']); !!}
-                            {!! Form::text('ltd', old('ltd', $project ? $project->ltd : null), ['class'=>'form-control' . ($errors->has('ltd') ? ' is-invalid' : ''), 'required' => true]) !!}
-                            @if ($errors->has('ltd'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('ltd') }}</strong></span>
+                            {!! Form::label('lng', trans('adminlte.longitude'), ['class' => 'col-form-label']); !!}
+                            {!! Form::text('lng', old('lng', $project ? $project->lng : null), ['class'=>'form-control' . ($errors->has('lng') ? ' is-invalid' : ''), 'required' => true]) !!}
+                            @if ($errors->has('lng'))
+                                <span class="invalid-feedback"><strong>{{ $errors->first('lng') }}</strong></span>
                             @endif
                         </div>
                     </div>
@@ -177,7 +177,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="price" class="col-form-label">Price</label>
-                    <input id="price" type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" value="{{ old('price') }}" required>
+                    <input id="price" type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" value="{{ old('price', $project ? $project->price : null) }}" required>
                     @if ($errors->has('price'))
                         <span class="invalid-feedback"><strong>{{ $errors->first('price') }}</strong></span>
                     @endif

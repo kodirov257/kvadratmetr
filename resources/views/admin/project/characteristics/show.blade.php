@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.projects.characteristics.edit', $characteristic) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
+        <a href="{{ route('admin.project.characteristics.edit', $characteristic) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
 
-        <form method="POST" action="{{ route('admin.projects.characteristics.destroy', $characteristic) }}" class="mr-1">
+        <form method="POST" action="{{ route('admin.project.characteristics.destroy', $characteristic) }}" class="mr-1">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">{{ trans('adminlte.delete') }}</button>

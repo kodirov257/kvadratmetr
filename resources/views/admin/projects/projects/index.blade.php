@@ -65,26 +65,27 @@
             <th>ID</th>
             <th>Updated</th>
             <th>Title</th>
-            <th>User</th>
-            <th>Region</th>
-            <th>Category</th>
+            <th>Developer</th>
+{{--            <th>Region</th>--}}
+{{--            <th>Category</th>--}}
             <th>Status</th>
         </tr>
         </thead>
         <tbody>
 
         @foreach ($projects as $project)
+            @php($developer = $project->developer)
             <tr>
                 <td>{{ $project->id }}</td>
                 <td>{{ $project->updated_at }}</td>
-                <td><a href="{{ route('admin.developers.projects.show', ['developer' => $project->developer, 'project' => $project]) }}" target="_blank">{{ $project->title }}</a></td>
-                <td>{{ $project->user->id }} - {{ $project->user->name }}</td>
-                <td>
-                    @if ($project->region)
-                        {{ $project->region->id }} - {{ $project->region->name }}
-                    @endif
-                </td>
-                <td>{{ $project->category->id }} - {{ $project->category->name }}</td>
+                <td><a href="{{ route('admin.developers.projects.show', [$developer, $project]) }}" target="_blank">{{ $project->name }}</a></td>
+                <td><a href="{{ route('admin.users.developers.show', [$developer->owner, $developer]) }}">{{ $project->developer->id }} - {{ $project->developer->name }}</a></td>
+{{--                <td>--}}
+{{--                    @if ($project->region)--}}
+{{--                        {{ $project->region->id }} - {{ $project->region->name }}--}}
+{{--                    @endif--}}
+{{--                </td>--}}
+{{--                <td>{{ $project->category->id }} - {{ $project->category->name }}</td>--}}
                 <td>
                     @if ($project->isDraft())
                         <span class="badge badge-secondary">Draft</span>
