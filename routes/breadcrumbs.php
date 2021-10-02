@@ -7,6 +7,7 @@ use App\Entity\Project\Projects\Project;
 use App\Entity\Project\Characteristic;
 use App\Entity\Banner\Banner;
 use App\Entity\Page;
+use App\Entity\Project\Projects\SaleOffice;
 use App\Entity\Region;
 use App\Entity\Ticket\Ticket;
 use App\Entity\User\User;
@@ -489,4 +490,21 @@ Breadcrumbs::for('admin.project.projects.plans.show', function (Crumbs $crumbs, 
 Breadcrumbs::for('admin.project.projects.plans.edit', function (Crumbs $crumbs, Project $project, Plan $plan) {
     $crumbs->parent('admin.project.projects.plans.show', $project, $plan);
     $crumbs->push(trans('adminlte.edit'), route('admin.project.projects.plans.edit', [$project, $plan]));
+});
+
+// Developer Sale offices
+
+Breadcrumbs::for('admin.project.developers.sale-offices.create', function (Crumbs $crumbs, Developer $developer) {
+    $crumbs->parent('admin.project.developers.show', $developer);
+    $crumbs->push(trans('adminlte.create'), route('admin.project.developers.sale-offices.create', $developer));
+});
+
+Breadcrumbs::for('admin.project.developers.sale-offices.show', function (Crumbs $crumbs, Developer $developer, SaleOffice $saleOffice) {
+    $crumbs->parent('admin.project.developers.show', $developer);
+    $crumbs->push($saleOffice->address, route('admin.project.developers.sale-offices.show', [$developer, $saleOffice]));
+});
+
+Breadcrumbs::for('admin.project.developers.sale-offices.edit', function (Crumbs $crumbs, Developer $developer, SaleOffice $saleOffice) {
+    $crumbs->parent('admin.project.developers.sale-offices.show', $developer, $saleOffice);
+    $crumbs->push($saleOffice->address, route('admin.project.developers.sale-offices.edit', [$developer, $saleOffice]));
 });

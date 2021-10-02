@@ -17,6 +17,7 @@ class CreateProjectSaleOfficesTable extends Migration
             $table->string('address_uz');
             $table->string('address_ru');
             $table->string('address_en');
+            $table->timestamps();
         });
 
         Schema::table('project_sale_offices', function (Blueprint $table) {

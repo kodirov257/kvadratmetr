@@ -86,4 +86,64 @@
             </div>
         </div>
     </div>
+
+    <div class="card" id="values">
+        <div class="card-header card-gray with-border">{{ trans('adminlte.projects') }}</div>
+        <div class="card-body">
+            <p><a href="{{ route('admin.project.developers.projects.create', $developer) }}" class="btn btn-success">{{ trans('adminlte.project.add') }}</a></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>{{ trans('adminlte.project.name') }}</th>
+                    <th>{{ trans('adminlte.latitude') }} - {{ trans('adminlte.longitude') }}</th>
+                    <th>{{ trans('adminlte.address') }}</th>
+                    <th>{{ trans('adminlte.landmark') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach ($developer->projects as $project)
+                    <tr>
+                        <td><a href="{{ route('admin.project.developers.projects.show', [$developer, $project]) }}">{{ $project->name }}</a></td>
+                        <td>{{ $project->ltd }} - {{ $project->lng }} </td>
+                        <td>{{ $project->address }}</td>
+                        <td>{{ $project->landmark }}</td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card" id="values">
+        <div class="card-header card-gray with-border">{{ trans('adminlte.sale-offices') }}</div>
+        <div class="card-body">
+            <p><a href="{{ route('admin.project.developers.sale-offices.create', $developer) }}" class="btn btn-success">{{ trans('adminlte.sale-offices.add') }}</a></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>{{ trans('adminlte.address') }}</th>
+                    <th>{{ trans('adminlte.latitude') }} - {{ trans('adminlte.longitude') }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach ($developer->saleOffices as $saleOffice)
+                    <tr>
+                        <td>{{ $saleOffice->address }}</td>
+                        <td>{{ $saleOffice->ltd }} - {{ $saleOffice->lng }} </td>
+                        <td class="text-center td-min-width">
+                            <a href="{!! route('admin.project.developers.sale-offices.show', [$developer, $saleOffice]) !!}" data-popup="tooltip" title="Show">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection

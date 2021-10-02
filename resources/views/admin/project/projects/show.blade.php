@@ -223,7 +223,7 @@
         </div>
     </div>
 
-    <div class="card" id="values">
+    <div class="card" id="plans">
         <div class="card-header card-gray with-border">{{ trans('adminlte.plan.name') }}</div>
         <div class="card-body">
             <p><a href="{{ route('admin.project.projects.plans.create', $project) }}" class="btn btn-success">{{ trans('adminlte.plan.add') }}</a></p>
@@ -283,7 +283,7 @@
         </div>
     </div>
 
-    <div class="card" id="values">
+    <div class="card" id="facilities">
         <div class="card-header card-gray with-border">{{ trans('adminlte.facility.name') }}</div>
         <div class="card-body">
             <p><a href="{{ route('admin.project.projects.facilities', $project) }}" class="btn btn-success">{{ trans('adminlte.facility.add') }}</a></p>

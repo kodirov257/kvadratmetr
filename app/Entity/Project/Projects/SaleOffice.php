@@ -32,9 +32,9 @@ class SaleOffice extends Model
 
     ########################################### Mutators
 
-    public function getNameAttribute(): string
+    public function getAddressAttribute(): string
     {
-        return htmlspecialchars_decode(LanguageHelper::getName($this));
+        return htmlspecialchars_decode(LanguageHelper::getAddress($this));
     }
 
     ###########################################

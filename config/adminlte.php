@@ -248,6 +248,11 @@ return [
                     'url'         => 'ru/admin/project/developers',
                     'icon'        => 'far fa-fw fa-file',
                 ],
+//                [
+//                    'text'        => 'sale-offices',
+//                    'url'         => 'ru/admin/project/developers',
+//                    'icon'        => 'far fa-fw fa-file',
+//                ],
                 [
                     'text'        => 'projects',
                     'url'         => 'ru/admin/project/projects',

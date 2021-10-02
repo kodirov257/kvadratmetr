@@ -97,6 +97,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('facilities/{facility}/remove-icon', 'FacilityController@removeIcon')->name('remove-icon');
 
                 Route::resource('characteristics', 'CharacteristicController');
+                Route::resource('sale-offices', 'SaleOfficeController');
 
                 Route::group(['prefix' => 'characteristics/{characteristic}', 'as' => 'characteristics.'], function () {
                     Route::post('/first', 'CharacteristicController@first')->name('first');
@@ -155,6 +156,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::get('projects', 'Projects\ProjectController@index')->name('projects.index');
                 Route::group(['prefix' => 'developers/{developer}', 'as' => 'developers.'], function () {
                     Route::resource('projects', 'Projects\ProjectController')->except('index');
+                    Route::resource('sale-offices', 'SaleOfficeController')->except('index');
                 });
 
                 Route::get('developers', 'DeveloperController@index')->name('developers.index');

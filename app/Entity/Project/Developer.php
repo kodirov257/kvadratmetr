@@ -2,6 +2,8 @@
 
 namespace App\Entity\Project;
 
+use App\Entity\Project\Projects\Project;
+use App\Entity\Project\Projects\SaleOffice;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
@@ -44,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $updated_at
  *
  * @property User $owner
+ * @property Project[] $projects
+ * @property SaleOffice[] $saleOffices
  *
  * @property string $name
  * @property string $about
@@ -107,6 +111,16 @@ class Developer extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id', 'id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'developer_id', 'id');
+    }
+
+    public function saleOffices()
+    {
+        return $this->hasMany(SaleOffice::class, 'developer_id', 'id');
     }
 
     ###########################################

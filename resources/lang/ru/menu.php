@@ -24,4 +24,5 @@ return [
     'characteristics' => 'Характеристики',
     'values' => 'Значения',
     'facilities' => 'Удобства',
+    'sale-offices' => 'Офисы продаж',
 ];
