@@ -33,7 +33,7 @@ class ValueController extends Controller
         try {
             $value = $this->service->addValue($project->id, $request);
 
-            return redirect()->route('admin.project.projects.values.show', ['product' => $project, 'characteristic' => $value->characteristic]);
+            return redirect()->route('admin.project.projects.values.show', ['project' => $project, 'characteristic' => $value->characteristic]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -60,7 +60,7 @@ class ValueController extends Controller
         try {
             $value = $this->service->editValue($project->id, $characteristic->id, $request);
 
-            return redirect()->route('admin.project.projects.values.show', ['product' => $project, 'characteristic' => $value->characteristic]);
+            return redirect()->route('admin.project.projects.values.show', ['project' => $project, 'characteristic' => $value->characteristic]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -70,7 +70,7 @@ class ValueController extends Controller
     {
         try {
             $this->service->removeValue($project->id, $characteristic->id);
-            return redirect()->route('admin.developers.projects.show', [$project->developer, $project]);
+            return redirect()->route('admin.project.developers.projects.show', [$project->developer, $project]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -80,7 +80,7 @@ class ValueController extends Controller
     {
         try {
             $this->service->moveValueToFirst($project->id, $characteristic->id);
-            return redirect()->route('admin.developers.projects.show', [$project->developer, $project]);
+            return redirect()->route('admin.project.developers.projects.show', [$project->developer, $project]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -90,7 +90,7 @@ class ValueController extends Controller
     {
         try {
             $this->service->moveValueUp($project->id, $characteristic->id);
-            return redirect()->route('admin.developers.projects.show', [$project->developer, $project]);
+            return redirect()->route('admin.project.developers.projects.show', [$project->developer, $project]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -100,7 +100,7 @@ class ValueController extends Controller
     {
         try {
             $this->service->moveValueDown($project->id, $characteristic->id);
-            return redirect()->route('admin.developers.projects.show', [$project->developer, $project]);
+            return redirect()->route('admin.project.developers.projects.show', [$project->developer, $project]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -110,7 +110,7 @@ class ValueController extends Controller
     {
         try {
             $this->service->moveValueToLast($project->id, $characteristic->id);
-            return redirect()->route('admin.developers.projects.show', [$project->developer, $project]);
+            return redirect()->route('admin.project.developers.projects.show', [$project->developer, $project]);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }

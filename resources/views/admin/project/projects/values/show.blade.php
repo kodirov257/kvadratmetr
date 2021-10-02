@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.project.projects.values.edit', ['product' => $product, 'characteristic' => $characteristic]) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
+        <a href="{{ route('admin.project.projects.values.edit', ['project' => $project, 'characteristic' => $characteristic]) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
         <form method="POST" action="{{ route('admin.project.projects.values.destroy', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
             @csrf
             @method('DELETE')
@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <table class="table {{--table-bordered--}} table-striped projects">
                         <tbody>
-                        <tr><th>{{ trans('adminlte.characteristic.name') }}</th><td><a href="{{ route('admin.projects.characteristics.show', [
+                        <tr><th>{{ trans('adminlte.characteristic.name') }}</th><td><a href="{{ route('admin.project.characteristics.show', [
                                     'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td></tr>
                         @if($value->characteristic->is_range)
                             <tr><th>{{ trans('adminlte.value.from') }}</th><td>{{ $value->value_from }}</td></tr>

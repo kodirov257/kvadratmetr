@@ -20,7 +20,7 @@ class PhotoService
         DB::beginTransaction();
         try {
             $photo = $project->photos()->create([
-                'product_id' => $project->id,
+                'project_id' => $project->id,
                 'file' => $imageName,
                 'sort' => 100,
             ]);
@@ -128,9 +128,9 @@ class PhotoService
         }
     }
 
-    private function deletePhotos(int $productId, string $filename)
+    private function deletePhotos(int $projectId, string $filename)
     {
-        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $productId . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $filename);
-        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $productId . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $filename);
+        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $projectId . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $filename);
+        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $projectId . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $filename);
     }
 }

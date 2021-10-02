@@ -69,7 +69,7 @@ class PlanController extends Controller
     {
         try {
             $this->service->moveToFirst($project->id, $plan->id);
-            return redirect()->route('admin.developers.projects.show', $project);
+            return redirect()->route('admin.project.developers.projects.show', $project);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -79,7 +79,7 @@ class PlanController extends Controller
     {
         try {
             $this->service->moveUp($project->id, $plan->id);
-            return redirect()->route('admin.developers.projects.show', $project);
+            return redirect()->route('admin.project.developers.projects.show', $project);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -89,7 +89,7 @@ class PlanController extends Controller
     {
         try {
             $this->service->moveDown($project->id, $plan->id);
-            return redirect()->route('admin.developers.projects.show', $project);
+            return redirect()->route('admin.project.developers.projects.show', $project);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -99,7 +99,7 @@ class PlanController extends Controller
     {
         try {
             $this->service->moveToLast($project->id, $plan->id);
-            return redirect()->route('admin.developers.projects.show', $project);
+            return redirect()->route('admin.project.developers.projects.show', $project);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }

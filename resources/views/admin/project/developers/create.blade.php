@@ -1,7 +1,7 @@
 @extends('layouts.admin.page')
 
 @section('content')
-    <form method="POST" action="{{ route('admin.users.developers.store', $user) }}">
+    <form method="POST" action="{{ route('admin.project.users.developers.store', $user) }}">
         @csrf
 
         @include('partials.admin._nav')

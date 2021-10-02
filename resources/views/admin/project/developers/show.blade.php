@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.users.developers.edit', [$user, $developer]) }}" class="btn btn-primary mr-1">@lang('adminlte.edit')</a>
-        <a href="{{ route('admin.developers.projects.create', $developer) }}" class="btn btn-primary mr-1">Add project</a>
+        <a href="{{ route('admin.project.users.developers.edit', [$user, $developer]) }}" class="btn btn-primary mr-1">@lang('adminlte.edit')</a>
+        <a href="{{ route('admin.project.developers.projects.create', $developer) }}" class="btn btn-primary mr-1">Add project</a>
 
-        <form method="POST" action="{{ route('admin.users.developers.destroy', [$user, $developer]) }}" class="mr-1">
+        <form method="POST" action="{{ route('admin.project.users.developers.destroy', [$user, $developer]) }}" class="mr-1">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger">@lang('adminlte.delete')</button>

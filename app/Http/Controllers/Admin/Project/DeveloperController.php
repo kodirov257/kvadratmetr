@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Projects;
+namespace App\Http\Controllers\Admin\Project;
 
 use App\Entity\Project\Developer;
 use App\Entity\User\User;
@@ -54,12 +54,12 @@ class DeveloperController extends Controller
 
         $developers = $query->paginate(20);
 
-        return view('admin.projects.developers.index', compact('developers'));
+        return view('admin.project.developers.index', compact('developers'));
     }
 
     public function create(User $user)
     {
-        return view('admin.projects.developers.create', compact('user'));
+        return view('admin.project.developers.create', compact('user'));
     }
 
     public function store(CreateRequest $request, User $user)
@@ -74,12 +74,12 @@ class DeveloperController extends Controller
 
     public function show(User $user, Developer $developer)
     {
-        return view('admin.projects.developers.show', compact('user', 'developer'));
+        return view('admin.project.developers.show', compact('user', 'developer'));
     }
 
     public function edit(User $user, Developer $developer)
     {
-        return view('admin.projects.developers.edit', compact('user', 'developer'));
+        return view('admin.project.developers.edit', compact('user', 'developer'));
     }
 
     public function update(UpdateRequest $request, User $user, Developer $developer)
@@ -97,12 +97,5 @@ class DeveloperController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index');
-    }
-
-    public function verify(User $user)
-    {
-        $this->service->verify($user->id);
-
-        return redirect()->route('admin.users.show', $user);
     }
 }

@@ -45,7 +45,7 @@
             <tr>
                 <td>{{ $developer->id }}</td>
                 <td>
-                    <a href="{{ route('admin.users.developers.show', ['user' => $developer->owner_id, 'developer' => $developer]) }}">
+                    <a href="{{ route('admin.project.users.developers.show', ['user' => $developer->owner_id, 'developer' => $developer]) }}">
                         {{ $developer->name }}
                     </a>
                 </td>

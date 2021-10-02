@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Projects;
+namespace App\Http\Controllers\Admin\Project\Projects;
 
 use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Project;
@@ -61,7 +61,7 @@ class ProjectController extends Controller
 
         $roles = User::rolesList();
 
-        return view('admin.projects.projects.index', compact('projects', 'statuses', 'roles'));
+        return view('admin.project.projects.index', compact('projects', 'statuses', 'roles'));
     }
 
     public function create(Request $request, Developer $developer)
@@ -70,7 +70,7 @@ class ProjectController extends Controller
         $regions = ProjectHelper::getRegionsList();
         $statuses = Project::statusesList();
 
-        return view('admin.projects.projects.create', compact('categories', 'regions', 'developer', 'statuses'));
+        return view('admin.project.projects.create', compact('categories', 'regions', 'developer', 'statuses'));
     }
 
     public function store(CreateRequest $request, Developer $developer)
@@ -86,7 +86,7 @@ class ProjectController extends Controller
 
     public function show(Developer $developer, Project $project)
     {
-        return view('admin.projects.projects.show', compact('developer', 'project'));
+        return view('admin.project.projects.show', compact('developer', 'project'));
     }
 
     public function edit(Developer $developer, Project $project)
@@ -95,7 +95,7 @@ class ProjectController extends Controller
 //        $regions = ProjectHelper::getRegionsList();
         $statuses = Project::statusesList();
 
-        return view('admin.projects.projects.edit', compact('project', 'categories', /*'regions', */'developer', 'statuses'));
+        return view('admin.project.projects.edit', compact('project', 'categories', /*'regions', */'developer', 'statuses'));
     }
 
     public function update(EditRequest $request, Developer $developer, Project $project)
@@ -107,27 +107,6 @@ class ProjectController extends Controller
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }
-    }
-
-    public function characteristicsForm(Project $project)
-    {
-        return view('admin.projec.characteristics.create', compact('project'));
-    }
-
-    public function photosForm(Project $project)
-    {
-        return view('admin.projects.photos.photos', compact('project'));
-    }
-
-    public function photos(PhotosRequest $request, Project $project)
-    {
-        try {
-            $this->service->addPhotos($project->id, $request);
-        } catch (\DomainException $e) {
-            return back()->with('error', $e->getMessage());
-        }
-
-        return redirect()->route('admin.project.developers.projects.show', ['developer' => $project->developer, 'project' => $project]);
     }
 
     public function sendToModeration(Project $project)
@@ -155,7 +134,7 @@ class ProjectController extends Controller
 
     public function rejectForm(Project $project)
     {
-        return view('admin.projects.projects.reject', compact('project'));
+        return view('admin.project.projects.reject', compact('project'));
     }
 
     public function reject(RejectRequest $request, Project $project)

@@ -31,7 +31,7 @@ class Value extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'product_id', 'characteristic_id', 'value', 'value_from', 'value_to', 'main', 'sort',
+        'project_id', 'characteristic_id', 'value', 'value_from', 'value_to', 'main', 'sort',
     ];
 
     public function isMain(): bool

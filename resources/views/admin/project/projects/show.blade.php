@@ -4,34 +4,28 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.developers.projects.edit', [$developer, $project]) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
+        <a href="{{ route('admin.project.developers.projects.edit', [$developer, $project]) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
         @if ($project->isOnModeration() && Gate::allows('alter-projects-status'))
-            <form method="POST" action="{{ route('admin.projects.moderate', $project) }}" class="mr-1">
+            <form method="POST" action="{{ route('admin.project.projects.moderate', $project) }}" class="mr-1">
                 @csrf
                 <button class="btn btn-primary" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.publish')</button>
             </form>
         @elseif (($project->isDraft() || $project->isClosed()) && Gate::allows('alter-projects-status'))
-            <form method="POST" action="{{ route('admin.projects.on-moderation', $project) }}" class="mr-1">
+            <form method="POST" action="{{ route('admin.project.projects.on-moderation', $project) }}" class="mr-1">
                 @csrf
                 <button class="btn btn-success" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.send_to_moderation')</button>
             </form>
         @elseif($project->isActive() && Gate::allows('manage-projects', $project))
-            <form method="POST" action="{{ route('admin.projects.close', $project) }}" class="mr-1">
+            <form method="POST" action="{{ route('admin.project.projects.close', $project) }}" class="mr-1">
                 @csrf
                 <button class="btn btn-danger" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.close')</button>
             </form>
-            @can('alter-projects-status')
-                <form method="POST" action="{{ route('admin.projects.draft', $project) }}" class="mr-1">
-                    @csrf
-                    <button class="btn btn-default" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.draft')</button>
-                </form>
-            @endcan
         @endif
         <a href="{{ route('admin.project.projects.photo', $project) }}" class="btn btn-secondary mr-1">{{ trans('adminlte.project.add_photos') }}</a>
         <a href="{{ route('admin.project.projects.values.add', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.value.add') }}</a>
         <a href="{{ route('admin.project.projects.facilities', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.facilities.add') }}</a>
         <a href="{{ route('admin.project.projects.plans.create', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.plan.add') }}</a>
-        <form method="POST" action="{{ route('admin.developers.projects.destroy', [$developer, $project]) }}" class="mr-1">
+        <form method="POST" action="{{ route('admin.project.developers.projects.destroy', [$developer, $project]) }}" class="mr-1">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">{{ trans('adminlte.delete') }}</button>
@@ -121,7 +115,7 @@
                         <tr>
                             <th>{{ trans('adminlte.developer') }}</th>
                             <td>
-                                <a href="{{ route('admin.users.developers.show', [$developer->owner, $developer]) }}">
+                                <a href="{{ route('admin.project.users.developers.show', [$developer->owner, $developer]) }}">
                                     {{ $project->developer->name }}
                                 </a>
                             </td>

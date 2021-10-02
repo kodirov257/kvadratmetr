@@ -25,7 +25,7 @@
                         <tr>
                             <th>Project</th>
                             <td>
-                                <a href="{{ route('admin.developers.projects.show', [$project->developer, $project]) }}">
+                                <a href="{{ route('admin.project.developers.projects.show', [$project->developer, $project]) }}">
                                     {{ $project->name }}
                                 </a>
                             </td>

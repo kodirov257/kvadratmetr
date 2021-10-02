@@ -110,19 +110,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('lng', trans('adminlte.longitude'), ['class' => 'col-form-label']); !!}
-                            {!! Form::text('lng', old('lng', $developer ? $developer->lng : null), ['class'=>'form-control' . ($errors->has('lng') ? ' is-invalid' : ''), 'required' => true]) !!}
-                            @if ($errors->has('lng'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('lng') }}</strong></span>
+                            {!! Form::label('ltd', trans('adminlte.latitude'), ['class' => 'col-form-label']); !!}
+                            {!! Form::text('ltd', old('ltd', $developer ? $developer->ltd : null), ['class'=>'form-control' . ($errors->has('ltd') ? ' is-invalid' : ''), 'required' => true]) !!}
+                            @if ($errors->has('ltd'))
+                                <span class="invalid-feedback"><strong>{{ $errors->first('ltd') }}</strong></span>
                             @endif
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('ltd', trans('adminlte.latitude'), ['class' => 'col-form-label']); !!}
-                            {!! Form::text('ltd', old('ltd', $developer ? $developer->ltd : null), ['class'=>'form-control' . ($errors->has('ltd') ? ' is-invalid' : ''), 'required' => true]) !!}
-                            @if ($errors->has('ltd'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('ltd') }}</strong></span>
+                            {!! Form::label('lng', trans('adminlte.longitude'), ['class' => 'col-form-label']); !!}
+                            {!! Form::text('lng', old('lng', $developer ? $developer->lng : null), ['class'=>'form-control' . ($errors->has('lng') ? ' is-invalid' : ''), 'required' => true]) !!}
+                            @if ($errors->has('lng'))
+                                <span class="invalid-feedback"><strong>{{ $errors->first('lng') }}</strong></span>
                             @endif
                         </div>
                     </div>

@@ -245,12 +245,12 @@ return [
             'submenu' => [
                 [
                     'text'        => 'developers',
-                    'url'         => 'ru/admin/developers',
+                    'url'         => 'ru/admin/project/developers',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'projects',
-                    'url'         => 'ru/admin/projects',
+                    'url'         => 'ru/admin/project/projects',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
