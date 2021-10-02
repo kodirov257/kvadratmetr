@@ -46,7 +46,7 @@ class EditRequest extends FormRequest
             'about_ru' => 'required|string',
             'about_en' => 'required|string',
             'slug' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9-]+$/', Rule::unique('project_projects')->ignore($this->project->id)],
-            'category_id' => 'required|numeric|min:1|exists:categories,id',
+//            'category_id' => 'required|numeric|min:1|exists:categories,id',
             'price' => 'required|numeric|min:0',
             'address_uz' => 'required|string|max:255',
             'address_ru' => 'required|string|max:255',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Projects;
+namespace App\Http\Controllers\Admin\Project;
 
 use App\Entity\Projects\Facility;
 use App\Entity\Projects\Project\Project;
@@ -36,12 +36,12 @@ class FacilityController extends Controller
 
         $facilities = $query->paginate(20);
 
-        return view('admin.projects.facilities.index', compact('facilities'));
+        return view('admin.project.facilities.index', compact('facilities'));
     }
 
     public function create()
     {
-        return view('admin.projects.facilities.create');
+        return view('admin.project.facilities.create');
     }
 
     public function store(CreateRequest $request)
@@ -49,7 +49,7 @@ class FacilityController extends Controller
         try {
             $facility = $this->service->create($request);
 
-            return redirect()->route('admin.projects.facilities.show', $facility);
+            return redirect()->route('admin.project.facilities.show', $facility);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -57,12 +57,12 @@ class FacilityController extends Controller
 
     public function show(Facility $facility)
     {
-        return view('admin.projects.facilities.show', compact('facility'));
+        return view('admin.project.facilities.show', compact('facility'));
     }
 
     public function edit(Facility $facility)
     {
-        return view('admin.projects.facilities.edit', compact('facility'));
+        return view('admin.project.facilities.edit', compact('facility'));
     }
 
     public function update(UpdateRequest $request, Facility $facility)
@@ -70,7 +70,7 @@ class FacilityController extends Controller
         try {
             $this->service->update($facility->id, $request);
 
-            return redirect()->route('admin.projects.facilities.show', $facility);
+            return redirect()->route('admin.project.facilities.show', $facility);
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -82,7 +82,7 @@ class FacilityController extends Controller
             Storage::disk('public')->deleteDirectory('/files/' . ImageHelper::FOLDER_FACILITIES . '/' . $facility->id);
 
             $facility->delete();
-            return redirect()->route('admin.projects.facilities.index');
+            return redirect()->route('admin.project.facilities.index');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }

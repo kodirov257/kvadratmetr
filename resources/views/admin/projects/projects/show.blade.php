@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.developers.projects.edit', $project) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
+        <a href="{{ route('admin.developers.projects.edit', [$developer, $project]) }}" class="btn btn-primary mr-1">{{ trans('adminlte.edit') }}</a>
         @if ($project->isOnModeration() && Gate::allows('alter-products-status'))
             <form method="POST" action="{{ route('admin.projects.moderate', $project) }}" class="mr-1">
                 @csrf
@@ -26,15 +26,11 @@
                     <button class="btn btn-default" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">@lang('adminlte.draft')</button>
                 </form>
             @endcan
-        @elseif ($project->isDraftAfterCategorySplit() && Gate::check('alter-products-status'))
-            <form method="POST" action="{{ route('admin.projects.activate', $project) }}" class="mr-1">
-                @csrf
-                <button class="btn btn-success">@lang('adminlte.activate')</button>
-            </form>
         @endif
         <a href="{{ route('admin.projects.photos', $project) }}" class="btn btn-secondary mr-1">{{ trans('adminlte.product.add_photos') }}</a>
         <a href="{{ route('admin.projects.values.add', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.value.add') }}</a>
-        <form method="POST" action="{{ route('admin.developers.projects.destroy', $project) }}" class="mr-1">
+        <a href="{{ route('admin.project.projects.facilities', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.facilities.add') }}</a>
+        <form method="POST" action="{{ route('admin.developers.projects.destroy', [$developer, $project]) }}" class="mr-1">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger" onclick="return confirm('{{ trans('adminlte.delete_confirmation_message') }}')">{{ trans('adminlte.delete') }}</button>
@@ -56,10 +52,10 @@
                         <tr><th>{{ trans('adminlte.about') }} Ru</th><td>{!! htmlspecialchars_decode($project->about_ru) !!}</td></tr>
                         <tr><th>{{ trans('adminlte.about') }} En</th><td>{!! htmlspecialchars_decode($project->about_en) !!}</td></tr>
                         <tr><th>Slug</th><td>{{ $project->slug }}</td></tr>
-                        <tr>
-                            <th>{{ trans('adminlte.product.category') }}</th>
-                            <td><a href="{{ route('admin.categories.show', $project->category) }}">{{ $project->category->name }}</a></td>
-                        </tr>
+{{--                        <tr>--}}
+{{--                            <th>{{ trans('adminlte.product.category') }}</th>--}}
+{{--                            <td><a href="{{ route('admin.categories.show', $project->category) }}">{{ $project->category->name }}</a></td>--}}
+{{--                        </tr>--}}
                         </tbody>
                     </table>
                 </div>
@@ -118,10 +114,21 @@
             <div class="card card-gray card-outline">
                 <div class="card-header"><h3 class="card-title">{{ trans('adminlte.others') }}</h3></div>
                 <div class="card-body">
+                    @php($developer = $project->developer)
                     <table class="table {{--table-bordered--}} table-striped projects">
                         <tbody>
-                        <tr><th>{{ trans('adminlte.created_by') }}</th><td>{{ $project->createdBy->name }}</td></tr>
-                        <tr><th>{{ trans('adminlte.updated_by') }}</th><td>{{ $project->updatedBy->name }}</td></tr>
+                        <tr>
+                            <th>{{ trans('adminlte.developer') }}</th>
+                            <td>
+                                <a href="{{ route('admin.users.developers.show', [$developer->owner, $developer]) }}">
+                                    {{ $project->developer->name }}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{ trans('adminlte.owner') }}</th>
+                            <td><a href="{{ route('admin.users.show', $developer->owner) }}">{{ $project->developer->owner->name }}</a></td>
+                        </tr>
                         <tr><th>{{ trans('adminlte.created_at') }}</th><td>{{ $project->created_at }}</td></tr>
                         <tr><th>{{ trans('adminlte.updated_at') }}</th><td>{{ $project->updated_at }}</td></tr>
                         </tbody>
@@ -192,19 +199,19 @@
                         <td>{{ $value->main ? trans('adminlte.yes') : trans('adminlte.no') }}</td>
                         <td>
                             <div class="d-flex flex-row">
-                                <form method="POST" action="{{ route('admin.projects.values.first', ['product' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.projects.values.first', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.projects.values.up', ['product' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.projects.values.up', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.projects.values.down', ['product' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.projects.values.down', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.projects.values.last', ['product' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.projects.values.last', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>
                                 </form>
@@ -212,6 +219,58 @@
                         </td>
                         <td class="text-center td-min-width">
                             <a href="{!! route('admin.projects.values.show', ['product' => $project, 'characteristic' => $characteristic]) !!}" data-popup="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card" id="values">
+        <div class="card-header card-gray with-border">{{ trans('adminlte.facility.name') }}</div>
+        <div class="card-body">
+            <p><a href="{{ route('admin.project.projects.facilities', $project) }}" class="btn btn-success">{{ trans('adminlte.facility.add') }}</a></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Icon</th>
+                    <th>{{ trans('adminlte.name') }}</th>
+                    <th>{{ trans('adminlte.comment') }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach ($project->facilities as $facility)
+                    <tr>
+                        <td>
+                            @if ($facility->icon)
+                                <a href="{{ $facility->iconOriginal }}" target="_blank"><img src="{{ $facility->iconThumbnail }}"></a>
+                            @endif
+                        </td>
+                        <td><a href="{{ route('admin.project.facilities.show', $facility) }}">{{ $facility->name }}</a></td>
+                        <td>{{ $facility->comment }}</td>
+                        <td>
+                            <div class="d-flex flex-row">
+                                <form method="POST" action="{{ route('admin.project.projects.facilities.first', ['project' => $project, 'facility' => $facility]) }}" class="mr-1">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
+                                </form>
+                                <form method="POST" action="{{ route('admin.project.projects.facilities.up', ['project' => $project, 'facility' => $facility]) }}" class="mr-1">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>
+                                </form>
+                                <form method="POST" action="{{ route('admin.project.projects.facilities.down', ['project' => $project, 'facility' => $facility]) }}" class="mr-1">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>
+                                </form>
+                                <form method="POST" action="{{ route('admin.project.projects.facilities.last', ['project' => $project, 'facility' => $facility]) }}" class="mr-1">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

@@ -390,24 +390,24 @@ Breadcrumbs::for('admin.categories.edit', function (Crumbs $crumbs, Category $ca
 
 // Project Characteristics
 
-Breadcrumbs::for('admin.projects.characteristics.index', function (Crumbs $crumbs) {
+Breadcrumbs::for('admin.project.characteristics.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push(trans('adminlte.characteristics.name'), route('admin.projects.characteristics.index'));
+    $crumbs->push(trans('adminlte.characteristics.name'), route('admin.project.characteristics.index'));
 });
 
-Breadcrumbs::for('admin.projects.characteristics.create', function (Crumbs $crumbs) {
-    $crumbs->parent('admin.projects.characteristics.index');
-    $crumbs->push(trans('adminlte.create'), route('admin.projects.characteristics.create'));
+Breadcrumbs::for('admin.project.characteristics.create', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.project.characteristics.index');
+    $crumbs->push(trans('adminlte.create'), route('admin.project.characteristics.create'));
 });
 
-Breadcrumbs::for('admin.projects.characteristics.show', function (Crumbs $crumbs, Characteristic $characteristic) {
-    $crumbs->parent('admin.projects.characteristics.index');
-    $crumbs->push($characteristic->name, route('admin.projects.characteristics.show', $characteristic));
+Breadcrumbs::for('admin.project.characteristics.show', function (Crumbs $crumbs, Characteristic $characteristic) {
+    $crumbs->parent('admin.project.characteristics.index');
+    $crumbs->push($characteristic->name, route('admin.project.characteristics.show', $characteristic));
 });
 
-Breadcrumbs::for('admin.projects.characteristics.edit', function (Crumbs $crumbs, Characteristic $characteristic) {
-    $crumbs->parent('admin.projects.characteristics.show', $characteristic);
-    $crumbs->push(trans('adminlte.edit'), route('admin.projects.characteristics.edit', $characteristic));
+Breadcrumbs::for('admin.project.characteristics.edit', function (Crumbs $crumbs, Characteristic $characteristic) {
+    $crumbs->parent('admin.project.characteristics.show', $characteristic);
+    $crumbs->push(trans('adminlte.edit'), route('admin.project.characteristics.edit', $characteristic));
 });
 
 // Project Values
@@ -434,22 +434,29 @@ Breadcrumbs::for('admin.projects.values.edit', function (Crumbs $crumbs, Project
 
 // Facilities
 
-Breadcrumbs::for('admin.projects.facilities.index', function (Crumbs $crumbs) {
+Breadcrumbs::for('admin.project.facilities.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
-    $crumbs->push('Facilities', route('admin.projects.facilities.index'));
+    $crumbs->push('Facilities', route('admin.project.facilities.index'));
 });
 
-Breadcrumbs::for('admin.projects.facilities.create', function (Crumbs $crumbs) {
-    $crumbs->parent('admin.projects.facilities.index');
-    $crumbs->push(trans('adminlte.create'), route('admin.projects.facilities.create'));
+Breadcrumbs::for('admin.project.facilities.create', function (Crumbs $crumbs) {
+    $crumbs->parent('admin.project.facilities.index');
+    $crumbs->push(trans('adminlte.create'), route('admin.project.facilities.create'));
 });
 
-Breadcrumbs::for('admin.projects.facilities.show', function (Crumbs $crumbs, Facility $facility) {
-    $crumbs->parent('admin.projects.facilities.index');
-    $crumbs->push($facility->name, route('admin.projects.facilities.show', $facility));
+Breadcrumbs::for('admin.project.facilities.show', function (Crumbs $crumbs, Facility $facility) {
+    $crumbs->parent('admin.project.facilities.index');
+    $crumbs->push($facility->name, route('admin.project.facilities.show', $facility));
 });
 
-Breadcrumbs::for('admin.projects.facilities.edit', function (Crumbs $crumbs, Facility $facility) {
-    $crumbs->parent('admin.projects.facilities.show', $facility);
-    $crumbs->push(trans('adminlte.edit'), route('admin.projects.facilities.edit', $facility));
+Breadcrumbs::for('admin.project.facilities.edit', function (Crumbs $crumbs, Facility $facility) {
+    $crumbs->parent('admin.project.facilities.show', $facility);
+    $crumbs->push(trans('adminlte.edit'), route('admin.project.facilities.edit', $facility));
+});
+
+// Project facilities
+
+Breadcrumbs::for('admin.project.projects.facilities', function (Crumbs $crumbs, Project $project) {
+    $crumbs->parent('admin.projects.show', $project);
+    $crumbs->push('Add', route('admin.project.projects.facilities', $project));
 });

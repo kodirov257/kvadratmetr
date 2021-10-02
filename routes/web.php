@@ -92,7 +92,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('/last', 'CategoryController@last')->name('last');
             });
 
-            Route::group(['prefix' => 'projects', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
+            Route::group(['prefix' => 'project', 'as' => 'project.', 'namespace' => 'Project'], function () {
                 Route::resource('facilities', 'FacilityController');
                 Route::post('facilities/{facility}/remove-icon', 'FacilityController@removeIcon')->name('remove-icon');
 
@@ -103,6 +103,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                     Route::post('/up', 'CharacteristicController@up')->name('up');
                     Route::post('/down', 'CharacteristicController@down')->name('down');
                     Route::post('/last', 'CharacteristicController@last')->name('last');
+                });
+
+                Route::group(['prefix' => 'projects/{project}', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
+                    Route::get('facilities', 'FacilityController@addForm')->name('facilities');
+                    Route::post('facilities', 'FacilityController@add');
+
+                    Route::group(['prefix' => 'facilities/{facility}', 'as' => 'facilities.'], function () {
+                        Route::post('/first', 'FacilityController@first')->name('first');
+                        Route::post('/up', 'FacilityController@up')->name('up');
+                        Route::post('/down', 'FacilityController@down')->name('down');
+                        Route::post('/last', 'FacilityController@last')->name('last');
+                    });
                 });
             });
 
@@ -142,7 +154,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                     Route::post('down', 'ValueController@down')->name('down');
                     Route::post('last', 'ValueController@last')->name('last');
                 });
-
             });
 //            Route::resource('projects', 'Projects\ProjectController');
 

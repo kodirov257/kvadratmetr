@@ -43,7 +43,7 @@ class CreateController extends Controller
         try {
             $project = $this->service->create(
                 Auth::id(),
-                $category->id,
+//                $category->id,
 //                $region ? $region->id : null,
                 $request
             );

@@ -18,7 +18,7 @@ class CreateProjectsTables extends Migration
             $table->text('about_ru');
             $table->text('about_en');
             $table->string('slug');
-            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('category_id')->nullable();
 //            $table->unsignedInteger('region_id')->nullable();
             $table->unsignedInteger('price')->default(0);
             $table->unsignedInteger('impressions')->default(0); 

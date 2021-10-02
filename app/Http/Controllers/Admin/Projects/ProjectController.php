@@ -76,7 +76,7 @@ class ProjectController extends Controller
     public function store(CreateRequest $request, Developer $developer)
     {
         try {
-            $project = $this->service->create($developer->id, $request->category_id, $request);
+            $project = $this->service->create($developer->id, /*$request->category_id, */$request);
 
             return redirect()->route('admin.developers.projects.show', [$developer, $project]);
         } catch (\DomainException $e) {
@@ -84,9 +84,9 @@ class ProjectController extends Controller
         }
     }
 
-    public function show(Project $project)
+    public function show(Developer $developer, Project $project)
     {
-        return view('admin.projects.projects.show', compact('project'));
+        return view('admin.projects.projects.show', compact('developer', 'project'));
     }
 
     public function edit(Developer $developer, Project $project)
@@ -155,18 +155,18 @@ class ProjectController extends Controller
 
     public function rejectForm(Project $project)
     {
-        return view('admin.projects.reject', compact('project'));
+        return view('admin.projects.projects.reject', compact('project'));
     }
 
     public function reject(RejectRequest $request, Project $project)
     {
         try {
             $this->service->reject($project->id, $request);
+
+            return redirect()->route('admin.developers.projects.show', [$project->developer, $project]);
         } catch (\DomainException $e) {
             return back()->with('error', $e->getMessage());
         }
-
-        return redirect()->route('projects.show', $project);
     }
 
     public function activate(Project $project)
