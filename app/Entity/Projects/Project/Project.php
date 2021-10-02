@@ -51,6 +51,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Value[] $values
  * @property ProjectFacility[] $projectFacilities
  * @property Facility[] $facilities
+ * @property Plan[] $plans
  * @property Photo[] $photos
  *
  * @property string $name
@@ -330,6 +331,11 @@ class Project extends Model
     public function facilities()
     {
         return $this->belongsToMany(Facility::class, 'project_project_facilities', 'project_id', 'facility_id');
+    }
+
+    public function plans()
+    {
+        return $this->hasMany(Plan::class, 'project_id', 'id');
     }
 
     public function photos()

@@ -115,6 +115,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                         Route::post('/down', 'FacilityController@down')->name('down');
                         Route::post('/last', 'FacilityController@last')->name('last');
                     });
+
+                    Route::resource('plans', 'PlanController');
+                    Route::group(['prefix' => 'plans/{plan}', 'as' => 'plans.'], function () {
+                        Route::post('remove-image', 'PlanController@removeImage')->name('remove-image');
+                        Route::post('first', 'PlanController@first')->name('first');
+                        Route::post('up', 'PlanController@up')->name('up');
+                        Route::post('down', 'PlanController@down')->name('down');
+                        Route::post('last', 'PlanController@last')->name('last');
+                    });
                 });
             });
 
