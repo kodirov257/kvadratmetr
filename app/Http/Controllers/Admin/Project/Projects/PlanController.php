@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Project\Projects;
 
-use App\Entity\Projects\Project\Plan;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Plan;
+use App\Entity\Project\Projects\Project;
 use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Projects\Plans\CreateRequest;

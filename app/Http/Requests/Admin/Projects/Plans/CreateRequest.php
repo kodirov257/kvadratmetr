@@ -4,7 +4,7 @@
 namespace App\Http\Requests\Admin\Projects\Plans;
 
 
-use App\Entity\Projects\Project\Plan;
+use App\Entity\Project\Projects\Plan;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

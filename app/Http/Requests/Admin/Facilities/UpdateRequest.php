@@ -4,7 +4,7 @@
 namespace App\Http\Requests\Admin\Facilities;
 
 
-use App\Entity\Projects\Facility;
+use App\Entity\Project\Facility;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

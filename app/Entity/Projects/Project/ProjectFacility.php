@@ -3,7 +3,7 @@
 namespace App\Entity\Projects\Project;
 
 use App\Entity\BasePivot;
-use App\Entity\Projects\Facility;
+use App\Entity\Project\Facility;
 
 /**
  * @property int $project_id

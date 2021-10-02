@@ -27,8 +27,8 @@
                 </form>
             @endcan
         @endif
-        <a href="{{ route('admin.projects.photos', $project) }}" class="btn btn-secondary mr-1">{{ trans('adminlte.project.add_photos') }}</a>
-        <a href="{{ route('admin.projects.values.add', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.value.add') }}</a>
+        <a href="{{ route('admin.project.projects.photo', $project) }}" class="btn btn-secondary mr-1">{{ trans('adminlte.project.add_photos') }}</a>
+        <a href="{{ route('admin.project.projects.values.add', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.value.add') }}</a>
         <a href="{{ route('admin.project.projects.facilities', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.facilities.add') }}</a>
         <a href="{{ route('admin.project.projects.plans.create', $project) }}" class="btn btn-warning mr-1">{{ trans('adminlte.plan.add') }}</a>
         <form method="POST" action="{{ route('admin.developers.projects.destroy', [$developer, $project]) }}" class="mr-1">
@@ -98,7 +98,7 @@
                         <tr>
                             <th>{{ trans('adminlte.reject_reason') }}</th>
                             <td>
-                                @if($project->status === \App\Entity\Projects\Project\Project::STATUS_DRAFT && $project->reject_reason)
+                                @if($project->status === \App\Entity\Project\Projects\Project::STATUS_DRAFT && $project->reject_reason)
                                     {{ $project->reject_reason }}
                                 @endif
                             </td>
@@ -146,10 +146,10 @@
                 @foreach($project->photos as $photo)
                     <div class="col-md-2 col-xs-3" style="text-align: center">
                         <div class="btn-group">
-                            <a href="{{ route('admin.projects.move-photo-up', ['project' => $project, 'photo' => $photo]) }}" id="{{ $project->id }}" class="btn btn-default">
+                            <a href="{{ route('admin.project.projects.move-photo-up', ['project' => $project, 'photo' => $photo]) }}" id="{{ $project->id }}" class="btn btn-default">
                                 <span class="glyphicon glyphicon-arrow-left"></span>
                             </a>
-                            {!! Form::open(['url' => route('admin.projects.remove-photo', ['project' => $project, 'photo' => $photo])]) !!}
+                            {!! Form::open(['url' => route('admin.project.projects.remove-photo', ['project' => $project, 'photo' => $photo])]) !!}
                             @csrf
                             @method('DELETE')
                             <button type="submit" id="{{ $project->id }}" photo_id="{{ $photo->id }}" class="btn btn-default" style="border-radius: 0; margin-left: -1px;"
@@ -157,7 +157,7 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                             {!! Form::close() !!}
-                            <a href="{{ route('admin.projects.move-photo-down', ['project' => $project, 'photo' => $photo]) }}" id="{{ $project->id }}" class="btn btn-default">
+                            <a href="{{ route('admin.project.projects.move-photo-down', ['project' => $project, 'photo' => $photo]) }}" id="{{ $project->id }}" class="btn btn-default">
                                 <span class="glyphicon glyphicon-arrow-right"></span>
                             </a>
                         </div>
@@ -173,7 +173,7 @@
     <div class="card" id="values">
         <div class="card-header card-gray with-border">{{ trans('adminlte.value.name') }}</div>
         <div class="card-body">
-            <p><a href="{{ route('admin.projects.values.add', $project) }}" class="btn btn-success">{{ trans('adminlte.value.add') }}</a></p>
+            <p><a href="{{ route('admin.project.projects.values.add', $project) }}" class="btn btn-success">{{ trans('adminlte.value.add') }}</a></p>
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -189,7 +189,7 @@
                 @foreach ($project->values as $value)
                     @php($characteristic = $value->characteristic)
                     <tr>
-                        <td><a href="{{ route('admin.projects.characteristics.show', ['project' => $project, 'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td>
+                        <td><a href="{{ route('admin.project.characteristics.show', ['project' => $project, 'characteristic' => $characteristic]) }}">{{ $characteristic->name }}</a></td>
                         <td>
                             @if($characteristic->is_range)
                                 {{ $value->value_from }} - {{ $value->value_to }}
@@ -200,26 +200,26 @@
                         <td>{{ $value->main ? trans('adminlte.yes') : trans('adminlte.no') }}</td>
                         <td>
                             <div class="d-flex flex-row">
-                                <form method="POST" action="{{ route('admin.projects.values.first', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.project.projects.values.first', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.projects.values.up', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.project.projects.values.up', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.projects.values.down', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.project.projects.values.down', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>
                                 </form>
-                                <form method="POST" action="{{ route('admin.projects.values.last', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
+                                <form method="POST" action="{{ route('admin.project.projects.values.last', ['project' => $project, 'characteristic' => $characteristic]) }}" class="mr-1">
                                     @csrf
                                     <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>
                                 </form>
                             </div>
                         </td>
                         <td class="text-center td-min-width">
-                            <a href="{!! route('admin.projects.values.show', ['project' => $project, 'characteristic' => $characteristic]) !!}" data-popup="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+                            <a href="{!! route('admin.project.projects.values.show', ['project' => $project, 'characteristic' => $characteristic]) !!}" data-popup="tooltip" title="Show"><i class="fa fa-eye"></i></a>
                         </td>
                     </tr>
                 @endforeach

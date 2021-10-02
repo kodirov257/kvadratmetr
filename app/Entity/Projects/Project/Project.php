@@ -2,9 +2,9 @@
 
 namespace App\Entity\Projects\Project;
 
-use App\Entity\Projects\Developer;
-use App\Entity\Projects\Facility;
-use App\Entity\Projects\Project\Dialog\Dialog;
+use App\Entity\Project\Developer;
+use App\Entity\Project\Facility;
+use App\Entity\Project\Projects\Dialog\Dialog;
 use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;

@@ -124,6 +124,32 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                         Route::post('down', 'PlanController@down')->name('down');
                         Route::post('last', 'PlanController@last')->name('last');
                     });
+
+                    Route::get('/photo', 'PhotoController@addForm')->name('photo');
+                    Route::post('/photo', 'PhotoController@addPhoto')->name('add-photo');
+                    Route::delete('photos/{photo}', 'PhotoController@removePhoto')->name('remove-photo');
+                    Route::get('/move-photo-up/{photo}', 'PhotoController@movePhotoUp')->name('move-photo-up');
+                    Route::get('/move-photo-down/{photo}', 'PhotoController@movePhotoDown')->name('move-photo-down');
+                    Route::post('/moderate', 'ProjectController@moderate')->name('moderate');
+                    Route::get('/reject', 'ProjectController@rejectForm')->name('reject');
+                    Route::post('/reject', 'ProjectController@reject');
+                    Route::post('send-to-moderation', 'ProjectController@sendToModeration')->name('on-moderation');
+                    Route::post('moderate', 'ProjectController@moderate')->name('moderate');
+                    Route::post('activate', 'ProjectController@activate')->name('activate');
+                    Route::post('close', 'ProjectController@close')->name('close');
+
+                    Route::get('values/create', 'ValueController@create')->name('values.add');
+                    Route::post('values', 'ValueController@store')->name('values.store');
+                    Route::group(['prefix' => 'characteristic/{characteristic}', 'as' => 'values.'], function () {
+                        Route::get('', 'ValueController@show')->name('show');
+                        Route::get('edit', 'ValueController@edit')->name('edit');
+                        Route::put('', 'ValueController@update')->name('update');
+                        Route::delete('', 'ValueController@destroy')->name('destroy');
+                        Route::post('first', 'ValueController@first')->name('first');
+                        Route::post('up', 'ValueController@up')->name('up');
+                        Route::post('down', 'ValueController@down')->name('down');
+                        Route::post('last', 'ValueController@last')->name('last');
+                    });
                 });
             });
 

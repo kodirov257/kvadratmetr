@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Projects;
 
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Projects\CharacteristicsResource;
 use Illuminate\Http\Request;

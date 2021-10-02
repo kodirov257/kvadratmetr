@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Projects;
 
-use App\Entity\Projects\Characteristic;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Characteristic;
+use App\Entity\Project\Projects\Project;
 use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Projects\ValueRequest;

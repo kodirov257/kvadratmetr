@@ -2,9 +2,9 @@
 
 namespace App\UseCases\Projects;
 
-use App\Entity\Projects\Characteristic;
-use App\Entity\Projects\Project\Project;
-use App\Entity\Projects\Project\Value;
+use App\Entity\Project\Characteristic;
+use App\Entity\Project\Projects\Project;
+use App\Entity\Project\Projects\Value;
 use App\Http\Requests\Admin\Projects\ValueRequest;
 use Illuminate\Support\Facades\DB;
 

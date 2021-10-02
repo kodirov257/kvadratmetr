@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin\Developers;
 
-use App\Entity\Projects\Developer;
+use App\Entity\Project\Developer;
 use App\Entity\User\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

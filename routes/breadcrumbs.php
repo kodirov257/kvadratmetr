@@ -1,10 +1,10 @@
 <?php
 
-use App\Entity\Projects\Developer;
-use App\Entity\Projects\Facility;
-use App\Entity\Projects\Project\Plan;
-use App\Entity\Projects\Project\Project;
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Developer;
+use App\Entity\Project\Facility;
+use App\Entity\Project\Projects\Plan;
+use App\Entity\Project\Projects\Project;
+use App\Entity\Project\Characteristic;
 use App\Entity\Banner\Banner;
 use App\Entity\Page;
 use App\Entity\Region;
@@ -418,19 +418,26 @@ Breadcrumbs::for('admin.projects.show', function (Crumbs $crumbs, Project $proje
     $crumbs->push($project->name, route('admin.developers.projects.show', ['developer' => $project->developer, 'project' => $project]));
 });
 
-Breadcrumbs::for('admin.projects.values.add', function (Crumbs $crumbs, Project $project) {
+Breadcrumbs::for('admin.project.projects.values.add', function (Crumbs $crumbs, Project $project) {
     $crumbs->parent('admin.projects.show', $project);
-    $crumbs->push(trans('adminlte.create'), route('admin.projects.values.add', $project));
+    $crumbs->push(trans('adminlte.create'), route('admin.project.projects.values.add', $project));
 });
 
-Breadcrumbs::for('admin.projects.values.show', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
+Breadcrumbs::for('admin.project.projects.values.show', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
     $crumbs->parent('admin.projects.show', $project);
-    $crumbs->push($characteristic->name, route('admin.projects.values.show', [$project, $characteristic]));
+    $crumbs->push($characteristic->name, route('admin.project.projects.values.show', [$project, $characteristic]));
 });
 
-Breadcrumbs::for('admin.projects.values.edit', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
-    $crumbs->parent('admin.projects.values.show', $project, $characteristic);
-    $crumbs->push(trans('adminlte.edit'), route('admin.projects.values.edit', [$project, $characteristic]));
+Breadcrumbs::for('admin.project.projects.values.edit', function (Crumbs $crumbs, Project $project, Characteristic $characteristic) {
+    $crumbs->parent('admin.project.projects.values.show', $project, $characteristic);
+    $crumbs->push(trans('adminlte.edit'), route('admin.project.projects.values.edit', [$project, $characteristic]));
+});
+
+// Project Photos
+
+Breadcrumbs::for('admin.project.projects.photo', function (Crumbs $crumbs, Project $project) {
+    $crumbs->parent('admin.projects.show', $project);
+    $crumbs->push(trans('adminlte.create'), route('admin.project.projects.photo', $project));
 });
 
 // Facilities

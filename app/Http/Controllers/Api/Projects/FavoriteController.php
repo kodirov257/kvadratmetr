@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Projects;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Http\Controllers\Controller;
 use App\UseCases\Projects\FavoriteService;
 use Illuminate\Http\Response;

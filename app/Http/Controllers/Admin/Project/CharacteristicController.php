@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Project;
 
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use App\Entity\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Characteristics\CreateRequest;

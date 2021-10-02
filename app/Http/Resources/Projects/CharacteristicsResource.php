@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Projects;
 
 use App\Entity\Category;
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use App\Helpers\LanguageHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 

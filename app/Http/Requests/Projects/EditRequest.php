@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Projects;
 
 use App\Entity\Category;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Region;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

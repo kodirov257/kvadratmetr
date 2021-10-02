@@ -2,7 +2,7 @@
 
 namespace App\Entity\Projects\Project;
 
-use App\Entity\Projects\Developer;
+use App\Entity\Project\Developer;
 use App\Helpers\LanguageHelper;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;

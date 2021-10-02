@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Banner\Banner;
 use App\Entity\Ticket\Ticket;
 use App\Entity\User\User;

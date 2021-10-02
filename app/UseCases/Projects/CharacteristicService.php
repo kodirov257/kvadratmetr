@@ -2,7 +2,7 @@
 
 namespace App\UseCases\Projects;
 
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use Illuminate\Support\Facades\DB;
 
 class CharacteristicService

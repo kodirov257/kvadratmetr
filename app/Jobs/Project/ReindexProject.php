@@ -2,7 +2,7 @@
 
 namespace App\Jobs\Project;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Services\Search\ProjectIndexer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

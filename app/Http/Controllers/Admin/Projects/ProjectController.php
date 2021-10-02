@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Projects;
 
-use App\Entity\Projects\Developer;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Developer;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Region;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;

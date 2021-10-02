@@ -4,8 +4,8 @@
 namespace App\UseCases\Projects;
 
 
-use App\Entity\Projects\Facility;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Facility;
+use App\Entity\Project\Projects\Project;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\Admin\Facilities\CreateRequest;
 use App\Http\Requests\Admin\Facilities\UpdateRequest;

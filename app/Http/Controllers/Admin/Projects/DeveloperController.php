@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Projects;
 
-use App\Entity\Projects\Developer;
+use App\Entity\Project\Developer;
 use App\Entity\User\User;
 use App\Http\Requests\Admin\Developers\CreateRequest;
 use App\Http\Requests\Admin\Developers\UpdateRequest;

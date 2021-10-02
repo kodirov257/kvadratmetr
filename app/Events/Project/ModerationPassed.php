@@ -2,7 +2,7 @@
 
 namespace App\Events\Project;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 

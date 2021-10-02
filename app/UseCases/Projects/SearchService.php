@@ -2,7 +2,7 @@
 
 namespace App\UseCases\Projects;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Category;
 use App\Entity\Region;
 use App\Http\Requests\Projects\SearchRequest;

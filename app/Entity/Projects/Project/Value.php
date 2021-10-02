@@ -2,7 +2,7 @@
 
 namespace App\Entity\Projects\Project;
 
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;

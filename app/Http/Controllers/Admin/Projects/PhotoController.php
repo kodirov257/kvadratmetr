@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Projects;
 
-use App\Entity\Projects\Project\Photo;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Photo;
+use App\Entity\Project\Projects\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Projects\PhotosRequest;
 use App\UseCases\Projects\PhotoService;
