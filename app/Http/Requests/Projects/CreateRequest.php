@@ -43,7 +43,7 @@ class CreateRequest extends FormRequest
             'about_ru' => 'required|string',
             'about_en' => 'required|string',
             'slug' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9-]+$/', 'unique:project_projects'],
-            'category_id' => 'required|numeric|min:1|exists:categories,id',
+//            'category_id' => 'required|numeric|min:1|exists:categories,id',
             'price' => 'required|numeric|min:0',
             'address_uz' => 'required|string|max:255',
             'address_ru' => 'required|string|max:255',

@@ -126,12 +126,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('category_id', trans('adminlte.product.category'), ['class' => 'col-form-label']); !!}
-                            {!! Form::select('category_id', $categories, old('category_id', $project ? $project->category_id : null),
-                                ['class'=>'form-control' . ($errors->has('category_id') ? ' is-invalid' : ''), 'placeholder' => '', 'required' => true]) !!}
-                            @if ($errors->has('category_id'))
-                                <span class="invalid-feedback"><strong>{{ $errors->first('category_id') }}</strong></span>
-                            @endif
+{{--                            {!! Form::label('category_id', trans('adminlte.product.category'), ['class' => 'col-form-label']); !!}--}}
+{{--                            {!! Form::select('category_id', $categories, old('category_id', $project ? $project->category_id : null),--}}
+{{--                                ['class'=>'form-control' . ($errors->has('category_id') ? ' is-invalid' : ''), 'placeholder' => '', 'required' => true]) !!}--}}
+{{--                            @if ($errors->has('category_id'))--}}
+{{--                                <span class="invalid-feedback"><strong>{{ $errors->first('category_id') }}</strong></span>--}}
+{{--                            @endif--}}
                         </div>
                     </div>
 {{--                    <div class="col-md-12">--}}
