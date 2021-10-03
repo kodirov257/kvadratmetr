@@ -8,20 +8,20 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Name</label>
+                            <label for="name" class="col-form-label">{{trans('adminlte.name')}}</label>
                             <input id="name" class="form-control" name="name" value="{{ request('name') }}">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="contact" class="col-form-label">Contact</label>
+                            <label for="contact" class="col-form-label">{{trans('adminlte.contact.title')}}</label>
                             <input id="contact" class="form-control" name="contact" value="{{ request('contact') }}">
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label class="col-form-label">&nbsp;</label><br />
-                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="submit" class="btn btn-primary">{{trans('adminlte.search')}}</button>
                         </div>
                     </div>
                 </div>
@@ -33,10 +33,10 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Contacts</th>
-            <th>Address</th>
-            <th>Landmark</th>
+            <th>{{trans('adminlte.name')}}</th>
+            <th>{{trans('adminlte.contact.title')}}</th>
+            <th>{{trans('adminlte.address')}}</th>
+            <th>{{trans('adminlte.landmark')}}</th>
         </tr>
         </thead>
         <tbody>

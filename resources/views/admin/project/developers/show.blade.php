@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.project.users.developers.edit', [$user, $developer]) }}" class="btn btn-primary mr-1">@lang('adminlte.edit')</a>
-        <a href="{{ route('admin.project.developers.projects.create', $developer) }}" class="btn btn-primary mr-1">Add project</a>
+        <a href="{{ route('admin.project.developers.projects.create', $developer) }}" class="btn btn-primary mr-1">{{trans('adminlte.project.add')}}</a>
 
         <form method="POST" action="{{ route('admin.project.users.developers.destroy', [$user, $developer]) }}" class="mr-1">
             @csrf
@@ -59,21 +59,21 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-primary card-outline">
-                <div class="card-header">{{ trans('adminlte.contact') }}</div>
+                <div class="card-header">{{ trans('adminlte.contact.title') }}</div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <tbody>
                         <tr>
-                            <th>Phone</th>
+                            <th>{{trans('adminlte.contact.number')}}</th>
                             <td>
                                 @if($developer->main_number)
                                     +{{ $developer->main_number }}
                                 @endif
                             </td>
                         </tr>
-                        <tr><th>Call center number</th><td>{{ $developer->call_center }}</td></tr>
-                        <tr><th>Website</th><td>{{ $developer->website }}</td></tr>
-                        <tr><th>Email</th><td>{{ $developer->email }}</td></tr>
+                        <tr><th>{{trans('adminlte.contact.call_center')}}</th><td>{{ $developer->call_center }}</td></tr>
+                        <tr><th>{{trans('adminlte.contact.website')}}</th><td>{{ $developer->website }}</td></tr>
+                        <tr><th>{{trans('adminlte.email')}}</th><td>{{ $developer->email }}</td></tr>
                         <tr><th>Facebook</th><td>{{ $developer->facebook }}</td></tr>
                         <tr><th>Instagram</th><td>{{ $developer->instagram }}</td></tr>
                         <tr><th>Tik-tok</th><td>{{ $developer->tik_tok }}</td></tr>
@@ -117,7 +117,7 @@
     </div>
 
     <div class="card" id="values">
-        <div class="card-header card-gray with-border">{{ trans('adminlte.sale-offices') }}</div>
+        <div class="card-header card-gray with-border">{{ trans('adminlte.sale-offices.name') }}</div>
         <div class="card-body">
             <p><a href="{{ route('admin.project.developers.sale-offices.create', $developer) }}" class="btn btn-success">{{ trans('adminlte.sale-offices.add') }}</a></p>
             <table class="table table-bordered table-striped">

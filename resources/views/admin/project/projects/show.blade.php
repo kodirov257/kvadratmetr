@@ -113,7 +113,7 @@
                     <table class="table {{--table-bordered--}} table-striped projects">
                         <tbody>
                         <tr>
-                            <th>{{ trans('adminlte.developer') }}</th>
+                            <th>{{ trans('adminlte.developer.name') }}</th>
                             <td>
                                 <a href="{{ route('admin.project.users.developers.show', [$developer->owner, $developer]) }}">
                                     {{ $project->developer->name }}
@@ -230,7 +230,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Image</th>
+                    <th>{{trans('adminlte.photo.plural')}}</th>
                     <th>{{ trans('adminlte.area') }}</th>
                     <th>{{ trans('adminlte.area_unit') }}</th>
                     <th>{{ trans('adminlte.rooms') }}</th>

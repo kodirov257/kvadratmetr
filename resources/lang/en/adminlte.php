@@ -4,6 +4,7 @@ return [
 
     'full_name'                   => 'Full name',
     'email'                       => 'Email',
+    'phone'                       => 'Phone number',
     'password'                    => 'Password',
     'retype_password'             => 'Retype password',
     'remember_me'                 => 'Remember Me',
@@ -33,6 +34,8 @@ return [
     'longitude'                   => 'Longitude',
     'latitude'                    => 'Latitude',
     'content'                     => 'Content',
+    'about'                     => 'About',
+    'comment' => 'Comment',
 
     'create' => 'Create',
     'save' => 'Save',
@@ -52,15 +55,31 @@ return [
     'close' => 'Close',
     'inactive' => 'Inactive',
     'active' => 'Active',
+    'landmark' => 'Landmark',
+    'address' => 'Address',
+    'name' => 'Name',
 
     'users' => 'Users',
     'projects' => 'Projects',
 
     'status' => 'Status',
+    'price' => 'Price',
+    'additional' => 'Additional Information',
+    'owner' => 'Owner',
+    'reject_reason' => 'Reason for rejection',
+    'created_at' => 'Created at',
+    'updated_at' => 'Updated at',
+    'others' => 'Other Information',
+
+    'area' => 'Area',
+    'area_unit' => 'Units of area',
+    'rooms' => 'Rooms',
+    'bathroom' => 'Bathroom',
 
     'user' => [
         'name'  => 'Username',
         'profile'  => 'Profile',
+        'verify' => 'User confirmation',
         'add' => 'Add User',
         'role' => 'Role',
         'waiting' => 'Waiting',
@@ -69,4 +88,47 @@ return [
         'role_moderator' => 'Moderator',
         'role_administrator' => 'Administrator',
     ],
+    'developer' => [
+        'create' => 'Create developer',
+        'name' => 'Developer name'
+    ],
+    'contact' => [
+        'title' => 'Contacts',
+        'number' => 'Contact number',
+        'call_center' => 'Call center number',
+        'website' => 'Website',
+    ],
+    'project' => [
+        'add' => 'Add Project',
+        'name' => 'Project Name',
+        'add_photos'=> 'Add Photos',
+    ],
+    'sale-offices' => [
+        'name'=> 'Sales Offices',
+        'add' => 'Add sales offices'
+    ],
+    'value'=>[
+        'add' => 'Add value',
+        'name' => 'Value name',
+    ],
+    'facilities'=>[
+        'add' => 'Add facilities'
+    ],
+    'plan'=>[
+        'add' => 'Add plan',
+        'name' => 'Plan name'
+    ],
+    'characteristic' => [
+        'name' => 'Characteristics'
+    ],
+    'photo' => [
+        'plural' => 'Photos',
+        'add' => 'Add photo'
+    ],
+    'facility'=> [
+        'name' => 'Facility',
+        'add' => 'Add Facility',
+
+    ],
+
 ];

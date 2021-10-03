@@ -1,7 +1,7 @@
 @extends('layouts.admin.page')
 
 @section('content')
-    <p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Add User</a></p>
+    <p><a href="{{ route('admin.users.create') }}" class="btn btn-success">{{ trans('adminlte.user.add') }}</a></p>
 
     <div class="card mb-3">
 {{--        <div class="card-header">Filter</div>--}}
@@ -10,25 +10,25 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Name</label>
+                            <label for="name" class="col-form-label">{{ trans('adminlte.user.name') }}</label>
                             <input id="name" class="form-control" name="name" value="{{ request('name') }}">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="email" class="col-form-label">Email</label>
+                            <label for="email" class="col-form-label">{{ trans('adminlte.email') }}</label>
                             <input id="email" class="form-control" name="email" value="{{ request('email') }}">
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="phone" class="col-form-label">Phone</label>
+                            <label for="phone" class="col-form-label">{{ trans('adminlte.phone') }}</label>
                             <input id="phone" class="form-control" name="phone" value="{{ request('phone') }}">
                         </div>
                     </div>
                     <div class="col-sm-1">
                         <div class="form-group">
-                            <label for="status" class="col-form-label">Status</label>
+                            <label for="status" class="col-form-label">{{ trans('adminlte.status') }}</label>
                             <select id="status" class="form-control" name="status">
                                 <option value=""></option>
                                 @foreach ($statuses as $value => $label)
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
-                            <label for="role" class="col-form-label">Role</label>
+                            <label for="role" class="col-form-label">{{ trans('adminlte.user.role') }}</label>
                             <select id="role" class="form-control" name="role">
                                 <option value=""></option>
                                 @foreach ($roles as $value => $label)
@@ -51,7 +51,7 @@
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label class="col-form-label">&nbsp;</label><br />
-                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="submit" class="btn btn-primary">{{ trans('adminlte.user.role') }}</button>
                         </div>
                     </div>
                 </div>
@@ -63,11 +63,11 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Status</th>
-            <th>Role</th>
+            <th>{{ trans('adminlte.user.name') }}</th>
+            <th>{{ trans('adminlte.email') }}</th>
+            <th>{{ trans('adminlte.phone') }}</th>
+            <th>{{ trans('adminlte.status') }}</th>
+            <th>{{ trans('adminlte.user.role') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -84,10 +84,10 @@
                 </td>
                 <td>
                     @if ($user->isWait())
-                        <span class="badge badge-secondary">Waiting</span>
+                        <span class="badge badge-secondary">{{ trans('adminlte.user.waiting') }}</span>
                     @endif
                     @if ($user->isActive())
-                        <span class="badge badge-primary">Active</span>
+                        <span class="badge badge-primary">{{ trans('adminlte.user.active') }}</span>
                     @endif
                 </td>
                 <td>

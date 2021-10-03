@@ -84,7 +84,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            {!! Form::label('about_en', 'about', ['class' => 'col-form-label']); !!}
+                            {!! Form::label('about_en', 'About', ['class' => 'col-form-label']); !!}
                             {!! Form::textarea('about_en', old('about_en', $developer ? $developer->about_en : null),
                                 ['class' => 'form-control' . $errors->has('about_en') ? ' is-invalid' : '', 'id' => 'about_en', 'rows' => 10]); !!}
                             @if ($errors->has('about_en'))
@@ -143,12 +143,12 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card card-primary card-outline">
-            <div class="card-header"><h3 class="card-title">Contacts</h3></div>
+            <div class="card-header"><h3 class="card-title">{{ trans('adminlte.contact.title') }}</h3></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="main_number" class="col-form-label">Contact number</label>
+                            <label for="main_number" class="col-form-label">{{ trans('adminlte.contact.number') }}</label>
                             <input id="main_number" class="form-control{{ $errors->has('main_number') ? ' is-invalid' : '' }}" name="main_number" value="{{ old('main_number', $developer ? $developer->main_number : null) }}">
                             @if ($errors->has('main_number'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('main_number') }}</strong></span>
@@ -158,7 +158,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="call_center" class="col-form-label">Call center number</label>
+                            <label for="call_center" class="col-form-label">{{ trans('adminlte.contact.call_center') }}</label>
                             <input id="call_center" class="form-control{{ $errors->has('call_center') ? ' is-invalid' : '' }}" name="call_center" value="{{ old('call_center', $developer ? $developer->call_center : null) }}">
                             @if ($errors->has('call_center'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('call_center') }}</strong></span>
@@ -168,7 +168,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="website" class="col-form-label">Website</label>
+                            <label for="website" class="col-form-label">{{ trans('adminlte.contact.website') }}</label>
                             <input id="website" type="text" class="form-control{{ $errors->has('website') ? ' is-invalid' : '' }}" name="website" value="{{ old('website', $developer ? $developer->website : null) }}">
                             @if ($errors->has('website'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('website') }}</strong></span>

@@ -7,6 +7,6 @@
         @include('partials.admin._nav')
         @include ('partials.admin.flash')
 
-        @include('admin.projects.developers._form', ['user' => $user, 'developer' => null])
+        @include('admin.project.developers._form', ['user' => $user, 'developer' => null])
     </form>
 @endsection

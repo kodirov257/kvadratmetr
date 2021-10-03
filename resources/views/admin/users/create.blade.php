@@ -9,7 +9,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name" class="col-form-label">Name</label>
+                            <label for="name" class="col-form-label">{{ trans('adminlte.user.name') }}</label>
                             <input id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
                             @if ($errors->has('name'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong></span>
@@ -17,7 +17,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-form-label">E-Mail Address</label>
+                            <label for="email" class="col-form-label">{{ trans('adminlte.email') }}</label>
                             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('email') }}</strong></span>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="phone" class="col-form-label">Phone</label>
+                            <label for="phone" class="col-form-label">{{ trans('adminlte.phone') }}</label>
                             <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
                             @if ($errors->has('phone'))
                                 <span class="invalid-feedback"><strong>{{ $errors->first('phone') }}</strong></span>
@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="role" class="col-form-label">Role</label>
+                            <label for="role" class="col-form-label">{{ trans('adminlte.user.role') }}</label>
                             <select id="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
                                 @foreach ($roles as $value => $label)
                                     <option value="{{ $value }}">{{ $label }}</option>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{{ trans('adminlte.save') }}</button>
         </div>
     </form>
 @endsection

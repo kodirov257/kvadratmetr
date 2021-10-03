@@ -170,13 +170,13 @@
 
 <div class="card mb-3">
     <div class="card-header">
-        Common
+        {{trans('adminlte.common')}}
     </div>
     <div class="card-body pb-2">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="price" class="col-form-label">Price</label>
+                    <label for="price" class="col-form-label">{{trans('adminlte.price')}}</label>
                     <input id="price" type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" value="{{ old('price', $project ? $project->price : null) }}" required>
                     @if ($errors->has('price'))
                         <span class="invalid-feedback"><strong>{{ $errors->first('price') }}</strong></span>
