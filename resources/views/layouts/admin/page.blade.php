@@ -265,6 +265,30 @@
             <!-- <div class="header-panel">
             </div> -->
         </header>
+        <sidebar class="sidebar">
+            <div id="accordian" class="sidebar-mainbuttons">
+                <ul class="show-dropdown">
+                    <li><a href="javascript:void(0);"><i class="icon-dash-icon"></i>Dashboard</a></li>
+                    <li class="active">
+                        <a href="javascript:void(0);"><i class="icon-content"></i>Content</a>
+                        <ul class="show-dropdown">
+                            <li class="active">
+                                <a href="javascript:void(0);"><i class="icon-buildings"></i>NRG Group</a>
+                                <ul class="show-dropdown">
+                                    <li><a href="javascript:void(0);">NRG Oybek</a></li>
+                                    <li class="active"><a href="javascript:void(0);">NRG Mirzo Ulugbek</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);"><i class="icon-insight"></i>Insights</a></li>
+                    <li><a href="javascript:void(0);"><i class="icon-marketing"></i>Marketing</a></li>
+                    <li><a href="javascript:void(0);"><i class="icon-lead"></i>Lead Manager</a></li>
+                    <li class="sidebar__settings"><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                    <li class="sidebar__support"><a href="javascript:void(0);"><i class="icon-help"></i>Support</a></li>
+                </ul>
+            </div>
+        </sidebar>
 
             <div class="content-wrapper">
                 @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
