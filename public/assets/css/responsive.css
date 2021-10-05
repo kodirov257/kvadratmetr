@@ -1,0 +1,138 @@
+@media(max-width: 1380px) {
+  .header .row .col-3.wid-345 {
+    width: 280px;
+  }
+  .header-profile__search {
+    width: 260px;
+  }
+}
+
+@media(max-width: 1199px) {
+  .header {
+    padding: 15px 30px;
+  }
+  .header-breadcrumb__link {
+    font-size: 14px;
+  }
+  .header .row .col-3.wid-345 {
+    width: auto;
+  }
+  .header-profile__search {
+    width: 200px;
+  }
+  .header-breadcrumb__link i {
+    display: none;
+  }
+  .header-profile__photo {
+    margin-left: 15px;
+    width: 40px;
+    height: 40px;
+  }
+  #accordian {
+    width: 260px;
+  }
+  .main-content {
+    padding-right: 25px;
+    padding-left: 285px;
+  }
+  .booster-foot__items {
+    flex-wrap: wrap;
+  }
+  .card {
+    padding: 20px;
+  }
+  .booster-card__title {
+    font-size: 26px;
+  }
+  .booster {
+    margin-bottom: 15px;
+  }
+  .pricement-title, .other-title {
+    font-size: 18px;
+  }
+  .pricement-item {
+    padding: 15px;
+  }
+  .client-leads-page {
+    margin: 15px;
+    padding: 18px;
+  }
+  .client-leads-page__options {
+    margin-right: 15px;
+  }
+  .client-leads-main {
+    margin: 15px;
+  }
+  .users__table th, .users__table td {
+    padding: 8px 10px;
+  }
+  .client-leads__table {
+    margin: 30px 0;
+  }
+  .pagin__span, .pagin__input, .pagin__btn {
+    display: none;
+  }
+  .pagination a.marright {
+    margin-right: 0;
+  }
+  .client-leads__icons {
+    width: 100%;
+  }
+  .client-leads__icon {
+    padding: 0 15px;
+  }
+  .b-nav {
+    margin: 25px 0;
+  }
+  .b-nav-tab {
+    margin-right: 20px;
+    font-size: 14px;
+  }
+  .info__about {
+    margin-top: 30px;
+  }
+  .info__about-text {
+    padding: 20px;
+  }
+  .info__text-main {
+    font-size: 18px;
+  }
+  .info__text {
+    font-size: 14px;
+    padding-right: 60px;
+  }
+  .save__infos {
+    margin-top: 25px;
+  }
+  .toolbar-address__location,
+  .card-toolbar-connecting a,
+  .card-toolbar-internet a,
+  .card-toolbar-mail a {
+    font-size: 14px;
+  }
+  .card-toolbar__title {
+    font-size: 20px;
+  }
+  .provinces-info, .demographics-project-info {
+    padding: 15px;
+  }
+  .provinces-info__page, .demographics-project-info__page {
+    flex-direction: column;
+  }
+  .provinces-info__page:not(:last-child), .demographics-project-info__page:not(:last-child) {
+    margin-bottom: 25px;
+  }
+  .demographics-filter__select {
+    width: 100%;
+  }
+  .provinces_bottom, .demographics-projects_bottom {
+    padding: 15px 0 18px;
+  }
+  .marketing-connect {
+    flex-direction: column;
+  }
+  .marketing-connect__link:not(:last-child) {
+    margin-right: 0px;
+    margin-bottom: 15px;
+  }
+}

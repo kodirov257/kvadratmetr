@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Прямоугольник_1692" data-name="Прямоугольник 1692" width="20" height="20" transform="translate(378 2318)" fill="#d4d4d4"/>
+    </clipPath>
+  </defs>
+  <g id="Группа_масок_151" data-name="Группа масок 151" transform="translate(-378 -2318)" clip-path="url(#clip-path)">
+    <path id="Next_to_you_Queen_Квартиры_в_аренду_в_г._Majorstuen_Осло_Норвегия-20" data-name="Next to you Queen — Квартиры в аренду в г. Majorstuen, Осло, Норвегия-20" d="M18.429,2.571a1.429,1.429,0,0,1,1.425,1.321l0,.107V9.6l1.319,3.955a2.142,2.142,0,0,1,.082.334l.021.171.006.171v6.911H19.857V19.714H2.714v1.429H1.286V14.232a2.142,2.142,0,0,1,.062-.512l.048-.166L2.714,9.6V4A1.429,1.429,0,0,1,3.926,2.588l.11-.013.106,0Zm1.429,12.857H2.714v2.857H19.857Zm-.991-4.286H3.7L2.753,14H19.818ZM18.429,4H4.143V9.714H5.571V6.857A1.429,1.429,0,0,1,6.893,5.432l.107,0h8.571A1.429,1.429,0,0,1,17,6.75l0,.107V9.714h1.429ZM10.571,6.857H7V9.714h3.571Zm5,0H12V9.714h3.571Z" transform="translate(376.714 2316.143)"/>
+  </g>
+</svg>
