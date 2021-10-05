@@ -2,7 +2,7 @@
 
 namespace App\Entity\User;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;

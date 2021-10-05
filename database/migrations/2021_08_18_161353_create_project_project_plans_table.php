@@ -21,6 +21,7 @@ class CreateProjectProjectPlansTable extends Migration
             $table->integer('rooms');
             $table->integer('bathroom');
             $table->string('image');
+            $table->integer('sort')->default(1000);
             $table->unsignedInteger('impressions')->default(0);
             $table->unsignedInteger('clicks')->default(0);
             $table->unsignedInteger('leads')->default(0);

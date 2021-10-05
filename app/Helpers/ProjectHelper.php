@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use App\Entity\Category;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Region;
 use Illuminate\Support\Collection;
 

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\UseCases\Projects\ProjectService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

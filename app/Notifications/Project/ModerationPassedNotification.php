@@ -2,7 +2,7 @@
 
 namespace App\Notifications\Project;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Notifications\SmsChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

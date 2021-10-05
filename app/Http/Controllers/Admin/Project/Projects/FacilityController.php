@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Project\Projects;
 
-use App\Entity\Projects\Facility;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Facility;
+use App\Entity\Project\Projects\Project;
 use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
 use App\UseCases\Projects\FacilityService;

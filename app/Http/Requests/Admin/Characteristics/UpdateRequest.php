@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin\Characteristics;
 
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use App\Entity\User\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

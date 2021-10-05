@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Projects;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Projects\CharacteristicsRequest;
 use App\Http\Requests\Projects\EditRequest;

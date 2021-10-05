@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\BaseModel;
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Characteristic;
 use App\Entity\User\User;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;

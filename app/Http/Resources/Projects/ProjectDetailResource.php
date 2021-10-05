@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Projects;
 
-use App\Entity\Projects\Project\Photo;
-use App\Entity\Projects\Project\Value;
-use App\Entity\Projects\Characteristic;
+use App\Entity\Project\Projects\Photo;
+use App\Entity\Project\Projects\Value;
+use App\Entity\Project\Characteristic;
 use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;

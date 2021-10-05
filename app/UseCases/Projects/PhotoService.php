@@ -2,16 +2,16 @@
 
 namespace App\UseCases\Projects;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Helpers\ImageHelper;
-use App\Http\Requests\Projects\PhotosRequest;
+use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PhotoService
 {
-    public function addPhoto(int $id, UploadedFile $image, bool $main = false): void
+    public function addPhoto(int $id, UploadedFile $image): void
     {
         $project = Project::findOrFail($id);
 
@@ -19,44 +19,21 @@ class PhotoService
 
         DB::beginTransaction();
         try {
-            if (!$main) {
-                $photo = $project->photos()->create([
-                    'product_id' => $project->id,
-                    'file' => $imageName,
-                    'sort' => 100,
-                ]);
+            $photo = $project->photos()->create([
+                'project_id' => $project->id,
+                'file' => $imageName,
+                'sort' => 100,
+            ]);
 
-                $this->sortPhotos($project);
-            } else {
-                $photo = $project->mainPhoto()->create([
-                    'product_id' => $project->id,
-                    'file' => $imageName,
-                    'sort' => 1,
-                ]);
-                $project->update(['main_photo_id' => $photo->id, 'status' => Project::STATUS_MODERATION]);
-            }
+            $this->sortPhotos($project);
 
             ImageHelper::uploadResizedImage($project->id, ImageHelper::FOLDER_PROJECTS, $image, $imageName);
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             throw $e;
         }
-    }
-
-    public function addPhotos($id, PhotosRequest $request): void
-    {
-        $project = Project::findOrFail($id);
-
-        DB::transaction(function () use ($request, $project) {
-            foreach ($request['files'] as $file) {
-                $project->photos()->create([
-                    'file' => $file->store('projects', 'public')
-                ]);
-            }
-            $project->update();
-        });
     }
 
     public function removePhoto(int $id, int $photoId): bool
@@ -64,7 +41,7 @@ class PhotoService
         $project = Project::findOrFail($id);
 
         if ($project->main_photo_id === $photoId) {
-            throw new \Exception('Cannot delete main photo.');
+            throw new Exception('Cannot delete main photo.');
         }
 
         $photo = $project->photos()->findOrFail($photoId);
@@ -79,7 +56,7 @@ class PhotoService
             DB::commit();
 
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             throw $e;
         }
@@ -105,7 +82,7 @@ class PhotoService
                 try {
                     $this->sortPhotos($project);
                     DB::commit();
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     DB::rollBack();
                     throw $e;
                 }
@@ -134,7 +111,7 @@ class PhotoService
                 try {
                     $this->sortPhotos($project);
                     DB::commit();
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     DB::rollBack();
                     throw $e;
                 }
@@ -151,9 +128,9 @@ class PhotoService
         }
     }
 
-    private function deletePhotos(int $productId, string $filename)
+    private function deletePhotos(int $projectId, string $filename)
     {
-        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $productId . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $filename);
-        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $productId . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $filename);
+        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $projectId . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $filename);
+        Storage::disk('public')->delete('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $projectId . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $filename);
     }
 }

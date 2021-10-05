@@ -4,8 +4,8 @@
 namespace App\UseCases\Projects;
 
 
-use App\Entity\Projects\Facility;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Facility;
+use App\Entity\Project\Projects\Project;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\Admin\Facilities\CreateRequest;
 use App\Http\Requests\Admin\Facilities\UpdateRequest;
@@ -234,9 +234,9 @@ class FacilityService
         return Storage::disk('public')->deleteDirectory('/files/' . ImageHelper::FOLDER_FACILITIES . '/' . $facility->id) && $facility->update(['icon' => null]);
     }
 
-    private function uploadIcon(int $brandId, UploadedFile $icon, string $imageName)
+    private function uploadIcon(int $facilityId, UploadedFile $icon, string $iconName)
     {
-        ImageHelper::saveThumbnail($brandId, ImageHelper::FOLDER_FACILITIES, $icon, $imageName);
-        ImageHelper::saveOriginal($brandId, ImageHelper::FOLDER_FACILITIES, $icon, $imageName);
+        ImageHelper::saveThumbnail($facilityId, ImageHelper::FOLDER_FACILITIES, $icon, $iconName);
+        ImageHelper::saveOriginal($facilityId, ImageHelper::FOLDER_FACILITIES, $icon, $iconName);
     }
 }

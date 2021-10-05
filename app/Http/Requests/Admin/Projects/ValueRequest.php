@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Admin\Projects;
 
-use App\Entity\Projects\Characteristic;
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Characteristic;
+use App\Entity\Project\Projects\Project;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

@@ -24,4 +24,5 @@ return [
     'characteristics' => 'Characteristics',
     'values' => 'Values',
     'facilities' => 'Facilities',
+    'sale-offices' => 'Sale offices',
 ];

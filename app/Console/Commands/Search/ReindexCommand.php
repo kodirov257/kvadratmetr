@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Search;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Banner\Banner;
 use App\Services\Search\ProjectIndexer;
 use App\Services\Search\BannerIndexer;

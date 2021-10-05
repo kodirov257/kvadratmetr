@@ -24,4 +24,5 @@ return [
     'characteristics' => 'Xususiyatlar',
     'values' => 'Qiymat',
     'facilities' => 'Qiymat',
+    'sale-offices' => 'Sotish ofislari',
 ];

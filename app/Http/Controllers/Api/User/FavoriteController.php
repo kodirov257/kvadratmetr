@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use App\Entity\Projects\Project\Project;
+use App\Entity\Project\Projects\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Projects\ProjectDetailResource;
 use App\UseCases\Projects\FavoriteService;

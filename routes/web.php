@@ -97,6 +97,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('facilities/{facility}/remove-icon', 'FacilityController@removeIcon')->name('remove-icon');
 
                 Route::resource('characteristics', 'CharacteristicController');
+                Route::resource('sale-offices', 'SaleOfficeController');
 
                 Route::group(['prefix' => 'characteristics/{characteristic}', 'as' => 'characteristics.'], function () {
                     Route::post('/first', 'CharacteristicController@first')->name('first');
@@ -115,56 +116,53 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                         Route::post('/down', 'FacilityController@down')->name('down');
                         Route::post('/last', 'FacilityController@last')->name('last');
                     });
+
+                    Route::resource('plans', 'PlanController');
+                    Route::group(['prefix' => 'plans/{plan}', 'as' => 'plans.'], function () {
+                        Route::post('remove-image', 'PlanController@removeImage')->name('remove-image');
+                        Route::post('first', 'PlanController@first')->name('first');
+                        Route::post('up', 'PlanController@up')->name('up');
+                        Route::post('down', 'PlanController@down')->name('down');
+                        Route::post('last', 'PlanController@last')->name('last');
+                    });
+
+                    Route::get('/photo', 'PhotoController@addForm')->name('photo');
+                    Route::post('/photo', 'PhotoController@addPhoto')->name('add-photo');
+                    Route::delete('photos/{photo}', 'PhotoController@removePhoto')->name('remove-photo');
+                    Route::get('/move-photo-up/{photo}', 'PhotoController@movePhotoUp')->name('move-photo-up');
+                    Route::get('/move-photo-down/{photo}', 'PhotoController@movePhotoDown')->name('move-photo-down');
+                    Route::post('/moderate', 'ProjectController@moderate')->name('moderate');
+                    Route::get('/reject', 'ProjectController@rejectForm')->name('reject');
+                    Route::post('/reject', 'ProjectController@reject');
+                    Route::post('send-to-moderation', 'ProjectController@sendToModeration')->name('on-moderation');
+                    Route::post('moderate', 'ProjectController@moderate')->name('moderate');
+                    Route::post('activate', 'ProjectController@activate')->name('activate');
+                    Route::post('close', 'ProjectController@close')->name('close');
+
+                    Route::get('values/create', 'ValueController@create')->name('values.add');
+                    Route::post('values', 'ValueController@store')->name('values.store');
+                    Route::group(['prefix' => 'characteristic/{characteristic}', 'as' => 'values.'], function () {
+                        Route::get('', 'ValueController@show')->name('show');
+                        Route::get('edit', 'ValueController@edit')->name('edit');
+                        Route::put('', 'ValueController@update')->name('update');
+                        Route::delete('', 'ValueController@destroy')->name('destroy');
+                        Route::post('first', 'ValueController@first')->name('first');
+                        Route::post('up', 'ValueController@up')->name('up');
+                        Route::post('down', 'ValueController@down')->name('down');
+                        Route::post('last', 'ValueController@last')->name('last');
+                    });
                 });
-            });
 
-            Route::group(['prefix' => 'projects/{project}', 'as' => 'projects.', 'namespace' => 'Projects'], function () {
-
-
-
-//                Route::get('/', 'ProjectController@index')->name('index');
-//                Route::get('/edit', 'ProjectController@edit')->name('edit');
-//                Route::put('/update', 'ProjectController@update')->name('update');
-                Route::get('/photos', 'PhotoController@addForm')->name('photos');
-                Route::post('/photos', 'PhotoController@addPhoto')->name('add-photo');
-                Route::post('/photos', 'PhotoController@addPhotos')->name('add-photos');
-                Route::delete('photos/{photo}', 'PhotoController@removePhoto')->name('remove-photo');
-                Route::get('/move-photo-up/{photo}', 'PhotoController@movePhotoUp')->name('move-photo-up');
-                Route::get('/move-photo-down/{photo}', 'PhotoController@movePhotoDown')->name('move-photo-down');
-                Route::get('/characteristics', 'ProjectController@characteristicsForm')->name('characteristics');
-                Route::post('/characteristics', 'ProjectController@characteristics');
-                Route::post('/moderate', 'ProjectController@moderate')->name('moderate');
-                Route::get('/reject', 'ProjectController@rejectForm')->name('reject');
-                Route::post('/reject', 'ProjectController@reject');
-                Route::post('send-to-moderation', 'ProjectController@sendToModeration')->name('on-moderation');
-                Route::post('moderate', 'ProjectController@moderate')->name('moderate');
-                Route::post('activate', 'ProjectController@activate')->name('activate');
-                Route::post('close', 'ProjectController@close')->name('close');
-//                Route::delete('/destroy', 'ProjectController@destroy')->name('destroy');
-
-                Route::get('values/create', 'ValueController@create')->name('values.add');
-                Route::post('values', 'ValueController@store')->name('values.store');
-                Route::group(['prefix' => 'characteristic/{characteristic}', 'as' => 'values.'], function () {
-                    Route::get('', 'ValueController@show')->name('show');
-                    Route::get('edit', 'ValueController@edit')->name('edit');
-                    Route::put('', 'ValueController@update')->name('update');
-                    Route::delete('', 'ValueController@destroy')->name('destroy');
-                    Route::post('first', 'ValueController@first')->name('first');
-                    Route::post('up', 'ValueController@up')->name('up');
-                    Route::post('down', 'ValueController@down')->name('down');
-                    Route::post('last', 'ValueController@last')->name('last');
+                Route::get('projects', 'Projects\ProjectController@index')->name('projects.index');
+                Route::group(['prefix' => 'developers/{developer}', 'as' => 'developers.'], function () {
+                    Route::resource('projects', 'Projects\ProjectController')->except('index');
+                    Route::resource('sale-offices', 'SaleOfficeController')->except('index');
                 });
-            });
-//            Route::resource('projects', 'Projects\ProjectController');
 
-            Route::get('projects', 'Projects\ProjectController@index')->name('projects.index');
-            Route::group(['prefix' => 'developers/{developer}', 'as' => 'developers.'], function () {
-                Route::resource('projects', 'Projects\ProjectController')->except('index');
-            });
-
-            Route::get('developers', 'Projects\DeveloperController@index')->name('developers.index');
-            Route::group(['prefix' => 'users/{user}', 'as' => 'users.'], function () {
-                Route::resource('developers', 'Projects\DeveloperController')->except('index');
+                Route::get('developers', 'DeveloperController@index')->name('developers.index');
+                Route::group(['prefix' => 'users/{user}', 'as' => 'users.'], function () {
+                    Route::resource('developers', 'DeveloperController')->except('index');
+                });
             });
 
             Route::group(['prefix' => 'banners', 'as' => 'banners.'], function () {

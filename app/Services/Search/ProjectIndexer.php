@@ -2,8 +2,8 @@
 
 namespace App\Services\Search;
 
-use App\Entity\Projects\Project\Project;
-use App\Entity\Projects\Project\Value;
+use App\Entity\Project\Projects\Project;
+use App\Entity\Project\Projects\Value;
 use Elasticsearch\Client;
 
 class ProjectIndexer
