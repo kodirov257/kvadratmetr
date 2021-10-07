@@ -241,6 +241,7 @@
 {{--                    </div>--}}
 {{--                </aside>--}}
 {{--            @endif--}}
+{{--        @dd($adminlte->menu())--}}
 
         <header class="header">
             <div class="row align-items-center justify-content-between">
@@ -268,15 +269,15 @@
         <sidebar class="sidebar">
             <div id="accordian" class="sidebar-mainbuttons">
                 <ul class="show-dropdown">
-                    <li><a href="javascript:void(0);"><i class="icon-dash-icon"></i>Dashboard</a></li>
+                    <li><a href="#"><i class="icon-dash-icon"></i>Dashboard</a></li>
                     <li class="active">
-                        <a href="javascript:void(0);"><i class="icon-content"></i>Content</a>
+                        <a href="#"><i class="icon-content"></i>Content</a>
                         <ul class="show-dropdown">
                             <li class="active">
-                                <a href="javascript:void(0);"><i class="icon-buildings"></i>NRG Group</a>
+                                <a href="#"><i class="icon-buildings"></i>NRG Group</a>
                                 <ul class="show-dropdown">
-                                    <li><a href="javascript:void(0);">NRG Oybek</a></li>
-                                    <li class="active"><a href="javascript:void(0);">NRG Mirzo Ulugbek</a></li>
+                                    <li><a href="#">NRG Oybek</a></li>
+                                    <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>
                                 </ul>
                             </li>
                         </ul>
