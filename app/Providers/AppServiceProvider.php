@@ -11,7 +11,15 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        //
+        view()->composer('*', function ($view){
+            $gUserExists = \Auth::user();
+
+//            if ($gUserExists){
+                $view->with(compact(['gUserExists']));
+//            }
+
+
+        });
     }
 
     public function register(): void
@@ -20,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $config = $app->make('config')->get('banner');
             return new CostCalculator($config['price']);
         });
+
 
         Passport::ignoreMigrations();
     }

@@ -241,7 +241,7 @@
 {{--                    </div>--}}
 {{--                </aside>--}}
 {{--            @endif--}}
-{{--        @dd($adminlte->menu())--}}
+{{--        @dd($gUserExists)--}}
 
         <header class="header">
             <div class="row align-items-center justify-content-between">
