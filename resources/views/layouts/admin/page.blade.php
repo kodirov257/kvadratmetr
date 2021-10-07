@@ -272,15 +272,15 @@
                     <li><a href="#"><i class="icon-dash-icon"></i>Dashboard</a></li>
                     <li class="active">
                         <a href="#"><i class="icon-content"></i>Content</a>
-                        <ul class="show-dropdown">
-                            <li class="active">
-                                <a href="#"><i class="icon-buildings"></i>NRG Group</a>
-                                <ul class="show-dropdown">
-                                    <li><a href="#">NRG Oybek</a></li>
-                                    <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+{{--                        <ul class="show-dropdown">--}}
+{{--                            <li class="active">--}}
+{{--                                <a href="#"><i class="icon-buildings"></i>NRG Group</a>--}}
+{{--                                <ul class="show-dropdown">--}}
+{{--                                    <li><a href="#">NRG Oybek</a></li>--}}
+{{--                                    <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>--}}
+{{--                                </ul>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
                     </li>
                     <li><a href="javascript:void(0);"><i class="icon-insight"></i>Insights</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-marketing"></i>Marketing</a></li>
