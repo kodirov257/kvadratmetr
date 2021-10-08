@@ -7,6 +7,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{asset('./assets/css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('./assets/css/responsive.css')}}">
 
     <title>Projects</title>
     @yield('meta')
@@ -15,6 +17,53 @@
     <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
 </head>
 <body id="app">
+<header class="header">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-3 wid-345">
+            <div class="header-logo"><img class="header-logo__image" src="{{asset('./assets/img/Logo.svg')}}" alt="logotip image"></div>
+        </div>
+        <div class="col-auto">
+            @section('breadcrumbs', Breadcrumbs::render())
+            @yield('breadcrumbs')
+        </div>
+        <div class="col">
+            <div class="header-profile">
+                <div class="header-profile__search">
+                    <i class="icon-search"></i>
+                    <input type="text" class="header-profile__input">
+                </div>
+                <button class="header-profile__notifications"><i class="icon-ring"></i></button>
+                <img class="header-profile__photo" src="{{asset('assets/img/profile-img.svg')}}">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="header-panel">
+    </div> -->
+</header>
+<sidebar class="sidebar">
+    <div id="accordian" class="sidebar-mainbuttons">
+        <ul class="show-dropdown">
+            <li><a href="#"><i class="icon-dash-icon"></i>Dashboard</a></li>
+            <li class="active">
+                <a href="#"><i class="icon-content"></i>Content</a>
+{{--                <ul class="show-dropdown">--}}
+{{--                    <li class="active">--}}
+{{--                        <a href="#"><i class="icon-buildings"></i>NRG Group</a>--}}
+{{--                        <ul class="show-dropdown">--}}
+{{--                            <li><a href="#">NRG Oybek</a></li>--}}
+{{--                            <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+            </li>
+            <li><a href="javascript:void(0);"><i class="icon-insight"></i>Insights</a></li>
+            <li><a href="javascript:void(0);"><i class="icon-marketing"></i>Marketing</a></li>
+            <li><a href="javascript:void(0);"><i class="icon-lead"></i>Lead Manager</a></li>
+            <li class="sidebar__settings"><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+            <li class="sidebar__support"><a href="javascript:void(0);"><i class="icon-help"></i>Support</a></li>
+        </ul>
+    </div>
+</sidebar>
 
 
 {{--    <header>--}}
@@ -103,6 +152,11 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js', 'build') }}"></script>
+
+<script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('/assets/js/main.js') }}"></script>
+<script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js" integrity="sha256-HmfY28yh9v2U4HfIXC+0D6HCdWyZI42qjaiCFEJgpo0=" crossorigin="anonymous"></script>
     @yield('scripts')
 </body>
 </html>

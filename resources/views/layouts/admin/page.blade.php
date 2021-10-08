@@ -43,9 +43,9 @@
 {{--@section('body_data',--}}
 {{--(config('adminlte.sidebar_scrollbar_theme', 'os-theme-light') != 'os-theme-light' ? 'data-scrollbar-theme=' . config('adminlte.sidebar_scrollbar_theme')  : '') . ' ' . (config('adminlte.sidebar_scrollbar_auto_hide', 'l') != 'l' ? 'data-scrollbar-auto-hide=' . config('adminlte.sidebar_scrollbar_auto_hide')   : ''))--}}
 
-@php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
-@php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )
-@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
+{{--@php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )--}}
+{{--@php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )--}}
+{{--@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )--}}
 
 {{--@if (config('adminlte.use_route_url', false))--}}
 {{--    @php( $logout_url = $logout_url ? route($logout_url) : '' )--}}
@@ -241,7 +241,7 @@
 {{--                    </div>--}}
 {{--                </aside>--}}
 {{--            @endif--}}
-{{--        @dd($gUserExists)--}}
+{{--        @dd(Route::getRoutes())--}}
 
         <header class="header">
             <div class="row align-items-center justify-content-between">
@@ -259,7 +259,7 @@
                             <input type="text" class="header-profile__input">
                         </div>
                         <button class="header-profile__notifications"><i class="icon-ring"></i></button>
-                        <img class="header-profile__photo" src="assets/img/profile-img.svg">
+                        <img class="header-profile__photo" src="{{asset('assets/img/profile-img.svg')}}">
                     </div>
                 </div>
             </div>
@@ -272,15 +272,15 @@
                     <li><a href="#"><i class="icon-dash-icon"></i>Dashboard</a></li>
                     <li class="active">
                         <a href="#"><i class="icon-content"></i>Content</a>
-{{--                        <ul class="show-dropdown">--}}
-{{--                            <li class="active">--}}
-{{--                                <a href="#"><i class="icon-buildings"></i>NRG Group</a>--}}
-{{--                                <ul class="show-dropdown">--}}
-{{--                                    <li><a href="#">NRG Oybek</a></li>--}}
-{{--                                    <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
+                        <ul class="show-dropdown">
+                            <li class="active">
+                                <a href="#"><i class="icon-buildings"></i>NRG Group</a>
+                                <ul class="show-dropdown">
+                                    <li><a href="#">NRG Oybek</a></li>
+                                    <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li><a href="javascript:void(0);"><i class="icon-insight"></i>Insights</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-marketing"></i>Marketing</a></li>
