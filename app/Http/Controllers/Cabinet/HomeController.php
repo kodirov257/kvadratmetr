@@ -8,6 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+//        dd('salom');
         return view('cabinet.home');
     }
 }

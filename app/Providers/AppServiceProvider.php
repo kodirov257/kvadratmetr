@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Entity\Project\Developer;
+use App\Entity\Project\Projects\Project;
 use App\Services\Banner\CostCalculator;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -13,9 +16,16 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view){
             $gUserExists = \Auth::user();
+            $locale = App::getLocale();
+//            dd($locale);
+            if ($gUserExists) {
+                $developer = Developer::where('owner_id', $gUserExists->id)->get()->first();
+                $view->with(compact(['gUserExists', 'locale', 'developer']));
 
+            }
+//            dd();
 //            if ($gUserExists){
-                $view->with(compact(['gUserExists']));
+                $view->with(compact(['gUserExists', 'locale']));
 //            }
 
 

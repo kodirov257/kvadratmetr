@@ -241,7 +241,7 @@
 {{--                    </div>--}}
 {{--                </aside>--}}
 {{--            @endif--}}
-{{--        @dd(Route::getRoutes())--}}
+        @dd(Route::getRoutes())
 
         <header class="header">
             <div class="row align-items-center justify-content-between">

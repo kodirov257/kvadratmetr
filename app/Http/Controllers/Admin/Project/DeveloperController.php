@@ -74,6 +74,7 @@ class DeveloperController extends Controller
 
     public function show(User $user, Developer $developer)
     {
+//        dd($developer);
         return view('admin.project.developers.show', compact('user', 'developer'));
     }
 

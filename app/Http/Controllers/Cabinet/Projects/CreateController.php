@@ -22,8 +22,14 @@ class CreateController extends Controller
     public function category()
     {
         $categories = Category::defaultOrder()->withDepth()->get()->toTree();
+//        dd($categories);
 
         return view('cabinet.projects.create.category', compact('categories'));
+    }
+
+    public function create(){
+//        dd('salom');
+        return view('cabinet.projects.create.create_project');
     }
 
     public function region(Category $category, Region $region = null)
