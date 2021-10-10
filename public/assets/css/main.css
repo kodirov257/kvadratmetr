@@ -742,6 +742,9 @@ ol {
     border: 1px solid #0071C5;
     border-radius: 4px;
 }
+.adding-new-project:hover {
+    color: white;
+}
 
 .project-card__footer {
     padding: 10px 15px;

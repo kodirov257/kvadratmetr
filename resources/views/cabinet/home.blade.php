@@ -122,7 +122,7 @@
                                     Construction companies can add their own Newly Built
                                     Projects
                                 </p>
-                                <a href="{{ route('cabinet.projects.create' }}" class="adding-new-project">
+                                <a href="{{ route('cabinet.projects.create') }}" class="adding-new-project">
                                     New Project
                                 </a>
 

@@ -217,6 +217,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         function () {
             Route::get('/', 'HomeController@index')->name('home');
 
+
+
             Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
                 Route::get('/', 'ProfileController@index')->name('home');
                 Route::get('/edit', 'ProfileController@edit')->name('edit');
@@ -240,8 +242,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 'namespace' => 'Projects',
 //            'middleware' => [App\Http\Middleware\FilledProfile::class],
             ], function () {
-                Route::get('/', 'ProjectController@index')->name('index');
-                Route::get('/create', 'CreateController@create')->name('create');
+//                Route::get('/', 'ProjectController@index')->name('index');
+                Route::resource('', 'ProjectController');
+
+//                Route::get('/create', 'CreateController@create')->name('create');
                 Route::get('/create/region/{category}/{region?}', 'CreateController@region')->name('create.region');
                 Route::get('/create/project/{category}/{region?}', 'CreateController@project')->name('create.project');
                 Route::post('/create/project/{category}/{region?}', 'CreateController@store')->name('create.project.store');
