@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Project;
 use App\Entity\Banner\Banner;
 use App\Entity\Ticket\Ticket;
@@ -94,5 +95,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-own-ticket', function (User $user, Ticket $ticket) {
             return $ticket->user_id === $user->id;
         });
+
+        Gate::define('manage-own-developer', function (User $user) {
+            return $user->id;
+        });
+
+//        Gate::define('manage-own-developer', function (User $user, Developer $developer) {
+//            return $developer->owner_id === $user->id;
+//        });
     }
 }

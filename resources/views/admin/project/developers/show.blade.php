@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="d-flex flex-row mb-3">
+{{--        @dd($user)--}}
         <a href="{{ route('admin.project.users.developers.edit', [$user, $developer]) }}" class="btn btn-primary mr-1">@lang('adminlte.edit')</a>
         <a href="{{ route('admin.project.developers.projects.create', $developer) }}" class="btn btn-primary mr-1">{{trans('adminlte.project.add')}}</a>
 

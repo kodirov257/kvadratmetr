@@ -1,6 +1,8 @@
 @extends('layouts.admin.master')
 
 @section('adminlte_css')
+    <link rel="stylesheet" href="{{asset('./assets/css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('./assets/css/responsive.css')}}">
     @stack('css')
     @yield('css')
 @stop
@@ -57,195 +59,283 @@
 
 
 @section('body')
-
     <div class="wrapper">
         @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
-        <nav class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.classes_topnav', 'navbar-white navbar-light')}}">
-            <div class="{{config('adminlte.classes_topnav_container', 'container')}}">
-                @if(config('adminlte.logo_img_xl'))
-                    <a href="{{ $dashboard_url }}" class="navbar-brand logo-switch">
-                        <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}" alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}" class="{{config('adminlte.logo_img_class', 'brand-image-xl')}} logo-xs">
-                        <img src="{{ asset(config('adminlte.logo_img_xl')) }}" alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}" class="{{config('adminlte.logo_img_xl_class', 'brand-image-xs')}} logo-xl">
-                    </a>
-                @else
-                    <a href="{{ $dashboard_url }}" class="navbar-brand {{ config('adminlte.classes_brand') }}">
-                        <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}" alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}" class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}" style="opacity: .8">
-                        <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
+            <nav class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.classes_topnav', 'navbar-white navbar-light')}}">
+                <div class="{{config('adminlte.classes_topnav_container', 'container')}}">
+                    @if(config('adminlte.logo_img_xl'))
+                        <a href="{{ $dashboard_url }}" class="navbar-brand logo-switch">
+                            <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}"
+                                 alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}"
+                                 class="{{config('adminlte.logo_img_class', 'brand-image-xl')}} logo-xs">
+                            <img src="{{ asset(config('adminlte.logo_img_xl')) }}"
+                                 alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}"
+                                 class="{{config('adminlte.logo_img_xl_class', 'brand-image-xs')}} logo-xl">
+                        </a>
+                    @else
+                        <a href="{{ $dashboard_url }}" class="navbar-brand {{ config('adminlte.classes_brand') }}">
+                            <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}"
+                                 alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}"
+                                 class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}"
+                                 style="opacity: .8">
+                            <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
                             {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                         </span>
-                    </a>
-                @endif
-
-                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-                    <ul class="nav navbar-nav">
-                        @each('partials.admin.menu-item-top-nav-left', $adminlte->menu(), 'item')
-                    </ul>
-                </div>
-            @else
-            <nav class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.classes_topnav', 'navbar-white navbar-light')}}">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#" @if(config('adminlte.sidebar_collapse_remember')) data-enable-remember="true" @endif @if(!config('adminlte.sidebar_collapse_remember_no_transition')) data-no-transition-after-reload="false" @endif @if(config('adminlte.sidebar_collapse_auto_size')) data-auto-collapse-size="{{config('adminlte.sidebar_collapse_auto_size')}}" @endif>
-                            <i class="fas fa-bars"></i>
-                            <span class="sr-only">{{ trans('adminlte.toggle_navigation') }}</span>
                         </a>
-                    </li>
-                    @each('partials.admin.menu-item-top-nav-left', $adminlte->menu(), 'item')
-                    @yield('content_top_nav_left')
-                </ul>
-            @endif
-                <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
-                    @yield('content_top_nav_right')
-                    @each('partials.admin.menu-item-top-nav-right', $adminlte->menu(), 'item')
-                    @if(Auth::user())
-                        @if(config('adminlte.usermenu_enabled'))
-                        <li class="nav-item dropdown user-menu">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                @if(config('adminlte.usermenu_image'))
-                                <img src="{{ Auth::user()->adminlte_image() }}" class="user-image img-circle elevation-2" alt="{{ Auth::user()->name }}">
-                                @endif
-                                <span @if(config('adminlte.usermenu_image'))class="d-none d-md-inline"@endif>{{ Auth::user()->name }}</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                @if(!View::hasSection('usermenu_header') && config('adminlte.usermenu_header'))
-                                <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }} @if(!config('adminlte.usermenu_image'))h-auto @endif">
-                                    @if(config('adminlte.usermenu_image'))
-                                    <img src="{{ Auth::user()->adminlte_image() }}" class="img-circle elevation-2" alt="{{ Auth::user()->name }}">
-                                    @endif
-                                    <p class="@if(!config('adminlte.usermenu_image'))mt-0 @endif">
-                                        {{ Auth::user()->name }}
-                                        @if(config('adminlte.usermenu_desc'))
-                                        <small>{{ Auth::user()->adminlte_desc() }}</small>
-                                        @endif
-                                    </p>
-                                </li>
-                                @else
-                                @yield('usermenu_header')
-                                @endif
-                                @each('partials.admin.menu-item-top-nav-user', $adminlte->menu(), 'item')
-                                @hasSection('usermenu_body')
-                                <li class="user-body">
-                                    @yield('usermenu_body')
-                                </li>
-                                @endif
-                                <li class="user-footer">
-                                    @if (Auth::user()->isAdmin())
-                                        @if($profile_url)
-                                            <a href="{{ $profile_url }}" class="btn btn-default btn-flat">@lang('frontend.profile')</a>
-                                        @endif
-                                    @else
-                                        <a href="{{ route('user.profile') }}" class="btn btn-default btn-flat">@lang('frontend.profile')</a>
-                                    @endif
+                    @endif
 
-                                    <a class="btn btn-default btn-flat float-right @if(!$profile_url)btn-block @endif" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="margin-top: 5px;">
-                                        <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte.log_out') }}
+                    <button class="navbar-toggler order-1" type="button" data-toggle="collapse"
+                            data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                        <ul class="nav navbar-nav">
+                            @each('partials.admin.menu-item-top-nav-left', $adminlte->menu(), 'item')
+                        </ul>
+                    </div>
+                    @else
+                        <nav class="main-header navbar {{config('adminlte.classes_topnav_nav', 'navbar-expand-md')}} {{config('adminlte.classes_topnav', 'navbar-white navbar-light')}}">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" data-widget="pushmenu" href="#"
+                                       @if(config('adminlte.sidebar_collapse_remember')) data-enable-remember="true"
+                                       @endif @if(!config('adminlte.sidebar_collapse_remember_no_transition')) data-no-transition-after-reload="false"
+                                       @endif @if(config('adminlte.sidebar_collapse_auto_size')) data-auto-collapse-size="{{config('adminlte.sidebar_collapse_auto_size')}}" @endif>
+                                        <i class="fas fa-bars"></i>
+                                        <span class="sr-only">{{ trans('adminlte.toggle_navigation') }}</span>
                                     </a>
-                                    <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
-                                        @if(config('adminlte.logout_method'))
-                                            {{ method_field(config('adminlte.logout_method')) }}
-                                        @endif
-                                        {{ csrf_field() }}
-                                    </form>
                                 </li>
+                                @each('partials.admin.menu-item-top-nav-left', $adminlte->menu(), 'item')
+                                @yield('content_top_nav_left')
                             </ul>
-                        </li>
-                        @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte.log_out') }}
-                            </a>
-                            <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
-                                @if(config('adminlte.logout_method'))
-                                    {{ method_field(config('adminlte.logout_method')) }}
+                            @endif
+                            <ul class="navbar-nav ml-auto @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))order-1 order-md-3 navbar-no-expand @endif">
+                                @yield('content_top_nav_right')
+                                @each('partials.admin.menu-item-top-nav-right', $adminlte->menu(), 'item')
+                                @if(Auth::user())
+                                    @if(config('adminlte.usermenu_enabled'))
+                                        <li class="nav-item dropdown user-menu">
+                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                                @if(config('adminlte.usermenu_image'))
+                                                    <img src="{{ Auth::user()->adminlte_image() }}"
+                                                         class="user-image img-circle elevation-2"
+                                                         alt="{{ Auth::user()->name }}">
+                                                @endif
+                                                <span @if(config('adminlte.usermenu_image'))class="d-none d-md-inline"@endif>{{ Auth::user()->name }}</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                                @if(!View::hasSection('usermenu_header') && config('adminlte.usermenu_header'))
+                                                    <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }} @if(!config('adminlte.usermenu_image'))h-auto @endif">
+                                                        @if(config('adminlte.usermenu_image'))
+                                                            <img src="{{ Auth::user()->adminlte_image() }}"
+                                                                 class="img-circle elevation-2"
+                                                                 alt="{{ Auth::user()->name }}">
+                                                        @endif
+                                                        <p class="@if(!config('adminlte.usermenu_image'))mt-0 @endif">
+                                                            {{ Auth::user()->name }}
+                                                            @if(config('adminlte.usermenu_desc'))
+                                                                <small>{{ Auth::user()->adminlte_desc() }}</small>
+                                                            @endif
+                                                        </p>
+                                                    </li>
+                                                @else
+                                                    @yield('usermenu_header')
+                                                @endif
+                                                @each('partials.admin.menu-item-top-nav-user', $adminlte->menu(), 'item')
+                                                @hasSection('usermenu_body')
+                                                    <li class="user-body">
+                                                        @yield('usermenu_body')
+                                                    </li>
+                                                @endif
+                                                <li class="user-footer">
+                                                    @if (Auth::user()->isAdmin())
+                                                        @if($profile_url)
+                                                            <a href="{{ $profile_url }}"
+                                                               class="btn btn-default btn-flat">@lang('frontend.profile')</a>
+                                                        @endif
+                                                    @else
+                                                        <a href="{{ route('user.profile') }}"
+                                                           class="btn btn-default btn-flat">@lang('frontend.profile')</a>
+                                                    @endif
+
+                                                    <a class="btn btn-default btn-flat float-right @if(!$profile_url)btn-block @endif"
+                                                       href="#"
+                                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                                       style="margin-top: 5px;">
+                                                        <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte.log_out') }}
+                                                    </a>
+                                                    <form id="logout-form" action="{{ $logout_url }}" method="POST"
+                                                          style="display: none;">
+                                                        @if(config('adminlte.logout_method'))
+                                                            {{ method_field(config('adminlte.logout_method')) }}
+                                                        @endif
+                                                        {{ csrf_field() }}
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte.log_out') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ $logout_url }}" method="POST"
+                                                  style="display: none;">
+                                                @if(config('adminlte.logout_method'))
+                                                    {{ method_field(config('adminlte.logout_method')) }}
+                                                @endif
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </li>
+                                    @endif
                                 @endif
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                        @endif
-                    @endif
-                    @if(config('adminlte.right_sidebar'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-widget="control-sidebar" @if(!config('adminlte.right_sidebar_slide')) data-controlsidebar-slide="false" @endif @if(config('adminlte.right_sidebar_scrollbar_theme', 'os-theme-light') != 'os-theme-light') data-scrollbar-theme="{{config('adminlte.right_sidebar_scrollbar_theme')}}" @endif @if(config('adminlte.right_sidebar_scrollbar_auto_hide', 'l') != 'l') data-scrollbar-auto-hide="{{config('adminlte.right_sidebar_scrollbar_auto_hide')}}" @endif>
-                                <i class="{{config('adminlte.right_sidebar_icon')}}"></i>
-                            </a>
-                        </li>
-                    @endif
-                </ul>
-                @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
-                    </nav>
+                                @if(config('adminlte.right_sidebar'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" data-widget="control-sidebar"
+                                           @if(!config('adminlte.right_sidebar_slide')) data-controlsidebar-slide="false"
+                                           @endif @if(config('adminlte.right_sidebar_scrollbar_theme', 'os-theme-light') != 'os-theme-light') data-scrollbar-theme="{{config('adminlte.right_sidebar_scrollbar_theme')}}"
+                                           @endif @if(config('adminlte.right_sidebar_scrollbar_auto_hide', 'l') != 'l') data-scrollbar-auto-hide="{{config('adminlte.right_sidebar_scrollbar_auto_hide')}}" @endif>
+                                            <i class="{{config('adminlte.right_sidebar_icon')}}"></i>
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                            @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
+                        </nav>
                 @endif
             </nav>
-        @if(!config('adminlte.layout_topnav') && !View::getSection('layout_topnav'))
-        <aside class="main-sidebar {{config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4')}}">
-            @if(config('adminlte.logo_img_xl'))
-                <a href="{{ $dashboard_url }}" class="brand-link logo-switch">
-                    <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}" alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}" class="{{config('adminlte.logo_img_class', 'brand-image-xl')}} logo-xs">
-                    <img src="{{ asset(config('adminlte.logo_img_xl')) }}" alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}" class="{{config('adminlte.logo_img_xl_class', 'brand-image-xs')}} logo-xl">
-                </a>
-            @else
-                <a href="{{ $dashboard_url }}" class="brand-link {{ config('adminlte.classes_brand') }}">
-                    <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}" alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}" class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}" style="opacity: .8">
-                    <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
+            @if(!config('adminlte.layout_topnav') && !View::getSection('layout_topnav'))
+                <aside class="main-sidebar {{config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4')}}">
+                    @if(config('adminlte.logo_img_xl'))
+                        <a href="{{ $dashboard_url }}" class="brand-link logo-switch">
+                            <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}"
+                                 alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}"
+                                 class="{{config('adminlte.logo_img_class', 'brand-image-xl')}} logo-xs">
+                            <img src="{{ asset(config('adminlte.logo_img_xl')) }}"
+                                 alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}"
+                                 class="{{config('adminlte.logo_img_xl_class', 'brand-image-xs')}} logo-xl">
+                        </a>
+                    @else
+                        <a href="{{ $dashboard_url }}" class="brand-link {{ config('adminlte.classes_brand') }}">
+                            <img src="{{ asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png')) }}"
+                                 alt="{{config('adminlte.logo_img_alt', 'AdminLTE')}}"
+                                 class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}"
+                                 style="opacity: .8">
+                            <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
                         {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                     </span>
-                </a>
+                        </a>
+                    @endif
+                    <div class="sidebar">
+                        <nav class="mt-2">
+                            <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}"
+                                data-widget="treeview" role="menu"
+                                @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}"
+                                @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
+                                @each('partials.admin.menu-item', $adminlte->menu(), 'item')
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
             @endif
-            <div class="sidebar">
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column {{config('adminlte.classes_sidebar_nav', '')}}" data-widget="treeview" role="menu" @if(config('adminlte.sidebar_nav_animation_speed') != 300) data-animation-speed="{{config('adminlte.sidebar_nav_animation_speed')}}" @endif @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
-                        @each('partials.admin.menu-item', $adminlte->menu(), 'item')
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        @endif
+{{--        @dd(Route::getRoutes())--}}
 
-        <div class="content-wrapper">
-            @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
-            <div class="container">
+{{--        <header class="header">--}}
+{{--            <div class="row align-items-center justify-content-between">--}}
+{{--                <div class="col-3 wid-345">--}}
+{{--                    <div class="header-logo"><img class="header-logo__image" src="{{asset('./assets/img/Logo.svg')}}" alt="logotip image"></div>--}}
+{{--                </div>--}}
+{{--                <div class="col-auto">--}}
+{{--                    @section('breadcrumbs', Breadcrumbs::render())--}}
+{{--                    @yield('breadcrumbs')--}}
+{{--                </div>--}}
+{{--                <div class="col">--}}
+{{--                    <div class="header-profile">--}}
+{{--                        <div class="header-profile__search">--}}
+{{--                            <i class="icon-search"></i>--}}
+{{--                            <input type="text" class="header-profile__input">--}}
+{{--                        </div>--}}
+{{--                        <button class="header-profile__notifications"><i class="icon-ring"></i></button>--}}
+{{--                        <img class="header-profile__photo" src="{{asset('assets/img/profile-img.svg')}}">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <!-- <div class="header-panel">--}}
+{{--            </div> -->--}}
+{{--        </header>--}}
+{{--        <sidebar class="sidebar">--}}
+{{--            <div id="accordian" class="sidebar-mainbuttons">--}}
+{{--                <ul class="show-dropdown">--}}
+{{--                    <li><a href="#"><i class="icon-dash-icon"></i>Dashboard</a></li>--}}
+{{--                    <li class="active">--}}
+{{--                        <a href="#"><i class="icon-content"></i>Content</a>--}}
+{{--                        <ul class="show-dropdown">--}}
+{{--                            <li class="active">--}}
+{{--                                <a href="#"><i class="icon-buildings"></i>NRG Group</a>--}}
+{{--                                <ul class="show-dropdown">--}}
+{{--                                    <li><a href="#">NRG Oybek</a></li>--}}
+{{--                                    <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>--}}
+{{--                                </ul>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                    <li><a href="javascript:void(0);"><i class="icon-insight"></i>Insights</a></li>--}}
+{{--                    <li><a href="javascript:void(0);"><i class="icon-marketing"></i>Marketing</a></li>--}}
+{{--                    <li><a href="javascript:void(0);"><i class="icon-lead"></i>Lead Manager</a></li>--}}
+{{--                    <li class="sidebar__settings"><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>--}}
+{{--                    <li class="sidebar__support"><a href="javascript:void(0);"><i class="icon-help"></i>Support</a></li>--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+{{--        </sidebar>--}}
+
+            <div class="content-wrapper">
+                @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
+                    <div class="container">
+                        @endif
+
+                        <div class="content-header">
+                            <div class="{{config('adminlte.classes_content_header', 'container-fluid')}}">
+                                @yield('content_header')
+
+                            </div>
+                        </div>
+                        @include('layouts.admin.errorSummary')
+                        <div class="content">
+                            <div class="{{config('adminlte.classes_content', 'container-fluid')}}">
+                                @section('breadcrumbs', Breadcrumbs::render())
+                                @yield('breadcrumbs')
+                                @yield('content')
+                            </div>
+                        </div>
+                        @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
+                    </div>
+                @endif
+            </div>
+
+            @hasSection('footer')
+                <footer class="main-footer">
+
+                    @yield('footer')
+                </footer>
             @endif
 
-            <div class="content-header">
-                <div class="{{config('adminlte.classes_content_header', 'container-fluid')}}">
-                    @yield('content_header')
-
-                </div>
-            </div>
-                @include('layouts.admin.errorSummary')
-                <div class="content">
-                <div class="{{config('adminlte.classes_content', 'container-fluid')}}">
-                    @section('breadcrumbs', Breadcrumbs::render())
-                    @yield('breadcrumbs')
-                    @yield('content')
-                </div>
-            </div>
-            @if(config('adminlte.layout_topnav') || View::getSection('layout_topnav'))
-            </div>
+            @if(config('adminlte.right_sidebar'))
+                <aside class="control-sidebar control-sidebar-{{config('adminlte.right_sidebar_theme')}}">
+                    @yield('right-sidebar')
+                </aside>
             @endif
-        </div>
-
-        @hasSection('footer')
-        <footer class="main-footer">
-
-            @yield('footer')
-        </footer>
-        @endif
-
-        @if(config('adminlte.right_sidebar'))
-            <aside class="control-sidebar control-sidebar-{{config('adminlte.right_sidebar_theme')}}">
-                @yield('right-sidebar')
-            </aside>
-        @endif
 
     </div>
 @stop
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/main.js') }}"></script>
+    <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js" integrity="sha256-HmfY28yh9v2U4HfIXC+0D6HCdWyZI42qjaiCFEJgpo0=" crossorigin="anonymous"></script>
     @stack('js')
     @yield('js')
 @stop

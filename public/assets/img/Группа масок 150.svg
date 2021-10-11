@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Прямоугольник_1691" data-name="Прямоугольник 1691" width="20" height="20" transform="translate(127.449 2276.449)" fill="#d4d4d4"/>
+    </clipPath>
+  </defs>
+  <g id="Группа_масок_150" data-name="Группа масок 150" transform="translate(-127.449 -2276.449)" clip-path="url(#clip-path)">
+    <path id="Classy_modern_bright_aptm_at_the_heart_of_Oslo_Квартиры_в_аренду_в_г._Majorstuen_Осло_Норвегия-21" data-name="Classy, modern, bright aptm at the heart of Oslo — Квартиры в аренду в г. Majorstuen, Осло, Норвегия-21" d="M20,.667a.667.667,0,0,1,.662.589l0,.078V20a.667.667,0,0,1-.589.662l-.078,0H1.333a.667.667,0,0,1-.662-.589l0-.078V1.333A.667.667,0,0,1,1.255.671l.078,0ZM2,2V19.333h8V2ZM6.667,8v4.39l1.2-1.195.943.943L6.471,14.471a.667.667,0,0,1-.88.055l-.063-.055L3.2,12.138l.943-.943,1.2,1.195V8Zm8.258-1a.667.667,0,0,1,.817,0l.063.055,2.333,2.333-.943.943L16,9.138v4.2H14.667v-4.2l-1.2,1.2-.943-.943,2.333-2.333ZM11.333,19.333h8V2h-8Z" transform="translate(126.782 2275.782)"/>
+  </g>
+</svg>

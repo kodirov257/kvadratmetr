@@ -111,6 +111,10 @@ Breadcrumbs::for('cabinet.profile.phone', function (Crumbs $crumbs) {
     $crumbs->parent('cabinet.profile.home');
     $crumbs->push('Phone', route('cabinet.profile.phone'));
 });
+Breadcrumbs::for('cabinet.developer.index', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push(trans('developer.create'), route('cabinet.developer.index'));
+});
 
 // Cabinet Projects
 
@@ -508,3 +512,4 @@ Breadcrumbs::for('admin.project.developers.sale-offices.edit', function (Crumbs 
     $crumbs->parent('admin.project.developers.sale-offices.show', $developer, $saleOffice);
     $crumbs->push($saleOffice->address, route('admin.project.developers.sale-offices.edit', [$developer, $saleOffice]));
 });
+
