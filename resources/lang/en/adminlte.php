@@ -58,6 +58,8 @@ return [
     'landmark' => 'Landmark',
     'address' => 'Address',
     'name' => 'Name',
+    'title' => 'Title',
+    'region' => 'Region',
 
     'users' => 'Users',
     'projects' => 'Projects',
@@ -75,6 +77,10 @@ return [
     'area_unit' => 'Units of area',
     'rooms' => 'Rooms',
     'bathroom' => 'Bathroom',
+    'clear' => 'Clear',
+    'type' => 'Type',
+    'required' => 'Required',
+    'icon' => 'Icon',
 
     'user' => [
         'name'  => 'Username',
@@ -116,10 +122,21 @@ return [
     ],
     'plan'=>[
         'add' => 'Add plan',
-        'name' => 'Plan name'
+        'name' => 'Plan name',
+        'area' => 'Area',
+        'area_unit' => 'Units of area',
+        'rooms' => 'Rooms',
+        'bathroom' => 'Bathroom',
     ],
     'characteristic' => [
-        'name' => 'Characteristics'
+        'name' => 'Characteristics',
+        'add' => 'Add Characteristics',
+        'is_rage' => 'Range',
+    ],
+    'characteristics' => [
+        'name' => 'Characteristics',
+        'add' => 'Add Characteristics',
+        'is_rage' => 'Range',
     ],
     'photo' => [
         'plural' => 'Photos',

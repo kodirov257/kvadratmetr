@@ -72,4 +72,4 @@
     <button type="submit" class="btn btn-primary">{{ trans('adminlte.' . ($value ? 'edit' : 'save')) }}</button>
 </div>
 
-@include('admin.projects.projects.values._scripts')
+@include('admin.project.projects.values._scripts')

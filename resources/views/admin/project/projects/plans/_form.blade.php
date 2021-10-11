@@ -65,7 +65,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card card-gray card-outline">
-            <div class="card-header"><h3 class="card-title">{{ trans('adminlte.image') }}</h3></div>
+            <div class="card-header"><h3 class="card-title">{{ trans('adminlte.photo.plural') }}</h3></div>
             <div class="card-body">
                 <div class="form-group">
                     <div class="file-loading">

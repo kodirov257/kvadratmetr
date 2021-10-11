@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    {!! Form::label('facility_id', trans('adminlte.facilities'), ['class' => 'col-form-label']); !!}
+                                    {!! Form::label('facility_id', trans('adminlte.facility.name'), ['class' => 'col-form-label']); !!}
                                     {!! Form::select('facility_id', $facilities, null,
                                         ['class'=>'form-control' . ($errors->has('facility_id') ? ' is-invalid' : ''), 'id' => 'facility_id',
                                         'required' => true, 'placeholder' => '']) !!}
@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">{{ trans('adminlte.add') }}</button>
+            <button type="submit" class="btn btn-primary">{{ trans('adminlte.create') }}</button>
         </div>
     </form>
 @endsection

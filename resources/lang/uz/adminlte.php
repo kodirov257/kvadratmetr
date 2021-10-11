@@ -39,6 +39,10 @@ return [
     'name' => 'Ismi',
     'about' => 'Tasnifi',
     'comment' => 'Izoh',
+    'title' => 'Sarlavha',
+    'region' => 'Hududi',
+    'type' => 'Turi',
+    'required' => 'Muhimligi',
 
 
     'create' => 'Yaratmoq',
@@ -120,8 +124,15 @@ return [
     'plan'=>[
         'add' => 'Reja qo\'shish',
         'name' => 'Reja Nomi',
+        'area' => 'Hudud',
+        'area_unit' => 'Hudud birligi',
+        'rooms' => 'Xonaligi',
+        'bathroom' => 'Hammom',
     ],
     'characteristic' => [
+        'name' => 'Xususiyatlar'
+    ],
+    'characteristics' => [
         'name' => 'Xususiyatlar'
     ],
     'photo' => [
