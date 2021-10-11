@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/glyphicon/css/glyphicon.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.css') }}">
 
     @include('layouts.admin.plugins', ['type' => 'css'])
 
     @yield('adminlte_css_pre')
 
-{{--    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 
     @yield('adminlte_css')
 

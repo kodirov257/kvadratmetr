@@ -44,10 +44,9 @@
 <sidebar class="sidebar">
     <div id="accordian" class="sidebar-mainbuttons">
         <ul class="show-dropdown">
-            <li><a href="#"><i class="icon-dash-icon"></i>Dashboard</a></li>
-            <li class="active">
-                <a href="#"><i class="icon-content"></i>Content</a>
-{{--                @dd($developer)--}}
+            <li class="{{ Request::is('ru/cabinet') ? 'active' : '' }}"><a href="{{route('cabinet.home')}}"><i class="icon-dash-icon"></i>Dashboard</a></li>
+            <li class="{{ Request::is('ru/cabinet/project') ? 'active' : '' }}">
+                <a href="{{route('cabinet.developer.index')}}"><i class="icon-content"></i>Content</a>
                 @if($developer)
                                 <ul class="show-dropdown">
                                     <li class="active">

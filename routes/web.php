@@ -217,6 +217,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         function () {
             Route::get('/', 'HomeController@index')->name('home');
 
+            Route::resource('developer', 'DeveloperController');
+
+
 
 
             Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
