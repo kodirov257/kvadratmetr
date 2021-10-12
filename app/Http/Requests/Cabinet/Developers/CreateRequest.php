@@ -41,8 +41,6 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_uz' => 'required|string|max:255',
-            'name_ru' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'about_uz' => 'required|string',
             'about_ru' => 'required|string',

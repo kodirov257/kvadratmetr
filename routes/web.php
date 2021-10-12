@@ -217,7 +217,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         function () {
             Route::get('/', 'HomeController@index')->name('home');
 
-            Route::resource('developer', 'DeveloperController');
+//            Route::resource('developer', 'DeveloperController')->only(['index', 'show', 'create', 'store', 'destroy']);
+
+            Route::group(['prefix' => 'developer', 'as' => 'developer.'], function () {
+                Route::get('/', 'DeveloperController@index')->name('index');
+                Route::get('/edit', 'DeveloperController@edit')->name('edit');
+                Route::put('/update', 'DeveloperController@update')->name('update');
+                Route::post('/create', 'DeveloperController@create')->name('create');
+                Route::post('/store', 'DeveloperController@store')->name('store');
+            });
 
 
 

@@ -133,6 +133,20 @@ function hideboTable() {
     }
 }
 
+function callInput() {
+    imageInput = document.getElementById('imageInput');
+    if (imageInput) {
+        imageInput.click();
+    }
+}
+
+function callNewInput() {
+    imageNewInput = document.getElementById('imageNewInput');
+    if (imageNewInput) {
+        imageNewInput.click();
+    }
+}
+
 
 var map = L.map('map').setView([45.52875, -122.6632], 5);
 

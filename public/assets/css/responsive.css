@@ -1,9 +1,62 @@
+@media(max-width: 1460px) {
+  .reports-card-form__connect {
+    width: 100%;
+  }
+  .characteristics input {
+    width: 100px;
+  }
+  .booster-foot__items {
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+  .booster-view__connect__title {
+    padding-top: 20px;
+  }
+}
+
 @media(max-width: 1380px) {
   .header .row .col-3.wid-345 {
     width: 280px;
   }
   .header-profile__search {
     width: 260px;
+  }
+  #reports-card-block [class^="col-"] {
+    width: 100%;
+  }
+  .reports-card-form__title {
+    margin-top: 20px;
+  }
+  .home-row > div {
+    width: 100%;
+  }
+  .booster-view .col-3,
+  .booster-view .col-9 {
+    width: 100%;
+  }
+  .booster-view img {
+    width: auto;
+  }
+  .booster-view {
+    padding: 15px;
+  }
+}
+
+@media(max-width: 1320px) {
+  .user-devices .col-5,
+  .user-devices .col-7 {
+    width: 100%;
+  }
+  .performance-info {
+    flex-wrap: wrap;
+  }
+  .performance-single {
+    width: calc(25% - 15px);
+    margin: 0 7.5px;
+  }
+  .performance-single:last-child {
+    margin-top: 15px;
+    width: 100%;
   }
 }
 
@@ -134,5 +187,32 @@
   .marketing-connect__link:not(:last-child) {
     margin-right: 0px;
     margin-bottom: 15px;
+  }
+  .room-numbers {
+    padding: 6px 20px;
+  }
+  .room-numbers h3 {
+    font-size: 16px;
+  }
+  .room-characteristic {
+    width: 100%;
+  }
+  .save-edit, .plan-title {
+    margin-top: 20px;
+  }
+  .image-character {
+    width: auto;
+  }
+  .characteristic-of-room, .room-pluses {
+    width: 100%;
+  }
+  .facilites .col-6 {
+    width: 100%;
+  }
+  .map {
+    min-height: 350px;
+  }
+  #images .col-4 {
+    width: 50%;
   }
 }

@@ -513,3 +513,6 @@ Breadcrumbs::for('admin.project.developers.sale-offices.edit', function (Crumbs 
     $crumbs->push($saleOffice->address, route('admin.project.developers.sale-offices.edit', [$developer, $saleOffice]));
 });
 
+Breadcrumbs::for('cabinet.developer.create', function ($trail) {
+    $trail->push('Title Here', route('cabinet.developer.create'));
+});

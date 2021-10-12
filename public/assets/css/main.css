@@ -742,9 +742,6 @@ ol {
     border: 1px solid #0071C5;
     border-radius: 4px;
 }
-.adding-new-project:hover {
-    color: white;
-}
 
 .project-card__footer {
     padding: 10px 15px;
@@ -1014,6 +1011,9 @@ ol {
     line-height: 21px;
     margin: 0;
     margin-left: 15px;
+    border: 0;
+    background-color: transparent;
+    width: 100%;
 }
 
 .contact__social-address {
@@ -1068,11 +1068,17 @@ ol {
 }
 
 .location__office-address {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 21px;
     margin: 0;
     margin-left: 15px;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+}
+
+.location__office-address::placeholder {
+    color: #000;
 }
 
 .location__our-address {
@@ -1701,9 +1707,16 @@ ol {
 }
 
 .character-year {
+    position: relative;
     background-color: #F2F2F2;
     border-radius: 8px;
     border: 1px solid #a1a1a1;
+}
+
+#datepicker {
+    position: absolute;
+    margin-top: 10px;
+    z-index: 2;
 }
 
 .calendar {
@@ -1843,14 +1856,20 @@ ol {
     border: 1px solid #a1a1a1;
 }
 
-.plan-character h4 {
+.plan-character h4,
+.plan-character input {
     font-size: 16px;
     line-height: 21px;
     font-weight: 600;
     margin: 0;
     display: inline-block;
     text-align: center;
-    width: calc(100% - 45px);
+    width: calc(100% - 65px);
+}
+
+.plan-character input {
+    border: 0;
+    background-color: transparent;
 }
 
 .plan-character h4.minH {
@@ -4003,6 +4022,13 @@ textarea#comment {
     position: absolute;
     top: 0%;
     left: 0;
+    padding: 6px 10px;
+    line-height: normal;
+    background-color: #23E5DB;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 8px 2px 2px;
 }
 
 .pricement-img {
