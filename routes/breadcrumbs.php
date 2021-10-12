@@ -116,6 +116,13 @@ Breadcrumbs::for('cabinet.developer.index', function (Crumbs $crumbs) {
     $crumbs->push(trans('developer.create'), route('cabinet.developer.index'));
 });
 
+Breadcrumbs::for('cabinet.developer.edit', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push(trans('developer.edit'), route('cabinet.developer.edit'));
+});
+
+
+
 // Cabinet Projects
 
 Breadcrumbs::for('cabinet.projects.index', function (Crumbs $crumbs) {

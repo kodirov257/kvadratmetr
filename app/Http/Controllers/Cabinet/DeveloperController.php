@@ -79,9 +79,13 @@ class DeveloperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = \Auth::user();
+
+        $developer = Developer::where('owner_id', $user->id)->first()->get();
+
+        return view('developer.edit', compact('developer', 'user'));
     }
 
     /**
