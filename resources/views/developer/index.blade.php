@@ -5,7 +5,7 @@
 
     <div class="main-content">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card">
                     <form method="POST" action="{{route('cabinet.developer.store')}}">
 {{--                        {{ csrf_field() }}--}}

@@ -5,9 +5,10 @@
 
     <div class="main-content">
         <div class="row">
-            <div class="col-12">
+            <div class="col-8">
                 <div class="card">
-                    <form method="POST" action="{{route('cabinet.developer.update')}}">
+                    <form method="POST" action="{{route('cabinet.developer.update')}}" enctype="multipart/form-data">
+{{--                        @method('PUT')--}}
                         @csrf
                         <div class="developer-bar">
                             <div class="developer-bar__image">
@@ -44,7 +45,9 @@
                                             <a href="#" class="developer-bar__button" onclick="activateInput('uzAbout')"
                                             ><i class="icon-pencil" ></i
                                                 ></a>
-                                            {{$developer->about_uz}}
+                                        </div>
+                                        <div class="info__text">
+                                            {!! $developer->about_uz !!}
                                         </div>
                                     </div>
                                     <div class="form-group" style="display: none">
@@ -70,7 +73,9 @@
                                             <a href="#" class="developer-bar__button" onclick="activateInput('enAbout')"
                                             ><i class="icon-pencil"></i
                                                 ></a>
-                                            {{$developer->about_en}}
+                                        </div>
+                                        <div class="info__text">
+                                            {!! $developer->about_en !!}
                                         </div>
                                     </div>
                                     <div class="form-group" style="display: none">
@@ -94,7 +99,9 @@
                                             <a href="#" class="developer-bar__button" onclick="activateInput('ruAbout')"
                                             ><i class="icon-pencil"></i
                                                 ></a>
-                                            {{$developer->about_ru}}
+                                        </div>
+                                        <div class="info__text">
+                                            {!! $developer->about_ru !!}
                                         </div>
                                     </div>
                                     <div class="form-group" style="display: none">
@@ -187,6 +194,7 @@
                     </form>
                 </div>
             </div>
+            @include('partials.components._sidebar_info_developer')
         </div>
     </div>
     <script src="{{asset('./assets/leaflet/leaflet.js')}}"></script>

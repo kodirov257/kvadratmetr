@@ -95,9 +95,21 @@ class DeveloperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+//        dd($request);
+        $user = \Auth::user();
+
+        $developer = Developer::where('owner_id', $user->id)->get()->first();
+//        dd($developer->id);
+        try {
+            $this->service->edit($developer->id, $request);
+            return redirect()->route('cabinet.developer.edit', [$user, $developer]);
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
     }
 
     /**

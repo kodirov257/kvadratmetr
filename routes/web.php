@@ -222,7 +222,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::group(['prefix' => 'developer', 'as' => 'developer.'], function () {
                 Route::get('/', 'DeveloperController@index')->name('index');
                 Route::get('/edit', 'DeveloperController@edit')->name('edit');
-                Route::put('/update', 'DeveloperController@update')->name('update');
+                Route::post('/update', 'DeveloperController@update')->name('update');
                 Route::post('/create', 'DeveloperController@create')->name('create');
                 Route::post('/store', 'DeveloperController@store')->name('store');
             });
