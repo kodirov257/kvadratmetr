@@ -16,6 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        dd('salom');
+
+
         $projects = Project::forUser(Auth::user())->orderByDesc('id')->paginate(20);
 
         return view('cabinet.projects.index', compact('projects'));

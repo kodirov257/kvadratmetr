@@ -26,6 +26,7 @@ class DeveloperController extends Controller
      */
     public function index()
     {
+//        dd('salom');
         $user = \Auth::user();
         $developer = Developer::where('owner_id', $user->id)->get()->first();
         return view('developer.index', compact('user', 'developer'));
@@ -38,10 +39,10 @@ class DeveloperController extends Controller
      */
     public function create()
     {
-        dd('asdasd');
+//        dd('asdasd');
         $user = \Auth::user();
         $developer = Developer::where('owner_id', $user->id)->get()->first();
-        return view('developer.index', compact('user', 'developer'));
+        return view('developer.create', compact('user', 'developer'));
     }
 
     /**

@@ -28,7 +28,7 @@ class CreateController extends Controller
     }
 
     public function create(){
-//        dd('salom');
+        dd('salom');
         return view('cabinet.projects.create.create_project');
     }
 

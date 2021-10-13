@@ -227,9 +227,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::post('/store', 'DeveloperController@store')->name('store');
             });
 
-
-
-
             Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
                 Route::get('/', 'ProfileController@index')->name('home');
                 Route::get('/edit', 'ProfileController@edit')->name('edit');
