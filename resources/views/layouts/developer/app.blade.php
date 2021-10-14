@@ -52,11 +52,11 @@
                 <li class="{{ Request::is('ru/cabinet') ? 'active' : '' }}"><a href="{{route('cabinet.home')}}"><i
                                 class="icon-dash-icon"></i>Dashboard</a></li>
                 <li class="{{ Request::is('en/cabinet/developer/edit') ? 'active' : '' }}">
-                    <a href="{{ $developer ? route('cabinet.developer.index') : route('cabinet.developer.create')}}"><i class="icon-content"></i>Content</a>
-                    @if($developer)
+                    <a href="{{ $gDeveloper ? route('cabinet.developer.index') : route('cabinet.developer.create')}}"><i class="icon-content"></i>Content</a>
+                    @if($gDeveloper)
                         <ul class="show-dropdown">
                             <li class="active">
-                                <a href="{{$developer ? route('cabinet.developer.index') : ''}}"><i class="icon-buildings"></i>{{$developer->name_en}}</a>
+                                <a href="{{$gDeveloper ? route('cabinet.developer.index') : ''}}"><i class="icon-buildings"></i>{{$gDeveloper->name_en}}</a>
                                 {{--                                        <ul class="show-dropdown">--}}
                                 {{--                                            <li><a href="#">NRG Oybek</a></li>--}}
                                 {{--                                            <li class="active"><a href="#">NRG Mirzo Ulugbek</a></li>--}}

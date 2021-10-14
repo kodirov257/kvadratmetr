@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cabinet\Projects;
 
+use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,12 +17,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        dd('salom');
+//        dd('salom');
 
 
-        $projects = Project::forUser(Auth::user())->orderByDesc('id')->paginate(20);
+//        $projects = Project::forUser(Auth::user())->orderByDesc('id')->paginate(20);
 
-        return view('cabinet.projects.index', compact('projects'));
+        return view('cabinet.projects.index');
     }
 
     /**
@@ -29,9 +30,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, Developer $developer)
     {
-        dd('salom');
+//        dd($developer);
+
+        return view('cabinet.projects.index');
+
     }
 
     /**

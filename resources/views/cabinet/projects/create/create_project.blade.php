@@ -1,8 +1,6 @@
 @extends('layouts.developer.app')
 
 @section('content')
-{{--    'salom'--}}
-
     <div class="main-content">
         <div class="row">
             <div class="col-8">

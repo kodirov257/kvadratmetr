@@ -131,7 +131,7 @@ Breadcrumbs::for('cabinet.projects.index', function (Crumbs $crumbs) {
 });
 
 Breadcrumbs::for('cabinet.projects.create', function (Crumbs $crumbs) {
-    $crumbs->parent('projects.index');
+    $crumbs->parent('cabinet.projects.index');
     $crumbs->push(trans('adminlte.create'), route('cabinet.projects.create'));
 });
 

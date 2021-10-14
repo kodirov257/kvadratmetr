@@ -19,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
             $locale = App::getLocale();
 //            dd($locale);
             if ($gUserExists) {
-                $developer = Developer::where('owner_id', $gUserExists->id)->get()->first();
-                $view->with(compact(['gUserExists', 'locale', 'developer']));
+                $gDeveloper = Developer::where('owner_id', $gUserExists->id)->get()->first();
+                $view->with(compact(['gUserExists', 'locale', 'gDeveloper']));
 
             }
 //            dd();

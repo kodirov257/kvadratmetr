@@ -74,8 +74,9 @@ class DeveloperController extends Controller
 
     public function show(User $user, Developer $developer)
     {
+        $developer = Developer::where('id', $developer->id)->get()->first();
 //        dd($developer);
-        return view('admin.project.developers.show', compact('user', 'developer'));
+        return view('admin.project.developers.show', compact('developer' ));
     }
 
     public function edit(User $user, Developer $developer)
