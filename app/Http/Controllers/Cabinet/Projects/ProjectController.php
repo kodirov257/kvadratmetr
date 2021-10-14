@@ -20,9 +20,9 @@ class ProjectController extends Controller
 //        dd('salom');
 
 
-//        $projects = Project::forUser(Auth::user())->orderByDesc('id')->paginate(20);
+        $project = [];
 
-        return view('cabinet.projects.index');
+        return view('cabinet.projects.index', compact('project'));
     }
 
     /**
@@ -34,6 +34,7 @@ class ProjectController extends Controller
     {
 //        dd($developer);
 
+//        $project = collect();
         return view('cabinet.projects.index');
 
     }
