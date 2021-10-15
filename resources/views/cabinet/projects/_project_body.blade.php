@@ -3,8 +3,13 @@
         <div class="developer-bar__image">
             <img src="{{asset('./assets/img/NRG-oybek-logo.svg')}}" alt=""/>
         </div>
-        <div class="developer-bar__title">NRG Oybek</div>
-        <a href="#" class="developer-bar__button"
+        <div class="developer-bar__title" id="titleMain">{{$project->name ?? 'Developer Name here'}}</div>
+        <input type="hidden"
+               name="name_en"
+               id="titleInput"
+               onblur="deactivateInput('title')"
+               value="{{$project->name ?? ''}}">
+        <a href="#" class="developer-bar__button" onclick="activateInput('title')"
         ><i class="icon-pencil"></i
             ></a>
     </div>
@@ -141,3 +146,79 @@
         @include('partials.components.dashboard._address_input')
     </div>
 </div>
+<script>
+    function activateInput(type) {
+        let childrenElements;
+        switch (type) {
+            case 'title':
+                document.getElementById('titleMain').style = ['display:none']
+                document.getElementById('titleInput').type = 'text'
+                console.log('test');
+                break;
+            case 'uzAbout':
+                childrenElements = document.getElementById('uzbek');
+                childrenElements = childrenElements.querySelector('.info__about-buildings');
+                childrenElements.querySelector('.info__about-text').style = ['display:none']
+                childrenElements.querySelector('.form-group').style = ['display:block']
+                break;
+            case 'ruAbout':
+                childrenElements = document.getElementById('russian');
+                childrenElements = childrenElements.querySelector('.info__about-buildings');
+                childrenElements.querySelector('.info__about-text').style = ['display:none']
+                childrenElements.querySelector('.form-group').style = ['display:block']
+                break;
+            case 'enAbout':
+                childrenElements = document.getElementById('english');
+                childrenElements = childrenElements.querySelector('.info__about-buildings');
+                childrenElements.querySelector('.info__about-text').style = ['display:none']
+                childrenElements.querySelector('.form-group').style = ['display:block']
+
+                break;
+
+            default:
+                console.log('default');
+                break
+        }
+    }
+
+    function deactivateInput(type) {
+        let childrenElements;
+        switch (type) {
+            case 'title':
+                document.getElementById('titleMain').style = ['display:show']
+                document.getElementById('titleInput').type = 'hidden'
+                document.getElementById('titleMain').innerHTML = document.getElementById('titleInput').value;
+                console.log(document.getElementById('titleInput').value);
+                break;
+            case 'uzAbout':
+                childrenElements = document.getElementById('uzbek');
+                childrenElements = childrenElements.querySelector('.info__about-buildings');
+                childrenElements.querySelector('.info__about-text').style = ['display:block']
+                childrenElements.querySelector('.info__about-text  > .info__text').innerHTML = CKEDITOR.instances['about_uz'].getData()
+                console.log(CKEDITOR.instances['about_uz'].getData())
+                childrenElements.querySelector('.form-group').style = ['display:none']
+                break;
+            case 'ruAbout':
+                childrenElements = document.getElementById('russian');
+                childrenElements = childrenElements.querySelector('.info__about-buildings');
+                childrenElements.querySelector('.info__about-text').style = ['display:block']
+                childrenElements.querySelector('.info__about-text  > .info__text').innerHTML = CKEDITOR.instances['about_ru'].getData()
+                console.log(CKEDITOR.instances['about_ru'].getData())
+                childrenElements.querySelector('.form-group').style = ['display:none']
+                break;
+            case 'enAbout':
+                childrenElements = document.getElementById('english');
+                childrenElements = childrenElements.querySelector('.info__about-buildings');
+                childrenElements.querySelector('.info__about-text').style = ['display:block']
+                childrenElements.querySelector('.info__about-text  > .info__text').innerHTML = CKEDITOR.instances['about_en'].getData()
+                console.log(CKEDITOR.instances['about_en'].getData())
+                childrenElements.querySelector('.form-group').style = ['display:none']
+                break;
+
+
+            default:
+                console.log('default');
+                break
+        }
+    }
+</script>
