@@ -48,9 +48,9 @@ class CharacteristicController extends Controller
     public function store(CreateRequest $request)
     {
         try {
-            if (($request->variants && $request->is_range) || ($request->type === Characteristic::TYPE_STRING && $request->is_range)) {
-                throw new Exception('Characteristic range cannot be string.');
-            }
+//            if (($request->variants && $request->is_range) || ($request->type === Characteristic::TYPE_STRING && $request->is_range)) {
+//                throw new Exception('Characteristic range cannot be string.');
+//            }
 
             $characteristic = Characteristic::create([
                 'name_uz' => $request->name_uz,

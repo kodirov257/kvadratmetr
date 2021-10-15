@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Cabinet\Projects;
 
+use App\Entity\Project\Characteristic;
 use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Project;
+use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +35,10 @@ class ProjectController extends Controller
     public function create(Request $request, Developer $developer)
     {
 //        dd($developer);
+        $characteristics = Characteristic::orderBy('sort')
+            ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
 
-        return view('cabinet.projects.index');
+        return view('cabinet.projects.index', compact('developer', 'characteristics'));
 
     }
 

@@ -27,6 +27,9 @@
     </div>
     <div id="projects" class="b-tab active">
         <div class="row">
+            @foreach ($developer->projects as $project)
+                @include('partials.components.dashboard._project_card')
+            @endforeach
             @include('partials.components.dashboard._create_new_project_card')
         </div>
         <div class="save__infos">

@@ -63,7 +63,7 @@
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-{{--<script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>--}}
+<script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
 
 @include('layouts.admin.plugins', ['type' => 'js'])
 

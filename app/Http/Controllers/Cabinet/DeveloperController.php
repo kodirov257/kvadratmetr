@@ -29,6 +29,7 @@ class DeveloperController extends Controller
 //        dd('salom');
         $user = \Auth::user();
         $developer = Developer::where('owner_id', $user->id)->get()->first();
+//        $projects = Projects::
         return view('developer.index', compact('user', 'developer'));
     }
 

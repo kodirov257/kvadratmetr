@@ -2,20 +2,25 @@
     <div class="project-card">
         <div class="project-card__image">
             <img
-                    src="assets/img/53a198a4da48c57e6dfeb33ed82a7608.jpg"
+                    src="{{$project->fileOriginal ?? ''}}"
                     alt=""
             />
             <a href="#" class="project-card__edit"
             ><i class="icon-pencil"></i
                 ></a>
             <span
-                    class="project-card__type project-card__type_active"
-            >Active</span
+                    class="project-card__type {{$project->status === 5 ? 'project-card__type_active': ''}}"
+            >{{$project->status === 5 ? 'Active': 'Deactive'}}</span
             >
         </div>
-        <div class="project-card__title">NRG Oybek</div>
+        <div class="project-card__title">{{$project->name ?? '-'}}</div>
         <div class="project-card__details">
             <p class="project-card__detail">
+                @foreach($project->values as $value)
+                    @php($characteristic = $value->characteristic)
+{{--                    TODO: Only show 5 main characteristics after adding them #todo --}}
+
+                @endforeach
                           <span><i class="icon-building"></i>Storeys:</span
                           ><b>16</b> floor
             </p>
@@ -37,9 +42,16 @@
             </p>
         </div>
         <div class="project-card__footer">
-            Status: <span class="text">Active</span>
+            Status: <span class="text {{$project->status === 5 ? '' : 'deactive'}}">{{$project->status === 5 ? 'Active' : 'Deactive'}}</span>
             <label class="switch">
-                <input type="checkbox" checked/>
+{{--                @dd($project->status)--}}
+                @if($project->status === 5)
+                    <input type="checkbox" checked/>
+
+                @else
+                    <input type="checkbox"/>
+
+                @endif
                 <span class="slider round"></span>
             </label>
         </div>

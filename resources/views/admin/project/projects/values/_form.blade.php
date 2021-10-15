@@ -17,6 +17,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+
                             {!! Form::label('characteristic_id', trans('adminlte.characteristic.name'), ['class' => 'col-form-label']); !!}
                             {!! Form::select('characteristic_id', $characteristics, $characteristic ? $characteristic->id : null,
                                 ['class'=>'form-control' . ($errors->has('characteristic_id') ? ' is-invalid' : ''), 'id' => 'characteristic_id',
@@ -73,3 +74,4 @@
 </div>
 
 @include('admin.project.projects.values._scripts')
+<script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
