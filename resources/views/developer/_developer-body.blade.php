@@ -223,82 +223,12 @@
         </div>
     </div>
     <div id="location" class="b-tab">
-        <a href="#" class="locations__info active">Location Info</a>
-        <a href="#" class="locations__info">Map</a>
-
-        <h2 class="location__address-title">Address uz</h2>
-        <div class="location-address">
-            <div class="location__our-address">
-                <i class="icon-location-pin"></i>
-            </div>
-            <input class="location__office-address" name="address_uz"
-                   placeholder="38а, st. Aybek, Shaykhontokhur district, BC Avalon, 1st floor"
-                   value="{{$developer->address_uz ?? ''}}"/>
-        </div>
-        <h2 class="location__address-title">Landmark Uz</h2>
-        <div class="location-address">
-            <div class="location__our-address">
-                <i class="icon-location-pin"></i>
-            </div>
-            <input class="location__office-address" name="landmark_uz"
-                   placeholder="Tashkent City Park. RC 'Boulevard'" value="{{$developer->landmark_uz ?? ''}}"/>
-
-        </div>
-        <h2 class="location__address-title">Address ru</h2>
-        <div class="location-address">
-            <div class="location__our-address">
-                <i class="icon-location-pin"></i>
-            </div>
-            <input class="location__office-address" name="address_ru"
-                   placeholder="38а, st. Aybek, Shaykhontokhur district, BC Avalon, 1st floor"
-                   value="{{$developer->address_ru ?? ''}}"/>
-        </div>
-        <h2 class="location__address-title">Landmark Ru</h2>
-        <div class="location-address">
-            <div class="location__our-address">
-                <i class="icon-location-pin"></i>
-            </div>
-            <input class="location__office-address" name="landmark_ru"
-                   placeholder="Tashkent City Park. RC 'Boulevard'" value="{{$developer->landmark_ru ?? ''}}"/>
-
-        </div>
-        <h2 class="location__address-title">Address en</h2>
-        <div class="location-address">
-            <div class="location__our-address">
-                <i class="icon-location-pin"></i>
-            </div>
-            <input class="location__office-address" name="address_en"
-                   placeholder="38а, st. Aybek, Shaykhontokhur district, BC Avalon, 1st floor"
-                   value="{{$developer->address_en ?? ''}}"/>
-        </div>
-
-        <h2 class="location__address-title">Landmark en</h2>
-        <div class="location-address">
-            <div class="location__our-address">
-                <i class="icon-location-pin"></i>
-            </div>
-            <input class="location__office-address" name="landmark_en"
-                   placeholder="Tashkent City Park. RC 'Boulevard'" value="{{$developer->landmark_en ?? ''}}"/>
-
-        </div>
-
-
-        <div class="location__in-map">
-            <h2 class="location__address-title">
-                Mark your Office on the map
-            </h2>
-            <div id="map" class="map"></div>
-        </div>
-        <div class="save__infos">
-            <button type="submit" class="saving">Save</button>
-        </div>
+        @include('partials.components.dashboard._address_input', ['info'=>$developer])
     </div>
 
-    <input type="hidden" name="lng" id="lng" value="{{$developer->lng ?? ''}}">
-    <input type="hidden" name="ltd" id="ltd" value="{{$developer->ltd ?? ''}}">
+
 </div>
 
-<script src="{{asset('./assets/leaflet/leaflet.js')}}"></script>
 <script src="{{asset('./assets/js/jquery.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"
         integrity="sha256-HmfY28yh9v2U4HfIXC+0D6HCdWyZI42qjaiCFEJgpo0=" crossorigin="anonymous"></script>
@@ -392,12 +322,5 @@
     });
     CKEDITOR.instances.about_en.on('blur', function () {
         deactivateInput('enAbout')
-    });
-</script>
-<script>
-    map.on('click', function (e) {
-        document.getElementById('lng').value = e.latlng.lng;
-        document.getElementById('ltd').value = e.latlng.lat;
-        // alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
     });
 </script>

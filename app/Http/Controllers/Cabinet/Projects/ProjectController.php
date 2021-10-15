@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cabinet\Projects;
 
 use App\Entity\Project\Characteristic;
 use App\Entity\Project\Developer;
+use App\Entity\Project\Facility;
 use App\Entity\Project\Projects\Project;
 use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
@@ -22,9 +23,9 @@ class ProjectController extends Controller
 //        dd('salom');
 
 
-//        $projects = Project::forUser(Auth::user())->orderByDesc('id')->paginate(20);
+        $project = [];
 
-        return view('cabinet.projects.index');
+        return view('cabinet.projects.index', compact('project'));
     }
 
     /**
@@ -35,10 +36,11 @@ class ProjectController extends Controller
     public function create(Request $request, Developer $developer)
     {
 //        dd($developer);
-        $characteristics = Characteristic::orderBy('sort')
-            ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+        $characteristics = Characteristic::orderBy('sort')->get();
+        $facilities = Facility::orderBy('id')->get();
+//        dd($characteristics);
 
-        return view('cabinet.projects.index', compact('developer', 'characteristics'));
+        return view('cabinet.projects.index', compact('developer', 'characteristics', 'facilities'));
 
     }
 
@@ -50,7 +52,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
