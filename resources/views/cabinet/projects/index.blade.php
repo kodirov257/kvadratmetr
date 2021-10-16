@@ -4,7 +4,7 @@
     <div class="main-content">
         <div class="row">
             <div class="col-8">
-                <form method="POST" action="{{route('cabinet.projects.store')}}">
+                <form method="POST" action="{{route('cabinet.projects.store')}}" enctype="multipart/form-data">
                     @csrf
                     @include('cabinet.projects._project_body')
                 </form>

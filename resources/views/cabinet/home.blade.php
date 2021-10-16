@@ -3,7 +3,7 @@
 @section('content')
     <div class="main-content">
         <div class="main-title" id="goodDay">
-            <h1 class="main-title__name">Good Day, <span>{{$name}}</span>!</h1>
+            <h1 class="main-title__name">Good Day, <span>{{$name->name}}</span>!</h1>
             <div class="main-title__progress"><div class="main-title__progress-bar"></div></div>
         </div>
         <div class="row home-row">

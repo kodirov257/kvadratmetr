@@ -8,11 +8,21 @@ use App\Entity\Project\Facility;
 use App\Entity\Project\Projects\Project;
 use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
+use App\UseCases\Projects\DeveloperService;
+use App\UseCases\Projects\ProjectService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+
+    private $service;
+
+    public function __construct(ProjectService $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +62,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+//        dd($request->images);
+//        dd($request);
+        $user = Auth::user();
+        $developer = Developer::where('owner_id', $user->id)->get()->first();
+        try {
+            $project = $this->service->create($developer->id, /*$request->category_id, */$request);
+
+            return redirect()->route('cabinet.developer.edit', [$developer, $project]);
+        } catch (\DomainException $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
     }
 
     /**

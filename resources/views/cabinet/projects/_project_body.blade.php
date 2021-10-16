@@ -50,7 +50,7 @@
             <div class="col-4">
                 <div class="image-of-projects">
                     <i class="icon-add-photo" onclick="callNewInput()"></i>
-                    <input type="file" class="d-none" id="imageNewInput">
+                    <input type="file" name="images[]" class="d-none" id="imageNewInput" multiple>
                 </div>
             </div>
         </div>
@@ -146,6 +146,10 @@
         @include('partials.components.dashboard._address_input')
     </div>
 </div>
+<script src="{{asset('./assets/js/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"
+        integrity="sha256-HmfY28yh9v2U4HfIXC+0D6HCdWyZI42qjaiCFEJgpo0=" crossorigin="anonymous"></script>
+<script src="{{asset('./assets/js/main.js')}}"></script>
 <script>
     function activateInput(type) {
         let childrenElements;
@@ -222,3 +226,4 @@
         }
     }
 </script>
+

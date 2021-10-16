@@ -14,9 +14,9 @@
                     <div class="icons-of-homes first">
                         <i class="icon-building"></i>
                     </div>
-                    <input type="text" placeholder="16" name="value_from_{{$characteristic->id}}"/>
+                    <input type="text" placeholder="16" name="{{$characteristic->name}}[]"/>
                     <div class="icons-of-homes">to</div>
-                    <input type="text" name="value_to_{{$characteristic->id}}"/>
+                    <input type="text" name="{{$characteristic->name}}[]"/>
                 </div>
             @elseif($characteristic->type === 'string')
                 <div class="characteristics repairs">

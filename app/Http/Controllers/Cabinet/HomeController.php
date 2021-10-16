@@ -11,9 +11,10 @@ class HomeController extends Controller
     {
 
         $ownerId = \Auth::user();
+//        dd($ownerId);
         $name = Developer::where('owner_id', $ownerId->id)->get()->first();
         if (!$name){
-            $name = $ownerId->name;
+            $name = $ownerId;
         }
 
         return view('cabinet.home', compact(['name']));

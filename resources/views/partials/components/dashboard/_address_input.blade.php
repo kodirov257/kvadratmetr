@@ -69,12 +69,16 @@
 </div>
 <input type="hidden" name="lng" id="lng" value="{{$info->lng ?? ''}}">
 <input type="hidden" name="ltd" id="ltd" value="{{$info->ltd ?? ''}}">
-<script src="{{asset('./assets/leaflet/leaflet.js')}}"></script>
 
+<script src="{{asset('./assets/leaflet/leaflet.js')}}"></script>
 <script>
-    map.on('click', function (e) {
-        document.getElementById('lng').value = e.latlng.lng;
-        document.getElementById('ltd').value = e.latlng.lat;
-        // alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        map.on('click', function (e) {
+            document.getElementById('lng').value = e.latlng.lng;
+            document.getElementById('ltd').value = e.latlng.lat;
+            // alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+        });
     });
+
 </script>

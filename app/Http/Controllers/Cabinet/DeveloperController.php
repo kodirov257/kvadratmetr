@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cabinet;
 
 use App\Entity\Project\Developer;
+use App\Entity\Project\Projects\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cabinet\Developers\CreateRequest;
 use App\UseCases\Projects\DeveloperService;

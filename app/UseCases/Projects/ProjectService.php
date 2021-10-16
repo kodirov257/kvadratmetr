@@ -2,6 +2,7 @@
 
 namespace App\UseCases\Projects;
 
+use App\Entity\Project\Characteristic;
 use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Project;
 use App\Entity\Category;
@@ -9,6 +10,7 @@ use App\Entity\Region;
 use App\Entity\User\User;
 use App\Events\Project\ModerationPassed;
 use App\Helpers\ImageHelper;
+use App\Helpers\LanguageHelper;
 use App\Http\Requests\Projects\CharacteristicsRequest;
 use App\Http\Requests\Projects\CreateRequest;
 use App\Http\Requests\Projects\EditRequest;
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectService
 {
-    public function create($developerId, /*$categoryId, $regionId, */CreateRequest $request): Project
+    public function create($developerId, /*$categoryId, $regionId, */ Request $request): Project
     {
         /** @var User $developer */
         $developer = Developer::findOrFail($developerId);
@@ -32,24 +34,34 @@ class ProjectService
         return DB::transaction(function () use ($request, $developer/*, $category, $region*/) {
 
 
-            if (!$request->file){
+            if (!$request->file) {
+//                $characteristics = Characteristic::orderBy('sort')
+//                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+//                dd($characteristics);
+//                foreach ($characteristics as $key => $part) {
+////                    dd($request[$key]);
+//                    if ($part === $request[$key]) {
+//                            dd($request, 'salom');
+//                    }
+//                }
+//                dd($request, 'request');
                 /** @var Project $project */
                 $project = Project::make([
-                    'name_uz' => $request->name_uz,
-                    'name_ru' => $request->name_ru,
-                    'name_en' => $request->name_en,
-                    'about_uz' => $request->about_uz,
-                    'about_ru' => $request->about_ru,
-                    'about_en' => $request->about_en,
-                    'slug' => $request->slug,
-                    'address_uz' => $request->address_uz,
-                    'address_ru' => $request->address_ru,
-                    'address_en' => $request->address_en,
-                    'landmark_uz' => $request->landmark_uz,
-                    'landmark_ru' => $request->landmark_ru,
-                    'landmark_en' => $request->landmark_en,
-                    'lng' => $request->lng,
-                    'ltd' => $request->ltd,
+                    'name_uz' => $request->input('name_en'),
+                    'name_ru' => $request->input('name_en'),
+                    'name_en' => $request->input('name_en'),
+                    'about_uz' => $request->input('about_uz'),
+                    'about_ru' => $request->input('about_ru'),
+                    'about_en' => $request->input('about_en'),
+                    'slug' => $request->input('name_en') . '123',
+                    'address_uz' => $request->input('address_uz'),
+                    'address_ru' => $request->input('address_ru'),
+                    'address_en' => $request->input('address_en'),
+                    'landmark_uz' => $request->input('landmark_uz'),
+                    'landmark_ru' => $request->input('landmark_ru'),
+                    'landmark_en' => $request->input('landmark_en'),
+                    'lng' => $request->input('lng'),
+                    'ltd' => $request->input('ltd'),
                     'status' => Project::STATUS_DRAFT,
                 ]);
 
@@ -57,26 +69,27 @@ class ProjectService
 //            $project->category()->associate($category);
 //            $project->region()->associate($region);
 
+
                 $project->saveOrFail();
                 return $project;
             }
             /** @var Project $project */
             $project = Project::make([
-                'name_uz' => $request->name_uz,
-                'name_ru' => $request->name_ru,
-                'name_en' => $request->name_en,
-                'about_uz' => $request->about_uz,
-                'about_ru' => $request->about_ru,
-                'about_en' => $request->about_en,
-                'slug' => $request->slug,
-                'address_uz' => $request->address_uz,
-                'address_ru' => $request->address_ru,
-                'address_en' => $request->address_en,
-                'landmark_uz' => $request->landmark_uz,
-                'landmark_ru' => $request->landmark_ru,
-                'landmark_en' => $request->landmark_en,
-                'lng' => $request->lng,
-                'ltd' => $request->ltd,
+                'name_uz' => $request->input('name_uz'),
+                'name_ru' => $request->input('name_ru'),
+                'name_en' => $request->input('name_en'),
+                'about_uz' => $request->input('about_uz'),
+                'about_ru' => $request->input('about_ru'),
+                'about_en' => $request->input('about_en'),
+                'slug' => $request->input('slug'),
+                'address_uz' => $request->input('address_uz'),
+                'address_ru' => $request->input('address_ru'),
+                'address_en' => $request->input('address_en'),
+                'landmark_uz' => $request->input('landmark_uz'),
+                'landmark_ru' => $request->input('landmark_ru'),
+                'landmark_en' => $request->input('landmark_en'),
+                'lng' => $request->input('lng'),
+                'ltd' => $request->input('ltd'),
                 'status' => Project::STATUS_DRAFT,
             ]);
 
@@ -85,6 +98,7 @@ class ProjectService
 //            $project->region()->associate($region);
 
             $project->saveOrFail();
+            dd($project);
 
 
             $this->addPhotos($project->id, $request);
