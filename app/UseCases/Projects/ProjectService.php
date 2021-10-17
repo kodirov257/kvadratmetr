@@ -37,12 +37,14 @@ class ProjectService
             if (!$request->file) {
 //                $characteristics = Characteristic::orderBy('sort')
 //                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
-//                dd($characteristics);
+////                dd($characteristics);
+//                $index = 0;
 //                foreach ($characteristics as $key => $part) {
-////                    dd($request[$key]);
-//                    if ($part === $request[$key]) {
+//                    dd($request->offsetGet($index));
+//                    if ($part === $request[$index]) {
 //                            dd($request, 'salom');
 //                    }
+//                    $index++;
 //                }
 //                dd($request, 'request');
                 /** @var Project $project */
