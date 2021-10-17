@@ -86,8 +86,8 @@ class DeveloperController extends Controller
     {
         $user = \Auth::user();
 
-        $developer = Developer::where('owner_id', $user->id)->first()->get();
-
+        $developer = Developer::where('owner_id', $user->id)->get()->first();
+//        dd($developer);
         return view('developer.edit', compact('developer', 'user'));
     }
 

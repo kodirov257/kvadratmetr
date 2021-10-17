@@ -5,7 +5,7 @@
                     src="{{$project->fileOriginal ?? ''}}"
                     alt=""
             />
-            <a href="#" class="project-card__edit"
+            <a href="{{route('cabinet.projects.edit', [$project->id])}}" class="project-card__edit"
             ><i class="icon-pencil"></i
                 ></a>
             <span

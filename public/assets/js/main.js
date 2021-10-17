@@ -109,6 +109,126 @@ function Tabs() {
   
 let connectTabs = new Tabs();
 
+function langTabs() {
+    let bindlangAll = function() {
+      let menuElements = document.querySelectorAll('[data-tab-lang]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].addEventListener('click', change, false);
+      }
+    }
+  
+    let clear = function() {
+      let menuElements = document.querySelectorAll('[data-tab-lang]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].classList.remove('active');
+        let id = menuElements[i].getAttribute('data-tab-lang');
+        document.getElementById(id).classList.remove('active');
+      }
+    }
+  
+    let change = function(e) {
+      clear();
+      e.target.classList.add('active');
+      let id = e.currentTarget.getAttribute('data-tab-lang');
+      document.getElementById(id).classList.add('active');
+      e.preventDefault();
+    }
+  
+    bindlangAll();
+}
+  
+let connectLangTabs = new langTabs();
+
+function charTabs() {
+    let bindcharAll = function() {
+      let menuElements = document.querySelectorAll('[data-tab-char]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].addEventListener('click', change, false);
+      }
+    }
+  
+    let clear = function() {
+      let menuElements = document.querySelectorAll('[data-tab-char]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].classList.remove('active');
+        let id = menuElements[i].getAttribute('data-tab-char');
+        document.getElementById(id).classList.remove('active');
+      }
+    }
+  
+    let change = function(e) {
+      clear();
+      e.target.classList.add('active');
+      let id = e.currentTarget.getAttribute('data-tab-char');
+      document.getElementById(id).classList.add('active');
+      e.preventDefault();
+    }
+  
+    bindcharAll();
+}
+  
+let connectCharTabs = new charTabs();
+
+function locTabs() {
+    let bindlocAll = function() {
+      let menuElements = document.querySelectorAll('[data-tab-loc]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].addEventListener('click', change, false);
+      }
+    }
+  
+    let clear = function() {
+      let menuElements = document.querySelectorAll('[data-tab-loc]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].classList.remove('active');
+        let id = menuElements[i].getAttribute('data-tab-loc');
+        document.getElementById(id).classList.remove('active');
+      }
+    }
+  
+    let change = function(e) {
+      clear();
+      e.target.classList.add('active');
+      let id = e.currentTarget.getAttribute('data-tab-loc');
+      document.getElementById(id).classList.add('active');
+      e.preventDefault();
+    }
+  
+    bindlocAll();
+}
+  
+let connectLocTabs = new locTabs();
+
+function socialTabs() {
+    let bindsocAll = function() {
+      let menuElements = document.querySelectorAll('[data-tab-social]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].addEventListener('click', change, false);
+      }
+    }
+  
+    let clear = function() {
+      let menuElements = document.querySelectorAll('[data-tab-social]');
+      for(let i = 0; i < menuElements.length ; i++) {
+        menuElements[i].classList.remove('active');
+        let id = menuElements[i].getAttribute('data-tab-social');
+        document.getElementById(id).classList.remove('active');
+      }
+    }
+  
+    let change = function(e) {
+      clear();
+      e.target.classList.add('active');
+      let id = e.currentTarget.getAttribute('data-tab-social');
+      document.getElementById(id).classList.add('active');
+      e.preventDefault();
+    }
+  
+    bindsocAll();
+}
+  
+let connectSocialTabs = new socialTabs();
+
 function hideDiv() {
     reportDiv = document.getElementById('reports-card-block');
     crtBtn = document.getElementById('crt-rep');

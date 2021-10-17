@@ -933,7 +933,7 @@ ol {
     font-size: 20px;
     line-height: 27px;
     color: #000;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 20px;
 }
 
@@ -952,8 +952,9 @@ ol {
 }
 
 .save__infos {
-    text-align: end;
     margin-top: 60px;
+    text-align: end;
+    width: 100%;
 }
 
 .saving {
@@ -1599,7 +1600,7 @@ ol {
     line-height: 27px;
     font-weight: 500;
     color: #000;
-    margin-top: 35px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -2282,6 +2283,7 @@ ol {
 
 .user-devices__page__card__percent {
     font-size: 16px;
+    font-weight: 600;
 }
 
 .user-devices__filter__title {
@@ -2416,6 +2418,7 @@ ol {
 
 .information-age {
     margin-bottom: 0;
+    font-weight: 500;
 }
 
 .user-devices__indicator {

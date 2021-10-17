@@ -3,6 +3,7 @@
         <div class="developer-bar__image">
             {{--                        <img src="assets/img/NRG-logo.svg" alt="" />--}}
         </div>
+        {{--        @dd($developer);--}}
         <div class="developer-bar__title" id="titleMain">{{$developer->name ?? 'Developer Name here'}}</div>
         <input type="hidden"
                name="name_en"
@@ -27,20 +28,24 @@
     </div>
     <div id="projects" class="b-tab active">
         <div class="row">
-            @foreach ($developer->projects as $project)
-                @include('partials.components.dashboard._project_card')
-            @endforeach
-            @include('partials.components.dashboard._create_new_project_card')
+            @if($developer)
+                @foreach ($developer->projects as $project)
+                    @include('partials.components.dashboard._project_card')
+                @endforeach
+                @include('partials.components.dashboard._create_new_project_card')
+            @endif
         </div>
         <div class="save__infos">
             <button type="submit" class="saving">Save</button>
         </div>
     </div>
     <div id="info" class="b-tab">
-        <a href="#uzbek" class="info__language-span">Uzbek</a>
-        <a href="#russian" class="info__language-span">Russian</a>
-        <a href="#english" class="info__language-span">English</a>
-        <div id="uzbek" class="info__about-uzbek">
+        <div class="b-nav">
+            <a href="#uzbek" data-tab-lang="uzbek" class="info__language-span">Uzbek</a>
+            <a href="#russian" data-tab-lang="russian" class="info__language-span">Russian</a>
+            <a href="#english" data-tab-lang="english" class="info__language-span">English</a>
+        </div>
+        <div id="uzbek" class="b-tab active info__about-uzbek">
             <h1 class="info__about">About Project Uzbek</h1>
             <div class="info__about-buildings">
                 <div class="info__about-text">
@@ -68,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <div id="english" class="info__about-english">
+        <div id="english" class="b-tab info__about-english">
             <h1 class="info__about">About Project English</h1>
             <div class="info__about-buildings">
                 <div class="info__about-text">
@@ -94,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div id="russian" class="info__about-russian">
+        <div id="russian" class="b-tab info__about-russian">
             <h1 class="info__about">About Project Russian</h1>
             <div class="info__about-buildings">
                 <div class="info__about-text">
@@ -126,95 +131,105 @@
         </div>
     </div>
     <div id="contacts" class="b-tab">
-        <a href="#" class="contacts__info active">Contact Info</a>
-        <a href="#" class="contacts__info">Social Network Accounts</a>
-        <div class="contact__accounting">
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Phone Number (Manager)</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-phone"></i>
+        <div class="b-nav">
+            <a href="#contactsTab" data-tab-social="contactsTab" class="contacts__info active">Contact Info</a>
+            <a href="#socialsTab" data-tab-social="socialsTab" class="contacts__info">Social Network Accounts</a>
+        </div>
+        <div id="contactsTab" class="b-tab active">
+            <div class="contact__accounting">
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Phone Number (Manager)</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-phone"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->main_number ?? ''}}"
+                               name="main_number"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->main_number ?? ''}}" name="main_number"/>
+                </div>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Website</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone"><i class="icon-site"></i></div>
+                        <input class="social__phone-number" value="{{$developer->website ?? ''}}" name="website"/>
+                    </div>
+                </div>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Call-Center (HOT)</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-phone"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->call_center ?? ''}}"
+                               name="call_center"/>
+                    </div>
+                </div>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Email</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-mail-dog"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->email ?? ''}}" name="email"/>
+                    </div>
                 </div>
             </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Website</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone"><i class="icon-site"></i></div>
-                    <input class="social__phone-number" value="{{$developer->website ?? ''}}" name="website"/>
-                </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Call-Center (HOT)</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-phone"></i>
+        </div>
+        <div id="socialsTab" class="b-tab active">
+            <div class="contact__accounting">
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Facebook</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-facebook"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->facebook ?? ''}}" name="facebook"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->call_center ?? ''}}" name="call_center"/>
                 </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Email</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-mail-dog"></i>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Instagram</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-instagram"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->instagram ?? ''}}" name="instagram"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->email ?? ''}}" name="email"/>
                 </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Facebook</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-facebook"></i>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Tik-Tok</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-tiktok"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->tik_tok ?? ''}}" name="tik_tok"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->facebook ?? ''}}" name="facebook"/>
                 </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Instagram</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-instagram"></i>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Telegram</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-telegram"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->telegram ?? ''}}" name="telegram"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->instagram ?? ''}}" name="instagram"/>
                 </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Tik-Tok</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-tiktok"></i>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Youtube</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-youtube"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->youtube ?? ''}}" name="youtube"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->tik_tok ?? ''}}" name="tik_tok"/>
                 </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Telegram</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-telegram"></i>
+                <div class="contact__address">
+                    <h2 class="contact__social-sets">Twitter</h2>
+                    <div class="contact__social-address">
+                        <div class="social__phone">
+                            <i class="icon-twitter"></i>
+                        </div>
+                        <input class="social__phone-number" value="{{$developer->twitter ?? ''}}" name="twitter"/>
                     </div>
-                    <input class="social__phone-number" value="{{$developer->telegram ?? ''}}" name="telegram"/>
-                </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Youtube</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-youtube"></i>
-                    </div>
-                    <input class="social__phone-number" value="{{$developer->youtube ?? ''}}" name="youtube"/>
-                </div>
-            </div>
-            <div class="contact__address">
-                <h2 class="contact__social-sets">Twitter</h2>
-                <div class="contact__social-address">
-                    <div class="social__phone">
-                        <i class="icon-twitter"></i>
-                    </div>
-                    <input class="social__phone-number" value="{{$developer->twitter ?? ''}}" name="twitter"/>
                 </div>
             </div>
         </div>

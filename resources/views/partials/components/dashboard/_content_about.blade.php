@@ -1,8 +1,9 @@
-
-<a href="#uzbek" class="info__language-span">Uzbek</a>
-<a href="#russian" class="info__language-span">Russian</a>
-<a href="#english" class="info__language-span">English</a>
-<div id="uzbek" class="info__about-uzbek">
+<div class="b-nav">
+    <a href="#uzbek" data-tab-lang="uzbek" class="b-nav-tab active info__language-span">Uzbek</a>
+    <a href="#russian" data-tab-lang="russian" class="b-nav-tab info__language-span">Russian</a>
+    <a href="#english" data-tab-lang="english" class="b-nav-tab info__language-span">English</a>
+</div>
+<div id="uzbek" class="b-tab active info__about-uzbek">
     <h1 class="info__about">About Project Uzbek</h1>
     <div class="info__about-buildings">
         <div class="info__about-text">
@@ -30,7 +31,7 @@
         </div>
     </div>
 </div>
-<div id="english" class="info__about-english">
+<div id="english" class="b-tab info__about-english">
     <h1 class="info__about">About Project English</h1>
     <div class="info__about-buildings">
         <div class="info__about-text">
@@ -56,7 +57,7 @@
         </div>
     </div>
 </div>
-<div id="russian" class="info__about-russian">
+<div id="russian" class="b-tab info__about-russian">
     <h1 class="info__about">About Project Russian</h1>
     <div class="info__about-buildings">
         <div class="info__about-text">
@@ -85,6 +86,9 @@
             <button type="submit" class="saving">Save</button>
         </div>
     </div>
+</div>
+<div class="save__infos">
+    <button type="submit" class="saving">Save</button>
 </div>
 <script>
     function activateInput(type) {

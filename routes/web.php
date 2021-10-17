@@ -252,8 +252,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             ], function () {
 
                 Route::get('/', 'ProjectController@index')->name('index');
-                Route::get('/edit', 'ProjectController@edit')->name('edit');
-                Route::post('/update', 'ProjectController@update')->name('update');
+                Route::get('/edit/{id}', 'ProjectController@edit')->name('edit');
+                Route::post('/update/{id}', 'ProjectController@update')->name('update');
                 Route::get('/create', 'ProjectController@create')->name('create');
                 Route::post('/store', 'ProjectController@store')->name('store');
 
@@ -262,8 +262,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::get('/create/project/{category}/{region?}', 'CreateController@project')->name('create.project');
                 Route::post('/create/project/{category}/{region?}', 'CreateController@store')->name('create.project.store');
 
-                Route::get('/{project}/edit', 'ManageController@editForm')->name('edit');
-                Route::put('/{project}/edit', 'ManageController@edit');
+//                Route::get('/{project}/edit', 'ManageController@editForm')->name('edit');
+//                Route::put('/{project}/edit', 'ManageController@edit');
                 Route::get('/{project}/photos', 'ManageController@photosForm')->name('photos');
                 Route::post('/{project}/photos', 'ManageController@photos');
                 Route::get('/{project}/characteristics', 'ManageController@characteristicsForm')->name('characteristics');

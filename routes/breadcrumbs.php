@@ -134,6 +134,13 @@ Breadcrumbs::for('cabinet.projects.create', function (Crumbs $crumbs) {
     $crumbs->parent('cabinet.projects.index');
     $crumbs->push(trans('adminlte.create'), route('cabinet.projects.create'));
 });
+Breadcrumbs::for('cabinet.projects.edit', function (Crumbs $crumbs, $id) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push(trans('adminlte.edit'), route('cabinet.projects.edit', $id));
+});
+//Breadcrumbs::for('cabinet.projects.edit', function ($trail, $id) {
+//    $trail->push('Title Here', route('cabinet.projects.edit', $id));
+//});
 
 Breadcrumbs::for('cabinet.projects.create.region', function (Crumbs $crumbs, Category $category, Region $region = null) {
     $crumbs->parent('cabinet.projects.create');

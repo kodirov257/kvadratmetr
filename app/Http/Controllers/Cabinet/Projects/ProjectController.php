@@ -84,18 +84,33 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+        $developer = Developer::where('owner_id', $user->id)->first()->get();
+        $characteristics = Characteristic::orderBy('sort')->get();
+        $facilities = Facility::orderBy('id')->get();
+        dd($developer);
+
+        return view('cabinet.projects.index', compact('developer', 'characteristics', 'facilities'));
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $user = Auth::user();
+        $developer = Developer::where('owner_id', $user->id)->get()->first();
+        $characteristics = Characteristic::orderBy('sort')->get();
+        $facilities = Facility::orderBy('id')->get();
+        $project = Project::where('id', $id)->get()->first();
+//        dd($project);
+
+        return view('cabinet.projects.edit', compact('developer', 'characteristics', 'facilities', 'project'));
+
     }
 
     /**
@@ -107,7 +122,17 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        dd($id);
+        $user = Auth::user();
+        $developer = Developer::where('owner_id', $user->id)->get()->first();
+        $project = Project::where('id', $id)->get()->first();
+        try {
+            $this->service->edit($id, $request);
+
+            return redirect()->route('cabinet.developer.edit', [$developer, $project]);
+        } catch (\DomainException $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**

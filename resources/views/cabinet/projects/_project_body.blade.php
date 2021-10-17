@@ -143,7 +143,7 @@
         </div>
     </div>
     <div id="location" class="b-tab">
-        @include('partials.components.dashboard._address_input')
+        @include('partials.components.dashboard._address_input', ['info'=>$project ?? []])
     </div>
 </div>
 <script src="{{asset('./assets/js/jquery.min.js')}}"></script>

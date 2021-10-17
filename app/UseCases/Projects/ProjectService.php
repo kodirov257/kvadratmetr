@@ -75,8 +75,8 @@ class ProjectService
             }
             /** @var Project $project */
             $project = Project::make([
-                'name_uz' => $request->input('name_uz'),
-                'name_ru' => $request->input('name_ru'),
+                'name_uz' => $request->input('name_en'),
+                'name_ru' => $request->input('name_en'),
                 'name_en' => $request->input('name_en'),
                 'about_uz' => $request->input('about_uz'),
                 'about_ru' => $request->input('about_ru'),
@@ -123,15 +123,26 @@ class ProjectService
         });
     }
 
-    public function edit($id, EditRequest $request): void
+    public function edit($id, Request $request): void
     {
         $project = $this->getProject($id);
-        $project->update($request->only([
-            'title',
-            'content',
-            'price',
-            'address',
-        ]));
+        $project->update([
+            'name_uz' => $request->input('name_en'),
+            'name_ru' => $request->input('name_en'),
+            'name_en' => $request->input('name_en'),
+            'about_uz' => $request->input('about_uz'),
+            'about_ru' => $request->input('about_ru'),
+            'about_en' => $request->input('about_en'),
+            'address_uz' => $request->input('address_uz'),
+            'address_ru' => $request->input('address_ru'),
+            'address_en' => $request->input('address_en'),
+            'landmark_uz' => $request->input('landmark_uz'),
+            'landmark_ru' => $request->input('landmark_ru'),
+            'landmark_en' => $request->input('landmark_en'),
+            'lng' => $request->input('lng'),
+            'ltd' => $request->input('ltd'),
+            'status' => Project::STATUS_DRAFT,
+        ]);
     }
 
     public function sendToModeration($id): void
