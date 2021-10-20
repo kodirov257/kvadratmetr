@@ -35,17 +35,11 @@ class ProjectService
 
 
             if (!$request->file) {
-//                $characteristics = Characteristic::orderBy('sort')
-//                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
-////                dd($characteristics);
-//                $index = 0;
-//                foreach ($characteristics as $key => $part) {
-//                    dd($request->offsetGet($index));
-//                    if ($part === $request[$index]) {
-//                            dd($request, 'salom');
-//                    }
-//                    $index++;
-//                }
+                $characteristics = Characteristic::orderBy('sort')
+                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id' );
+//                dd($characteristics);
+//                $infromation = [];
+
 //                dd($request, 'request');
                 /** @var Project $project */
                 $project = Project::make([
@@ -67,12 +61,69 @@ class ProjectService
                     'status' => Project::STATUS_DRAFT,
                 ]);
 
+
                 $project->developer()->associate($developer);
+                $project->saveOrFail();
+//                dd($project);
+
+                $projects = Project::findOrFail($project->id);
 //            $project->category()->associate($category);
 //            $project->region()->associate($region);
 
+//                dd($projects);
+                foreach ($characteristics as $key => $part) {
+                    if (gettype($request[$part]) == 'array') {
+                        DB::beginTransaction();
+                        try {
+                            $value = $project->values()->create([
+                                'characteristic_id' => $key,
+                                'value' => $request[$part][1],
+                                'value_from' => $request[$part][0],
+                                'main' => true,
+                                'value_to' => $request[$part][1],
+                                'sort' => 1000,
+                            ]);
 
-                $project->saveOrFail();
+                            foreach ($project->values as $i => $value) {
+                                $value->setSort($i + 1);
+                                DB::table('project_project_values')->where('project_id', $value->project_id)
+                                    ->where('characteristic_id', $value->characteristic_id)->update(['sort' => ($i + 1)]);
+                            }
+
+                            DB::commit();
+
+                        } catch (\Exception $e) {
+                            DB::rollBack();
+                            throw $e;
+                        }
+                    }else{
+                        DB::beginTransaction();
+                        try {
+                            $value = $project->values()->create([
+                                'characteristic_id' => $key,
+                                'value' => $request[$part],
+                                'main' => true,
+                                'sort' => 1000,
+                            ]);
+
+                            foreach ($project->values as $i => $value) {
+                                $value->setSort($i + 1);
+                                DB::table('project_project_values')->where('project_id', $value->project_id)
+                                    ->where('characteristic_id', $value->characteristic_id)->update(['sort' => ($i + 1)]);
+                            }
+
+                            DB::commit();
+
+                        } catch (\Exception $e) {
+                            DB::rollBack();
+                            throw $e;
+                        }
+                    }
+                }
+
+//                dd('success');
+
+
                 return $project;
             }
             /** @var Project $project */
