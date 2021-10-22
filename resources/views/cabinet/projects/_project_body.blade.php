@@ -60,6 +60,7 @@
         </div>
     </div>
     <div id="characteristics" class="b-tab">
+{{--        @dd($project->facilities)--}}
         @include('partials.components.dashboard._characteristics_facilities')
     </div>
     <div id="plan" class="b-tab">

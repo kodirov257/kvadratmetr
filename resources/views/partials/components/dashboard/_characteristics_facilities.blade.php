@@ -82,7 +82,7 @@
                         </div>
                         <div class="icons-of-homes repair">
                             <label class="switch">
-                                <input type="checkbox" name="{{$facility->id}}"/>
+                                <input type="checkbox" name="{{$facility->name}}"/>
                                 <span class="slider round"></span>
                             </label>
                         </div>

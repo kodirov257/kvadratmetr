@@ -4,6 +4,7 @@ namespace App\UseCases\Projects;
 
 use App\Entity\Project\Characteristic;
 use App\Entity\Project\Developer;
+use App\Entity\Project\Facility;
 use App\Entity\Project\Projects\Project;
 use App\Entity\Category;
 use App\Entity\Region;
@@ -35,10 +36,16 @@ class ProjectService
 
 
             if (!$request->file) {
+//                dd($request);
                 $characteristics = Characteristic::orderBy('sort')
                     ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id' );
+                $facilities = Facility::orderBy('id')
+                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+
 //                dd($characteristics);
 //                $infromation = [];
+
+
 
 //                dd($request, 'request');
                 /** @var Project $project */
@@ -115,6 +122,18 @@ class ProjectService
                             DB::commit();
 
                         } catch (\Exception $e) {
+                            DB::rollBack();
+                            throw $e;
+                        }
+                    }
+                }
+                foreach ($facilities as $key => $facility){
+                    if ($request[$facility]){
+                        DB::beginTransaction();
+                        try {
+                            $project->addOrRemoveFacility($key);
+                            DB::commit();
+                        } catch (Exception $e) {
                             DB::rollBack();
                             throw $e;
                         }
