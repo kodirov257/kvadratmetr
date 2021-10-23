@@ -27,27 +27,15 @@ class ProjectService
     {
         /** @var User $developer */
         $developer = Developer::findOrFail($developerId);
-//        /** @var Category $category */
-//        $category = Category::findOrFail($categoryId);
-//        /** @var Region $region */
-//        $region = $regionId ? Region::findOrFail($regionId) : null;
 
         return DB::transaction(function () use ($request, $developer/*, $category, $region*/) {
 
-
             if (!$request->file) {
-//                dd($request);
                 $characteristics = Characteristic::orderBy('sort')
                     ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id' );
                 $facilities = Facility::orderBy('id')
                     ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
 
-//                dd($characteristics);
-//                $infromation = [];
-
-
-
-//                dd($request, 'request');
                 /** @var Project $project */
                 $project = Project::make([
                     'name_uz' => $request->input('name_en'),
@@ -68,65 +56,10 @@ class ProjectService
                     'status' => Project::STATUS_DRAFT,
                 ]);
 
-
                 $project->developer()->associate($developer);
                 $project->saveOrFail();
-//                dd($project);
 
-                $projects = Project::findOrFail($project->id);
-//            $project->category()->associate($category);
-//            $project->region()->associate($region);
-
-//                dd($projects);
-                foreach ($characteristics as $key => $part) {
-                    if (gettype($request[$part]) == 'array') {
-                        DB::beginTransaction();
-                        try {
-                            $value = $project->values()->create([
-                                'characteristic_id' => $key,
-                                'value' => $request[$part][1],
-                                'value_from' => $request[$part][0],
-                                'main' => true,
-                                'value_to' => $request[$part][1],
-                                'sort' => 1000,
-                            ]);
-
-                            foreach ($project->values as $i => $value) {
-                                $value->setSort($i + 1);
-                                DB::table('project_project_values')->where('project_id', $value->project_id)
-                                    ->where('characteristic_id', $value->characteristic_id)->update(['sort' => ($i + 1)]);
-                            }
-
-                            DB::commit();
-
-                        } catch (\Exception $e) {
-                            DB::rollBack();
-                            throw $e;
-                        }
-                    }else{
-                        DB::beginTransaction();
-                        try {
-                            $value = $project->values()->create([
-                                'characteristic_id' => $key,
-                                'value' => $request[$part],
-                                'main' => true,
-                                'sort' => 1000,
-                            ]);
-
-                            foreach ($project->values as $i => $value) {
-                                $value->setSort($i + 1);
-                                DB::table('project_project_values')->where('project_id', $value->project_id)
-                                    ->where('characteristic_id', $value->characteristic_id)->update(['sort' => ($i + 1)]);
-                            }
-
-                            DB::commit();
-
-                        } catch (\Exception $e) {
-                            DB::rollBack();
-                            throw $e;
-                        }
-                    }
-                }
+                $this->addCharacteristicsToProduct($characteristics, $project, $request);
                 foreach ($facilities as $key => $facility){
                     if ($request[$facility]){
                         DB::beginTransaction();
@@ -139,9 +72,6 @@ class ProjectService
                         }
                     }
                 }
-
-//                dd('success');
-
 
                 return $project;
             }
@@ -170,14 +100,12 @@ class ProjectService
 //            $project->region()->associate($region);
 
             $project->saveOrFail();
-            dd($project);
 
 
             $this->addPhotos($project->id, $request);
 
 
             return $project;
-
         });
     }
 
@@ -195,9 +123,83 @@ class ProjectService
         });
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function edit($id, Request $request): void
     {
         $project = $this->getProject($id);
+        if (!$request->file) {
+            $characteristics = Characteristic::orderBy('sort')
+                ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+            $facilities = Facility::orderBy('id')
+                ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+            foreach ($characteristics as $key => $part) {
+                $value = $project->values()->where('characteristic_id', $key)->first();
+                if($value){
+
+                    if (gettype($request[$part]) == 'array') {
+                        DB::beginTransaction();
+                        try {
+                            DB::table('project_project_values')->where('project_id', $value->project_id)
+                                ->where('characteristic_id', $value->characteristic_id)->update([
+                                    'characteristic_id' => $key,
+                                    'value' => $request[$part][1],
+                                    'value_from' => $request[$part][0],
+                                    'main' => true,
+                                    'value_to' => $request[$part][1]
+                                ]);
+
+                            $value = $project->values()->where('characteristic_id', $request->characteristic_id)->first();
+
+                            DB::commit();
+
+                        } catch (\Exception $e) {
+                            DB::rollBack();
+                            throw $e;
+                        }
+                    }else{
+                        DB::beginTransaction();
+                        try {
+                            DB::table('project_project_values')->where('project_id', $value->project_id)
+                                ->where('characteristic_id', $value->characteristic_id)->update([
+                                    'characteristic_id' => $key,
+                                    'value' => $request[$part],
+                                    'main' => true,
+                                ]);
+                            DB::commit();
+
+                        } catch (\Exception $e) {
+                            DB::rollBack();
+                            throw $e;
+                        }
+                    }
+                }else{
+                    $this->addCharacteristicsToProduct($characteristics, $project, $request);
+                }
+
+            }
+            foreach ($facilities as $key => $facility){
+//                dd($request);
+                if ($request[$facility]){
+                    DB::beginTransaction();
+                    try {
+//                        dd($request[$facility]);
+                        if ($request[$facility] === 'on' && $project->projectFacilities()->where('facility_id', $key)->exists()){
+                            continue;
+                        }else{
+                            $project->addOrRemoveFacility($key);
+//                            dd('salom');
+                            DB::commit();
+                        }
+                    } catch (Exception $e) {
+                        DB::rollBack();
+                        throw $e;
+                    }
+                }
+            }
+
+        }
         $project->update([
             'name_uz' => $request->input('name_en'),
             'name_ru' => $request->input('name_en'),
@@ -215,6 +217,62 @@ class ProjectService
             'ltd' => $request->input('ltd'),
             'status' => Project::STATUS_DRAFT,
         ]);
+
+    }
+
+    public function addCharacteristicsToProduct($characteristics, $project, $request): void
+    {
+        foreach ($characteristics as $key => $part) {
+            if (gettype($request[$part]) == 'array') {
+                DB::beginTransaction();
+                try {
+                    $value = $project->values()->create([
+                        'characteristic_id' => $key,
+                        'value' => $request[$part][1],
+                        'value_from' => $request[$part][0],
+                        'main' => true,
+                        'value_to' => $request[$part][1],
+                        'sort' => 1000,
+                    ]);
+
+                    foreach ($project->values as $i => $value) {
+                        $value->setSort($i + 1);
+                        DB::table('project_project_values')->where('project_id', $value->project_id)
+                            ->where('characteristic_id', $value->characteristic_id)->update(['sort' => ($i + 1)]);
+                    }
+
+                    DB::commit();
+
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    throw $e;
+                }
+            }else{
+                DB::beginTransaction();
+                try {
+                    $value = $project->values()->create([
+                        'characteristic_id' => $key,
+                        'value' => $request[$part],
+                        'main' => true,
+                        'sort' => 1000,
+                    ]);
+
+                    foreach ($project->values as $i => $value) {
+                        $value->setSort($i + 1);
+                        DB::table('project_project_values')->where('project_id', $value->project_id)
+                            ->where('characteristic_id', $value->characteristic_id)->update(['sort' => ($i + 1)]);
+                    }
+
+                    DB::commit();
+
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    throw $e;
+                }
+            }
+        }
+
+
     }
 
     public function sendToModeration($id): void

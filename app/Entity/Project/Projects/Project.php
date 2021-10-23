@@ -155,7 +155,9 @@ class Project extends Model
 
     public function addOrRemoveFacility($facilityId): void
     {
+//        dd($facilityId);
         if (!$this->projectFacilities()->where('facility_id', $facilityId)->exists()) {
+//            dd($this->projectFacilities()->where('facility_id', $facilityId)->exists());
             $this->projectFacilities()->create(['facility_id' => $facilityId]);
         } else {
             $this->projectFacilities()->where('facility_id', $facilityId)->delete();

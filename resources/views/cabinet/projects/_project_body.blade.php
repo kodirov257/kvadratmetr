@@ -60,8 +60,13 @@
         </div>
     </div>
     <div id="characteristics" class="b-tab">
-{{--        @dd($project->facilities)--}}
-        @include('partials.components.dashboard._characteristics_facilities')
+        {{--        @dd($project->values)--}}
+        @if($project->facilities && count($project->facilities) > 0)
+            @include('partials.components.dashboard._characteristics_facilities',
+            ['project_facilities'=>$project->facilities, 'project_characteristics'=> $project->values])
+        @else
+            @include('partials.components.dashboard._characteristics_facilities')
+        @endif
     </div>
     <div id="plan" class="b-tab">
         <div class="room__numbers">

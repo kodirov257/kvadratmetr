@@ -1,8 +1,9 @@
 <div class="b-nav">
-<a href="#characteristicsTab" data-tab-char="characteristicsTab" class="b-nav-tab active characteristics__info active"
->Characteristics</a
->
-<a href="#facilitiesTab" data-tab-char="facilitiesTab" class="b-nav-tab characteristics__info">Facilities</a>
+    <a href="#characteristicsTab" data-tab-char="characteristicsTab"
+       class="b-nav-tab active characteristics__info active"
+    >Characteristics</a
+    >
+    <a href="#facilitiesTab" data-tab-char="facilitiesTab" class="b-nav-tab characteristics__info">Facilities</a>
 </div>
 <div id="characteristicsTab" class="b-tab active">
     <div class="characteristics-of-rooms">
@@ -16,9 +17,19 @@
                         <div class="icons-of-homes first">
                             <i class="icon-building"></i>
                         </div>
-                        <input type="text" placeholder="16" name="{{$characteristic->name}}[]"/>
-                        <div class="icons-of-homes">to</div>
-                        <input type="text" name="{{$characteristic->name}}[]"/>
+                            @foreach($project_characteristics as $project_characteristic)
+                                @if($project_characteristic)
+                                    <input type="text" placeholder="16" name="{{$characteristic->name}}[]"
+                                           value="{{$project_characteristic->value_from}}"/>
+                                    <div class="icons-of-homes">to</div>
+                                    <input type="text" name="{{$characteristic->name}}[]"
+                                           value="{{$project_characteristic->value_to}}"/>
+                                @else
+                                    <input type="text" placeholder="16" name="{{$characteristic->name}}[]"/>
+                                    <div class="icons-of-homes">to</div>
+                                    <input type="text" name="{{$characteristic->name}}[]"/>
+                                @endif
+                            @endforeach
                     </div>
                 @elseif($characteristic->type === 'string')
                     <div class="characteristics repairs">
@@ -71,7 +82,6 @@
 
             {{--        @dd($facilities)--}}
             @foreach($facilities as $facility)
-
                 <div class="col-6">
                     <div class="characteristics repairs mb-4">
                         <div class="icons-of-homes first">
@@ -82,7 +92,13 @@
                         </div>
                         <div class="icons-of-homes repair">
                             <label class="switch">
-                                <input type="checkbox" name="{{$facility->name}}"/>
+                                @foreach($project_facilities as $project_facility)
+                                    @if($project_facility->id === $facility->id)
+                                        <input type="checkbox" name="{{$facility->name}}" checked/>
+                                    @else
+                                        <input type="checkbox" name="{{$facility->name}}"/>
+                                    @endif
+                                @endforeach
                                 <span class="slider round"></span>
                             </label>
                         </div>
