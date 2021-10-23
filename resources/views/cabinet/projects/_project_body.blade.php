@@ -38,19 +38,21 @@
         <h2 class="project-images">Add project images</h2>
         <div class="row">
 
-            <div class="col-4">
-                <div class="image-of-projects">
-                    <img
-                            src="{{asset('./assets/img/0caec11cdc98518be7e4b885b3aff1c6.png')}}"
-                            alt=""
-                            class="project-image"
-                    />
+            <div id="project_images" class="row">
+                <div class="col-4">
+                    <div class="image-of-projects">
+                        <img
+                                src="{{asset('./assets/img/0caec11cdc98518be7e4b885b3aff1c6.png')}}"
+                                alt=""
+                                class="project-image"
+                        />
+                    </div>
                 </div>
             </div>
             <div class="col-4">
                 <div class="image-of-projects">
                     <i class="icon-add-photo" onclick="callNewInput()"></i>
-                    <input type="file" name="images[]" class="d-none" id="imageNewInput" multiple>
+                    <input type="file" name="images" class="d-none" id="imageNewInput">
                 </div>
             </div>
         </div>
@@ -230,6 +232,36 @@
                 console.log('default');
                 break
         }
+    }
+
+    const inputElement = document.getElementById("imageNewInput");
+    inputElement.addEventListener("change", uploadImage, false);
+    // function handleFiles() {
+    //     const fileList = this.files; /* now you can work with the file list */
+    // }
+    function uploadImage() {
+        console.log(window.URL.createObjectURL(this.files[0]))
+        let imageArray = localStorage.getItem('images') ? JSON.parse(localStorage.getItem('images')) : [];
+        imageArray.push({order: imageArray.length + 1, imageUrl: window.URL.createObjectURL(this.files[0])});
+
+        let imageContainer = document.getElementById('project_images');
+        let imagesHtml = '';
+        for (let i = 0; i < imageArray.length; i++) {
+             imagesHtml += `
+        <div class="col-4">
+                    <div class="image-of-projects">
+                        <img
+                                src="${imageArray[i].imageUrl}"
+                                alt=""
+                                class="project-image"
+                        />
+                    </div>
+                </div>
+
+        `;
+        }
+        imageContainer.innerHTML = imagesHtml;
+        localStorage.setItem('images', JSON.stringify(imageArray));
     }
 </script>
 
