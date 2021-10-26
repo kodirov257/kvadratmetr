@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.707" height="18.707" viewBox="0 0 18.707 18.707">
+  <g id="search" transform="translate(-3 -3)">
+    <g id="Эллипс_4" data-name="Эллипс 4" transform="translate(3 3)" fill="none" stroke="#bcbccb" stroke-width="2">
+      <circle cx="8" cy="8" r="8" stroke="none"/>
+      <circle cx="8" cy="8" r="7" fill="none"/>
+    </g>
+    <line id="Линия_15" data-name="Линия 15" x1="4.35" y1="4.35" transform="translate(16.65 16.65)" fill="none" stroke="#bcbccb" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>
