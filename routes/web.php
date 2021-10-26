@@ -20,6 +20,8 @@ Route::get('admin',function () {
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/developers', 'DevelopersController@index')->name('developers');
+    Route::get('/developer', 'DevelopersController@show')->name('developers');
 
 //    Auth::routes();
 

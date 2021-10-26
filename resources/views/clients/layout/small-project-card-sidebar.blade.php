@@ -1,7 +1,7 @@
 <div class="small-item">
     <div class="image">
         <img
-                src="assets/img/domtut-4.jpg"
+                src="{{asset('assets/user-front/assets/img/domtut-4.jpg')}}"
                 alt="small-item-image"
                 class="picture"
         />

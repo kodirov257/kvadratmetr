@@ -3,7 +3,7 @@
         <div class="col-4">
             <div class="big-item-logo">
                 <img
-                        src="assets/img/golden_house.jpg"
+                        src="{{asset('assets/user-front/assets/img/golden_house.jpg')}}"
                         alt="developers logo"
                 />
             </div>
