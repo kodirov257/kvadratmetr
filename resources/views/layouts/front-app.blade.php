@@ -9,8 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{--    Styles --}}
-    <link rel="stylesheet" type="text/css" href="{{asset('./assets/user-front/assets/css/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('./assets/user-front/assets/leaflet/leaflet.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('./assets/user-front/assets/css/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('./assets/user-front/assets/css/slick-theme.css')}}"/>
     <link rel="stylesheet" href="{{asset('./assets/user-front/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('./assets/user-front/assets/css/responsive.css')}}">

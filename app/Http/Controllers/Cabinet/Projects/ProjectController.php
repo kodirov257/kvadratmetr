@@ -67,6 +67,7 @@ class ProjectController extends Controller
         $user = Auth::user();
         $developer = Developer::where('owner_id', $user->id)->get()->first();
         try {
+            dd($request);
             $project = $this->service->create($developer->id, /*$request->category_id, */$request);
 
             return redirect()->route('cabinet.developer.edit', [$developer, $project]);

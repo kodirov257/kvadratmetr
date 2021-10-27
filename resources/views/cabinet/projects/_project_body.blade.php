@@ -50,9 +50,9 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="image-of-projects">
-                    <i class="icon-add-photo" onclick="callNewInput()"></i>
-                    <input type="file" name="images" class="d-none" id="imageNewInput">
+                <div class="image-of-projects" >
+                    <i class="icon-add-photo" id="imageFilePutter" onclick="callNewInput()"></i>
+                    <input type="file" name="images[0]" class="d-none" id="imageNewInput" multiple>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
     </div>
     <div id="characteristics" class="b-tab">
         {{--        @dd($project->values)--}}
-        @if($project->facilities && count($project->facilities) > 0)
+        @if(isset($project) && $project->facilities && count($project->facilities) > 0)
             @include('partials.components.dashboard._characteristics_facilities',
             ['project_facilities'=>$project->facilities, 'project_characteristics'=> $project->values])
         @else
@@ -153,6 +153,7 @@
     <div id="location" class="b-tab">
         @include('partials.components.dashboard._address_input', ['info'=>$project ?? []])
     </div>
+    <input type="file" style="display: none" id="allImages" name="allImages[]" multiple>
 </div>
 <script src="{{asset('./assets/js/jquery.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"
@@ -235,14 +236,26 @@
     }
 
     const inputElement = document.getElementById("imageNewInput");
-    inputElement.addEventListener("change", uploadImage, false);
-    // function handleFiles() {
-    //     const fileList = this.files; /* now you can work with the file list */
-    // }
+    inputElement.addEventListener("change", uploadImage, false)
+
+    let imageArray = [];
+    let imagesArrayAll = [];
     function uploadImage() {
-        console.log(window.URL.createObjectURL(this.files[0]))
-        let imageArray = localStorage.getItem('images') ? JSON.parse(localStorage.getItem('images')) : [];
+        console.log(this.files, this.files[0], 'testsetst')
+        const fd = new FormData();
+        console.log(this.files[imageArray.length], imageArray.length)
+        imagesArrayAll.push(this.files[0])
         imageArray.push({order: imageArray.length + 1, imageUrl: window.URL.createObjectURL(this.files[0])});
+
+        const putterContainer = document.getElementById("imageFilePutter")
+
+        putterContainer.outerHTML += (`<input type="file" name='images[${imageArray.length }]' class="d-none" id="imageNewInput" >  `)
+
+        console.log(fd.getAll('allImages[]'))
+        const inputElementDelete = document.querySelector('input[name="images[' + (imageArray.length - 1) + ']"]')
+        inputElementDelete.removeAttribute('id')
+        const newEveryInput = document.getElementById("imageNewInput");
+        newEveryInput.addEventListener("change", uploadImage, false)
 
         let imageContainer = document.getElementById('project_images');
         let imagesHtml = '';
@@ -261,7 +274,6 @@
         `;
         }
         imageContainer.innerHTML = imagesHtml;
-        localStorage.setItem('images', JSON.stringify(imageArray));
     }
 </script>
 
