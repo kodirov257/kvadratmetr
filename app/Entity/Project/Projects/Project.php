@@ -77,7 +77,7 @@ class Project extends Model
         'developer_id', 'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'slug', 'address_uz',
         'price', 'category_id', 'region_id', 'impressions', 'clicks', 'leads', 'address_ru', 'address_en',
         'landmark_uz', 'landmark_ru', 'landmark_en', 'lng', 'ltd', 'status', 'reject_reason', 'published_at',
-        'expires_at',
+        'expires_at', 'logo'
     ];
 
     protected $casts = [

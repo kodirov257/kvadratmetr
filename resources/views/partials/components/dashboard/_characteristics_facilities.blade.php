@@ -17,6 +17,7 @@
                         <div class="icons-of-homes first">
                             <i class="icon-building"></i>
                         </div>
+                        @if(isset($project_characteristics))
                             @foreach($project_characteristics as $project_characteristic)
                                 @if($project_characteristic)
                                     <input type="text" placeholder="16" name="{{$characteristic->name}}[]"
@@ -30,6 +31,11 @@
                                     <input type="text" name="{{$characteristic->name}}[]"/>
                                 @endif
                             @endforeach
+                        @else
+                            <input type="text" placeholder="16" name="{{$characteristic->name}}[]"/>
+                            <div class="icons-of-homes">to</div>
+                            <input type="text" name="{{$characteristic->name}}[]"/>
+                        @endif
                     </div>
                 @elseif($characteristic->type === 'string')
                     <div class="characteristics repairs">
@@ -92,6 +98,7 @@
                         </div>
                         <div class="icons-of-homes repair">
                             <label class="switch">
+                                @if(isset($project_facilities))
                                 @foreach($project_facilities as $project_facility)
                                     @if($project_facility->id === $facility->id)
                                         <input type="checkbox" name="{{$facility->name}}" checked/>
@@ -99,6 +106,9 @@
                                         <input type="checkbox" name="{{$facility->name}}"/>
                                     @endif
                                 @endforeach
+                                @else
+                                    <input type="checkbox" name="{{$facility->name}}"/>
+                                @endif
                                 <span class="slider round"></span>
                             </label>
                         </div>

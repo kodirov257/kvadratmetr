@@ -6,7 +6,7 @@
     <div class="main-content">
         <div class="row home-row">
             <div class="col-8">
-                    <form method="POST" action="{{route('cabinet.developer.store')}}">
+                    <form method="POST" action="{{route('cabinet.developer.store')}}" enctype="multipart/form-data">
                         {{--                        {{ csrf_field() }}--}}
 
                         @csrf

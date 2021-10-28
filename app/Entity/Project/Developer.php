@@ -66,7 +66,7 @@ class Developer extends Model
         'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'slug', 'status', 'main_number',
         'call_center', 'website', 'email', 'facebook', 'instagram', 'tik_tok', 'telegram', 'youtube', 'twitter',
         'address_uz', 'address_ru', 'address_en', 'landmark_uz', 'landmark_ru', 'landmark_en', 'lng', 'ltd',
-        'impressions', 'clicks', 'leads',
+        'impressions', 'clicks', 'leads','logo'
     ];
 
     public function getStatusLabel(): string

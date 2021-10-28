@@ -266,6 +266,12 @@ function callNewInput() {
         imageNewInput.click();
     }
 }
+function callIconInput() {
+    imageNewInput = document.getElementById('logoInput');
+    if (imageNewInput) {
+        imageNewInput.click();
+    }
+}
 
 
 var map = L.map('map').setView([45.52875, -122.6632], 5);

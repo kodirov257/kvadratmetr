@@ -30,51 +30,11 @@ class ProjectService
 
         return DB::transaction(function () use ($request, $developer/*, $category, $region*/) {
 
-            if (!$request->file) {
-                $characteristics = Characteristic::orderBy('sort')
-                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id' );
-                $facilities = Facility::orderBy('id')
-                    ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+            $characteristics = Characteristic::orderBy('sort')
+                ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
+            $facilities = Facility::orderBy('id')
+                ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
 
-                /** @var Project $project */
-                $project = Project::make([
-                    'name_uz' => $request->input('name_en'),
-                    'name_ru' => $request->input('name_en'),
-                    'name_en' => $request->input('name_en'),
-                    'about_uz' => $request->input('about_uz'),
-                    'about_ru' => $request->input('about_ru'),
-                    'about_en' => $request->input('about_en'),
-                    'slug' => $request->input('name_en') . '123',
-                    'address_uz' => $request->input('address_uz'),
-                    'address_ru' => $request->input('address_ru'),
-                    'address_en' => $request->input('address_en'),
-                    'landmark_uz' => $request->input('landmark_uz'),
-                    'landmark_ru' => $request->input('landmark_ru'),
-                    'landmark_en' => $request->input('landmark_en'),
-                    'lng' => $request->input('lng'),
-                    'ltd' => $request->input('ltd'),
-                    'status' => Project::STATUS_DRAFT,
-                ]);
-
-                $project->developer()->associate($developer);
-                $project->saveOrFail();
-
-                $this->addCharacteristicsToProduct($characteristics, $project, $request);
-                foreach ($facilities as $key => $facility){
-                    if ($request[$facility]){
-                        DB::beginTransaction();
-                        try {
-                            $project->addOrRemoveFacility($key);
-                            DB::commit();
-                        } catch (Exception $e) {
-                            DB::rollBack();
-                            throw $e;
-                        }
-                    }
-                }
-
-                return $project;
-            }
             /** @var Project $project */
             $project = Project::make([
                 'name_uz' => $request->input('name_en'),
@@ -83,7 +43,7 @@ class ProjectService
                 'about_uz' => $request->input('about_uz'),
                 'about_ru' => $request->input('about_ru'),
                 'about_en' => $request->input('about_en'),
-                'slug' => $request->input('slug'),
+                'slug' => $request->input('name_en') . '123',
                 'address_uz' => $request->input('address_uz'),
                 'address_ru' => $request->input('address_ru'),
                 'address_en' => $request->input('address_en'),
@@ -96,14 +56,28 @@ class ProjectService
             ]);
 
             $project->developer()->associate($developer);
-//            $project->category()->associate($category);
-//            $project->region()->associate($region);
-
             $project->saveOrFail();
 
+            $this->addCharacteristicsToProduct($characteristics, $project, $request);
+            foreach ($facilities as $key => $facility) {
+                if ($request[$facility]) {
+                    DB::beginTransaction();
+                    try {
+                        $project->addOrRemoveFacility($key);
+                        DB::commit();
+                    } catch (Exception $e) {
+                        DB::rollBack();
+                        throw $e;
+                    }
+                }
+            }
+            if ($request->files) {
 
-            $this->addPhotos($project->id, $request);
+                $this->addPhotos($project->id, $request);
+                $this->addLogo($project->id, $request);
 
+                return $project;
+            }
 
             return $project;
         });
@@ -112,14 +86,24 @@ class ProjectService
     public function addPhotos($id, Request $request): void
     {
         $project = $this->getProject($id);
-
+//        dd($request['images']);
         DB::transaction(function () use ($request, $project) {
-            foreach ($request['files'] as $file) {
+            foreach ($request['images'] as $file) {
                 $project->photos()->create([
                     'file' => $file->store('projects', 'public')
                 ]);
             }
             $project->update();
+        });
+    }
+
+    public function addLogo($id, Request $request): void
+    {
+        $developer = $this->getProject($id);
+        DB::transaction(function () use ($request, $developer) {
+            $developer->update([
+                'logo' => $request['logo']->store('projects', 'public')
+            ]);
         });
     }
 
@@ -136,7 +120,7 @@ class ProjectService
                 ->pluck('name_' . LanguageHelper::getCurrentLanguagePrefix(), 'id');
             foreach ($characteristics as $key => $part) {
                 $value = $project->values()->where('characteristic_id', $key)->first();
-                if($value){
+                if ($value) {
 
                     if (gettype($request[$part]) == 'array') {
                         DB::beginTransaction();
@@ -158,7 +142,7 @@ class ProjectService
                             DB::rollBack();
                             throw $e;
                         }
-                    }else{
+                    } else {
                         DB::beginTransaction();
                         try {
                             DB::table('project_project_values')->where('project_id', $value->project_id)
@@ -174,20 +158,20 @@ class ProjectService
                             throw $e;
                         }
                     }
-                }else{
+                } else {
                     $this->addCharacteristicsToProduct($characteristics, $project, $request);
                 }
 
             }
-            foreach ($facilities as $key => $facility){
+            foreach ($facilities as $key => $facility) {
 //                dd($request);
-                if ($request[$facility]){
+                if ($request[$facility]) {
                     DB::beginTransaction();
                     try {
 //                        dd($request[$facility]);
-                        if ($request[$facility] === 'on' && $project->projectFacilities()->where('facility_id', $key)->exists()){
+                        if ($request[$facility] === 'on' && $project->projectFacilities()->where('facility_id', $key)->exists()) {
                             continue;
-                        }else{
+                        } else {
                             $project->addOrRemoveFacility($key);
 //                            dd('salom');
                             DB::commit();
@@ -247,7 +231,7 @@ class ProjectService
                     DB::rollBack();
                     throw $e;
                 }
-            }else{
+            } else {
                 DB::beginTransaction();
                 try {
                     $value = $project->values()->create([

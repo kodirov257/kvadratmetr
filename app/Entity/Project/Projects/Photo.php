@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Project $project
  * @mixin Eloquent
  */
-class Photo extends Model
+class  Photo extends Model
 {
     protected $table = 'project_project_photos';
 

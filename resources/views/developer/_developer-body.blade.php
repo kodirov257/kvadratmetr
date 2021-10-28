@@ -1,7 +1,18 @@
 <div class="card">
     <div class="developer-bar">
         <div class="developer-bar__image">
-            {{--                        <img src="assets/img/NRG-logo.svg" alt="" />--}}
+            <div id="logoImgContainer">
+            @if($developer->logo)
+                <img src="{{$developer->logo}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
+                @endif
+            </div>
+            <div class="{{$developer->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
+                 style="height: 50px; display: {{$developer->logo ? 'none' : ''}}">
+                @if(!$developer->logo)
+                <i class="icon-add-photo" id="logoImgPutter" onclick="callIconInput()"></i>
+                @endif
+                <input type="file" name="logo" class="d-none" id="logoInput">
+            </div>
         </div>
         {{--        @dd($developer);--}}
         <div class="developer-bar__title" id="titleMain">{{$developer->name ?? 'Developer Name here'}}</div>
@@ -338,4 +349,22 @@
     CKEDITOR.instances.about_en.on('blur', function () {
         deactivateInput('enAbout')
     });
+
+    const inputLogoElement = document.getElementById("logoInput");
+    inputLogoElement.addEventListener("change", uploadIconImage, false)
+
+    function uploadIconImage() {
+        console.log(this.files[0])
+        document.getElementById('logoImgContainer').innerHTML = `<img
+                                src="${window.URL.createObjectURL(this.files[0])}"
+                                alt=""
+                                onclick="callIconInput()"
+                                class="project-image"
+                                style="width: 50px;height: 50px;"
+                        />`;
+
+        document.querySelector('#logoImgPutter').remove();
+        document.querySelector('#logoImgSelectorContainer').style.display = 'none';
+    }
+
 </script>

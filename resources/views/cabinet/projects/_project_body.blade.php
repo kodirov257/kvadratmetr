@@ -1,7 +1,18 @@
 <div class="card">
     <div class="developer-bar">
         <div class="developer-bar__image">
-            <img src="{{asset('./assets/img/NRG-oybek-logo.svg')}}" alt=""/>
+            <div id="logoImgContainer">
+                @if($project->logo)
+                    <img src="{{$project->logo}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
+                @endif
+            </div>
+            <div class="{{$project->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
+                 style="height: 50px; display: {{$project->logo ? 'none' : ''}}">
+                @if(!$project->logo)
+                    <i class="icon-add-photo" id="logoImgPutter" onclick="callIconInput()"></i>
+                @endif
+                <input type="file" name="logo" class="d-none" id="logoInput">
+            </div>
         </div>
         <div class="developer-bar__title" id="titleMain">{{$project->name ?? 'Developer Name here'}}</div>
         <input type="hidden"
@@ -39,18 +50,24 @@
         <div class="row">
 
             <div id="project_images" class="row">
-                <div class="col-4">
-                    <div class="image-of-projects">
-                        <img
-                                src="{{asset('./assets/img/0caec11cdc98518be7e4b885b3aff1c6.png')}}"
-                                alt=""
-                                class="project-image"
-                        />
-                    </div>
-                </div>
+                @if($project->photos)
+                    @foreach($project->photos as $photo)
+                        <div class="col-4">
+                            <div class="image-of-projects">
+
+                                <img
+                                        src="{{$photo->fileOriginal}}"
+                                        alt=""
+                                        class="project-image"
+                                />
+                            </div>
+                        </div>
+
+                    @endforeach
+                @endif
             </div>
             <div class="col-4">
-                <div class="image-of-projects" >
+                <div class="image-of-projects">
                     <i class="icon-add-photo" id="imageFilePutter" onclick="callNewInput()"></i>
                     <input type="file" name="images[0]" class="d-none" id="imageNewInput" multiple>
                 </div>
@@ -240,6 +257,7 @@
 
     let imageArray = [];
     let imagesArrayAll = [];
+
     function uploadImage() {
         console.log(this.files, this.files[0], 'testsetst')
         const fd = new FormData();
@@ -249,7 +267,7 @@
 
         const putterContainer = document.getElementById("imageFilePutter")
 
-        putterContainer.outerHTML += (`<input type="file" name='images[${imageArray.length }]' class="d-none" id="imageNewInput" >  `)
+        putterContainer.outerHTML += (`<input type="file" name='images[${imageArray.length}]' class="d-none" id="imageNewInput" >  `)
 
         console.log(fd.getAll('allImages[]'))
         const inputElementDelete = document.querySelector('input[name="images[' + (imageArray.length - 1) + ']"]')
@@ -260,7 +278,7 @@
         let imageContainer = document.getElementById('project_images');
         let imagesHtml = '';
         for (let i = 0; i < imageArray.length; i++) {
-             imagesHtml += `
+            imagesHtml += `
         <div class="col-4">
                     <div class="image-of-projects">
                         <img
@@ -275,5 +293,23 @@
         }
         imageContainer.innerHTML = imagesHtml;
     }
+
+    const inputLogoElement = document.getElementById("logoInput");
+    inputLogoElement.addEventListener("change", uploadIconImage, false)
+
+    function uploadIconImage() {
+        console.log(this.files[0])
+        document.getElementById('logoImgContainer').innerHTML = `<img
+                                src="${window.URL.createObjectURL(this.files[0])}"
+                                alt=""
+                                onclick="callIconInput()"
+                                class="project-image"
+                                style="width: 50px;height: 50px;"
+                        />`;
+
+        document.querySelector('#logoImgPutter').remove();
+        document.querySelector('#logoImgSelectorContainer').style.display = 'none';
+    }
+
 </script>
 

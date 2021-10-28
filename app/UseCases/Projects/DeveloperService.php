@@ -7,6 +7,7 @@ use App\Entity\User\User;
 use App\Http\Requests\Cabinet\Developers\CreateRequest;
 use App\Http\Requests\Admin\Developers\UpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeveloperService
 {
@@ -47,7 +48,22 @@ class DeveloperService
         $developer->owner()->associate($user);
         $developer->saveOrFail();
 
+        if ($request->files){
+            $this->addLogo($developer->id, $request);
+
+        }
+
         return $developer;
+    }
+
+    public function addLogo($id, Request $request): void
+    {
+        $developer = $this->getDeveloper($id);
+        DB::transaction(function () use ($request, $developer) {
+                $developer->update([
+                    'logo' => $request['logo']->store('projects', 'public')
+                ]);
+        });
     }
 
     public function edit(int $id, Request $request): void
@@ -81,6 +97,11 @@ class DeveloperService
             'ltd' => $request->input('ltd'),
             'status' => Developer::STATUS_ACTIVE,
         ]);
+        if ($request->files){
+            $this->addLogo($developer->id, $request);
+
+        }
+
     }
 
     private function getDeveloper($id): Developer
