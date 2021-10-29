@@ -2,12 +2,14 @@
 
 namespace App\UseCases\Projects;
 
+use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Plan;
 use App\Entity\Project\Projects\Project;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\Admin\Projects\Plans\CreateRequest;
 use App\Http\Requests\Admin\Projects\Plans\UpdateRequest;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,34 +18,34 @@ class PlanService
 {
     private $nextId;
 
-    public function create(int $projectId, CreateRequest $request): Plan
+    public function create(int $projectId, Request $request): Plan
     {
         $project = Project::findOrFail($projectId);
 
         try {
             $plan = Plan::make([
-                'area' => $request->area,
-                'area_unit' => $request->area_unit,
-                'rooms' => $request->rooms,
-                'bathroom' => $request->bathroom,
+                'area' => $request->input('area'),
+                'area_unit' => $request->input('area_unit'),
+                'rooms' => $request->input('rooms'),
+                'bathroom' => $request->input('bathroom'),
+                'price' => $request->input('price'),
                 'sort' => 1000,
             ]);
 
             $plan->project()->associate($project);
+            $plan->saveOrFail();
 
-            if (!$request->image) {
-                $plan->saveOrFail();
-
-                return $plan;
+            if ($request->files) {
+                $this->uploadImg($plan->id, $request);
             }
 
-            $imageName = ImageHelper::getRandomName($request->image);
+            $imageName = ImageHelper::getRandomName($request->input('planImg'));
             $plan->id = $this->getNextId();
             $plan->image = $imageName;
 
             $plan->saveOrFail();
 
-            $this->uploadIcon($this->getNextId(), $request->image, $imageName);
+            $this->uploadIcon($this->getNextId(), $request->input('planImg'), $imageName);
 
             return $plan;
         } catch (\Throwable|Exception $e) {
@@ -71,6 +73,17 @@ class PlanService
 //        $this->uploadIcon($this->getNextId(), $request->image, $imageName);
 //
 //        return $plan;
+    }
+
+    public function uploadImg ($id, Request $request): void
+    {
+        $plan = $this->getPlan($id);
+        DB::transaction(function () use ($request, $plan) {
+            $plan->update([
+                'image' => $request['planImg']->store('projects', 'public')
+            ]);
+        });
+
     }
 
     public function update(int $projectId, int $planId, UpdateRequest $request): Plan
@@ -260,5 +273,9 @@ class PlanService
     {
         ImageHelper::saveThumbnail($planId, ImageHelper::FOLDER_PROJECT_PLAN, $icon, $imageName);
         ImageHelper::saveOriginal($planId, ImageHelper::FOLDER_PROJECT_PLAN, $icon, $imageName);
+    }
+    private function getPlan($id): Plan
+    {
+        return Plan::findOrFail($id);
     }
 }

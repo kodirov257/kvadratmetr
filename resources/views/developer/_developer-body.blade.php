@@ -2,13 +2,14 @@
     <div class="developer-bar">
         <div class="developer-bar__image">
             <div id="logoImgContainer">
-            @if($developer->logo)
+
+            @if(isset($developer) && isset($developer->logo))
                 <img src="{{$developer->logo}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
-                @endif
+            @endif
             </div>
-            <div class="{{$developer->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
-                 style="height: 50px; display: {{$developer->logo ? 'none' : ''}}">
-                @if(!$developer->logo)
+            <div class="{{isset($developer->logo) && $developer->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
+                 style="height: 50px; display: {{isset($developer->logo) && $developer->logo ? 'none' : ''}}">
+                @if(!isset($developer->logo))
                 <i class="icon-add-photo" id="logoImgPutter" onclick="callIconInput()"></i>
                 @endif
                 <input type="file" name="logo" class="d-none" id="logoInput">

@@ -272,6 +272,12 @@ function callIconInput() {
         imageNewInput.click();
     }
 }
+function callNewInputPlan() {
+    imageNewInput = document.getElementById('planImage');
+    if (imageNewInput) {
+        imageNewInput.click();
+    }
+}
 
 
 var map = L.map('map').setView([45.52875, -122.6632], 5);

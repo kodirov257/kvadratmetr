@@ -19,6 +19,7 @@ Route::group(['as' => 'api.', 'namespace' => 'Api'],
     function () {
         Route::get('/', 'HomeController@home');
         Route::post('/register', 'Auth\RegisterController@register');
+        Route::post('/plan-price', 'Projects\PlanPriceController@create');
 
         Route::middleware('auth:api')->group(function () {
             Route::resource('projects', 'Projects\ProjectController')->only('index', 'show');

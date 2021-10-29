@@ -2,19 +2,19 @@
     <div class="developer-bar">
         <div class="developer-bar__image">
             <div id="logoImgContainer">
-                @if($project->logo)
+                @if(isset($project) && isset($project->logo))
                     <img src="{{$project->logo}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
                 @endif
             </div>
-            <div class="{{$project->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
-                 style="height: 50px; display: {{$project->logo ? 'none' : ''}}">
-                @if(!$project->logo)
+            <div class="{{isset($project->logo) && $project->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
+                 style="height: 50px; display: {{isset($project->logo) && $project->logo ? 'none' : ''}}">
+                @if(!isset($developer->logo))
                     <i class="icon-add-photo" id="logoImgPutter" onclick="callIconInput()"></i>
                 @endif
                 <input type="file" name="logo" class="d-none" id="logoInput">
             </div>
         </div>
-        <div class="developer-bar__title" id="titleMain">{{$project->name ?? 'Developer Name here'}}</div>
+        <div class="developer-bar__title" id="titleMain">{{$project->name ?? 'Project Name here'}}</div>
         <input type="hidden"
                name="name_en"
                id="titleInput"
@@ -35,9 +35,11 @@
                 class="b-nav-tab"
         >Characteristics</a
         >
-        <a href="#plan" data-tab="plan" class="b-nav-tab"
-        >Plan and Prices</a
-        >
+        @if($status !== 'create')
+            <a href="#plan" data-tab="plan" class="b-nav-tab"
+            >Plan and Prices</a
+            >
+        @endif
         <a href="#location" data-tab="location" class="b-nav-tab"
         >Location</a
         >
@@ -50,7 +52,7 @@
         <div class="row">
 
             <div id="project_images" class="row">
-                @if($project->photos)
+                @if(isset($project) && $project->photos)
                     @foreach($project->photos as $photo)
                         <div class="col-4">
                             <div class="image-of-projects">
@@ -87,86 +89,9 @@
             @include('partials.components.dashboard._characteristics_facilities')
         @endif
     </div>
-    <div id="plan" class="b-tab">
-        <div class="room__numbers">
-            <div class="room-numbers disabled">
-                <h3>1-room</h3>
-            </div>
-            <div class="room-numbers active">
-                <h3>2-room</h3>
-            </div>
-            <div class="room-numbers">
-                <h3>3-room</h3>
-            </div>
-            <div class="room-numbers">
-                <h3>4-room</h3>
-            </div>
-            <div class="room-numbers disabled">
-                <h3>5-room</h3>
-            </div>
-            <div class="room-numbers disabled">
-                <h3>6-room</h3>
-            </div>
-            <div class="room-numbers disabled">
-                <h3>7-room</h3>
-            </div>
-            <div class="room-numbers disabled">
-                <h3>8-room</h3>
-            </div>
-        </div>
-        <div class="about-room-character">
-            <h2 class="add-character">
-                Add Room Characteristics (2 - ROOM)
-            </h2>
-            <div class="room-characters">
-                <div class="room-characteristic">
-                    <div class="plan-character__first">
-                        <h3 class="plan-title">Area</h3>
-                        <div class="plan-character">
-                            <div class="icon-div"><i class="icon-area"></i></div>
-                            <h4>80 m<sup>2</sup></h4>
-                        </div>
-                    </div>
-                    <div class="plan-character__second">
-                        <h3 class="plan-title">Bathroom</h3>
-                        <div class="plan-character">
-                            <div class="icon-div"><i class="icon-water"></i></div>
-                            <h4>1</h4>
-                        </div>
-                    </div>
-                    <div class="plan-character__third">
-                        <h3 class="plan-title">Price</h3>
-                        <div class="plan-character">
-                            <div class="icon-div">
-                                <i class="icon-calculator"></i>
-                            </div>
-                            <h4 class="minH">9 200 000</h4>
-                            <div class="price">
-                                <h5>/ per sq.</h5>
-                            </div>
-                        </div>
-
-                        <div class="save-edit">
-                            <button class="button__save btn">Save Parameters</button>
-                            <button class="button__edit btn"><i class="icon-pencil"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="image-character">
-                    <h3 class="plan-title">Image</h3>
-                    <div class="image">
-                        <img src="./assets/img/Сгруппировать 917.png" alt=""/>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="add-new-room">
-                <i class="icon-plus"></i> Add New Room Configurations
-            </button>
-            <div class="save__infos">
-                <button type="button" class="saving">Save</button>
-            </div>
-        </div>
-    </div>
+    @if($status !== 'create')
+        @include('cabinet.projects.create.plan_price_component')
+    @endif
     <div id="location" class="b-tab">
         @include('partials.components.dashboard._address_input', ['info'=>$project ?? []])
     </div>
