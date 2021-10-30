@@ -17,6 +17,7 @@
                 </div>
                 <div class="col-4">
 @include('clients.components.about-us-contact-info')
+{{--                    TODO: map--}}
 @include('clients.layout.map')
                 </div>
             </div>

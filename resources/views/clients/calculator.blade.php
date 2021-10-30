@@ -41,13 +41,13 @@
                     @include('clients.components.payment-calculator')
                     <h1 class="page-title text-align-left mb-4">About Project</h1>
                     <div class="about-us-page-information mb-5">
-                        {{--TODO: Developer about show--}}
+                        {!! $project->about !!}
                     </div>
                     @include('clients.components.location-project-calculator')
                 </div>
                 <div class="col-4">
                     @include('clients.layout.send-request-for-more')
-                    @include('clients.components.about-us-contact-info')
+                    @include('clients.components.about-us-contact-info', ['developer'=>$project->developer])
                     <div class="ad p-0 mb-30">
                         <div class="ad-item mh-240">Place for AD</div>
                     </div>

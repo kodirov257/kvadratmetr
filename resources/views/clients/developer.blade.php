@@ -4,35 +4,32 @@
 
 @section('content')
 
-<section class="developer-page">
-    <div class="container">
-        @include('clients.layout.breadcrumb')
-        <h1 class="page-title text-align-left">Dream City Development</h1>
-    </div>
-</section>
-
-@include('clients.components.about-developer')
-
-<section class="develop-projects">
-    <div class="container">
-        <h2 class="develop-projects-title">Dream City's Projects</h2>
-        <div class="latest-slider">
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-
+    <section class="developer-page">
+        <div class="container">
+            @include('clients.layout.breadcrumb')
+            <h1 class="page-title text-align-left">{{$developer->title}}</h1>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="sales-ofice">
-    <div class="container">
-        <h2 class="sales-ofice-title">Sales Offices</h2>
-        <div id="map" class="map"></div>
-    </div>
-</section>
-<script src="{{asset('assets/user-front/assets/leaflet/leaflet.js')}}"></script>
+    @include('clients.components.about-developer')
+
+    <section class="develop-projects">
+        <div class="container">
+            <h2 class="develop-projects-title">{{$developer->title}}</h2>
+            <div class="latest-slider">
+                @foreach($developer->projects as $project)
+                    @include('clients.layout.project-card-main')
+                @endforeach
+
+            </div>
+        </div>
+    </section>
+
+    <section class="sales-ofice">
+        <div class="container">
+            <h2 class="sales-ofice-title">Sales Offices</h2>
+            <div id="map" class="map"></div>
+        </div>
+    </section>
+    <script src="{{asset('assets/user-front/assets/leaflet/leaflet.js')}}"></script>
 @endsection

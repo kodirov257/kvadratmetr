@@ -2,10 +2,9 @@
     <div class="container">
         <h1 class="page-title">The Most Popular Buildings</h1>
         <div class="popular-slider">
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
-            @include('clients.layout.project-card-main')
+            @foreach($projects as $project)
+                @include('clients.layout.project-card-main')
+            @endforeach
         </div>
     </div>
 </section>

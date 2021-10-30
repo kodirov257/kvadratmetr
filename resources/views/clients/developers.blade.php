@@ -12,17 +12,15 @@
                     <!-- AD -->
                     @include('clients.layout.place-for-ads-sidebar')
                     <!-- END AD -->
-                    @include('clients.layout.small-project-card-sidebar')
-                    @include('clients.layout.small-project-card-sidebar')
-                    @include('clients.layout.small-project-card-sidebar')
-                    @include('clients.layout.small-project-card-sidebar')
+                    @foreach($projects as $project)
+                        @include('clients.layout.small-project-card-sidebar', ['project'=>$project])
+                    @endforeach
                 </div>
                 <div class="col-9">
+                    @foreach($developers as $developer)
                     @include('clients.layout.big-developer-card')
-                    @include('clients.layout.big-developer-card')
-                    @include('clients.layout.big-developer-card')
-                    @include('clients.layout.big-developer-card')
-                    @include('clients.layout.big-developer-card')
+                    @endforeach
+{{--                    TODO: pagination need to connect--}}
                     @include('clients.layout.pagination')
                 </div>
             </div>

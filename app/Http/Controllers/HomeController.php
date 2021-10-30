@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Entity\Category;
+use App\Entity\Project\Developer;
+use App\Entity\Project\Projects\Project;
 use App\Entity\Region;
 use App\Helpers\LanguageHelper;
 
@@ -10,10 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $regions = Region::roots()->orderBy('name_' . LanguageHelper::getCurrentLanguagePrefix())->getModels();
+        $developers = Developer::limit(8)->get();
+        $projects = Project::limit(8)->get();
+        $lastAddedProjects = Project::orderBy('created_at')->limit(8)->get();
 
-        $categories = Category::whereIsRoot()->defaultOrder()->getModels();
-
-        return view('home', compact('regions', 'categories'));
+        return view('home', compact('developers', 'projects', 'lastAddedProjects'));
     }
 }
