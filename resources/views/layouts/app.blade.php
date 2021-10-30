@@ -157,6 +157,7 @@
 <script src="{{ asset('/assets/js/main.js') }}"></script>
 <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js" integrity="sha256-HmfY28yh9v2U4HfIXC+0D6HCdWyZI42qjaiCFEJgpo0=" crossorigin="anonymous"></script>
-    @yield('scripts')
+
+@yield('scripts')
 </body>
 </html>

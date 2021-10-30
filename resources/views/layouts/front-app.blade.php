@@ -23,7 +23,7 @@
 <div class="wrapper">
     <header class="main-header">
         <div class="container">
-            <a href="/" class="logo"><img src="{{asset('assets/img/logo.svg')}}" alt="Kvadrat metr logo"></a>
+            <a href="/" class="logo"><img src="{{asset('assets/user-front/assets/img/logo.svg')}}" alt="Kvadrat metr logo"></a>
             <nav class="main-nav">
                 <div id="menu" class="links">
                     <a href="/developer" class="main-nav-link">Developers</a>
