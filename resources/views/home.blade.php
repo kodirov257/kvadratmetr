@@ -6,21 +6,34 @@
 
     <section class="main-slider">
         <div class="container">
-            <form action="" class="main-filter">
-                <button class="filter-item">
+            <form action="{{route('search')}}" class="main-filter">
+                <div class="filter-item">
                     <span class="filter-item-type">Category</span>
                     <span class="filter-item-value">Real Estates <i class="icon-building"></i></span>
                     <input type="text" name="category" hidden>
                     <small>Apartments in this category</small>
                     <i class="filter-btn-btn icon-down"></i>
-                </button>
-                <button class="filter-item">
+                </div>
+                <div class="filter-item">
                     <span class="filter-item-type">District</span>
-                    <span class="filter-item-value">Chilanzar <i class="icon-map"></i></span>
+                    <span class="filter-item-value">
+                        <select name="select" id="">
+                          <option value="Bektemir">Bektemir</option>
+                          <option value="Chilanzar">Chilanzar</option>
+                          <option value="Mirobod">Mirobod</option>
+                          <option value="Mirzo Ulugbek">Mirzo Ulugbek</option>
+                          <option value="Olmazar">Olmazar</option>
+                          <option value="Sergeli">Sergeli</option>
+                          <option value="Shaykhontohur">Shaykhontohur</option>
+                          <option value="Uchtepa">Uchtepa</option>
+                          <option value="Yakkasaray">Yakkasaray</option>
+                          <option value="Yashnobod">Yashnobod</option>
+                          <option value="Yunusabad">Yunusabad</option>
+                        </select> <i class="icon-map"></i></span>
                     <input type="text" name="district" hidden>
                     <small>Real estates in Chilanzar district</small>
                     <i class="filter-btn-btn icon-down"></i>
-                </button>
+                </div>
                 <div class="filter-item">
                     <div class="rangeslider">
                         <div class="range_div">

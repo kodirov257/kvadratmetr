@@ -141,16 +141,36 @@ $(document).ready(function () {
     $('#menu').slideToggle();
   });
 
-  var mymap = L.map('map').setView([51.505, -0.09], 13);
+  var map = L.map('map').setView([45.52875, -122.6632], 5);
 
-  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-  }).addTo(mymap);
+  L.tileLayer('http://{s}.tile.cloudmade.com/API-key/997/256/{z}/{x}/{y}.png', {
+    maxZoom: 16,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+  }).addTo(map);
+
+  var marker = L.marker([45.52875, -122.6632]).addTo(map);
+
+  var polygon = L.polygon([
+    [46.01, -130.01],
+    [40.81, -128.76],
+    [44.15, -133.23]
+  ]).addTo(map);
+
+  var popup = L.popup().setLatLng([45.52875, -122.6632]).setContent("I am a standalone popup.").openOn(map);
+
+  function onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
+  }
+
+  map.on('click', onMapClick);
+
+  var popup = L.popup();
+
+  function onMapClick(e) {
+    popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);
+  }
+
+  map.on('click', onMapClick);
 
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -167,3 +187,20 @@ $(document).ready(function () {
   });
   chart.render();
 });
+
+function showCharDetail(e, i) {
+  const charDet = document.getElementById(e);
+  const detButton = document.getElementById(i);
+  if (charDet) {
+    if (!charDet.classList.contains('d-none')) {
+      charDet.classList.add('d-none')
+      detButton.classList.remove('icon-down')
+      detButton.classList.add('icon-up')
+    } else {
+      charDet.classList.remove('d-none')
+      detButton.classList.add('icon-down')
+      detButton.classList.remove('icon-up')
+    }
+    console.log(charDet);
+  }
+}

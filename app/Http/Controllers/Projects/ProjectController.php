@@ -22,37 +22,33 @@ class ProjectController extends Controller
         $this->search = $search;
     }
 
-    public function index(SearchRequest $request, ProjectsPath $path)
+    public function index()
     {
-        $region = $path->region;
-        $category = $path->category;
+//        SearchRequest $request, ProjectsPath $path this inside qovus
+//        $region = $path->region;
+//        $category = $path->category;
+//
+//        $result = $this->search->search($category, $region, $request, 20, $request->get('page', 1));
+//
+//        $projects = $result->projects;
+//        $regionsCounts = $result->regionsCounts;
+//        $categoriesCounts = $result->categoriesCounts;
+//
+//        $query = $region ? $region->children() : Region::roots();
+//        $regions = $query->orderBy('name_' . LanguageHelper::getCurrentLanguagePrefix())->getModels();
+//
+//        $query = $category ? $category->children() : Category::whereIsRoot();
+//        $categories = $query->defaultOrder()->getModels();
+//
+//        $regions = array_filter($regions, function (Region $region) use ($regionsCounts) {
+//            return isset($regionsCounts[$region->id]) && $regionsCounts[$region->id] > 0;
+//        });
+//
+//        $categories = array_filter($categories, function (Category $category) use ($categoriesCounts) {
+//            return isset($categoriesCounts[$category->id]) && $categoriesCounts[$category->id] > 0;
+//        });
 
-        $result = $this->search->search($category, $region, $request, 20, $request->get('page', 1));
-
-        $projects = $result->projects;
-        $regionsCounts = $result->regionsCounts;
-        $categoriesCounts = $result->categoriesCounts;
-
-        $query = $region ? $region->children() : Region::roots();
-        $regions = $query->orderBy('name_' . LanguageHelper::getCurrentLanguagePrefix())->getModels();
-
-        $query = $category ? $category->children() : Category::whereIsRoot();
-        $categories = $query->defaultOrder()->getModels();
-
-        $regions = array_filter($regions, function (Region $region) use ($regionsCounts) {
-            return isset($regionsCounts[$region->id]) && $regionsCounts[$region->id] > 0;
-        });
-
-        $categories = array_filter($categories, function (Category $category) use ($categoriesCounts) {
-            return isset($categoriesCounts[$category->id]) && $categoriesCounts[$category->id] > 0;
-        });
-
-        return view('projects.index', compact(
-            'category', 'region',
-            'categories', 'regions',
-            'regionsCounts', 'categoriesCounts',
-            'projects'
-        ));
+        return view('clients.search');
     }
 
     public function show(Project $project)

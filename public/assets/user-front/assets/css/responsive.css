@@ -15,6 +15,71 @@
     .rangeslider {
         height: 95px;
     }
+
+    .pop-item img.hei-100 {
+        height: auto;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .about-us-page-information {
+        margin-bottom: 30px;
+    }
+
+    .contact-us-page-contacts {
+        display: none;
+    }
+
+    .sales-ofice {
+        display: none;
+    }
+
+    .about-developer-address {
+        flex-direction: column;
+    }
+
+    .about-developer-descriptions-description {
+        width: auto;
+    }
+
+    .about-developer-coordinate {
+        width: auto;
+        margin-left: 35px;
+        margin-bottom: 15px;
+    }
+
+    .about-developer .login .comment-div {
+        margin-bottom: 20px;
+    }
+
+    .images-page-img, .images-page-img.mini {
+        height: auto;
+    }
+
+    .calculator-page .title-flex .price-information {
+        display: none;
+    }
+
+    .calculator-page .title-flex .calc-btn {
+        display: block;
+    }
+
+    .image-detail-btn {
+        bottom: -35px;
+        left: 30%;
+    }
+
+    .char-image img {
+        width: 100%;
+    }
+
+    .characteristics-page .login {
+        margin-top: 30px;
+    }
+
+    .chart-summ-div {
+        left: 0;
+        right: 0;
+    }
 }
 
 @media(max-width: 767px) {
@@ -49,7 +114,9 @@
         border-radius: 4px;
     }
 
-    .main-nav-link, .page-title.dblint-sec, .row.dispresp-sec {
+    .main-nav-link,
+    .page-title.dblint-sec,
+    .row.dispresp-sec {
         display: block;
     }
 
@@ -80,15 +147,24 @@
         height: 95px;
     }
 
-    .filter-item-type, .range_price {
+    .filter-item-type,
+    .range_price {
         font-size: 12px;
     }
 
-    .filter-item-value, .range_max, .range_min, .icon-equalizer {
+    .filter-item-value,
+    .range_max,
+    .range_min,
+    .icon-equalizer {
         font-size: 20px;
     }
 
-    .filter-item small, .page-title.dblint, .scroll-down, .areas-item .informs .complex, .bradcrump, .row.dispresp  {
+    .filter-item small,
+    .page-title.dblint,
+    .scroll-down,
+    .areas-item .informs .complex,
+    .bradcrump,
+    .row.dispresp {
         display: none;
     }
 
@@ -130,7 +206,8 @@
 
     /* Footer */
 
-    .foot-descriptions, .foot-contacts {
+    .foot-descriptions,
+    .foot-contacts {
         margin-bottom: 25px;
     }
 }
@@ -140,4 +217,3 @@
         width: 92%;
     }
 }
-

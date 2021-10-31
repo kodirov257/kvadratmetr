@@ -26,6 +26,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::get('/advertisement', 'AdvertisementController@index')->name('advertisement');
     Route::get('/calculator/{id}', 'CalculatorController@index')->name('calculator');
     Route::get('/contact-us', 'ContactUsController@index')->name('contactUs');
+    Route::get('search', 'Projects\ProjectController@index')->name('search');
 
 //    Auth::routes();
 
