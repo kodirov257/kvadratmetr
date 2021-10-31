@@ -26,7 +26,7 @@
             <a href="/" class="logo"><img src="{{asset('assets/user-front/assets/img/logo.svg')}}" alt="Kvadrat metr logo"></a>
             <nav class="main-nav">
                 <div id="menu" class="links">
-                    <a href="/developer" class="main-nav-link">Developers</a>
+                    <a href="/developers" class="main-nav-link">Developers</a>
                     <a href="/about" class="main-nav-link">About us</a>
                     <a href="/advertisement" class="main-nav-link">Advertising</a>
                     <a id="navLinkBtn" href="contact" class="main-nav-link btn">Contact</a>

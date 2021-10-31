@@ -264,6 +264,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::get('/create', 'ProjectController@create')->name('create');
                 Route::post('/store', 'ProjectController@store')->name('store');
 
+                Route::get('/plan-price/{id}', 'ProjectController@planPrice')->name('planPrice');
+                Route::get('/plan-price/{id}/{room}', 'ProjectController@planCreate')->name('planAdd');
+                Route::get('/plan-price/edit/{id}/{room}/{plan_id}', 'ProjectController@planEdit')->name('planEdit');
+                Route::post('/plan-price', 'PlanPriceController@create')->name('planCreate');
+                Route::post('/plan-price/edit', 'PlanPriceController@edit')->name('planEdit');
+
+
 //                Route::get('/create', 'CreateController@create')->name('create');
                 Route::get('/create/region/{category}/{region?}', 'CreateController@region')->name('create.region');
                 Route::get('/create/project/{category}/{region?}', 'CreateController@project')->name('create.project');

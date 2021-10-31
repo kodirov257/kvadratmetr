@@ -1,7 +1,8 @@
 <div class="about-developer-address">
     <div class="about-developer-locations">
         <address class="about-developer-location">
-            <i class="icon-map"></i><span class="about-developer-coordinate">{{$developer->adress}}</span>
+{{--            @dd($developer)--}}
+            <i class="icon-map"></i><span class="about-developer-coordinate">{{$developer->address}}</span>
             <span class="about-developer-detail-coordinate">({{$developer->landmark}})</span>
             <div class="about-developer-landmark">Landmark:</div>
             <div class="about-developer-landmark-location">{{$developer->landmark}}</div>
@@ -9,7 +10,7 @@
     </div>
     <div class="about-developer-contacts">
         <div class="about-developer-contact">
-            <a href="tel:+{{$developer->phone ?? ''}}"><i class="icon-phone"></i>{{$developer->phone ?? ''}}</a>
+            <a href="tel:+{{$developer->$developer ?? ''}}"><i class="icon-phone"></i>{{$developer->main_number ?? ''}}</a>
             <a href="{{$developer->website ?? ''}}" target="_blank"><i class="icon-earth"></i>{{$developer->website ?? ''}}</a>
             <a href="mailto:{{$developer->email ?? ''}}"><i class="icon-at"></i>{{$developer->email ?? ''}}</a>
         </div>

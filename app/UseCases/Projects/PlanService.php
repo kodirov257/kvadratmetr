@@ -25,30 +25,35 @@ class PlanService
         try {
             $plan = Plan::make([
                 'area' => $request->input('area'),
-                'area_unit' => $request->input('area_unit'),
-                'rooms' => $request->input('rooms'),
+                'area_unit' => 2,
+                'rooms' => $request->input('room'),
                 'bathroom' => $request->input('bathroom'),
                 'price' => $request->input('price'),
-                'sort' => 1000,
+                'sort' => 10036,
             ]);
 
             $plan->project()->associate($project);
-            $plan->saveOrFail();
+//            dd($plan);
+//            dd($plan);
+//            $plan->save();
 
-            if ($request->files) {
-                $this->uploadImg($plan->id, $request);
-            }
 
-            $imageName = ImageHelper::getRandomName($request->input('planImg'));
+//            dd($request);
+            $imageName = ImageHelper::getRandomName($request['planImage']);
             $plan->id = $this->getNextId();
             $plan->image = $imageName;
+//            if ($request->files) {
+//                $this->uploadImg($plan->id, $request);
+//            }
+//            dd($plan);
 
             $plan->saveOrFail();
 
-            $this->uploadIcon($this->getNextId(), $request->input('planImg'), $imageName);
+            $this->uploadIcon($this->getNextId(), $request['planImage'], $imageName);
 
             return $plan;
         } catch (\Throwable|Exception $e) {
+            dd($e);
             throw $e;
         }
 
@@ -80,17 +85,17 @@ class PlanService
         $plan = $this->getPlan($id);
         DB::transaction(function () use ($request, $plan) {
             $plan->update([
-                'image' => $request['planImg']->store('projects', 'public')
+                'image' => $request['planImage']->store('projects', 'public')
             ]);
         });
 
     }
 
-    public function update(int $projectId, int $planId, UpdateRequest $request): Plan
+    public function update(int $projectId, Request $request): Plan
     {
         $project = Project::findOrFail($projectId);
         /* @var $plan Plan */
-        $plan = $project->plans()->where('id', $planId)->firstOrFail();
+        $plan = $project->plans()->where('id', $request->plan_id)->firstOrFail();
 
         try {
             if (!$request->image) {

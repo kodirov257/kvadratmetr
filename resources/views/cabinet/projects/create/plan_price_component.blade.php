@@ -1,44 +1,18 @@
 <div id="plan" class="b-tab">
-    <div class="room__numbers">
-        <div class="room-numbers disabled" id="1room" onclick="roomActivate('1-room')">
-            <h3>1-room</h3>
-        </div>
-        <div class="room-numbers active" id="2room" onclick="roomActivate('2-room')">
-            <h3>2-room</h3>
-        </div>
-        <div class="room-numbers" id="3room" onclick="roomActivate('3-room')">
-            <h3>3-room</h3>
-        </div>
-        <div class="room-numbers" id="4room" onclick="roomActivate('4-room')">
-            <h3>4-room</h3>
-        </div>
-        <div class="room-numbers disabled" id="5room" onclick="roomActivate('5-room')">
-            <h3>5-room</h3>
-        </div>
-        <div class="room-numbers disabled" id="6room" onclick="roomActivate('6-room')">
-            <h3>6-room</h3>
-        </div>
-        <div class="room-numbers disabled" id="7room" onclick="roomActivate('7-room')">
-            <h3>7-room</h3>
-        </div>
-        <div class="room-numbers disabled" id="8room" onclick="roomActivate('8-room')">
-            <h3>8-room</h3>
-        </div>
-    </div>
     <div class="about-room-character">
-        <h2 class="add-character">
-            Add Room Characteristics (<span id="roomActiveNumber">2</span> - ROOM)
-        </h2>
-        <div id="characteristicsContainer">
+{{--        <h2 class="add-character">--}}
+{{--            Add Room Characteristics (<span id="roomActiveNumber">2</span> - ROOM)--}}
+{{--        </h2>--}}
+{{--        <div id="characteristicsContainer">--}}
 
 
-        </div>
-        <button type="button" class="add-new-room" onclick="addNewRoom()">
-            <i class="icon-plus"></i> Add New Room Configurations
-        </button>
-        <div class="save__infos">
-            <button type="button" class="saving">Save</button>
-        </div>
+{{--        </div>--}}
+        <a class="add-new-room" href="{{route('cabinet.projects.planPrice', $project->id)}}">
+            <i class="icon-plus"></i> Manage Room Configurations
+        </a>
+{{--        <div class="save__infos">--}}
+{{--            <button type="button" class="saving">Save</button>--}}
+{{--        </div>--}}
     </div>
 </div>
 <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>

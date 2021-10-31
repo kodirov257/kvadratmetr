@@ -8,16 +8,17 @@
         <div class="container">
             <form action="{{route('search')}}" class="main-filter">
                 <div class="filter-item">
-                    <span class="filter-item-type">Category</span>
-                    <span class="filter-item-value">Real Estates <i class="icon-building"></i></span>
-                    <input type="text" name="category" hidden>
-                    <small>Apartments in this category</small>
+                    <span class="filter-item-type">Real Estate Name</span>
+                    <span class="filter-item-value"><input type="text" name="name" style="width: 80%;"> <i class="icon-building"></i></span>
+
+                    <small>Apartments in this Real estate</small>
                     <i class="filter-btn-btn icon-down"></i>
                 </div>
                 <div class="filter-item">
                     <span class="filter-item-type">District</span>
                     <span class="filter-item-value">
-                        <select name="select" id="">
+                        <select name="district" id="district">
+                          <option value="All">All</option>
                           <option value="Bektemir">Bektemir</option>
                           <option value="Chilanzar">Chilanzar</option>
                           <option value="Mirobod">Mirobod</option>

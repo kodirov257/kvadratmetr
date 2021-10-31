@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cabinet\Projects;
 use App\Entity\Project\Characteristic;
 use App\Entity\Project\Developer;
 use App\Entity\Project\Facility;
+use App\Entity\Project\Projects\Plan;
 use App\Entity\Project\Projects\Project;
 use App\Helpers\LanguageHelper;
 use App\Http\Controllers\Controller;
@@ -146,4 +147,44 @@ class ProjectController extends Controller
     {
         //
     }
+
+    public function planPrice(Request $request){
+
+        $project = Project::where('id', $request->id)->first();
+
+        $plans = Plan::where('project_id', $request->id)->where('rooms', $request->roomNumber ?? 2)->get();
+//dd($plan);
+
+        return view('cabinet.projects.create.plan_price', compact('project', 'plans'));
+
+    }
+    public function planCreate(Request $request){
+
+//        dd($request->room);
+        $project_id = $request->id;
+        $room = $request->room;
+//        $project = Project::where('id', $request->id)->first();
+//
+//        $plan = Plan::where('project_id', $request->id)->where('rooms', $request->roomNumber ?? 2)->get();
+
+
+        return view('cabinet.projects.create.plan_price_create', compact('project_id', 'room'));
+
+    }
+
+    public function planEdit(Request $request){
+
+//        dd($request->room);
+        $project_id = $request->id;
+        $room = $request->room;
+//        $ = $request->room;
+//        $project = Project::where('id', $request->id)->first();
+//
+        $plan = Plan::where('id', $request->plan_id)->first();
+
+
+        return view('cabinet.projects.create.plan_price_edit', compact('project_id', 'room', 'plan'));
+
+    }
+
 }

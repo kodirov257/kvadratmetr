@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="big-item-phone"><span>Phone:</span><a href="tel:+998{{$developer->phone}}">{{$developer->phone}}</a></div>
+            <div class="big-item-phone"><span>Phone:</span><a href="tel:+998{{$developer->main_number}}">{{$developer->main_number}}</a></div>
             <div class="big-item-call-center"><span>Call Center:</span><a href="tel:{{$developer->call_center}}">{{$developer->call_center}}</a></div>
             <div class="big-item-website"><span>Website:</span><a  href="{{$developer->website ?? ''}}" target="_blank">{{$developer->website ?? ''}}</a></div>
             <div class="big-item-e-mail"><span>E-mail:</span><a href="mailto:{{$developer->email ?? ''}}">{{$developer->email ?? ''}}</a></div>

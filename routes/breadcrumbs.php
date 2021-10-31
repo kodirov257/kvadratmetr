@@ -121,6 +121,21 @@ Breadcrumbs::for('cabinet.developer.edit', function (Crumbs $crumbs) {
     $crumbs->push(trans('developer.edit'), route('cabinet.developer.edit'));
 });
 
+Breadcrumbs::for('cabinet.projects.planPrice', function (Crumbs $crumbs, $id) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push('Plan and Price', route('cabinet.projects.planPrice', $id));
+});
+
+Breadcrumbs::for('cabinet.projects.planAdd', function (Crumbs $crumbs, $id, $room) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push('Plan and Price Create', route('cabinet.projects.planEdit', [$id, $room]));
+});
+
+Breadcrumbs::for('cabinet.projects.planEdit', function (Crumbs $crumbs, $id, $room) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push('Plan and Price Create', route('cabinet.projects.planAdd', [$id, $room]));
+});
+
 
 
 // Cabinet Projects
@@ -530,3 +545,4 @@ Breadcrumbs::for('admin.project.developers.sale-offices.edit', function (Crumbs 
 Breadcrumbs::for('cabinet.developer.create', function ($trail) {
     $trail->push('Title Here', route('cabinet.developer.create'));
 });
+

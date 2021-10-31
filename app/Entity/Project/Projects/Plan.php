@@ -36,10 +36,10 @@ class Plan extends Model
     protected $table = 'project_project_plans';
 
     protected $fillable = [
-        'area', 'area_unit', 'rooms', 'bathroom', 'image', 'sort'
+        'area', 'area_unit', 'rooms', 'bathroom', 'image', 'sort', 'price'
     ];
 
-    public static function add(int $id, string $area, string $areaUnit, string $rooms, string $bathroom, string $imageName): self
+    public static function add(int $id, string $area, string $areaUnit, string $rooms, string $bathroom, string $imageName, int $price): self
     {
         return static::make([
             'id' => $id,
@@ -49,10 +49,11 @@ class Plan extends Model
             'bathroom' => $bathroom,
             'image' => $imageName,
             'sort' => 1000,
+            'price' => $price
         ]);
     }
 
-    public function edit(string $area, string $areaUnit, string $rooms, string $bathroom, string $imageName = null): void
+    public function edit(string $area, string $areaUnit, string $rooms, string $bathroom, string $imageName = null, int $price): void
     {
         $this->update([
             'area' => $area,
@@ -60,6 +61,7 @@ class Plan extends Model
             'rooms' => $rooms,
             'bathroom' => $bathroom,
             'image' => $imageName ?: $this->image,
+            'price' => $price
         ]);
     }
 

@@ -7,7 +7,8 @@
     <section class="developer-page">
         <div class="container">
             @include('clients.layout.breadcrumb')
-            <h1 class="page-title text-align-left">{{$developer->title}}</h1>
+{{--            @dd($developer)--}}
+            <h1 class="page-title text-align-left">{{$developer->name}}</h1>
         </div>
     </section>
 
@@ -15,7 +16,7 @@
 
     <section class="develop-projects">
         <div class="container">
-            <h2 class="develop-projects-title">{{$developer->title}}</h2>
+            <h2 class="develop-projects-title">{{$developer->name}}</h2>
             <div class="latest-slider">
                 @foreach($developer->projects as $project)
                     @include('clients.layout.project-card-main')

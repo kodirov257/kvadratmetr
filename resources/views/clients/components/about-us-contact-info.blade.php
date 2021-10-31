@@ -5,7 +5,7 @@
     </div>
     <i class="icon-map"></i><span class="contact-us-page-coordinate">{{$developer->address}}</span>
     <div class="contact-us-page-contact">
-        <a href="tel:+{{$developer->phone ?? ''}}"><i class="icon-phone"></i>{{$developer->phone ?? ''}}</a>
+        <a href="tel:+{{$developer->main_number ?? ''}}"><i class="icon-phone"></i>+{{$developer->main_number ?? ''}}</a>
         <a href="tel:{{$developer->call_center ?? ''}}"><i class="icon-phone"></i>{{$developer->call_center ?? ''}}</a>
         <a href="{{$developer->website ?? ''}}" target="_blank"><i class="icon-earth"></i>{{$developer->website ?? ''}}</a>
         <a href="mailto:{{$developer->email ?? ''}}"><i class="icon-at"></i>{{$developer->email ?? ''}}</a>

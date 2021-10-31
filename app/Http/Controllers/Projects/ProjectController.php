@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Projects;
 
+use App\Entity\Project\Developer;
 use App\Entity\Project\Projects\Project;
 use App\Entity\Category;
 use App\Entity\Region;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Projects\SearchRequest;
 use App\Http\Router\ProjectsPath;
 use App\UseCases\Projects\SearchService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -22,7 +24,7 @@ class ProjectController extends Controller
         $this->search = $search;
     }
 
-    public function index()
+    public function index(Request $request)
     {
 //        SearchRequest $request, ProjectsPath $path this inside qovus
 //        $region = $path->region;
@@ -30,6 +32,26 @@ class ProjectController extends Controller
 //
 //        $result = $this->search->search($category, $region, $request, 20, $request->get('page', 1));
 //
+
+        $result = Project::orderByDesc('created_at');
+//        dd($request->name);
+
+        if ($request->name){
+            $developer_id = Developer::where('name_en', 'like', '%'.$request->name.'%')->first();
+            $result = $result->where('developer_id', $developer_id);
+        }
+        if ($request->rooms){
+//            TODO: After plan and price for project
+        }
+        if ($request->district){
+            $result = $result->where('address_en', 'like', '%'.$request->district.'%');
+        }
+        if ($request->range_1){
+//            TODO: Price range after price and plan
+        }
+        if ($request->range_2){
+//            TODO: Price range after price and plan
+        }
 //        $projects = $result->projects;
 //        $regionsCounts = $result->regionsCounts;
 //        $categoriesCounts = $result->categoriesCounts;
@@ -47,8 +69,11 @@ class ProjectController extends Controller
 //        $categories = array_filter($categories, function (Category $category) use ($categoriesCounts) {
 //            return isset($categoriesCounts[$category->id]) && $categoriesCounts[$category->id] > 0;
 //        });
+//        dd($result);
+        $resultNumber = $result->count();
+        $result = $result->paginate(10);
 
-        return view('clients.search');
+        return view('clients.search', compact('result', 'resultNumber'));
     }
 
     public function show(Project $project)
