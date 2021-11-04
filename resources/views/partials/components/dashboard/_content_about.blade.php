@@ -82,9 +82,7 @@
                         class="invalid-feedback"><strong>{{ $errors->first('about_ru') }}</strong></span>
             @endif
         </div>
-        <div class="save__infos">
-            <button type="submit" class="saving">Save</button>
-        </div>
+
     </div>
 </div>
 <div class="save__infos">

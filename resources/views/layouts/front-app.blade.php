@@ -28,8 +28,7 @@
                 <div id="menu" class="links">
                     <a href="/developers" class="main-nav-link">Developers</a>
                     <a href="/about" class="main-nav-link">About us</a>
-                    <a href="/advertisement" class="main-nav-link">Advertising</a>
-                    <a id="navLinkBtn" href="contact" class="main-nav-link btn">Contact</a>
+                    <a id="navLinkBtn" href="/contact" class="main-nav-link">Contact</a>
                 </div>
                 <div class="lang">
                     <button class="lang-toggle">EN</button>
@@ -51,7 +50,7 @@
             <div class="main-footer-box">
                 <div class="row align-items-end">
                     <div class="col-md-4 col-sm-12">
-                        <a href="index.html" class="logo"><img src="./assets/img/logo.svg" alt="logo image"></a>
+                        <a href="/" class="logo"><img src="{{asset('assets/user-front/assets/img/logo.svg')}}" alt="logo image"></a>
                         <div class="foot-descriptions">
                             <h5 class="title">About this Site</h5>
                             <p class="paragraph">The primary real estate market is growing and developing. Time shows

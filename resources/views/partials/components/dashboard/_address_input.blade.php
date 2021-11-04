@@ -70,9 +70,10 @@
         </h2>
         <div id="map" class="map"></div>
     </div>
-    <div class="save__infos">
-        <button type="submit" class="saving">Save</button>
-    </div>
+
+</div>
+<div class="save__infos">
+    <button type="submit" class="saving">Save</button>
 </div>
 <input type="hidden" name="lng" id="lng" value="{{$info->lng ?? ''}}">
 <input type="hidden" name="ltd" id="ltd" value="{{$info->ltd ?? ''}}">

@@ -136,10 +136,11 @@
                                 class="invalid-feedback"><strong>{{ $errors->first('about_ru') }}</strong></span>
                     @endif
                 </div>
-                <div class="save__infos">
-                    <button type="submit" class="saving">Save</button>
-                </div>
+
             </div>
+        </div>
+        <div class="save__infos">
+            <button type="submit" class="saving">Save</button>
         </div>
     </div>
     <div id="contacts" class="b-tab">
@@ -187,7 +188,7 @@
                 </div>
             </div>
         </div>
-        <div id="socialsTab" class="b-tab active">
+        <div id="socialsTab" class="b-tab">
             <div class="contact__accounting">
                 <div class="contact__address">
                     <h2 class="contact__social-sets">Facebook</h2>
