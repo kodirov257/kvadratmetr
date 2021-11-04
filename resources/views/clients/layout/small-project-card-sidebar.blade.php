@@ -8,18 +8,10 @@
     </div>
     <div class="small-item-info">
         {{--        TODO: Characteristics after need to here--}}
-        {{--        <div class="small-info">--}}
-        {{--            <p>Storeys:</p>--}}
-        {{--            <span>10 floor</span>--}}
-        {{--        </div>--}}
-        {{--        <div class="small-info">--}}
-        {{--            <p>Area:</p>--}}
-        {{--            <span>to 114 m<sup>2</sup></span>--}}
-        {{--        </div>--}}
-        {{--        <div class="small-info">--}}
-        {{--            <p>Rooms:</p>--}}
-        {{--            <span>to 3</span>--}}
-        {{--        </div>--}}
+        @foreach($project->values as $characteristic)
+            {{--            TODO: Once characteristics added need to fix these--}}
+            <div class="small-info"><p>{{$characteristic->name}}:</p><span><strong>{{$characteristic->value}} </strong></span></div>
+        @endforeach
     </div>
     <h6 class="name">{{$project->name}}</h6>
     @if($project->price)

@@ -18,11 +18,11 @@
             <p class="project-card__detail">
                 @foreach($project->values as $value)
                     @php($characteristic = $value->characteristic)
-{{--                    TODO: Only show 5 main characteristics after adding them #todo --}}
+                    {{--                    TODO: Only show 5 main characteristics after adding them #todo --}}
 
                 @endforeach
-                          <span><i class="icon-building"></i>Storeys:</span
-                          ><b>16</b> floor
+                <span><i class="icon-building"></i>Storeys:</span
+                ><b>16</b> floor
             </p>
             <p class="project-card__detail">
                           <span><i class="icon-area"></i>Area:</span
@@ -32,19 +32,18 @@
                 <span><i class="icon-square"></i>Rooms:</span>from
                 <b>16</b> to <b>16</b>
             </p>
-            <p class="project-card__detail">
-                <span><i class="icon-hummer"></i>Repairs:</span>with
-                <b>repair</b>
-            </p>
-            <p class="project-card__detail">
-                          <span><i class="icon-parking"></i>Parking:</span
-                          >private <b>Parking</b>
-            </p>
+            @foreach($project->facilities as $facility)
+                <p class="project-card__detail">
+                    <span><i class="icon-hummer"></i>With {{$facility->name}}</span>
+                </p>
+            @endforeach
+
         </div>
         <div class="project-card__footer">
-            Status: <span class="text {{$project->status === 5 ? '' : 'deactive'}}">{{$project->status === 5 ? 'Active' : 'Deactive'}}</span>
+            Status: <span
+                    class="text {{$project->status === 5 ? '' : 'deactive'}}">{{$project->status === 5 ? 'Active' : 'Deactive'}}</span>
             <label class="switch">
-{{--                @dd($project->status)--}}
+                {{--                @dd($project->status)--}}
                 @if($project->status === 5)
                     <input type="checkbox" checked/>
 

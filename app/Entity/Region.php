@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Region extends Model
 {
+
     protected $fillable = ['name_uz', 'name_ru', 'name_en', 'slug', 'parent_id'];
 
     public function getPath(): string
@@ -35,6 +36,7 @@ class Region extends Model
     {
         return ($this->parent ? $this->parent->getAddress() . ', ' : '') . $this->name;
     }
+
 
 
     ########################################### Scopes

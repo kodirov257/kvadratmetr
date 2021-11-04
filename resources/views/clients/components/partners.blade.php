@@ -1,11 +1,12 @@
 <section class="partners" id="partners">
     <div class="container">
         <div class="partners-slider">
+            @foreach($developers as $developer)
             <div class="slider-item">
-                @foreach($developers as $developer)
+
                     <img src="{{$developer->logo}}" alt="partner logo">
-                @endforeach
             </div>
+            @endforeach
         </div>
     </div>
 </section>
