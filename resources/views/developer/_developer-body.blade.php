@@ -4,7 +4,7 @@
             <div id="logoImgContainer">
 
             @if(isset($developer) && isset($developer->logo))
-                <img src="{{$developer->logo}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
+                <img src="{{$developer->logoOriginal}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
             @endif
             </div>
             <div class="{{isset($developer->logo) && $developer->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"

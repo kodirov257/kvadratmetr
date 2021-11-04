@@ -5,6 +5,7 @@ namespace App\Entity\Project;
 use App\Entity\Project\Projects\Project;
 use App\Entity\Project\Projects\SaleOffice;
 use App\Entity\User\User;
+use App\Helpers\ImageHelper;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
 use Eloquent;
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $about_ru
  * @property string $about_en
  * @property string $slug
+ * @property string $logo
  * @property int $status
  * @property string $main_number
  * @property string $call_center
@@ -53,6 +55,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $about
  * @property string $address
  * @property string $landmark
+ * @property string $logoThumbnail
+ * @property string $logoOriginal
  * @mixin Eloquent
  */
 class Developer extends Model
@@ -101,6 +105,16 @@ class Developer extends Model
     public function getLandmarkAttribute(): string
     {
         return htmlspecialchars_decode(LanguageHelper::getLandmark($this));
+    }
+
+    public function getLogoThumbnailAttribute(): string
+    {
+        return '/storage/files/' . ImageHelper::FOLDER_DEVELOPERS . '/' . $this->id . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $this->logo;
+    }
+
+    public function getLogoOriginalAttribute(): string
+    {
+        return '/storage/files/' . ImageHelper::FOLDER_DEVELOPERS . '/' . $this->id . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $this->logo;
     }
 
     ###########################################

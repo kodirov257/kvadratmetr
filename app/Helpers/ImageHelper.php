@@ -14,6 +14,7 @@ class ImageHelper
     const FOLDER_PAYMENTS = 'payments';
     const FOLDER_CATEGORIES = 'categories';
     const FOLDER_PROJECTS = 'projects';
+    const FOLDER_DEVELOPERS = 'developers';
     const FOLDER_BANNERS = 'banners';
     const FOLDER_SLIDERS = 'sliders';
     const FOLDER_NEWS = 'news';

@@ -3,7 +3,7 @@
         <div class="developer-bar__image">
             <div id="logoImgContainer">
                 @if(isset($project) && isset($project->logo))
-                    <img src="{{$project->logo}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
+                    <img src="{{$project->logoOriginal}}" alt="Logo Developer" onclick="callIconInput()" style="width: 50px;height: 50px;"/>
                 @endif
             </div>
             <div class="{{isset($project->logo) && $project->logo ? '' : 'image-of-projects'}}" id="logoImgSelectorContainer"
