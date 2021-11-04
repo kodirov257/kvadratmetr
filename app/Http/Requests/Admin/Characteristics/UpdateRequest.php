@@ -15,6 +15,7 @@ use Illuminate\Validation\Rule;
  * @property string $required
  * @property string $variants
  * @property bool $is_range
+ * @property \Illuminate\Http\UploadedFile $icon
  *
  * @property Characteristic $characteristic
  */
@@ -35,6 +36,7 @@ class UpdateRequest extends FormRequest
             'required' => 'nullable|string|max:255',
             'variants' => 'nullable|string',
             'is_range' => 'boolean',
+            'icon' => 'image|mimes:jpeg,png,jpg',
         ];
     }
 }

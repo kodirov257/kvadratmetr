@@ -1,10 +1,10 @@
 @extends('layouts.admin.page')
 
 @section('content')
-    {!! Form::open(['url' => route('admin.project.characteristics.update', $characteristic), 'method' => 'POST']) !!}
+    <form method="POST" action="{{ route('admin.project.characteristics.update', $characteristic) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         @include('admin.project.characteristics._form')
-    {!! Form::close() !!}
+    </form>
 @endsection

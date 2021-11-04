@@ -4,6 +4,7 @@ namespace App\Entity\Project;
 
 use App\Entity\BaseModel;
 use App\Entity\User\User;
+use App\Helpers\ImageHelper;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
 use Eloquent;
@@ -20,12 +21,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property array $variants
  * @property boolean $is_range
  * @property integer $sort
+ * @property string $icon
  * @property int $created_by
  * @property int $updated_by
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @property string $name
+ * @property string $iconThumbnail
+ * @property string $iconOriginal
+ *
  * @property User $createdBy
  * @property User $updatedBy
  *
@@ -41,11 +46,41 @@ class Characteristic extends BaseModel
 
     public $timestamps = false;
 
-    protected $fillable = ['name_uz', 'name_ru', 'name_en', 'type', 'required', 'default', 'variants', 'is_range', 'sort'];
+    protected $fillable = ['id', 'name_uz', 'name_ru', 'name_en', 'type', 'required', 'default', 'variants', 'is_range', 'sort', 'icon'];
 
     protected $casts = [
         'variants' => 'array',
     ];
+
+    public static function add(int $id, string $nameUz, string $nameRu, string $nameEn, string $type, bool $required, ?string $variants, ?bool $isRange, string $iconName): self
+    {
+        return static::create([
+            'id' => $id,
+            'name_uz' => $nameUz,
+            'name_ru' => $nameRu,
+            'name_en' => $nameEn,
+            'type' => $type,
+            'required' => $required,
+            'variants' => array_map('trim', preg_split('#[\r\n]+#', $variants)),
+            'is_range' => $isRange ?? false,
+            'sort' => Characteristic::count() + 1,
+            'icon' => $iconName,
+        ]);
+    }
+
+    public function edit(string $nameUz, string $nameRu, string $nameEn, string $type, bool $required, ?string $variants, ?string $isRange, string $iconName = null): void
+    {
+        $this->update([
+            'name_uz' => $nameUz,
+            'name_ru' => $nameRu,
+            'name_en' => $nameEn,
+            'type' => $type,
+            'required' => $required,
+            'variants' => array_map('trim', preg_split('#[\r\n]+#', $variants)),
+            'is_range' => $isRange ?? false,
+            'icon' => $iconName ?: $this->icon,
+        ]);
+    }
 
     public static function typesList(): array
     {
@@ -107,6 +142,16 @@ class Characteristic extends BaseModel
     public function getNameAttribute(): string
     {
         return LanguageHelper::getName($this);
+    }
+
+    public function getIconThumbnailAttribute(): string
+    {
+        return '/storage/files/' . ImageHelper::FOLDER_CHARACTERISTICS . '/' . $this->id . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $this->icon;
+    }
+
+    public function getIconOriginalAttribute(): string
+    {
+        return '/storage/files/' . ImageHelper::FOLDER_CHARACTERISTICS . '/' . $this->id . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $this->icon;
     }
 
     ###########################################

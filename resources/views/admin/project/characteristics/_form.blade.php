@@ -113,10 +113,69 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-gray card-outline">
+            <div class="card-header"><h3 class="card-title">{{ trans('adminlte.icon') }}</h3></div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="file-loading">
+                        <input id="file-input" class="file" type="file" name="icon">
+                    </div>
+                    @if ($errors->has('icon'))
+                        <span class="invalid-feedback"><strong>{{ $errors->first('icon') }}</strong></span>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="form-group">
     <button type="submit" class="btn btn-primary">{{ trans('adminlte.' . ($characteristic ? 'edit' : 'save')) }}</button>
 </div>
 @section($javaScriptSectionName)
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/plugins/piexif.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/plugins/sortable.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/plugins/purify.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/themes/fa/theme.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/locales/uz.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/locales/ru.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-fileinput/js/locales/LANG.js') }}"></script>
+    {{--    <script src="{{ mix('js/fileinput.js', 'build') }}"></script>--}}
+
     <script>
+        let fileInput = $("#file-input");
+        let iconUrl = '{{ $characteristic ? ($characteristic->icon ? $characteristic->iconOriginal : null) : null }}';
+
+        if (iconUrl) {
+            let send = XMLHttpRequest.prototype.send, token = $('meta[name="csrf-token"]').attr('content');
+            XMLHttpRequest.prototype.send = function(data) {
+                this.setRequestHeader('X-CSRF-Token', token);
+                return send.apply(this, arguments);
+            };
+
+            fileInput.fileinput({
+                initialPreview: [iconUrl],
+                initialPreviewAsData: true,
+                showUpload: false,
+                previewFileType: 'text',
+                browseOnZoneClick: true,
+                overwriteInitial: true,
+                deleteUrl: 'remove-icon',
+                maxFileCount: 1,
+                allowedFileExtensions: ['jpg', 'jpeg', 'png'],
+            });
+        } else {
+            fileInput.fileinput({
+                showUpload: false,
+                previewFileType: 'text',
+                browseOnZoneClick: true,
+                maxFileCount: 1,
+                allowedFileExtensions: ['jpg', 'jpeg', 'png'],
+            });
+        }
     </script>
 @endsection

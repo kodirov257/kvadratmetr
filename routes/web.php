@@ -107,6 +107,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::resource('sale-offices', 'SaleOfficeController');
 
                 Route::group(['prefix' => 'characteristics/{characteristic}', 'as' => 'characteristics.'], function () {
+                    Route::post('/remove-icon', 'CharacteristicController@removeIcon')->name('remove-icon');
                     Route::post('/first', 'CharacteristicController@first')->name('first');
                     Route::post('/up', 'CharacteristicController@up')->name('up');
                     Route::post('/down', 'CharacteristicController@down')->name('down');

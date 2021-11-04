@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin\Project;
 
 use App\Entity\Project\Characteristic;
 use App\Entity\Category;
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Characteristics\CreateRequest;
 use App\Http\Requests\Admin\Characteristics\UpdateRequest;
 use App\UseCases\Projects\CharacteristicService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CharacteristicController extends Controller
 {
@@ -52,16 +54,7 @@ class CharacteristicController extends Controller
 //                throw new Exception('Characteristic range cannot be string.');
 //            }
 
-            $characteristic = Characteristic::create([
-                'name_uz' => $request->name_uz,
-                'name_ru' => $request->name_ru,
-                'name_en' => $request->name_en,
-                'type' => $request->type,
-                'required' => $request->required,
-                'variants' => array_map('trim', preg_split('#[\r\n]+#', $request->variants)),
-                'is_range' => $request->is_range ?? false,
-                'sort' => Characteristic::count() + 1,
-            ]);
+            $characteristic = $this->service->create($request);
 
             return redirect()->route('admin.project.characteristics.show', $characteristic);
         } catch (Exception $e) {
@@ -88,15 +81,7 @@ class CharacteristicController extends Controller
                 throw new Exception('Characteristic range cannot be string.');
             }
 
-            $characteristic->update([
-                'name_uz' => $request->name_uz,
-                'name_ru' => $request->name_ru,
-                'name_en' => $request->name_en,
-                'type' => $request->type,
-                'required' => $request->required,
-                'variants' => array_map('trim', preg_split('#[\r\n]+#', $request->variants)),
-                'is_range' => $request->is_range ?? false,
-            ]);
+            $this->service->update($characteristic->id, $request);
 
             return redirect()->route('admin.project.characteristics.show', $characteristic);
         } catch (Exception $e) {
@@ -146,8 +131,22 @@ class CharacteristicController extends Controller
 
     public function destroy(Characteristic $characteristic)
     {
-        $characteristic->delete();
+        try {
+            Storage::disk('public')->deleteDirectory('/files/' . ImageHelper::FOLDER_CHARACTERISTICS . '/' . $characteristic->id);
 
-        return redirect()->route('admin.project.characteristics.index');
+            $characteristic->delete();
+
+            return redirect()->route('admin.project.characteristics.index');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function removeIcon(Characteristic $characteristic)
+    {
+        if ($this->service->removeIcon($characteristic->id)) {
+            return response()->json('The icon is successfully deleted!');
+        }
+        return response()->json('The icon is not deleted!', 400);
     }
 }

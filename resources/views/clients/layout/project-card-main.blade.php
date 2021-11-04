@@ -8,7 +8,7 @@
         <div class="info">
             @foreach($project->values as $value)
 {{--            TODO: Once characteristics added need to fix these--}}
-            <div class="small-info"><p>{{ $value->characteristic->name }}:</p><span><strong>{{ $characteristic->value }} </strong></span></div>
+            <div class="small-info"><p>{{ $value->characteristic->name }}:</p><span><strong>{{ $value->value }} </strong></span></div>
             @endforeach
         </div>
         <div class="next-page"><a class="btn next-btn" href="{{ route('calculator', $project->id) }}">More <i class="icon-right"></i></a></div>

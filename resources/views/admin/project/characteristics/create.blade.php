@@ -1,12 +1,10 @@
 @extends('layouts.admin.page')
 
 @section('content')
+    <form method="POST" action="{{ route('admin.project.characteristics.store') }}" enctype="multipart/form-data">
+        @csrf
 
-    {!! Form::open(['url' => route('admin.project.characteristics.store'), 'method' => 'POST',  'enctype' => 'multipart/form-data']) !!}
-    @csrf
-
-    @include ('partials.admin.flash')
-    @include('admin.project.characteristics._form', ['characteristic' => null])
-    {!! Form::close() !!}
-
+        @include ('partials.admin.flash')
+        @include('admin.project.characteristics._form', ['characteristic' => null])
+    </form>
 @endsection

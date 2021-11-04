@@ -13,6 +13,18 @@
         </form>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-gray card-outline">
+                <div class="card-header"><h3 class="card-title">{{ trans('adminlte.icon') }}</h3></div>
+                <div class="card-body">
+                    @if ($characteristic->icon)
+                        <a href="{{ $characteristic->iconOriginal }}" target="_blank"><img src="{{ $characteristic->iconThumbnail }}"></a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
