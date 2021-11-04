@@ -8,15 +8,15 @@
     </div>
     <div class="small-item-info">
         {{--        TODO: Characteristics after need to here--}}
-        @foreach($project->values as $characteristic)
+        @foreach($project->values as $value)
             {{--            TODO: Once characteristics added need to fix these--}}
-            <div class="small-info"><p>{{$characteristic->name}}:</p><span><strong>{{$characteristic->value}} </strong></span></div>
+            <div class="small-info"><p>{{ $value->characteristic->name }}:</p><span><strong>{{ $value->value }} </strong></span></div>
         @endforeach
     </div>
-    <h6 class="name">{{$project->name}}</h6>
+    <h6 class="name">{{ $project->name }}</h6>
     @if($project->price)
     <p class="price">
-        {{$project->price}} <span>sum</span><small>and more</small>
+        {{ $project->price }} <span>sum</span><small>and more</small>
     </p>
     @endif
     <div class="foot">
