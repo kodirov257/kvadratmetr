@@ -117,7 +117,7 @@
             @endforeach
         </div>
         <div class="save__infos">
-            <button type="button" class="saving">Save</button>
+            <button type="submit" class="saving">Save</button>
         </div>
     </div>
 </div>
