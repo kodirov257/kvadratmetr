@@ -16,11 +16,13 @@
         <div class="project-card__title">{{$project->name ?? '-'}}</div>
         <div class="project-card__details">
             <p class="project-card__detail">
-                @foreach($project->values as $value)
-                    @php($characteristic = $value->characteristic)
-                    {{--                    TODO: Only show 5 main characteristics after adding them #todo --}}
+                @if($project->values)
+                    @foreach($project->values as $value)
+                        @php($characteristic = $value->characteristic)
+                        {{--                    TODO: Only show 5 main characteristics after adding them #todo --}}
 
-                @endforeach
+                    @endforeach
+                @endif
                 <span><i class="icon-building"></i>Storeys:</span
                 ><b>16</b> floor
             </p>

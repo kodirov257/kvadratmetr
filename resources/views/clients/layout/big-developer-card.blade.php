@@ -26,7 +26,7 @@
             </div>
             <div class="big-item-about">About Developer:</div>
             <div class="big-item-descr">
-                {{$developer->about}}
+                {!! $developer->about !!}
             </div>
         </div>
         <div class="col-4">

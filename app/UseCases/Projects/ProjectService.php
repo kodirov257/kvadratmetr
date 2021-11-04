@@ -18,6 +18,7 @@ use App\Http\Requests\Projects\EditRequest;
 use App\Http\Requests\Projects\PhotosRequest;
 use App\Http\Requests\Projects\RejectRequest;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -138,7 +139,7 @@ class ProjectService
 
                             DB::commit();
 
-                        } catch (\Exception $e) {
+                        } catch (Exception $e) {
                             DB::rollBack();
                             throw $e;
                         }
@@ -153,7 +154,7 @@ class ProjectService
                                 ]);
                             DB::commit();
 
-                        } catch (\Exception $e) {
+                        } catch (Exception $e) {
                             DB::rollBack();
                             throw $e;
                         }
@@ -227,7 +228,7 @@ class ProjectService
 
                     DB::commit();
 
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     DB::rollBack();
                     throw $e;
                 }
@@ -249,7 +250,7 @@ class ProjectService
 
                     DB::commit();
 
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     DB::rollBack();
                     throw $e;
                 }

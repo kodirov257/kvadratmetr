@@ -27,7 +27,8 @@ class CreateController extends Controller
         return view('cabinet.projects.create.category', compact('categories'));
     }
 
-    public function create(){
+    public function create()
+    {
         dd('salom');
         return view('cabinet.projects.create.create_project');
     }

@@ -13,7 +13,7 @@
                     @include('clients.layout.place-for-ads-sidebar')
                     <!-- END AD -->
                     @foreach($projects as $project)
-                        @include('clients.layout.small-project-card-sidebar', ['project'=>$project])
+                        @include('clients.layout.small-project-card-sidebar', ['project' => $project])
                     @endforeach
                 </div>
                 <div class="col-9">
