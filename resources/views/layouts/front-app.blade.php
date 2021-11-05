@@ -69,7 +69,7 @@
                         <address class="foot-location"><i class="icon-map"></i><span>31/2, st. H.Olimjan, Mirzo Ulugbek district, 2-floor, 1-room</span>
                         </address>
                         <div class="foot-social">
-                            <span>Follow as:</span>
+                            <span>Follow us:</span>
                             <a href="#" class="facebook"><i class="icon-facebook"></i></a>
                             <a href="#" class="instagram"><i class="icon-instagram"></i></a>
                             <a href="#" class="telegram"><i class="icon-telegram"></i></a>

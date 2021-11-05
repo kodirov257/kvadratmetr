@@ -16,11 +16,13 @@
                     @include('clients.components.about-us')
                 </div>
                 <div class="col-4">
-@include('clients.components.about-us-contact-info')
-{{--                    TODO: map--}}
-@include('clients.layout.map')
+                    @include('clients.components.about-us-contact-info')
+                    {{--                    TODO: map--}}
+                    @include('clients.layout.map')
                 </div>
             </div>
+            @include('clients.components.blog')
+
         </div>
     </section>
 

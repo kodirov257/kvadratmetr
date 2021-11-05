@@ -9,10 +9,28 @@
         <a href="tel:{{$developer->call_center ?? ''}}"><i class="icon-phone"></i>{{$developer->call_center ?? ''}}</a>
         <a href="{{$developer->website ?? ''}}" target="_blank"><i class="icon-earth"></i>{{$developer->website ?? ''}}</a>
         <a href="mailto:{{$developer->email ?? ''}}"><i class="icon-at"></i>{{$developer->email ?? ''}}</a>
-        <span>Follow as:</span>
+        <span>Follow us:</span>
 {{--        TODO: Social network--}}
 {{--        <a href="#" class="social facebook"><i class="icon-facebook"></i></a>--}}
 {{--        <a href="#" class="social instagram"><i class="icon-instagram"></i></a>--}}
 {{--        <a href="#" class="social telegram"><i class="icon-telegram"></i></a>--}}
+        @if($developer->instagram)
+            <a href="{{$developer->instagram}}"><i class="icon-instagram"></i></a>
+        @endif
+        @if($developer->facebook)
+            <a href="{{$developer->facebook}}"><i class="icon-facebook"></i></a>
+        @endif
+        @if($developer->telegram)
+            <a href="{{$developer->telegram}}"><i class="icon-telegram"></i></a>
+        @endif
+        @if($developer->tik_tok)
+            <a href="{{$developer->tik_tok}}"><i class="icon-tiktok"></i></a>
+        @endif
+        @if($developer->youtube)
+            <a href="{{$developer->youtube}}"><i class="icon-youtube"></i></a>
+        @endif
+        @if($developer->twitter)
+            <a href="{{$developer->twitter}}"><i class="icon-twitter"></i></a>
+        @endif
     </div>
 </div>

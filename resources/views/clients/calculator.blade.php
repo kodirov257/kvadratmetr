@@ -19,26 +19,18 @@
                     @include('clients.components.characteristics')
                     <h1 class="page-title text-align-left mb-4">Plans and Prices</h1>
                     <div class="row">
-                        <div class="col-3 mb-4">
-                            <button class="characteristic-panel btn char-btn p-2"><span>1 - Room</span><i
-                                        class="icon-down"></i></button>
-                        </div>
-                        <div class="col-3 mb-4">
-                            <button class="characteristic-panel btn char-btn p-2 active"><span>2 - Room</span><i
-                                        class="icon-down"></i></button>
-                        </div>
-                        <div class="col-3 mb-4">
-                            <button class="characteristic-panel btn char-btn p-2"><span>3 - Room</span><i
-                                        class="icon-down"></i></button>
-                        </div>
-                        <div class="col-3 mb-4">
-                            <button class="characteristic-panel btn char-btn p-2"><span>4 - Room</span><i
-                                        class="icon-down"></i></button>
-                        </div>
+                        <div class="col-lg-3 col-md-6 col-6 mb-4"><button class="characteristic-panel btn char-btn p-2"><span>1 - Room</span><i
+                                        class="icon-down"></i></button></div>
+                        <div class="col-lg-3 col-md-6 col-6 mb-4"><button class="characteristic-panel btn char-btn p-2 active"><span>2 -
+                    Room</span><i class="icon-up"></i></button></div>
+                        <div class="col-lg-3 col-md-6 col-6 mb-4"><button class="characteristic-panel btn char-btn p-2"><span>3 - Room</span><i
+                                        class="icon-down"></i></button></div>
+                        <div class="col-lg-3 col-md-6 col-6 mb-4"><button class="characteristic-panel btn char-btn p-2"><span>4 - Room</span><i
+                                        class="icon-down"></i></button></div>
                     </div>
                     @include('clients.components.plan-price-cards')
                     @include('clients.components.facilities')
-                    @include('clients.components.payment-calculator')
+{{--                    @include('clients.components.payment-calculator')--}}
                     <h1 class="page-title text-align-left mb-4">About Project</h1>
                     <div class="about-us-page-information mb-5">
                         {!! $project->about !!}
