@@ -77,8 +77,8 @@ class ProjectController extends Controller
 
     public function updateStatus(Request $request)
     {
-//        if ($request->id){
-//
-//        }
+        if ($request->id){
+
+        }
     }
 }
