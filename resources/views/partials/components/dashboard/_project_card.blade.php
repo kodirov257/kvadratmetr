@@ -1,10 +1,12 @@
 <div class="col-4">
     <div class="project-card">
         <div class="project-card__image">
+            @if(isset($project->photos) && count($project->photos) > 0)
             <img
-                    src="{{$project->fileOriginal ?? ''}}"
+                    src="{{$project->photos[0]->fileOriginal}}"
                     alt=""
             />
+            @endif
             <a href="{{route('cabinet.projects.edit', [$project->id])}}" class="project-card__edit"
             ><i class="icon-pencil"></i
                 ></a>
@@ -15,28 +17,25 @@
         </div>
         <div class="project-card__title">{{$project->name ?? '-'}}</div>
         <div class="project-card__details">
-            <p class="project-card__detail">
-                @if($project->values)
-                    @foreach($project->values as $value)
-                        @php($characteristic = $value->characteristic)
-                        {{--                    TODO: Only show 5 main characteristics after adding them #todo --}}
-
-                    @endforeach
-                @endif
-                <span><i class="icon-building"></i>Storeys:</span
-                ><b>16</b> floor
-            </p>
-            <p class="project-card__detail">
-                          <span><i class="icon-area"></i>Area:</span
-                          ><b>16</b> m<sup>2</sup> to <b>16</b> m<sup>2</sup>
-            </p>
-            <p class="project-card__detail">
-                <span><i class="icon-square"></i>Rooms:</span>from
-                <b>16</b> to <b>16</b>
-            </p>
+{{--            <p class="project-card__detail">--}}
+            @foreach($project->values as $value)
+{{--                @if($value->value)--}}
+                    <p class="project-card__detail"><img src="{{$value->characteristic->icon}}" alt="">{{$value->characteristic->name}}:
+                        <span>{{$value->value}} </span>
+                    </p>
+{{--                @endif--}}
+            @endforeach
+{{--            <p class="project-card__detail">--}}
+{{--                          <span><i class="icon-area"></i>Area:</span--}}
+{{--                          ><b>16</b> m<sup>2</sup> to <b>16</b> m<sup>2</sup>--}}
+{{--            </p>--}}
+{{--            <p class="project-card__detail">--}}
+{{--                <span><i class="icon-square"></i>Rooms:</span>from--}}
+{{--                <b>16</b> to <b>16</b>--}}
+{{--            </p>--}}
             @foreach($project->facilities as $facility)
                 <p class="project-card__detail">
-                    <span><i class="icon-hummer"></i>With {{$facility->name}}</span>
+                    <span><img src="{{$facility->icon}}" alt="">With {{$facility->name}}</span>
                 </p>
             @endforeach
 
@@ -58,3 +57,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function submitChangeStatus(id, status){
+        console.log(id, status)
+    }
+
+
+</script>
