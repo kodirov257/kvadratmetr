@@ -1,36 +1,19 @@
 <div class="contact-us-page-contacts">
     <div class="contact-us-logo-name">
-        <h3 class="logo-name">{{$developer->name}}</h3>
-        <img src="{{$developer->logo}}" alt="site logo" class="logo">
+        <h3 class="logo-name">KvadratMetr</h3>
+        <img src="{{asset('/assets/user-front/assets/img/logo-small.svg')}}" alt="site logo" class="logo">
     </div>
-    <i class="icon-map"></i><span class="contact-us-page-coordinate">{{$developer->address}}</span>
+    <i class="icon-map"></i><span class="contact-us-page-coordinate">31/2, st. H. Olimjan, Mirzo Ulugbek
+                district, 2-floor, 1 room.</span>
     <div class="contact-us-page-contact">
-        <a href="tel:+{{$developer->main_number ?? ''}}"><i class="icon-phone"></i>+{{$developer->main_number ?? ''}}</a>
-        <a href="tel:{{$developer->call_center ?? ''}}"><i class="icon-phone"></i>{{$developer->call_center ?? ''}}</a>
-        <a href="{{$developer->website ?? ''}}" target="_blank"><i class="icon-earth"></i>{{$developer->website ?? ''}}</a>
-        <a href="mailto:{{$developer->email ?? ''}}"><i class="icon-at"></i>{{$developer->email ?? ''}}</a>
-        <span>Follow us:</span>
-{{--        TODO: Social network--}}
-{{--        <a href="#" class="social facebook"><i class="icon-facebook"></i></a>--}}
-{{--        <a href="#" class="social instagram"><i class="icon-instagram"></i></a>--}}
-{{--        <a href="#" class="social telegram"><i class="icon-telegram"></i></a>--}}
-        @if($developer->instagram)
-            <a href="{{$developer->instagram}}"><i class="icon-instagram"></i></a>
-        @endif
-        @if($developer->facebook)
-            <a href="{{$developer->facebook}}"><i class="icon-facebook"></i></a>
-        @endif
-        @if($developer->telegram)
-            <a href="{{$developer->telegram}}"><i class="icon-telegram"></i></a>
-        @endif
-        @if($developer->tik_tok)
-            <a href="{{$developer->tik_tok}}"><i class="icon-tiktok"></i></a>
-        @endif
-        @if($developer->youtube)
-            <a href="{{$developer->youtube}}"><i class="icon-youtube"></i></a>
-        @endif
-        @if($developer->twitter)
-            <a href="{{$developer->twitter}}"><i class="icon-twitter"></i></a>
-        @endif
+        <a href="tel:+998781507779"><i class="icon-phone"></i>+998 (78) 150-77-79</a>
+        <a href="tel:+998712237878"><i class="icon-phone"></i>+998 (71) 223-78-78</a>
+        <a href="https://www.kvadratmetr.uz" target="_blank"><i
+                    class="icon-earth"></i>https://www.kvadratmetr.uz</a>
+        <a href="mailto:info@kvadratmetr.uz"><i class="icon-at"></i>info@kvadratmetr.uz</a>
+        <span>Follow as:</span>
+        <a href="#" class="social facebook"><i class="icon-facebook"></i></a>
+        <a href="#" class="social instagram"><i class="icon-instagram"></i></a>
+        <a href="#" class="social telegram"><i class="icon-telegram"></i></a>
     </div>
 </div>

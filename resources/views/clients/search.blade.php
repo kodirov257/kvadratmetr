@@ -19,6 +19,10 @@
     {{--Selected filter--}}
     @php($realEstateSlugs = explode(',', request('name')))
     @php($districtSlugs = explode(',', request('district')))
+    @php($roomsSlugs = explode(',', request('rooms')))
+    @php($developerSlugs = explode(',', request('developer')))
+    @php($priceSlugs1 = explode(',', request('range_1')))
+    @php($priceSlugs2 = explode(',', request('range_2')))
 
     <section class="buildings-selects">
         <div class="container">
@@ -30,6 +34,14 @@
                 @endif
                 @if($districtSlugs[0] != '')
                     <button class="selects_btn">{{$districtSlugs[0]}} ({{$resultNumber}}) <i
+                                class="icon-plus radius"></i></button>
+                @endif
+                @if($roomsSlugs[0] != '')
+                    <button class="selects_btn">{{$roomsSlugs[0]}} ({{$resultNumber}}) <i
+                                class="icon-plus radius"></i></button>
+                @endif
+                @if($developerSlugs[0] != '')
+                    <button class="selects_btn">{{$developerSlugs[0]}} ({{$resultNumber}}) <i
                                 class="icon-plus radius"></i></button>
                 @endif
                 <button class="selects_btn">Result ({{$resultNumber}}) <i class="icon-plus radius"></i></button>
@@ -79,6 +91,15 @@
                                 {{--                                        id="developer">--}}
                                 {{--                                    <option value="Select Developer">Select Developer</option>--}}
                                 {{--                                </select>--}}
+                                <label for="rooms">Rooms</label>
+                                <select class="characteristic-panel apart-input btn char-btn p-2 min-h-bg" name="rooms" id="rooms">
+                                    <option value="District">Select rooms</option>
+                                </select>
+                                <label for="developer">Developer</label>
+                                <select class="characteristic-panel apart-input btn char-btn p-2 min-h-bg" name="developer"
+                                        id="developer">
+                                    <option value="Select Developer">Select Developer</option>
+                                </select>
                                 <div class="bld-filt-item">
                                     <div class="rangeslider">
                                         <div class="range_div">
@@ -88,19 +109,19 @@
                                         <span class="range_min light left">3.000.000</span>
                                         <i class="icon-equalizer"></i>
                                         <span class="range_max light right">38.000.000</span>
-                                        @php($priceSlugs1 = explode(',', request('range_1')))
-                                        @php($priceSlugs2 = explode(',', request('range_2')))
+
                                         <input class="min" name="range_1" type="range" min="1" max="100"
                                                value="{{$priceSlugs1[0] ?? 3}}"/>
                                         <input class="max" name="range_2" type="range" min="1" max="100"
                                                value="{{$priceSlugs2[0] ?? 38}}"/>
                                     </div>
                                 </div>
+                                <div class="send-buttons" type="submit">
+                                    <button class="btn send-btn cus-my-btn">Filter by Parametrics<i
+                                                class="icon-telegram"></i></button>
+                                </div>
                             </form>
-                            <div class="send-buttons">
-                                <button class="btn send-btn cus-my-btn">Filter by Parametrics<i
-                                            class="icon-telegram"></i></button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -123,7 +144,7 @@
                                         @if($project->values)
                                             @foreach($project->values as $value)
                                                 {{--            TODO: Once characteristics added need to fix these--}}
-                                                <div class="small-info"><p>{{ $value->characteristic->name }}:</p><span><strong>{{ $characteristic->value }} </strong></span></div>
+                                                <div class="small-info"><p>{{ $value->characteristic->name }}:</p><span><strong>{{ $value->value }} </strong></span></div>
                                             @endforeach
                                         @endif
                                         {{--                                        </div>--}}
@@ -153,13 +174,7 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-md-8 col-sm-12">
-                <div class="pagination">
-                    <button class="btn-left"><i class="icon-left"></i></button>
-                    <div class="pagination-btns">
-                        <button class="pagination-btn active">1</button>
-                    </div>
-                    <button class="btn-right"><i class="icon-right"></i></button>
-                </div>
+                @include('clients.layout.pagination', ['pagination'=>$result])
             </div>
         </div>
     </section>

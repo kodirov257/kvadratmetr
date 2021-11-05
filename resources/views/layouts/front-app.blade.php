@@ -28,7 +28,7 @@
                 <div id="menu" class="links">
                     <a href="/developers" class="main-nav-link">Developers</a>
                     <a href="/about" class="main-nav-link">About us</a>
-                    <a id="navLinkBtn" href="/contact" class="main-nav-link">Contact</a>
+                    <a id="navLinkBtn" href="/contact-us" class="main-nav-link">Contact</a>
                 </div>
                 <div class="lang">
                     <button class="lang-toggle">EN</button>

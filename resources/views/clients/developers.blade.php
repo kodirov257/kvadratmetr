@@ -21,7 +21,7 @@
                     @include('clients.layout.big-developer-card')
                     @endforeach
 {{--                    TODO: pagination need to connect--}}
-                    @include('clients.layout.pagination')
+                    @include('clients.layout.pagination', ['pagination'=>$developers])
                 </div>
             </div>
         </div>

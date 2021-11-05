@@ -9,11 +9,11 @@ use App\Helpers\LanguageHelper;
 
 class AboutController extends Controller
 {
-    public function index($developerID)
+    public function index()
     {
-        $developer = Developer::where('id', $developerID)->first();
+//        $developer = Developer::where('id', $developerID)->first();
 
 
-        return view('clients.about', compact('developer'));
+        return view('clients.about');
     }
 }
