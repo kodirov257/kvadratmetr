@@ -208,8 +208,8 @@ class CharacteristicService
 
     public function removeIcon(int $id): bool
     {
-        $facility = Characteristic::findOrFail($id);
-        return Storage::disk('public')->deleteDirectory('/files/' . ImageHelper::FOLDER_CHARACTERISTICS . '/' . $facility->id) && $facility->update(['icon' => null]);
+        $characteristic = Characteristic::findOrFail($id);
+        return Storage::disk('public')->deleteDirectory('/files/' . ImageHelper::FOLDER_CHARACTERISTICS . '/' . $characteristic->id) && $characteristic->update(['icon' => null]);
     }
 
     private function uploadIcon(int $facilityId, UploadedFile $icon, string $iconName)

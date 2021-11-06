@@ -20,11 +20,15 @@ use App\Http\Requests\Projects\RejectRequest;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectService
 {
-    public function create($developerId, /*$categoryId, $regionId, */ Request $request): Project
+    private $nextId;
+
+    public function create($developerId, /*$categoryId, $regionId, */ CreateRequest $request): Project
     {
         /** @var User $developer */
         $developer = Developer::findOrFail($developerId);
@@ -38,22 +42,24 @@ class ProjectService
 
             /** @var Project $project */
             $project = Project::make([
-                'name_uz' => $request->input('name_en'),
-                'name_ru' => $request->input('name_en'),
-                'name_en' => $request->input('name_en'),
-                'about_uz' => $request->input('about_uz'),
-                'about_ru' => $request->input('about_ru'),
-                'about_en' => $request->input('about_en'),
-                'slug' => $request->input('name_en') . '123',
-                'address_uz' => $request->input('address_uz'),
-                'address_ru' => $request->input('address_ru'),
-                'address_en' => $request->input('address_en'),
-                'landmark_uz' => $request->input('landmark_uz'),
-                'landmark_ru' => $request->input('landmark_ru'),
-                'landmark_en' => $request->input('landmark_en'),
-                'lng' => $request->input('lng'),
-                'ltd' => $request->input('ltd'),
+                'id' => $this->getNextId(),
+                'name_uz' => $request->name_uz,
+                'name_ru' => $request->name_ru,
+                'name_en' => $request->name_en,
+                'about_uz' => $request->about_uz,
+                'about_ru' => $request->about_ru,
+                'about_en' => $request->about_en,
+                'slug' => $request->name_en . '123',
+                'address_uz' => $request->address_uz,
+                'address_ru' => $request->address_ru,
+                'address_en' => $request->address_en,
+                'landmark_uz' => $request->landmark_uz,
+                'landmark_ru' => $request->landmark_ru,
+                'landmark_en' => $request->landmark_en,
+                'lng' => $request->lng,
+                'ltd' => $request->ltd,
                 'status' => Project::STATUS_DRAFT,
+//                'logo' => $logoName,
             ]);
 
             $project->developer()->associate($developer);
@@ -75,36 +81,13 @@ class ProjectService
             if ($request->files) {
 
                 $this->addPhotos($project->id, $request);
+//                $this->uploadLogo($this->getNextId(), $request['logo'], $logoName);
                 $this->addLogo($project->id, $request);
 
                 return $project;
             }
 
             return $project;
-        });
-    }
-
-    public function addPhotos($id, Request $request): void
-    {
-        $project = $this->getProject($id);
-//        dd($request['images']);
-        DB::transaction(function () use ($request, $project) {
-            foreach ($request['images'] as $file) {
-                $project->photos()->create([
-                    'file' => $file->store('projects', 'public')
-                ]);
-            }
-            $project->update();
-        });
-    }
-
-    public function addLogo($id, Request $request): void
-    {
-        $developer = $this->getProject($id);
-        DB::transaction(function () use ($request, $developer) {
-            $developer->update([
-                'logo' => $request['logo']->store('projects', 'public')
-            ]);
         });
     }
 
@@ -203,6 +186,43 @@ class ProjectService
             'status' => Project::STATUS_DRAFT,
         ]);
 
+    }
+
+    public function addPhotos($id, Request $request): void
+    {
+        $project = $this->getProject($id);
+
+        DB::transaction(function () use ($request, $project) {
+            foreach ($request['images'] as $file) {
+                $photoName = ImageHelper::getRandomName($file);
+                $photo = $project->photos()->create([
+                    'project_id' => $project->id,
+                    'file' => $photoName,
+                    'sort' => 100,
+                ]);
+
+                ImageHelper::uploadResizedImage($project->id, ImageHelper::FOLDER_PROJECTS, $file, $photoName);
+//                $project->photos()->create([
+//                    'file' => $file->store('projects', 'public')
+//                ]);
+            }
+
+            $this->sortPhotos($project);
+        });
+    }
+
+    public function addLogo($id, Request $request): void
+    {
+        $logoName = ImageHelper::getRandomName($request['logo']);
+
+        $project = $this->getProject($id);
+        DB::transaction(function () use ($request, $project, $logoName) {
+            $project->update([
+                'logo' => $logoName,
+            ]);
+
+            $this->uploadLogo($this->getNextId(), $request['logo'], $logoName);
+        });
     }
 
     public function addCharacteristicsToProduct($characteristics, $project, $request): void
@@ -321,8 +341,37 @@ class ProjectService
         $project->delete();
     }
 
+    public function getNextId(): int
+    {
+        if (!$this->nextId) {
+            $nextId = DB::select("select nextval('project_projects_id_seq')");
+            return $this->nextId = intval($nextId['0']->nextval);
+        }
+        return $this->nextId;
+    }
+
+    private function sortPhotos(Project $project): void
+    {
+        foreach ($project->photos as $i => $photo) {
+            $photo->setSort($i + 2);
+            $photo->saveOrFail();
+        }
+    }
+
     private function getProject($id): Project
     {
         return Project::findOrFail($id);
+    }
+
+    public function removeIcon(int $id): bool
+    {
+        $project = Project::findOrFail($id);
+        return Storage::disk('public')->deleteDirectory('/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $project->id) && $project->update(['icon' => null]);
+    }
+
+    private function uploadLogo(int $projectId, UploadedFile $logo, string $logoName)
+    {
+        ImageHelper::saveThumbnail($projectId, ImageHelper::FOLDER_PROJECTS, $logo, $logoName);
+        ImageHelper::saveOriginal($projectId, ImageHelper::FOLDER_PROJECTS, $logo, $logoName);
     }
 }

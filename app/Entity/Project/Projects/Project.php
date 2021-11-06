@@ -8,6 +8,7 @@ use App\Entity\Project\Projects\Dialog\Dialog;
 use App\Entity\Category;
 use App\Entity\Region;
 use App\Entity\User\User;
+use App\Helpers\ImageHelper;
 use App\Helpers\LanguageHelper;
 use Carbon\Carbon;
 use Eloquent;
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $category_id
  * @property int $region_id
  * @property int $price
+ * @property string $logo
  * @property int $impressions
  * @property int $clicks
  * @property int $leads
@@ -58,6 +60,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $about
  * @property string $address
  * @property string $landmark
+ * @property string $logoThumbnail
+ * @property string $logoOriginal
  * @method Builder active()
  * @method Builder forUser(User $user)
  * @mixin Eloquent
@@ -74,7 +78,7 @@ class Project extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'developer_id', 'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'slug', 'address_uz',
+        'id', 'developer_id', 'name_uz', 'name_ru', 'name_en', 'about_uz', 'about_ru', 'about_en', 'slug', 'address_uz',
         'price', 'category_id', 'region_id', 'impressions', 'clicks', 'leads', 'address_ru', 'address_en',
         'landmark_uz', 'landmark_ru', 'landmark_en', 'lng', 'ltd', 'status', 'reject_reason', 'published_at',
         'expires_at', 'logo'
@@ -258,6 +262,16 @@ class Project extends Model
     public function getLandmarkAttribute(): string
     {
         return htmlspecialchars_decode(LanguageHelper::getLandmark($this));
+    }
+
+    public function getLogoThumbnailAttribute(): string
+    {
+        return '/storage/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $this->id . '/' . ImageHelper::TYPE_THUMBNAIL . '/' . $this->logo;
+    }
+
+    public function getLogoOriginalAttribute(): string
+    {
+        return '/storage/files/' . ImageHelper::FOLDER_PROJECTS . '/' . $this->id . '/' . ImageHelper::TYPE_ORIGINAL . '/' . $this->logo;
     }
 
     ###########################################
