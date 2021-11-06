@@ -8,6 +8,7 @@
         <div class="container">
             @include('clients.layout.breadcrumb')
 {{--            @dd($developer)--}}
+{{--            @dd($developer->name)--}}
             <h1 class="page-title text-align-left">{{$developer->name}}</h1>
         </div>
     </section>
@@ -29,8 +30,9 @@
     <section class="sales-ofice">
         <div class="container">
             <h2 class="sales-ofice-title">Sales Offices</h2>
-            <div id="map" class="map"></div>
+            @include('clients.layout.map', ['mapInfo'=>$developer])
+
         </div>
     </section>
-    <script src="{{asset('assets/user-front/assets/leaflet/leaflet.js')}}"></script>
+{{--    <script src="{{asset('assets/user-front/assets/leaflet/leaflet.js')}}"></script>--}}
 @endsection

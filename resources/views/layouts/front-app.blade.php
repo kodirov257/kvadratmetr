@@ -28,7 +28,7 @@
                 <div id="menu" class="links">
                     <a href="/developers" class="main-nav-link">Developers</a>
                     <a href="/about" class="main-nav-link">About us</a>
-                    <a id="navLinkBtn" href="/contact" class="main-nav-link">Contact</a>
+                    <a id="navLinkBtn" href="/contact-us" class="main-nav-link">Contact</a>
                 </div>
                 <div class="lang">
                     <button class="lang-toggle">EN</button>
@@ -69,7 +69,7 @@
                         <address class="foot-location"><i class="icon-map"></i><span>31/2, st. H.Olimjan, Mirzo Ulugbek district, 2-floor, 1-room</span>
                         </address>
                         <div class="foot-social">
-                            <span>Follow as:</span>
+                            <span>Follow us:</span>
                             <a href="#" class="facebook"><i class="icon-facebook"></i></a>
                             <a href="#" class="instagram"><i class="icon-instagram"></i></a>
                             <a href="#" class="telegram"><i class="icon-telegram"></i></a>

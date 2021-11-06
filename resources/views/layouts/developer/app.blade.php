@@ -49,9 +49,9 @@
     <sidebar class="sidebar">
         <div id="accordian" class="sidebar-mainbuttons">
             <ul class="show-dropdown">
-                <li class="{{ Request::is('ru/cabinet') ? 'active' : '' }}"><a href="{{route('cabinet.home')}}"><i
+                <li class="{{ Request::is(App::getLocale().'/cabinet') ? 'active' : '' }}"><a href="{{route('cabinet.home')}}"><i
                                 class="icon-dash-icon"></i>Dashboard</a></li>
-                <li class="{{ Request::is('en/cabinet/developer/edit') ? 'active' : '' }}">
+                <li class="{{ Request::is(App::getLocale().'/cabinet/developer') ? 'active' : '' }}">
                     <a href="{{ $gDeveloper ? route('cabinet.developer.index') : route('cabinet.developer.create')}}"><i class="icon-content"></i>Content</a>
                     @if($gDeveloper)
                         <ul class="show-dropdown">
@@ -74,6 +74,7 @@
             </ul>
         </div>
     </sidebar>
+
     @yield('content')
 </div>
 

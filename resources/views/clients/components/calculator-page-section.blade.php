@@ -7,12 +7,12 @@
     </div>
     <div class="title-flex">
         <div class="title-informations">
-            <h1 class="page-title text-align-left m-bottom-15">{{$project->title}}</h1>
+            <h1 class="page-title text-align-left m-bottom-15">{{$project->name}}</h1>
             <p class="subtitle"><i class="icon-map"></i>{{$project->address}}</p>
         </div>
 
         <div class="price-information">
-            @if(isset($project->price))
+            @if(isset($project->price) && $project->price)
                 <p class="meter">sq. meter<span>from</span></p>
                 <span class="summa-price">{{$project->price}}</span>
             @endif

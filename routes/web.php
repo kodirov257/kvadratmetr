@@ -22,7 +22,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/developers', 'DevelopersController@index')->name('developers');
     Route::get('/developer/{id}', 'DevelopersController@show')->name('developers');
-    Route::get('/about/{id}', 'AboutController@index')->name('about');
+    Route::get('/about', 'AboutController@index')->name('about');
     Route::get('/advertisement', 'AdvertisementController@index')->name('advertisement');
     Route::get('/calculator/{id}', 'CalculatorController@index')->name('calculator');
     Route::get('/contact-us', 'ContactUsController@index')->name('contactUs');

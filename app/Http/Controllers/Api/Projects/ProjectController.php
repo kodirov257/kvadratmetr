@@ -10,6 +10,7 @@ use App\Http\Requests\Projects\SearchRequest;
 use App\Http\Resources\Projects\ProjectDetailResource;
 use App\Http\Resources\Projects\ProjectListResource;
 use App\UseCases\Projects\SearchService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
@@ -72,5 +73,12 @@ class ProjectController extends Controller
         }
 
         return new ProjectDetailResource($project);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        if ($request->id){
+
+        }
     }
 }
